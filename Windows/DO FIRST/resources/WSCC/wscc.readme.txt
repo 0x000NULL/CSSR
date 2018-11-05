@@ -1,0 +1,64 @@
+WSCC - Windows System Control Center
+
+Copyright (C) 2007-2016 KirySoft S.R.L. All Rights Reserved.
+
+1.Introduction:
+
+WSCC is a free, portable program that allows you to install, update, execute and organize the utilities from various system utility suites. WSCC can install and update the supported utilities automatically. Alternatively, WSCC can use the http protocol to download and run the programs.
+
+This edition of WSCC supports the following utility suites:
+
+- Windows Sysinternals Suite (including support for "Sysinternals Live" service)
+- NirSoft Utilities
+
+Windows Sysinternals Suite download and Licensing FAQ website: http://www.sysinternals.com.
+Windows Sysinternals is property of Microsoft Corporation.
+
+NirSoft Utilities website: http://www.nirsoft.net.
+NirSoft Utilities is property of Nir Sofer.
+
+2.Quick start:
+
+2.1. System Requirements:
+
+Windows 10/8.1/8/7/Vista/XP 32/64bit
+Windows Server 2012R2/2012/2008R2/2008/2003R2/2003 32/64bit
+
+2.2. Installation:
+
+WSCC is a portable application, installation is not required.
+Extract the content of the zip archive to any directory on your computer.
+
+2.3. Keyboard shortcuts:
+
+<ALT>+S             - Search
+<ALT>+X             - Clear search
+<ALT>+N             - New console dialog
+<ALT>+O             - Options dialog
+<ALT>+1 ... <ALT>+9 - Select software category
+
+Software items view:
+
+<ENTER>             - Launch application
+<SHIFT>+<ENTER>     - Launch application (hide main screen)
+<CTRL>+<ENTER>      - Launch application (disable hide main screen)
+<ALT>+<ENTER>       - Show properties
+
+Console keyboard shortcuts:
+
+<CTRL>+X            - Abort running command
+
+Options dialog:
+
+<CTRL>+F2           - Show advanced properties page
+
+3.License:
+
+See wscc.license.txt
+
+4.Contact:
+
+For more information about this program and/or comments / feedback use:
+
+email: contact@kls-soft.com
+web site: http://www.kls-soft.com/wscc

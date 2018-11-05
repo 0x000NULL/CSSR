@@ -1,0 +1,519 @@
+
+#!/bin/bash
+
+#Sets up variables that can be changed eaisly
+numProblems=75
+savedFile=/root/RyanSetupNOLOOK/completed.txt
+output=/home/argus/Desktop/User_Answers
+goodsound=/root/RyanSetupNOLOOK/Point_Gain.mp3
+badsound=/root/RyanSetupNOLOOK/Point_Loss.mp3
+echo "" >> $savedFile
+echo "" > $output
+
+#True = solved, false = not solved
+#True = 0, false = 1
+#this declares them all empty arrays
+oldSaves=()
+newSaves=()
+outputString=()
+outputPoints=()
+commands=()
+compareCommandTo=()	#contains what command should/shouldn't be (must specify)
+total=0
+grandtotal=250
+/usr/bin/updatedb
+/home/argus/.mozilla/firefox/ovas0n
+
+
+while (true)
+do
+	#loops through and gets all of the old solved items, and sets up the arrays
+	for ((i=1;i<=$numProblems;i++)); do
+		oldSaves[$i]=1;
+		newSaves[$i]=1;
+	#	echo ${oldSaves[$i]}
+	done;
+
+	stuff=()
+	while IFS='' read -r line || [[ -n "$line" ]]
+	do
+		oldSaves[$line]=0;
+		#echo ${oldSaves[$line]};
+	done < "$savedFile"
+
+
+	#for i in $stuff; do
+	#	for ((a=1;a<=$numProblems;a++)); do
+	#		if [ $i == $a ]; then
+	#			oldSaves[$a]=true;
+	#		fi
+	#	done;
+	#done;
+
+
+
+
+	#Entering Specific to each Image zone
+
+
+
+
+
+	#Sets up all of the specific information for each problem (like, the output info, the points, the one-line command that can be used to see if output is true)
+	for ((i=1;i<=$numProblems;i++)); do
+		case $i in
+			1)outputString[$i]="Forensics Question 1			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "\.\.\." /home/argus/Desktop/Forensics_Question_1.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			2)outputString[$i]="Forensics Question 2			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "home/ward/Documents/HailHydra.png" /home/argus/Desktop/Forensics_Question_2.txt );
+			  compareCommandTo[$i]=" -eq 10 ";
+			;;
+			3)outputString[$i]="Forensics Question 3				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "5" /home/argus/Desktop/Forensics_Question_3.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			4)outputString[$i]="Forensics Question 4				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "4" /home/argus/Desktop/Forensics_Question_4.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			5)outputString[$i]="Forensics Question 5				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "Flibbertigibbit" /home/argus/Desktop/Forensics_Question_5.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			6)outputString[$i]="Forensics Question 6				-";
+			  outputPoints[$i]=8;
+			  commands[$i]=$( grep -ic -e "Ward:toor" -e "Welcome to your own personal hell, courtesy of Ryan Galligher" /home/argus/Desktop/Forensics_Question_6.txt );
+			  compareCommandTo[$i]=" -eq 2 ";
+			;;
+			7)outputString[$i]="Change insecure root password					-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic "root:\$6\$85TC6GFX\$WuhBqKBqHx6O6A4/D/gfHiePWoiXj2ry7HrAqbg8wJ1Ju0aKkWaBSQaNHS3cAQbK9rviMmQa7zs/zKaCq8KFp/" /etc/shadow );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			8)outputString[$i]="Removed program Crack		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "Crack" -e "crack" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			9)outputString[$i]="Removed program Hydra		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "Hydra" -e "hydra" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			10)outputString[$i]="Removed program John the Ripper		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "John" -e "john" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			11)outputString[$i]="Removed program Nginx		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "Nginx" -e "nginx" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			12)outputString[$i]="Removed program telnetd		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "telnetd" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			13)outputString[$i]="Removed program logkeys		-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "logkeys" -e "logkers" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			14)outputString[$i]="SSH root login disabled	-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "PermitRootLogin yes" -e "PermitRootLogin without-password" /etc/ssh/sshd_config );
+			  compareCommandTo[$i]=" -eq 0 "
+			;;
+			15)outputString[$i]="SSH don't permit empty password	-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "PermitEmptyPasswords yes" /etc/ssh/sshd_config );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			16)outputString[$i]="Remove user Ward			-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic -e "ward:x:1007:1007:Ward,,,:/home/ward:/bin/bash" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			17)outputString[$i]="Remove user Hannah			-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic -e "muscleman:x:1004:1004:Hannah:/home/muscleman:/bin/bash" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			18)outputString[$i]="Remove user Gaben			-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic -e "muscleman:x:1004:1004:Hannah:/home/muscleman:/bin/bash" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			19)outputString[$i]="Mordecai is not an administrator			-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic "sudo" /etc/group | grep "mordecai" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			20)outputString[$i]="Rigby is not an administrator			-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic "sudo" /etc/group | grep "rigby" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			21)outputString[$i]="Add user account Greg				-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( grep -ic -e "greg" -e "Greg" /etc/passwd );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			22)outputString[$i]="Turn on firewall				-";
+			  outputPoints[$i]=1;
+			  commands[$i]=$( ufw status | grep -ic " active" );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			23)outputString[$i]="Ufw logging on high				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( ufw status verbose | grep -ic "logging: high" );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			24)outputString[$i]="Don't allow telnentd through firewall			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( ufw status verbose | grep -ic  -e "ALLOW IN" -e "inactive" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			25)outputString[$i]="Check for updates daily			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic "APT::Periodic::Update-Package-Lists \"1\";" /etc/apt/apt.conf.d/10periodic );
+			compareCommandTo[$i]=" -ne 0 ";
+			;;
+			26)outputString[$i]="Performed updates and restarted computer			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$(( $( apt-get upgrade --simulate | grep -ic "0 upgraded" ) && $(grep -ic "security-updates" /etc/apt/sources.list) ));
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			27)outputString[$i]="Remove insecure sudoers.d configuration			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /etc/sudoers.d/ | grep -ic "all" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			28)outputString[$i]="Sky is not sudoer			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic "sky	ALL=(ALL) NOPASSWD: ALL" /etc/sudoers );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			29)outputString[$i]="Remove insecure README sudo configuration			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "ALL ALL = NOPASSWD: ALL" /etc/sudoers.d/README );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			30)outputString[$i]="Remove insecure sudoers configuration			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic "!authenticate" /etc/sudoers );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			31)outputString[$i]="Set correct password length and complexity			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "minlen=" -e "dcredit=" -e "ucredit=" -e "lcredit=" -e "ocredit=" /etc/pam.d/common-password );
+			  compareCommandTo[$i]=" -eq 5 ";
+			;;
+			32)outputString[$i]="Set maximum password age			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "PASS_MAX_DAYS	99999" /etc/login.defs );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			33)outputString[$i]="Set account lockout policy			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "auth [success=1 default=ignore] pam_unix.so nullok_secure" -e "auth requisite pam_deny.so " -e "auth required pam_permit.so" /etc/pam.d/common-auth );
+			  compareCommandTo[$i]=" -eq 3 ";
+			;; 
+			34)outputString[$i]="Remove Argus' illegal bash shell	-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( grep -ic -e "/home/argus:/home/argus/Videos/.bash" /etc/passwd ) || $(ls -la /home/argus/Videos | grep -ic ".bash");
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			35)outputString[$i]="Remove illegal bash shell	-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "Gordon:/home/mortica:/bin/mybash" /etc/passwd ) || $(ls -la /bin | grep -ic "mybash");
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			36)outputString[$i]="Give user Rigby a password				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "nopasswdlogin:x:112:sky,rigby" -e "nopasswdlogin:x:112:rigby" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			37)outputString[$i]="Give user Sky a password				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "nopasswdlogin:x:112:sky,rigby" -e "nopasswdlogin:x:112:sky" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			38)outputString[$i]="Removed guest account			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "allow-guest=false" /etc/lightdm/lighedm.conf );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			39)outputString[$i]="Remove Illegal Media File HailHydra			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /home/ward/Documents | grep -ic "HailHydra.png" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			40)outputString[$i]="Remove Illegal Media File Gaben			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /root | grep -ic "Gaben" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			41)outputString[$i]="Turned on cookie protection			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "net.ipv4.tcp_syncookies = 1" /etc/sysctl.conf);
+			  compareCommandTo[$i]=" -ne 0 ";
+			;; 
+			42)outputString[$i]="Removed hidden root user toor			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "toor" -e "Toor" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			43)outputString[$i]="Removed hidden root user Antivirus			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "Antivirus" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			44)outputString[$i]="Disable root account			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "root:x:0:0:root:/root:/sbin/nologin" /etc/passwd );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			45)outputString[$i]="Secure cron				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /etc/ | grep -ic -e "cron.allow" -e "at.allow" ) && $(( $( ls -la /etc/ | grep -ic -e "cron.deny" -e "at.deny" ) == 0 ));
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			46)outputString[$i]="Disable control-alt-delete			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "start on control-alt-delete" /etc/init/control-alt-delete.conf );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			47)outputString[$i]="Remove hidden messages 			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$(( $(tree -a /home | grep -ic "\.\.\." ) + $(ls -la /etc/init.d/ | grep -ic "\.\.\." ) + $(ls -la /etc/lightdm/ | grep -ic "\.\.\." ) + $(ls -la /etc/ufw/applications.d/ | grep -ic "\.\.\." ) + $(ls -la /var/spool/cron/crontabs/ | grep -ic "\.\.\." ) ));
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			48)outputString[$i]="Remove hidden directory 			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /root | grep -ic "\.    " );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			49)outputString[$i]="Remove hidden password list 			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /etc/init.d/ | grep -ic "\.\.passwords\." );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			50)outputString[$i]="Remove illegal lines preventing history from recording 			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "unset HISTFILE" -e "export HISTSIZE=0" -e "export HISTFILESIZE=0" /root/.bashrc );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			51)outputString[$i]="Remove insecure service rsh  				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -ic "rsh-server" ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			52)outputString[$i]="Remove Finn from sudo group 			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -i -e "sudo:x:27:" /etc/group | grep -ic "finn" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			53)outputString[$i]="Remove insecure login group for Rigby 			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "rigby:x:1002:1002:" /etc/passwd );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			54)outputString[$i]="Remove all scheduled cron jobs 			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /var/spool/cron/crontabs | grep -ic -e "argus" -e "finn" -e "root" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			55)outputString[$i]="Remove Netcat Backdoor 'nc'				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /var/spool/cron/crontabs | grep -ic "root" ) || $( netstat -ntlup | grep -ic "nc" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			56)outputString[$i]="Remove Netcat Backdoor 'netcat'				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /etc/cron.d | grep -ic "cron" ) || $( netstat -ntlup | grep -ic "nc" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			57)outputString[$i]="Remove cron script turning off ufw				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "ufw disable" /etc/cron.hourly/.placeholder ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			58)outputString[$i]="Remove insecure rebooting cron netcat backdoor script in init.d 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /etc/init.d | grep -c "Cron" ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			59)outputString[$i]="Remove insecure rebooting script 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /etc/rc2.d | grep -ic "S99foo" ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			60)outputString[$i]="Change insecure permissions for /etc/passwd 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( echo $( ls -la /etc/ | grep "passwd" ) | grep -ic "\-rw\-r\-\-r\-\-") ;
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			61)outputString[$i]="Change insecure permissions for /etc/group 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( echo $( ls -la /etc/ | grep "group" ) | grep -ic "\-rw\-r\-\-r\-\-") ;
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			62)outputString[$i]="Change insecure permissions for /etc/shadow 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( echo $( ls -la /etc/ | grep " shadow" | grep -vi "gshadow" ) | grep -ic "\-rw\-r\-\-\-\-\-") ;
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			63)outputString[$i]="Samba secure encryption  				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic "encrypt passwords = false" /etc/samba/smb.conf ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			64)outputString[$i]="Remove prohibited game content aisleriot  				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( dpkg-query --list | grep -ic "aisleriot" ) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			65)outputString[$i]="remove the rm alias 				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$(( $(grep -ic "alias rm='file'" /etc/bash.bashrc) || $(alias | grep -ic "rm") )) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			66)outputString[$i]="remove the cd function 				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$(( $(ls -la /etc/profile.d | grep -ic "sysvar.sh") || $(declare -F | grep -ic "cd") )) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			67)outputString[$i]="remove the bad netstat executable 				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$(ls -la /home/finn/Videos | grep -ic "netstat") ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			68)outputString[$i]="Remove bad PATH routing 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$(grep -ic "/home/finn/Videos" /etc/environment) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			69)outputString[$i]="Change owner for /etc/passwd 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( echo $( ls -la /etc/ | grep "passwd" ) | grep -vic "root") ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			70)outputString[$i]="Delete rootkit server 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$(( $(ls -la /dev/ | grep -ic "server" ) || $(grep -ic "/dev/server" /etc/rc.local) )) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			71)outputString[$i]="Delete rootkit vexed.sh 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$(( $(ls -la /usr/lib/firefox-addons/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}/ | grep -ic "vexed.sh" ) || $(grep -ic "/usr/lib/firefox-addons/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}/vexed.sh" /etc/rc.local) )) ;
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			72)outputString[$i]="Delete rootkit ovasOn 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$(ls -la /home/argus/.mozilla/firefox/ | grep -ic "ovas0n" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			73)outputString[$i]="Delete trojaned firefox 				-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$(file /usr/bin/firefox | grep -ic "Bourne-Again shell script" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			74)outputString[$i]="Delete rootkit blackhole 				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$(ls -la /boot | grep -ic "blackhole" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			75)outputString[$i]="Delete trojaned updatedb 				-";
+			  outputPoints[$i]=8;
+			  commands[$i]=$(file /usr/bin/updatedb | grep -ic "Bourne-Again shell script" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+		esac
+	done;
+
+
+
+
+
+
+
+	#Exiting Specific to each Image zone
+
+
+
+
+
+
+
+	#loops through the output of each command and what the output should be if completed, and will set new as solved or not accordingly
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${commands[$i]} ${compareCommandTo[$i]};
+		if [ ${commands[$i]} ${compareCommandTo[$i]} ]; then
+			newSaves[$i]=0;
+		fi
+	done
+
+
+	#Now compare each item, and if was in old and not in new, play bad sound. If is in new but not in old, play good sound. If same in both, play nothing.
+	#All true statments are put into the Answers file
+
+	echo "" > $output
+
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${oldSaves[$i]};
+		echo ${newSaves[$i]};
+		if [ ${oldSaves[$i]} -eq ${newSaves[$i]} ];
+		then
+			echo "I'm in!";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				echo ${outputString[$i]} ${outputPoints[$i]} >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+				#echo ${outputPoints[$i]};
+				#echo ${total};
+			fi
+		else
+			echo "is apparently not same";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $goodsound > /dev/null 2>&1;
+				echo ${outputString[$i]} ${outputPoints[$i]}  >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+			fi
+			if [ ${newSaves[$i]} -eq 1 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $badsound > /dev/null 2>&1;
+			fi
+		fi
+	done;
+
+	#Save all of the now solved vuln into the saved file file.
+
+	echo "" > $savedFile
+
+	for ((i=1;i<=$numProblems;i++)); do
+		if [ ${newSaves[$i]} -eq 0 ]; then
+			echo $i >> $savedFile;
+		fi
+	done;
+	echo "" >> $output
+	echo 'Total: '$total >> $output
+	
+	if [ $grandtotal -eq $total ]; then 
+		echo "Congradulations! You have successfully finished the Hard Image! Scoring Bot shutting off." >> $output
+		exit 0;
+	fi
+
+	total=0
+done

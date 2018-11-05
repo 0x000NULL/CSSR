@@ -1,0 +1,223 @@
+
+#!/bin/bash
+
+#Sets up variables that can be changed eaisly
+numProblems=16
+savedFile=/root/RyanSetupNOLOOK/completed.txt
+output=/home/argus/Desktop/Answers
+goodsound=/root/RyanSetupNOLOOK/Point_Gain.mp3
+badsound=/root/RyanSetupNOLOOK/Point_Loss.mp3
+echo "" >> $savedFile
+echo "" > $output
+
+#True = solved, false = not solved
+#True = 0, false = 1
+#this declares them all empty arrays
+oldSaves=()
+newSaves=()
+outputString=()
+outputPoints=()
+commands=()
+compareCommandTo=()	#contains what command should/shouldn't be (must specify)
+total=0
+grandtotal=100
+
+while (true)
+do
+	#loops through and gets all of the old solved items, and sets up the arrays
+	for ((i=1;i<=$numProblems;i++)); do
+		oldSaves[$i]=1;
+		newSaves[$i]=1;
+	#	echo ${oldSaves[$i]}
+	done;
+
+	stuff=()
+	while IFS='' read -r line || [[ -n "$line" ]]
+	do
+		oldSaves[$line]=0;
+		#echo ${oldSaves[$line]};
+	done < "$savedFile"
+
+
+	#for i in $stuff; do
+	#	for ((a=1;a<=$numProblems;a++)); do
+	#		if [ $i == $a ]; then
+	#			oldSaves[$a]=true;
+	#		fi
+	#	done;
+	#done;
+
+
+
+
+	#Entering Specific to each Image zone
+
+
+
+
+
+	#Sets up all of the specific information for each problem (like, the output info, the points, the one-line command that can be used to see if output is true)
+	for ((i=1;i<=$numProblems;i++)); do
+		case $i in
+			1)outputString[$i]="Forensics Question 1			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "3.19.0-25-generic" /home/argus/Desktop/Forensics_Question_1.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			2)outputString[$i]="Check for updates daily			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "APT::Periodic::Update-Package-Lists \"1\";" /etc/apt/apt.conf.d/10periodic );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			3)outputString[$i]="Remove Cron files				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /var/spool/cron/crontabs | grep -ic "argus" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			4)outputString[$i]="Removed program John the Ripper		-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( dpkg-query --list | grep -c 'john' );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			5)outputString[$i]="Removed program logkeys			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( dpkg-query --list | grep -c 'logkeys' );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			6)outputString[$i]="Remove hidden root user Hacker			-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$( grep -ic "Hacker:x:0:1001:" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			7)outputString[$i]="Remove insecure sudo configuration			-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$( ls -la /etc/sudoers.d | grep -ic "IWantIn.txt" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			8)outputString[$i]="Performed updates and restarted computer			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( apt-get upgrade --simulate | grep -ic "0 upgraded" );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			9)outputString[$i]="Changed insecure ssh config (PermitRootLogin)	-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$( grep -ic -e "PermitRootLogin yes" -e "PermitRootLogin without-password" /etc/ssh/sshd_config );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			10)outputString[$i]="ufw enabled					-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ufw status | grep -c ' active' );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			11)outputString[$i]="Default password age					-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$( grep -ic "PASS_MAX_DAYS	99999" /etc/login.defs );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			12)outputString[$i]="Remove user Stalkernet.exe				-";
+			  outputPoints[$i]=10;
+			  commands[$i]=$( grep -ic "stalkernetexe:x:1002:1003:" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			13)outputString[$i]="Give user Wesley a password				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "nopasswdlogin:x:119:wesley" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			14)outputString[$i]="Wesley is not an administrator				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "sudo:x:27:argus,nikhil,wesley" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			15)outputString[$i]="Give root a secure password				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic "root:$6$Sa2Vqbe3$utz6jTaJIIPL5BkzLSRZ6x6OmHmqUQt5XC399bVpMI4bVSqd8RzlgdH" /etc/shadow );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			16)outputString[$i]="Remove illegal photo				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /home/rogerrabbit | grep -ic "Hello.jpg" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+		esac
+	done;
+
+
+
+
+
+
+
+	#Exiting Specific to each Image zone
+
+
+
+
+
+
+
+	#loops through the output of each command and what the output should be if completed, and will set new as solved or not accordingly
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${commands[$i]} ${compareCommandTo[$i]};
+		if [ ${commands[$i]} ${compareCommandTo[$i]} ]; then
+			newSaves[$i]=0;
+		fi
+	done
+
+
+	#Now compare each item, and if was in old and not in new, play bad sound. If is in new but not in old, play good sound. If same in both, play nothing.
+	#All true statments are put into the Answers file
+
+	echo "" > $output
+
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${oldSaves[$i]};
+		echo ${newSaves[$i]};
+		if [ ${oldSaves[$i]} -eq ${newSaves[$i]} ];
+		then
+			echo "I'm in!";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				echo ${outputString[$i]} ${outputPoints[$i]} >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+				#echo ${outputPoints[$i]};
+				#echo ${total};
+			fi
+		else
+			echo "is apparently not same";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $goodsound > /dev/null 2>&1;
+				echo ${outputString[$i]} ${outputPoints[$i]}  >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+			fi
+			if [ ${newSaves[$i]} -eq 1 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $badsound > /dev/null 2>&1;
+			fi
+		fi
+	done;
+
+	#Save all of the now solved vuln into the saved file file.
+
+	echo "" > $savedFile
+
+	for ((i=1;i<=$numProblems;i++)); do
+		if [ ${newSaves[$i]} -eq 0 ]; then
+			echo $i >> $savedFile;
+		fi
+	done;
+	echo "" >> $output
+	echo 'Total: '$total >> $output
+	
+	if [ $grandtotal -eq $total ]; then 
+		echo "Congradulations! You have successfully finished the Easy Image! Scoring Bot shutting off." >> $output
+		exit 0;
+	fi
+
+	total=0
+done
+
+
