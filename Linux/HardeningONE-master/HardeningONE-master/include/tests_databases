@@ -1,0 +1,146 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Databases
+#
+#################################################################################
+#
+    # Status of database processes
+    MYSQL_RUNNING=0
+    POSTGRESQL_RUNNING=0
+    # Paths to DATADIR
+    sMYSQLDBPATHS="/var/lib/mysql"
+    # Paths to my.cnf
+    sMYCNFLOCS="/etc/mysql/my.cnf /usr/etc/my.cnf"
+#
+#################################################################################
+#
+    InsertSection "" #18. Banco de dados"
+    
+    # Test        : DBS-1804
+    # Description : Check if MySQL is being used
+#    Register --test-no DBS-1804 --weight L --network NO --description "Verificado processos ativos do MySQL"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`${PSBINARY} ax | egrep "mysqld|mysqld_safe" | grep -v "grep"`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-DBS-1804-MySQL status dos processos ..." --result "NOK" --color WHITE
+#	    logtext "R-TEC-DBS-1804-Resultado: MySQL process not active"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-DBS-1804-MySQL status dos processos ..." --result "OK" --color GREEN
+#	    logtext "R-TEC-DBS-1804-Resultado: MySQL is active"
+#	    MYSQL_RUNNING=1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : DBS-1808
+    # Description : Check MySQL data directory
+    #Register --test-no DBS-1808 --weight L --network NO --description "Verificado MySQL data directory"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #fi
+#
+#################################################################################
+#
+    # Test        : DBS-1812
+    # Description : Check data directory permissions
+    #Register --test-no DBS-1812 --weight L --network NO --description "Verificado MySQL data directory permissions"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #fi
+#
+#################################################################################
+#
+    # Test        : DBS-1816
+    # Description : Check empty MySQL root password
+    # Notes       : Only perform test when MySQL is running and client is available
+#    if [ ! "${MYSQLCLIENTBINARY}" = "" -a ${MYSQL_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no DBS-1816 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado MySQL root password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-DBS-1816-Teste: Trying to login to local MySQL server without password"
+#	FIND=`${MYSQLCLIENTBINARY} -u root --password= --silent --batch --execute="" 2> /dev/null; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    logtext "R-TEC-DBS-1816-Resultado: Login succeeded, no MySQL root password set!"
+#	    ReportWarning ${TEST_NO} "H" "R-TEC-DBS-1816-No MySQL root password set"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-DBS-1816-Use mysqladmin to set a MySQL root password (mysqladmin -u root -p password MYPASSWORD)"
+#	    Display --indent 4 --text "- R-TEC-DBS-1816-Checking empty MySQL root password" --result WARNING --color RED
+#	    AddHP 0 5
+#	  else
+#	    logtext "R-TEC-DBS-1816-Resultado: Login did not succeed, so a MySQL root password is set"	    
+#	    Display --indent 4 --text "- R-TEC-DBS-1816-Checking MySQL root password" --result OK --color GREEN
+#	    AddHP 2 2
+#	fi
+#      else
+#        logtext "R-TEC-DBS-1816-Test skipped, MySQL daemon not running or no MySQL client available"
+#    fi
+#
+#################################################################################
+#
+    # Test        : DBS-1826
+    # Description : Check if PostgreSQL is being used
+#    Register --test-no DBS-1826 --weight L --network NO --description "Verificado active PostgreSQL processes"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`${PSBINARY} ax | grep "postgres:" | grep -v "grep"`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-DBS-1826-PostgreSQL status dos processos ..." --result "NOK" --color WHITE
+#	    logtext "R-TEC-DBS-1826-Resultado: PostgreSQL process not active"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-DBS-1826-PostgreSQL status dos processos ..." --result "OK" --color GREEN
+#	    logtext "R-TEC-DBS-1826-Resultado: PostgreSQL is active"
+#	    POSTGRESQL_RUNNING=1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : DBS-1840
+    # Description : Check if Oracle is being used
+    # Notes       : tnslsnr: Oracle listener
+    #               pmon: process monitor
+    #               smon: system monitor
+    #               dbwr: database writer
+    #               lgwr: log writer
+    #               arch: archiver (optional)
+    #               ckpt: checkpoint (optional)
+    #               reco: recovery (optional)
+#    Register --test-no DBS-1840 --weight L --network NO --description "Verificado active Oracle processes"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`${PSBINARY} ax | grep "ora_pmon|ora_smon|tnslsnr" | grep -v "grep"`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-DBS-1840-Oracle status dos processos ..." --result "NOK" --color WHITE
+#	    logtext "R-TEC-DBS-1840-Resultado: Oracle process(es) not active"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-DBS-1840-Oracle status dos processos ..." --result "OK" --color GREEN
+#	    logtext "R-TEC-DBS-1840-Resultado: Oracle is active"
+#	    POSTGRESQL_RUNNING=1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : DBS-1842
+    # Description : Check Oracle home paths from oratab
+    #Register --test-no DBS-1842 --weight L --network NO --description "Verificado Oracle home paths"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    # if [ -f /etc/oratab ]; then
+    #  FIND=`cat /etc/oratab | grep -v "#" | awk -F: "{ print $2 }"`
+    # fi
+    #fi
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

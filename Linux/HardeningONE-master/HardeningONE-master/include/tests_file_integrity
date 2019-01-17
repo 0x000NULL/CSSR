@@ -1,0 +1,131 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+    FILE_INT_TOOL_FOUND=0		# Boolean, file integrity tool found
+#
+#################################################################################
+#
+    InsertSection "" #30. Software: Integridade de Arquivos"
+
+#    # Test        : FINT-4310
+#    # Description : Check if AFICK is installed
+#    Register --test-no FINT-4310 --weight L --network NO --description "AFICK availability"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FINT-4310-Teste: Checking AFICK binary"
+#	if [ ! "${AFICKBINARY}" = "" ]; then
+#	    logtext "R-TEC-FINT-4310-Resultado: AFICK is installed (${AFICKBINARY})"
+#	    FILE_INT_TOOL_FOUND=1
+#	    Display --indent 2 --text "- R-TEC-FINT-4310-Verificado AFICK..." --result OK --color GREEN
+#	  else	
+#	    logtext "R-TEC-FINT-4310-Resultado: AFICK is not installed"
+#	    Display --indent 2 --text "- R-TEC-FINT-4310-Verificado AFICK..." --result "NOK" --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FINT-4314
+#    # Description : Check if AIDE is installed
+#    Register --test-no FINT-4314 --weight L --network NO --description "AIDE availability"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FINT-4314-Teste: Checking AIDE binary"
+#	if [ ! "${AIDEBINARY}" = "" ]; then
+#	    logtext "R-TEC-FINT-4314-Resultado: AIDE is installed (${AIDEBINARY})"
+#	    FILE_INT_TOOL_FOUND=1
+#	    Display --indent 2 --text "- R-TEC-FINT-4314-Verificado AIDE..." --result OK --color GREEN
+#	  else	
+#	    logtext "R-TEC-FINT-4314-Resultado: AIDE is not installed"
+#	    Display --indent 2 --text "- R-TEC-FINT-4314-Verificado AIDE..." --result "NOK" --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FINT-4318
+#    # Description : Check if Osiris is installed
+#    Register --test-no FINT-4318 --weight L --network NO --description "Osiris availability"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FINT-4318-Teste: Checking Osiris binary"
+#	if [ ! "${OSIRISBINARY}" = "" ]; then
+#	    logtext "R-TEC-FINT-4318-Resultado: Osiris is installed (${OSIRISBINARY})"
+#	    FILE_INT_TOOL_FOUND=1
+#	    Display --indent 2 --text "- R-TEC-FINT-4318-Verificado Osiris..." --result OK --color GREEN
+#	  else	
+#	    logtext "R-TEC-FINT-4318-Resultado: Osiris is not installed"
+#	    Display --indent 2 --text "- R-TEC-FINT-4318-Verificado Osiris..." --result "NOK" --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FINT-4322
+#    # Description : Check if Samhain is installed
+#    Register --test-no FINT-4322 --weight L --network NO --description "Samhain availability"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FINT-4322-Teste: Checking Samhain binary"
+#	if [ ! "${SAMHAINBINARY}" = "" ]; then
+#	    logtext "R-TEC-FINT-4322-Resultado: Samhain is installed (${SAMHAINBINARY})"
+#	    FILE_INT_TOOL_FOUND=1
+#	    Display --indent 2 --text "- R-TEC-FINT-4322-Verificado Samhain..." --result OK --color GREEN
+#	  else	
+#	    logtext "R-TEC-FINT-4322-Resultado: Samhain is not installed"
+#	    Display --indent 2 --text "- R-TEC-FINT-4322-Verificado Samhain..." --result "NOK" --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FINT-4326
+#    # Description : Check if Tripwire is installed
+#    Register --test-no FINT-4326 --weight L --network NO --description "Tripwire availability"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FINT-4326-Teste: Checking Tripwire binary"
+#	if [ ! "${TRIPWIREBINARY}" = "" ]; then
+#	    logtext "R-TEC-FINT-4326-Resultado: Tripwire is installed (${TRIPWIREBINARY})"
+#	    FILE_INT_TOOL_FOUND=1
+#	    Display --indent 2 --text "- R-TEC-FINT-4326-Verificado Tripwire..." --result OK --color GREEN
+#	  else	
+#	    logtext "R-TEC-FINT-4326-Resultado: Tripwire is not installed"
+#	    Display --indent 2 --text "- R-TEC-FINT-4326-Verificado Tripwire..." --result "NOK" --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FINT-4350
+#    # Description : Check if at least one file integrity tool is installed
+#    Register --test-no FINT-4350 --weight L --network NO --description "File integrity software installed"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FINT-4350-Teste: Check if at least on file integrity tool is available/installed"
+#	if [ ${FILE_INT_TOOL_FOUND} -eq 1 ]; then
+#	    logtext "R-TEC-FINT-4350-Resultado: found at least one tool"
+#	    Display --indent 2 --text "- R-TEC-FINT-4350-Verificado presence integrity tool..." --result OK --color GREEN
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FINT-4350-Install a file integrity tool"
+#	    AddHP 5 5
+#	  else
+#	    logtext "R-TEC-FINT-4350-Resultado: No file integrity tools found"
+#	    Display --indent 2 --text "- R-TEC-FINT-4350-Verificado presence integrity tool..." --result "NOK" --color YELLOW
+#	    AddHP 0 5
+#	fi
+#    fi
+#
+#################################################################################
+#
+    wait_for_keypress
+        
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

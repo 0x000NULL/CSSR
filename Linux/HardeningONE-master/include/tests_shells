@@ -1,0 +1,159 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Shells
+#
+#################################################################################
+#
+    InsertSection "" #6. Shells"
+#
+#################################################################################
+#
+    # bash
+    # Files (interactive login shells):     /etc/profile $HOME/.bash_profile
+    #                                       $HOME/.bash_login $HOME/.profile
+    # Files (interactive non-login shells): $HOME/.bash_rc
+    
+
+    # csh/tcsh
+    # Files: /etc/csh.cshrc /etc/csh.login
+    
+    # zsh
+    # Files: /etc/zshenv /etc/zsh/zshenv $HOME/.zshenv /etc/zprofile
+    #        /etc/zsh/zprofile $HOME/.zprofile /etc/zshrc /etc/zsh/zshrc
+    #        $ZDOTDIR/.zshrc /etc/zlogin /etc/zsh/zlogin
+    
+    SHELL_LOGIN_FILES="/etc/csh.cshrc /etc/csh.login /etc/zshenv /etc/zsh/zshenv
+                       /etc/zprofile /etc/zsh/zprofile /etc/zshrc /etc/zsh/zshrc
+                       /etc/zlogin /etc/zsh/zlogin"
+#
+#################################################################################
+#
+
+#    # Test        : SHLL-6202
+#    # Description : check all console TTYs in which root user can enter single user mode without password
+#    Register --test-no SHLL-6202 --os FreeBSD --weight L --network NO --description "Check console TTYs"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado console TTYs..."
+#        FIND=`cat /etc/ttys | egrep '^console' | grep -v 'insecure'`
+#        if [ "${FIND}" = "" ]; then
+#   	    Display --indent 2 --text "- Checking console TTYs... " --result OK --color GREEN
+#	    logtext "Result: console is secured against single user mode without password."
+#          else
+#    	    Display --indent 2 --text "- Checking console TTYs... " --result ATENÇÃO --color RED
+#	    logtext "Result: Found insecure console in /etc/ttys. Single user mode login without password allowed!"
+#    	    logtext "Output /etc/ttys:"	
+#    	    logtext "${FIND}"
+#	    ReportWarning ${TEST_NO} "M" "Found unprotected console in /etc/ttys"
+#	    ReportSuggestion ${TEST_NO} "Change the console line from 'secure' to 'insecure'."
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : SHLL-6214
+    # Description : check for idle session killing tools (timeoutd)
+
+
+#
+#################################################################################
+#
+    # Test        : SHLL-6211
+    # Description : which shells are available according /etc/shells
+#    Register --test-no SHLL-6211 --weight L --network NO --description "Checking available and valid shells"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Searching for /etc/shells..."
+#        if [ -f /etc/shells ]; then
+#            logtext "Result: Found /etc/shells file"
+#            logtext "Test: Reading available shells from /etc/shells"
+#            SSHELLS=`cat /etc/shells | grep "^/"`
+#            CSSHELLS=0; CSSHELLS_ALL=0
+#            Display --indent 2 --text "- Verificado shells de /etc/shells..."
+#            for I in ${SSHELLS}; do
+#                CSSHELLS_ALL=`expr ${CSSHELLS_ALL} + 1`
+#                report "available_shell[]=${I}"
+#                # YYY add check for symlinked shells
+#                if [ -f ${I} ]; then
+#                    logtext "Found installed shell: ${I}"
+#                    CSSHELLS=`expr ${CSSHELLS} + 1`
+#                  else
+#                    logtext "Shell ${I} not installed. Probably a dummy or non existing shell."
+#                fi
+#             done
+#            Display --indent 4 --text "Resultado: encontrado ${CSSHELLS_ALL} shells (shells válidos: ${CSSHELLS})."
+#          else
+#	    logtext "Result: /etc/shells not found, skipping test"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : SHLL-6220
+    # Description : check for idle session killing tools (timeoutd)
+
+
+#
+#################################################################################
+#
+    # Test        : SHLL-6226
+    # Description : check for idle session killing tools (autolog)
+#
+#################################################################################
+#
+
+    # Test        : SHLL-6236
+    # Description : Check /etc/profile
+#
+#################################################################################
+#
+
+    # Test        : SHLL-6240
+    # Description : Check default umask
+#    Register --test-no SHLL-6240 --weight L --network NO --description "Check default umask"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Checking /etc/profile..."
+#	if [ -f /etc/profile ]; then
+#    	    FIND=`grep "^umask" | awk '{ print $2 }'`
+#    	    if [ "${FIND}" = "" ]; then
+#		logtext "Result: xxx"
+#  		Display --indent 2 --text "- Checking default umask... " --result OK --color GREEN
+#              else
+#		logtext "Result: xxx"
+#    		Display --indent 2 --text "- Checking default umask... " --result ATENÇÃO --color RED
+#		#ReportWarning ${TEST_NO} "M" "xxx"
+#		#ReportSuggestion ${TEST_NO} "xxx"
+#	    fi
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : SHLL-6250
+    # Description : Check /etc/bash.bashrc
+#    Register --test-no SHLL-6250 --weight L --network NO --description "Check default umask"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+
+
+
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

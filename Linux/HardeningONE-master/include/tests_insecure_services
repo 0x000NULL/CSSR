@@ -1,0 +1,350 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Unsecure services
+#
+#################################################################################
+#
+    InsertSection "" #23. Serviços Inseguros e Ferramentas de Hacking"
+#
+#################################################################################
+#
+    INETD_ACTIVE=0
+    INETD_CONFIG_FILE="/etc/inetd.conf"
+
+
+    PROFTPD_ACTIVE=0
+    PROFTPD_CONFIG_FILE="/etc/proftpd/proftpd.conf"
+
+    SMBD_ACTIVE=0
+    SMBD_CONFIG_FILE="/etc/smbd/smbd.conf"
+
+    SNMPD_ACTIVE=0
+    SNMPD_CONFIG_FILE="/etc/snmpd/snmpd.conf"
+
+    NMAP_OS_FINGERPRINT_FILE="/usr/share/nmap/nmap-os-fingerprint"
+
+    TELNETD_ACTIVE=0
+    TELNETD_CONFIG_FILE="/etc/xinetd.d/telnet.conf"
+
+
+    #ToDO
+    # se for CentOS fica em /etc/proftpd.conf
+#
+#################################################################################
+#
+#    # Test        : INSE-8002
+#    # Description : Check for inetd status
+#    Register --test-no INSE-8002 --weight L --network NO --description "Verificado se o Daemon do inet está habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "R-TEC-INSE-8002-Teste: Localizando por atividade do daemon inet..."
+#	FIND=`${PSBINARY} ax | grep "inetd" | grep -v "grep"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8002-Resultado: inetd está em execução"
+#	    Display --indent 2 --text "- R-TEC-INSE-8002-Verificado status do inetd..." --result ATIVO --color GREEN
+#	    #YYY perform manual check
+#	    INETD_ACTIVE=1
+#	  else
+#	    logtext "R-TEC-INSE-8002-Resultado: inetd NÃO está em execução"	      
+#	    Display --indent 2 --text "- R-TEC-INSE-8002-Verificado status do inetd..." --result "DESATIVADO" --color GREEN
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : INSE-8004
+#    # Description : Check for inetd configuration file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8004 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado inet daemon habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8004-Teste: Localizando arquivo de configuração ${INETD_CONFIG_FILE}..."
+#	if [ -f ${INETD_CONFIG_FILE} ]; then
+#	    logtext "R-TEC-INSE-8004-Resultado: ${INETD_CONFIG_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8004-Verificado inetd.conf..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8004-Resultado: ${INETD_CONFIG_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8004-Verificado inetd.conf..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8010
+#    # Description : Check for proftpd status
+#    Register --test-no INSE-8010 --weight L --network NO --description "Verificado se o Daemon do proftpd está habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "R-TEC-INSE-8010-Teste: Localizando por atividade do daemon proftpd..."
+#	FIND=`${PSBINARY} ax | grep "proftpd" | grep -v "grep"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8010-Resultado: proftpd está em execução"
+#	    Display --indent 2 --text "- R-TEC-INSE-8010-Verificado status do proftpd..." --result ATIVO --color GREEN
+#	    #YYY perform manual check
+#	    PROFTPD_ACTIVE=1
+#	  else
+#	    logtext "R-TEC-INSE-8010-Resultado: proftpd NÃO está em execução"	      
+#	    Display --indent 2 --text "- R-TEC-INSE-8010-Verificado status do proftpd..." --result "DESATIVADO" --color GREEN
+#	fi
+#    fi
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8011
+#    # Description : Check for proftpd configuration file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8011 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado daemon proftpd habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8011-Teste: Localizando arquivo de configuração ${PROFTPD_CONFIG_FILE}..."
+#	if [ -f ${PROFTPD_CONFIG_FILE} ]; then
+#	    logtext "R-TEC-INSE-8011-Resultado: ${PROFTPD_CONFIG_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8011-Verificado proftpd.conf..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8011-Resultado: ${PROFTPD_CONFIG_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8011-Verificado proftpd.conf..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8012
+#    # Description : Check for smbd/smbclient status
+#    Register --test-no INSE-8012 --weight L --network NO --description "Verificado se o daemon smbd está habilitado e contém smbclient"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "R-TEC-INSE-8012-Teste: Localizando por atividade daemon smbd..."
+#	FIND=`${PSBINARY} ax | grep "smbd" | grep -v "grep"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8012-Resultado: smbd está em execução"
+#	    Display --indent 2 --text "- R-TEC-INSE-8012-Verificado status do smbd..." --result ATIVO --color GREEN
+#	    #YYY perform manual check
+#	    SMBD_ACTIVE=1
+#	  else
+#	    logtext "R-TEC-INSE-8012-Resultado: smbd NÃO está em execução"	      
+#	    Display --indent 2 --text "- R-TEC-INSE-8012-Verificado status do smbd..." --result "DESATIVADO" --color GREEN
+#	fi
+#    fi
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8013
+#    # Description : Check for smbd/smbclient configuration file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8013 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado daemon proftpd habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8013-Teste: Localizando arquivo de configuração ${SMBD_CONFIG_FILE}..."
+#	if [ -f ${SMBD_CONFIG_FILE} ]; then
+#	    logtext "R-TEC-INSE-8013-Resultado: ${SMBD_CONFIG_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8013-Verificado smbd.conf..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8013-Resultado: ${SMBD_CONFIG_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8013-Verificado smbd.conf..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8014
+#    # Description : Check for snmpd status
+#    Register --test-no INSE-8014 --weight L --network NO --description "Verificado se o daemon snmpd está habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "R-TEC-INSE-8014-Teste: Localizando por atividade daemon snmpd..."
+#	FIND=`${PSBINARY} ax | grep "snmpd" | grep -v "grep"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8014-Resultado: snmpd está em execução"
+#	    Display --indent 2 --text "- R-TEC-INSE-8014-Verificado status do snmpd..." --result ATIVO --color GREEN
+#	    #YYY perform manual check
+#	    SNMPD_ACTIVE=1
+#	  else
+#	    logtext "R-TEC-INSE-8014-Resultado: snmpd NÃO está em execução"	      
+#	    Display --indent 2 --text "- R-TEC-INSE-8014-Verificado status do snmpd..." --result "DESATIVADO" --color GREEN
+#	fi
+#    fi
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8015
+#    # Description : Check for snmp configuration file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8015 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado daemon snmpd habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8015-Teste: Localizando arquivo de configuração ${SNMPD_CONFIG_FILE}..."
+#	if [ -f ${SNMPD_CONFIG_FILE} ]; then
+#	    logtext "R-TEC-INSE-8015-Resultado: ${SNMPD_CONFIG_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8015-Verificado snmpd.conf..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8015-Resultado: ${SNMPD_CONFIG_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8015-Verificado snmpd.conf..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8018
+#    # Description : Check for telnetd status
+#    Register --test-no INSE-8018 --weight L --network NO --description "Verificado se o daemon telnetd está habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "R-TEC-INSE-8018-Teste: Localizando por atividade daemon telnetd..."
+#	FIND=`${PSBINARY} ax | grep "telnetd" | grep -v "grep"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8018-Resultado: telnetd está em execução"
+#	    Display --indent 2 --text "- R-TEC-INSE-8018-Verificado status do telnetd..." --result ATIVO --color GREEN
+#	    #YYY perform manual check
+#	    TELNETD_ACTIVE=1
+#	  else
+#	    logtext "R-TEC-INSE-8018-Resultado: telnetd NÃO está em execução"	      
+#	    Display --indent 2 --text "- R-TEC-INSE-8018-Verificado status do telnetd..." --result "DESATIVADO" --color GREEN
+#	fi
+#    fi
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8019
+#    # Description : Check for telnetd configuration file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8019 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado daemon telnetd habilitado"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8019-Teste: Localizando arquivo de configuração ${TELNETD_CONFIG_FILE}..."
+#	if [ -f ${TELNETD_CONFIG_FILE} ]; then
+#	    logtext "R-TEC-INSE-8019-Resultado: ${TELNETD_CONFIG_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8019-Verificado telnetd.conf..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8019-Resultado: ${TELNETD_CONFIG_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8019-Verificado telnetd.conf..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+## Em testes ainda
+##################################################################################
+##
+#    # Test        : INSE-8016
+#    # Description : Check for nmap-os-fingerprint file
+#    if [ ${INETD_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8016 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado se há arquivo nmap-os-fingerprint"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check configuration file
+#	logtext "R-TEC-INSE-8016-Teste: Localizando arquivo de configuração ${NMAP_OS_FINGERPRINT_FILE}..."
+#	if [ -f ${NMAP_OS_FINGERPRINT_FILE} ]; then
+#	    logtext "R-TEC-INSE-8016-Resultado: ${NMAP_OS_FINGERPRINT_FILE} existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8016-Verificado nmap-os-fingerprint..." --result OK --color WHITE
+#	  else
+#	    logtext "R-TEC-INSE-8016-Resultado: ${NMAP_OS_FINGERPRINT_FILE} não existe"
+#	    Display --indent 2 --text "- R-TEC-INSE-8016-Verificado nmap-os-fingerprint..." --result "NAO OK" --color WHITE
+#	fi
+#	# YYY immutable bit could be set
+#	# YYY permission check (already set in profile)
+#    fi
+##
+
+
+
+##################################################################################
+##
+#    # Test        : INSE-8006
+#    # Description : Check for inetd configuration file contents if inetd is NOT active
+#    if [ ${INETD_ACTIVE} -eq 0 -a -f ${INETD_CONFIG_FILE} ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8006 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado for disabled inet daemon"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check if any service is enabled in /etc/inetd.conf (inetd is not active, see test 8002)
+#	logtext "R-TEC-INSE-8006-Teste: check if all services are disabled if inetd is disabled"
+#	FIND=`cat ${INETD_CONFIG_FILE} | grep -v "^#" | grep -v "^$"`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-INSE-8006-Verificado inetd.conf services..." --result OK --color GREEN
+#	  else
+#	    Display --indent 2 --text "- R-TEC-INSE-8006-Verificado inetd.conf services..." --result SUGESTÃO --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-INSE-8006-Although inetd is not running, make sure no services are habilitado em  ${INETD_CONFIG_FILE}"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : INSE-8016
+#    # Description : Check for telnet enabled via inetd
+#    if [ ${INETD_ACTIVE} -eq 1 -a -f ${INETD_CONFIG_FILE} ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no INSE-8016 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado for telnet via inetd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-INSE-8016-Teste: checking telnet presence in inetd configuration"
+#	FIND=`grep "^telnet" ${INETD_CONFIG_FILE}`
+#	if [ "${FIND}" = "" ]; then
+#	    logtext "R-TEC-INSE-8016-Resultado: telnet not habilitado em  ${INETD_CONFIG_FILE}"
+#	    Display --indent 2 --text "- R-TEC-INSE-8016-Verificado inetd (telnet)..." --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-INSE-8016-Resultado: telnet habilitado em  ${INETD_CONFIG_FILE}"
+#	    Display --indent 2 --text "- R-TEC-INSE-8016-Verificado inetd (telnet)..." --result ATENÇÃO --color RED
+#        fi
+#    fi
+##
+
+##################################################################################
+##
+#    # Test        : INSE-8017
+#    # Description : Verificar permissões no log do syslog
+
+#Display --indent 4 --text "- R-TEC-INSE-8017-Verificado permissões no log do syslog"
+#stat /var/log/syslog
+
+#Display --indent 4 --text "- R-TEC-INSE-8017-Verificado Scanning por services ON"
+#netstat -tanp|grep LISTEN
+
+#################################################################################
+#
+# Check telnet in /etc/xinetd.conf
+# Check telnet in /etc/xinetd/*
+# Check running telnet daemon (telnetd)
+# rshd rlogin rexec
+# /etc/hosts.equiv
+
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

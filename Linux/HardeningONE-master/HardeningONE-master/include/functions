@@ -1,0 +1,394 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# This software is licensed under GPL, version 3. See LICENSE file for
+# usage of this software.
+#
+#################################################################################
+#
+# Functions
+#
+#################################################################################
+#
+#    Function			Description
+#    -----------------------    -------------------------------------------------
+#    AddHP                      Add Hardening points to plot a graph later
+#    CheckFilePermissions	Check file permissions
+#    counttests                 Count number of performed tests
+#    Display			Output text to screen with colors and identation
+#    InsertSection              Insert a section block
+#    ReportSuggestion		Add a suggestion to report file
+#    ReportWarning		Add a warning and priority to report file
+#    Register                   Register a test (for logging and execution)
+#
+#################################################################################
+
+    # Add Hardening Points
+    AddHP()
+      {
+        HPADD=$1; HPADDMAX=$2
+        HPPOINTS=`expr ${HPPOINTS} + ${HPADD}`
+	HPTOTAL=`expr ${HPTOTAL} + ${HPADDMAX}`
+	logtext "Hardening: assigned ${HPADD} hardening points (max for this item: ${HPADDMAX}), atual: ${HPPOINTS}, total: ${HPTOTAL}"
+      }
+
+    # Check file permissions
+    # Parameter 1 is file/dir
+    # Result: FILE_NOT_FOUND | OK | BAD
+    CheckFilePermissions()
+      {
+        CHECKFILE=$1
+        if [ ! -d $CHECKFILE -a ! -f $CHECKFILE ]; then
+	    PERMS="FILE_NOT_FOUND"
+	  else
+	    # If 'file' is an directory, use -d
+	    if [ -d ${CHECKFILE} ]; then
+	        FILEVALUE=`ls -d -l ${CHECKFILE} | cut -c 2-10`
+		PROFILEVALUE=`cat ${PROFILE} | grep '^permdir' | grep ":${CHECKFILE}:" | cut -d: -f3` 
+	      else
+	        FILEVALUE=`ls -l ${CHECKFILE} | cut -c 2-10`
+		PROFILEVALUE=`cat ${PROFILE} | grep '^permfile' | grep ":${CHECKFILE}:" | cut -d: -f3` 
+	    fi
+	    if [ "${FILEVALUE}" = "${PROFILEVALUE}" ]; then PERMS="OK"; else PERMS="BAD"; fi
+	fi
+      }
+
+    # Check updates
+    CheckUpdates()
+      {
+        PROGRAM_LV="0000000000"; DB_MALWARE_LV="0000000000"; DB_FILEPERMS_LV="0000000000"
+	#if [ ! "${DIGBINARY}" = "" ]; then
+            PROGRAM_LV=`dig +short -t txt hardeningone-lv.rootkit.nl 2> /dev/null | sed 's/[".]//g'`
+            DB_MALWARE_LV=`dig +short -t txt hardeningone-mw.rootkit.nl 2> /dev/null | sed 's/[".]//g'`
+            DB_FILEPERMS_LV=`dig +short -t txt hardeningone-fp.rootkit.nl 2> /dev/null | sed 's/[".]//g'`
+	#  else
+	#    logtext "Note: dig not installed, update check skipped"
+	#fi
+      }
+
+    # Count the number of performed tests
+    counttests()
+      {
+        CTESTS_PERFORMED=`expr ${CTESTS_PERFORMED} + 1`
+      }
+
+    # Display text
+    Display()
+      {
+        INDENT=0; TEXT=""; RESULT=""; COLOR=""
+        while [ $# -ge 1 ]; do
+	    case $1 in
+	        --color)
+		    shift
+		        case $1 in
+			  GREEN)   COLOR=$GREEN   ;;
+			  RED)     COLOR=$RED     ;;
+			  WHITE)   COLOR=$WHITE   ;;
+			  YELLOW)  COLOR=$YELLOW  ;;
+			esac
+		;;
+	        --indent)
+		    shift
+		    INDENT=$1
+	        ;;
+		--no-break | --nobreak | -nb)
+		    ECHOCMD="echo -en"
+		;;
+		--result)
+		    shift
+		    RESULT=$1
+		;;
+	        --text)
+	            shift
+	            TEXT=$1
+	        ;;
+		*)
+		    echo "OPcao INVÁLIDA (Display): $1"
+		    exit 1
+		;;
+	    esac
+	    # Go to next parameter
+	    shift
+	done
+	
+	if [ "${RESULT}" = "" ]; then
+	    RESULTPART=""
+	  else
+	    if [ ${CRONJOB} -eq 0 ]; then
+	        RESULTPART=" [ ${COLOR}${RESULT}${NORMAL} ]"
+	      else
+	        RESULTPART=" [ ${RESULT} ]"
+	    fi
+	fi
+	
+	if [ ! "${TEXT}" = "" ]; then
+	    # Show warnings always, and other messages if no quiet is being used
+	    if [ ${QUIET} -eq 0 -o "${RESULT}" = "Atencao:" ]; then
+	        # Display
+		LINESIZE=`echo "${TEXT}" | wc -c | tr -d ' '`
+	        SPACES=`expr 62 - ${INDENT} - ${LINESIZE}`
+		if [ ${CRONJOB} -eq 0 ]; then
+                    ${ECHOCMD} "\033[${INDENT}C${TEXT}\033[${SPACES}C${RESULTPART}"
+    		  else
+	    	    echo "${TEXT}${RESULTPART}"
+		fi	    
+	    fi
+	fi
+      }
+
+    # Exit cleanly (removing temp files, PID files)
+    ExitClean()
+      {
+        RemovePIDFile
+	exit 0
+      }
+    
+    # Bloco de Seção
+    # Insert section block
+    InsertSection()
+      {
+        if [ ${QUIET} -eq 0 ]; then
+            echo ""
+#	    echo "[+] ${SECTION}$1${NORMAL}"
+#    	    echo "------------------------------------"
+	fi
+      }
+
+    # Function IsWorldWritable
+    IsWorldWritable()
+      {
+        sFILE=$1
+        FileIsWorldWritable=""
+	
+	# Check for symlink
+	if [ -L ${sFILE} ]; then
+	    if [ ! "${READLINKBINARY}" = "" ]; then
+	        sFILE=`${READLINKBINARY} ${sFILE}`
+	    fi
+	fi
+	# Only check the file if it isn't a symlink (after previous check)	
+        if [ -f ${sFILE} -a ! -L ${sFILE} ]; then
+            FINDVAL=`ls -l $1 | cut -c 9`
+	    if [ "${FINDVAL}" = "w" ]; then FileIsWorldWritable="TRUE"; else FileIsWorldWritable="FALSE"; fi
+          else
+    	    FileIsWorldWritable="NOSUCHFILE"
+        fi	   
+      }
+
+    # Function logtext (redirect data ($1) to log file)
+    logtext()
+      {	
+	CDATE=`date "+[%H:%M:%S]"`
+        echo "${CDATE} $1" >> ${LOGFILE}
+      }
+
+
+    ################################################################################
+    # Name        : logtextbreak()
+    # Description : Add a separator to log file between sections, tests etc
+    # Returns     : <nothing>
+    logtextbreak()
+      {
+    	CDATE=`date "+[%H:%M:%S]"`
+        echo "${CDATE} ===---------------------------------------------------------------===" >> ${LOGFILE}
+      }
+
+
+    ################################################################################
+    # Name        : Maid()
+    # Description : Cleanup service
+    # Returns     : <nothing>
+    Maid()
+      {
+	echo ""; echo "Interrupcao detectada."
+        # Remove PID
+        RemovePIDFile
+	
+	# YYY Remove TMPFILE if present
+	# if [ -f ${TMPFILE} ]; then rm -f ${TMPFILE}; fi
+
+	Display --text "Limpando..." --result DONE --color GREEN
+	
+	# Exit with exit code 1
+	exit 1
+      }
+
+    ################################################################################
+    # Name        : Register()
+    # Description : Register a test and see if it has to be run
+    # Returns     : SKIPTEST (0 or 1)
+    Register()
+      {
+        # Do not insert a log break, if previous test was not logged
+        if [ ${SKIPLOGTEST} -eq 0 ]; then logtextbreak; fi
+        SKIPTEST=0; SKIPLOGTEST=0; TEST_NEED_OS=""; PREQS_MET=""
+	TEST_NEED_NETWORK=""; TEST_NEED_PLATFORM=""
+	TOTAL_TESTS=`expr ${TOTAL_TESTS} + 1`
+        while [ $# -ge 1 ]; do
+	    case $1 in
+	        --description)
+		    shift
+		    TEST_DESCRIPTION=$1
+		;;
+		--platform)
+		    shift
+		    TEST_NEED_PLATFORM=$1
+		;;
+	        --network)
+		    shift
+		    TEST_NEED_NETWORK=$1
+		;;
+		--os)
+		    shift
+		    TEST_NEED_OS=$1
+		;;
+		--preqs-met)
+		    shift
+		    PREQS_MET=$1
+		;;
+	        --test-no)
+		    shift
+		    TEST_NO=$1
+		;;
+	        --weight)
+		    shift
+		    TEST_WEIGHT=$1
+		;;
+
+		*)
+		    echo "OPcao INVÁLIDO (Registro): $1"
+		    exit 1
+		;;
+	    esac
+	    # Go to next parameter
+	    shift
+	done
+
+	# Skip test if it's configured in profile
+	if [ ${SKIPTEST} -eq 0 ]; then
+	    FIND=`echo "${TEST_SKIP_ALWAYS}" | grep "${TEST_NO}"`
+	    if [ ! "${FIND}" = "" ]; then SKIPTEST=1; SKIPREASON="Saindo da configuracao"; fi
+	fi
+
+	# Skip if test is not in the list 
+	if [ ${SKIPTEST} -eq 0 -a ! "${TESTS_TO_PERFORM}" = "" ]; then
+	  FIND=`echo "${TESTS_TO_PERFORM}" | grep "${TEST_NO}"`
+	  if [ "${FIND}" = "" ]; then SKIPTEST=1; SKIPREASON="Teste nao está na lista de teste para execucao"; fi
+	fi
+
+	# Do not run scans which have a higher intensity than what we prefer
+	if [ ${SKIPTEST} -eq 0 -a "${TEST_WEIGHT}" = "H" -a "${SCAN_TEST_HEAVY}" = "NO" ]; then SKIPTEST=1; SKIPREASON="Teste intensivo no sistema em mode scan (H)"; fi
+	if [ ${SKIPTEST} -eq 0 -a "${TEST_WEIGHT}" = "M" -a "${SCAN_TEST_MEDIUM}" = "NO" ]; then SKIPTEST=1; SKIPREASON="Teste intensivo no sistema em mode scan  (M)"; fi	
+	
+	# Skip test if OS is different than requested	
+	if [ ${SKIPTEST} -eq 0 -a ! -z "${TEST_NEED_OS}" -a ! "${OS}" = "${TEST_NEED_OS}" ]; then
+	    SKIPTEST=1; SKIPREASON="Incorreto SO guest (${TEST_NEED_OS})"
+	    if [ ${LOG_INCORRECT_OS} -eq 0 ]; then
+	      SKIPLOGTEST=1
+	    fi
+	fi
+	
+	# Check for correct hardware platform
+	if [ ${SKIPTEST} -eq 0 -a ! -z "${TEST_NEED_PLATFORM}" -a ! "${HARDWARE}" = "${TEST_NEED_PLATFORM}" ]; then SKIPTEST=1; SKIPREASON="Plataforma de hardware incorreta"; fi
+	
+	# Not all prerequisites met, like missing tool
+	if [ ${SKIPTEST} -eq 0 -a "${PREQS_MET}" = "NO" ]; then SKIPTEST=1; SKIPREASON="Pre-requisitos nao contemplados(ex: faltando ferramentas, distribuicao Linux incorreta, etc)"; fi
+
+	# Skip test?
+	if [ ${SKIPTEST} -eq 0 ]; then
+	    # First wait X seconds (depending pause_between_tests)
+	    if [ ${TEST_PAUSE_TIME} -gt 0 ]; then sleep ${TEST_PAUSE_TIME}; fi
+	    
+            # Increase counter for every registered test which is performed
+            counttests
+	    if [ ${SKIPLOGTEST} -eq 0 ]; then logtext "Executando teste ID ${TEST_NO} ($TEST_DESCRIPTION)"; fi
+	  else
+	    if [ ${SKIPLOGTEST} -eq 0 ]; then logtext "Saindo do teste ${TEST_NO} ($TEST_DESCRIPTION)"; fi
+	    if [ ${SKIPLOGTEST} -eq 0 ]; then logtext "Reacao da Saída: ${SKIPREASON}"; fi
+	fi
+
+      }
+
+    # Remove PID file
+    RemovePIDFile()
+      {
+        # Test if PIDFILE is defined, before checking file presence
+	if [ ! "${PIDFILE}" = "" ]; then
+	  if [ -f ${PIDFILE} ]; then
+	      rm -f $PIDFILE;
+	      logtext "O PID foi removido (${PIDFILE})"
+	  fi
+	fi
+      }
+
+    # Dump to report file
+    report()
+      {
+        echo "$1" >> ${REPORTFILE}
+      }
+
+    # Report data (TESTID STATUS IMPACT MESSAGE)
+    ReportResult()
+      {
+        if [ $1 = "" ]; then TESTID="DESCONHECIDO"; fi
+	# Status: OK, WARNING, NEUTRAL, SUGGESTION
+	# Impact: HIGH, SEVERE, LOW, 
+	#report "result[]=TESTID-${TESTID},STATUS-$2,IMPACT-$3,MESSAGE-$4-"
+	# Reset ID before next test
+	TESTID=""
+      }
+
+    # Log suggestions to report file
+    ReportSuggestion()
+      {
+        # 2 parameters
+        # <ID> <suggestion text>
+        report "sugestao[]=$1|$2|"
+	logtext "Sugestao: $2 [test:$1]"
+      }
+
+    # Log warning to report file
+    ReportWarning()
+      {
+        # 3 parameters
+	# <ID> <priority/impact> <warning text>
+        report "atencao:[]=$1|$2|$3|"
+	logtext "Atencao: $3 [test:$1] [impact:$2]"
+      }
+        
+    # Show result code
+    ShowResult()
+      {
+	case $1 in
+	OK)
+	    echo "[ ${OK}OK${NORMAL} ]"
+	;;
+	WARNING)
+	    echo "[ ${WARNING}WARNING${NORMAL} ]"
+	    # log the warning to our log file
+	    #logtext "Atencao: $2"
+	    # add the warning to our report file
+	    #report "atencao:=$2"
+	;;
+        esac
+      }
+    
+    # Wait for [ENTER] or manually break
+    wait_for_keypress()
+      {
+        if [ ! ${QUICKMODE} -eq 1 ]; then
+          echo ""; echo "[ ${WHITE}Pressione [ENTER] para continuar, ou [CTRL]+C para parar${NORMAL} ]"
+          read void
+	fi
+      }
+
+
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao -  - 

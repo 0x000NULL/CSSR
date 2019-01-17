@@ -1,0 +1,84 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+    InsertSection "" #35. Hardening"
+#
+#################################################################################
+#
+#    # Test        : HRDN-7220
+#    # Description : Check for installed compilers
+#    Register --test-no HRDN-7220 --weight L --network NO --description "Verificar se um ou mais compiladores  estão instalados"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Vericado se um ou mais compiladores são encontrados no sistema"
+#	if [ ${COMPILER_INSTALLED} -eq 0 ]; then
+#	    logtext "Resultado: não foi encontrado compiladores"
+#	    Display --indent 4 --text "- Compiladores instalado(s)..." --result "NÃO ENCONTRADO" --color GREEN
+#	    AddHP 3 3
+#	  else
+#	    logtext "Resultado: encontrado compiladores"
+#	    Display --indent 4 --text "- Compiladores instalado(s)..." --result "ENCONTRADO" --color RED
+#	    ReportSuggestion ${TEST_NO} "Para o Hardening do sistema, é necessário através da remoção de compiladores desnecessários. Isso pode diminuir a chance de trojans personalizados, backdoors e rootkits para ser compilados e instalados"
+#	    AddHP 1 3
+#	    #YYY check if compilers have a specific group (like compiler, or NOT root/wheel)
+#	    # /usr/bin/*cc*
+#	    # /usr/bin/*++*
+#	    # /usr/bin/ld
+#	    # /usr/bin/as
+#	    # (and 750 permissions)
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : HRDN-7230
+#    # Description : Check for installed malware scanners
+#    Register --test-no HRDN-7230 --weight L --network NO --description "Check for malware scanner"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Verificado se há um ou mais compiladores no sistema"
+#	if [ ${MALWARE_SCANNER_INSTALLED} -eq 1 ]; then
+#	    logtext "Resultado: encontrado ultima versão de scanner de malware"
+#	    Display --indent 4 --text "- Scanner de Malware instalado..." --result "ENCONTRADO" --color GREEN
+#	    AddHP 3 3
+#	  else
+#	    logtext "Resultado: scanner de malware não foi encontrado"
+#	    Display --indent 4 --text "- Scanner de Malware instalado..." --result "NÃO ENCONTRADO" --color RED
+#	    ReportSuggestion ${TEST_NO} "Para um Hardening é necessário a instalação de um ou mais scanners de malware e executar um scanning periodicamente."
+#	    AddHP 1 3
+#	fi
+#    fi
+##
+##################################################################################
+##
+#            
+#    logtext "--------------------------------------------------------------------"
+#    logtext "| System part                        | Preferred value | Actual value | Points |"
+#    logtext "| [!] Compiler installed               |              0  | [${COMPILER_INSTALLED}]     | x  |"
+#    logtext "| [V] Malware scanner installed        |              1  | [x]     | x  |"
+#    logtext "| [V] Packet filter enabled            |              1  | [x]     | x  |"
+#    logtext "--------------------------------------------------------------------"
+#    logtext "| [!]: Hardening possible,  [V]: Hardening performed,  [ ]: Unknown "
+#    logtext "--------------------------------------------------------------------"
+
+#    
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 
