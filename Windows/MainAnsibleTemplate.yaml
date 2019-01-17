@@ -1,0 +1,74 @@
+﻿
+---
+# TODO check if we can generate random folder and randome file name
+# TODO Chana, Wilhilm -> IPNS Check
+# TODO M889481 --> 7.2.3 Configure RDP Authentication and Encryption - to be tested
+# TODO M889940 review the basic authentication thing
+
+- name: creating the needed scripts directory on the server
+  win_file:
+    path: c:\TEMP\ansible_hardening
+    state: directory
+
+- name: copying the needed files to the server
+  win_copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ ansible_win_os_hardening_files_to_be_copied }}"
+  tags: certfiles
+
+- include: M889922-corporate-scan-service-agent.yml
+  when: installipins == "True"
+
+- include: M889793-group-policy_settings.yml
+  when: grouppolicy == "True"
+
+- include: M889801-windows-update.yml
+  when: autoupdate == "True"
+
+- include: M889815-disable-unneeded-services.yml
+  when: disableunneeded == "True"
+
+- include: M889477-DACLs-for-windows-services.yml
+  when: securedacls == "True"
+
+- include: M889229-disable-ssl-v3.yml
+  when: disablessl == "True"
+
+- include: M889797-disable-RC4-stream-cipher.yml
+  when: disablerc4 == "True"
+
+- include: M889660-disable-triple-DES-cipher.yml
+  when:  disabledes == "True"
+
+- include: M889580-enable-improved-protection.yml
+  when: enableprotection == "True"
+
+- include: M889449-disable-guest-account.yml
+  when: disableguest == "True"
+
+- include: M889960-protection-against-ICMP-attacks.yml
+  when: icmpprotection == "True"
+
+- include: M889878-enable-powershell-scripts.yml
+  when: enablepsscripts == "True"
+
+- include: M889940-windows-remote-management.yml
+  when: winremotemgmt == "True"
+
+- include: M889481-configure-RDP-authentication-encryption.yml
+  when: confrdpauthandencryption == "True"
+
+- include: M889734-secure-administrative-RDP-sessions.yml
+  when: securerdpsession == "True"
+
+- include: M889923-restrict-RDP-access.yml
+  when: restrictrdpaccess == "True"
+
+- name: rebooting your server to reflect reg changes
+  win_reboot:
+    shutdown_timeout_sec: 3600
+    reboot_timeout_sec: 3600
+
+
+

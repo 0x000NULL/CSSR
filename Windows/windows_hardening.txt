@@ -1,0 +1,47 @@
+# Windows 8 and Windows 10 hardening
+# License: GNU Free Documentation License - Version 1.3, 3 November 2008 (for details, see LICENSE.txt)
+
+=====
+Windows 8 and Windows 10 hardening
+
+0.0 Install the system offline and make the possible setting offline, starting with the firewall.
+0.1 Turn off "Automatic Proxy" settings. It allows WPAD and your NTLM hashes can get stolen easily (eg. responder.py).
+
+1. Windows firewall, white listing of applications allowed to communicate out.
+2. Disable not needed services. Note: make sure BITS works or you won't be able to update Windows.
+3. AppLocker configuration, preferably with cert based limits - dll based makes the system too slow.
+4. Disable the automatic leaking of NetNTLM hashes of any user by lnk/url files (see "References" for the fix and note that, if the link is opened it may still leak).
+5. Disable powershell for standard users with applocker. You can also try the powershell restrictions, but these are easy to bypass.
+6. EMET for antiexploitation (take time to configure the applications, don't just use the default ones).
+7. Install applications with different users for application separation.
+8. Do not install applications with elevated privileges.
+9. No antivirus or similar "security product" for experienced users - these often pose higher risks, list below. For standard users, it may worth thinking about it.
+10. If you use the computer for browsing, make sure the browser is hardened (eg. NoScript, Request Policy..etc)
+
+
+=====
+Important practices in order to stay secure
+
+- Never use an account with admin privileges for general use (eg. web browsing).
+- Always verify the checksums of software being installed.
+- If the software source that needs to be run or installed can't be verified by checksums, try uploading them to antivirus communities (eg. VirusTotal) and check the results. Note that many AV software still use MD5 which can be poisoned.
+
+Note for privacy: enterprise version of Windows is preferred. The "home" editions leak more data and have more bloatware preinstalled.
+
+
+=====
+References
+  AppLocker https://technet.microsoft.com/en-us/library/dd759117.aspx
+  EMET https://microsoft.com/emet/
+  Obscure fix for NetNTML leaking by lnk/url: https://support.microsoft.com/en-us/kb/968389
+  Browser "security" https://securityinabox.org/en/guide/firefox/windows
+
+
+=====
+Why AVs often pose higher risks:
+ESET Nod32 Exploit: https://www.exploit-db.com/exploits/12529/
+Avast Command Execution: https://code.google.com/p/google-security-research/issues/detail?id=546
+Malwarebytes Remote Code Exec: https://www.rapid7.com/db/modules/exploit/windows/browser/malwarebytes_update_exec
+Malwarebytes DoS: https://www.exploit-db.com/exploits/35842/
+McAfee with poorly written auth: https://github.com/tfairane/HackStory/blob/master/McAfeePrivesc.md
+...and so on.
