@@ -1,0 +1,100 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Home directories
+#
+#################################################################################
+#
+    InsertSection "" #33. Diretorios Home"
+
+    # Test        : HOME-9302
+    # Description : Create list with home directories
+    Register --test-no HOME-9302 --weight L --network NO --description "" #Create list with home directories"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	# Read sixth field of /etc/passwd
+	logtext "R-TEC-HOME-9302-Teste: consultando o arquivo /etc/passwd para obter diretorios home"
+        FIND=`${AWKBINARY} -F: '{ if ($1 !~ "#") print $6 }' /etc/passwd | sort | uniq`
+	for I in ${FIND}; do
+	    if [ -d ${I} ]; then
+	        logtext "R-TEC-HOME-9302-Resultado: encontrar diretorio home: ${I} (diretorio existe)"
+	        report "home_directory[]=${I}"
+	      else
+	        logtext "R-TEC-HOME-9302-Resultado: encontrar diretorio home: ${I} (diretorio não existe)"
+	    fi
+	done
+    fi	
+#
+#################################################################################
+#
+    # Test        : HOME-9310
+    # Description : Check for suspicious shell history files
+    Register --test-no HOME-9310 --weight L --network NO --description "" #Verificando por arquivos de historico em shell"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ ! "${HOMEDIRS}" = "" ]; then
+	    if [ ${OS} = "Solaris" ]; then
+	        # Solaris doesn't support -maxdepth
+	        FIND=`find ${HOMEDIRS} -name ".*history" -not -type f -print`
+	      else
+	        FIND=`find ${HOMEDIRS} -maxdepth 1 -name ".*history" -not -type f -print`
+	    fi
+	    if [ "${FIND}" = "" ]; then
+		Display --indent 2 --text "" #- R-TEC-HOME-9310-Verificado arquivos de histórico no shell... " --result OK --color GREEN
+	        logtext "R-TEC-HOME-9310-Resultado: Ok, arquivos de historico são do tipo 'file'."
+	      else
+		Display --indent 2 --text "" #- R-TEC-HOME-9310-Verificado arquivos de histórico no shell... " --result ATENÇÃO --color RED
+	        logtext "R-TEC-HOME-9310-Resultado: os arquivos encontrados estão formato errado:"
+	        logtext "R-TEC-HOME-9310-Saída: ${FIND}"
+		logtext "R-TEC-HOME-9310-Info: above files could be redirected files to avoid logging and should be investigated"
+		ReportWarning ${TEST_NO} "M" "R-TEC-HOME-9310-Tipo incorreto de arquivo encontrado no arquivo de historico do shell"
+	        fi
+	    logtext "R-TEC-HOME-9310-Remarks: ${HOME_HISTORY_LOG_TEXT}"
+          else
+	    Display --indent 2 --text "" #- R-TEC-HOME-9310-Verificado arquivos de histórico no shell... " --result PULADO --color WHITE
+	    logtext "R-TEC-HOME-9310-Resultado: Diretorio Home está vazio, o teste será cancelado"
+	fi
+    fi
+
+#
+#################################################################################
+#
+    # Test        : HOME-9314
+    # Description : Check if non local paths are found in PATH, which can be a risk, but also bad for performance
+    #               (like searching on a filer, instead of local disk)
+    #Register --test-no HOME-9314 --weight L --network NO --description "" #Create list with home directories"
+#
+#################################################################################
+#
+    #YYY
+    #echo -n "      - Checking PATH variable vulnerabilities... "
+    #
+    #FIND=`find ${HOMEDIRS} -name * | grep -r 'PATH=' | egrep '=.:|:.:|:.;' | grep -v 'CDPATH'`
+    #if [ "${FIND}" = "" ]
+    #  then
+    #    logtext "Resultado: Ok, no special things found in the PATH variable"
+    #  else
+    #    echo "[ ${WARNING}WARNING${NORMAL} ]"
+    #    logtext "Warning: Probably found \".\" in the PATH. Details: ${FIND}"
+    #fi
+    #
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

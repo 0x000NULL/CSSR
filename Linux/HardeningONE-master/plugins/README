@@ -1,0 +1,15 @@
+
+##########################################################################
+#
+# This directory contains plugins
+#
+# Note: custom plugins can be added to this directory
+# (see documention for more help about plugins)
+#
+# AT THIS MOMENT, PLUGINS ARE NOT SUPPORTED YET
+#
+##########################################################################
+
+Permissions
+-------------
+Plugins should be installed with octal permissions of 400 (r--------)

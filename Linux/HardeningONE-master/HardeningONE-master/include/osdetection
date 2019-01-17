@@ -1,0 +1,231 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   HardeningOne
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao(mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# This software is licensed under GPL, version 3. See LICENSE file for
+# usage of this software.
+#
+#################################################################################
+#
+# Operating System detection
+#
+#################################################################################
+#
+
+    # Check operating system
+    case `uname` in
+
+	# IBM AIX
+	AIX)
+	  OS="AIX"
+	  OS_NAME="AIX"
+	  OS_FULLNAME=`uname -s -r`
+	  OS_VERSION=`uname -r`
+	  CPU=`uname -p`
+	  HARDWARE=`uname -M`
+	  FIND_BINARIES="whereis -b"
+	  SYSCTL_READKEY=""
+	;;
+
+	# Mac OS X
+	Darwin)
+	  OS="MacOS"
+	  if [ -x /usr/bin/sw_vers ]; then
+	      OS_NAME=`/usr/bin/sw_vers -productName`
+	      OS_VERSION=`/usr/bin/sw_vers -productVersion`
+	      OS_FULLNAME="${OS_NAME} ${OS_VERSION}"
+	    else
+	      # Fall back to pretty safe name
+	      OS_NAME="Mac OS X"
+	      OS_FULLNAME=`uname -s -r`
+	      OS_VERSION=`uname -r`
+	  fi  
+	  HARDWARE=`uname -m`
+	  HOMEDIRS="/Users"
+	  FIND_BINARIES="whereis"
+	  OS_KERNELVERSION=`uname -r`
+	  SYSCTL_READKEY=""
+	;;
+	
+	# FreeBSD
+        FreeBSD)
+	  OS="FreeBSD"
+	  OS_NAME="FreeBSD"
+          OS_FULLNAME=`uname -s -r`
+	  OS_VERSION=`uname -r`
+	  HARDWARE=`uname -m`
+	  HOMEDIRS="/home /root"
+	  FIND_BINARIES="whereis -q -a -b"
+	  OS_KERNELVERSION=`uname -i`
+	  SYSCTL_READKEY="sysctl -n"
+        ;;
+
+	# HP-UX
+	HP-UX)
+	  OS="HP-UX"
+	  OS_NAME="HP-UX"
+	  OS_FULLNAME=`uname -s -r`
+	  OS_VERSION=`uname -r`
+	  HARDWARE=`uname -m`
+	  FIND_BINARIES="whereis -b"
+	  SYSCTL_READKEY=""
+	;;
+	    
+	# Linux
+	Linux)
+	  OS="Linux"
+	  OS_NAME="Linux"
+          OS_FULLNAME=""
+	  OS_VERSION=`uname -r`
+	  LINUX_VERSION=""
+	  HARDWARE=`uname -m`
+	  HOMEDIRS="/home"
+	  FIND_BINARIES="whereis -b"
+	  OS_KERNELVERSION=`uname -r`
+	  # Cobalt
+	  if [ -e "/etc/cobalt-release" ]; then		OS_FULLNAME=`cat /etc/cobalt-release`; fi
+	  # CPUBuilders Linux
+	  if [ -e "/etc/cpub-release" ]; then		OS_FULLNAME=`cat /etc/cpub-release`; fi
+	  # Debian/Ubuntu (***)
+	  if [ -e "/etc/debian_version" -a -e /etc/lsb-release ]; then
+	  	OS_VERSION=`cat /etc/debian_version`
+		FIND=`grep "^DISTRIB_ID=" /etc/lsb-release | cut -d '=' -f2`
+		if [ "${FIND}" = "Ubuntu" ]; then
+		    OS_NAME="Ubuntu"
+		    OS_VERSION=`grep "^DISTRIB_RELEASE=" /etc/lsb-release | cut -d '=' -f2`
+		    OS_FULLNAME="Ubuntu ${OS_VERSION}"
+		    LINUX_VERSION="Ubuntu"
+		  else
+		    OS_NAME="Debian"
+		    OS_FULLNAME="Debian ${OS_VERSION}"
+		    LINUX_VERSION="Debian"
+		fi
+		# Ubuntu test (optional) `cat /proc/version | grep "[Uu]buntu"`
+	  fi
+	  # E-smith
+	  if [ -e "/etc/e-smith-release" ]; then	OS_FULLNAME=`cat /etc/e-smith-release`; fi
+	  # Gentoo
+	  if [ -e "/etc/gentoo-release" ]; then		OS_FULLNAME=`cat /etc/gentoo-release | awk '{ print $5 }' | cut -d '.' -f1,2`; fi
+	  # Red Hat and others
+	  if [ -e "/etc/redhat-release" ]; then
+		# CentOS
+	  	FIND=`grep "CentOS" /etc/redhat-release`
+		if [ ! "${FIND}" = "" ]; then
+			OS_NAME="CentOS"
+			OS_FULLNAME=`cat /etc/redhat-release | grep "CentOS"`
+			LINUX_VERSION="CentOS"
+			OS_VERSION="${OS_FULLNAME}"
+		fi
+		# Fedora
+	  	FIND=`grep "Fedora" /etc/redhat-release`
+		if [ ! "${FIND}" = "" ]; then
+			OS_NAME="Fedora"
+			OS_FULLNAME=`cat /etc/redhat-release | grep "Fedora"`
+			OS_VERSION="${OS_FULLNAME}"
+			LINUX_VERSION="Fedora"
+		fi
+		# Oracle Enterprise Linux
+	  	FIND=`grep "Enterprise Linux Enterprise Linux Server" /etc/redhat-release`
+		if [ ! "${FIND}" = "" ]; then		OS_NAME="Oracle Enterprise Linux";	OS_FULLNAME=`cat /etc/redhat-release | grep "Enterprise Linux"`;	OS_VERSION="${OS_FULLNAME}"; fi
+		
+		# Red Hat
+	  	FIND=`grep "Red Hat" /etc/redhat-release`
+		if [ ! "${FIND}" = "" ]; then
+			OS_NAME="Red Hat"
+			OS_FULLNAME=`cat /etc/redhat-release | grep "Red Hat"`
+			OS_VERSION="${OS_FULLNAME}"
+			LINUX_VERSION="Red Hat"
+		fi	
+	  fi
+	  if [ -e "/etc/SLOX-release" ]; then		OS_FULLNAME=`cat /etc/SLOX-release | grep "SuSE Linux"`; fi
+	  
+	  # Slackware
+	  if [ -e "/etc/slackware-version" ]; then	OS_NAME="Slackware";	OS_FULLNAME=`cat /etc/slackware-version`;		LINUX_VERSION="Slackware"; fi
+	  
+	  # SuSE
+	  if [ -e "/etc/SuSE-release" ]; then		OS_NAME="SuSE";		OS_VERSION=`cat /etc/SuSE-release | head -n 1`; 	LINUX_VERSION="SuSE"; fi
+	  
+	  # Turbo Linux
+	  if [ -e "/etc/turbolinux-release" ]; then	OS_FULLNAME=`cat /etc/turbolinux-release`; fi
+	  # YellowDog
+	  if [ -e "/etc/yellowdog-release" ]; then	OS_FULLNAME=`cat /etc/yellowdog-release`; fi
+
+	  # If Linux version is unknown, use uname value	  
+	  if [ "${OS_FULLNAME}" = "" ]; then OS_FULLNAME=`uname -s -r`; fi
+	  SYSCTL_READKEY="sysctl -n"
+
+	;;
+
+	# NetBSD
+	NetBSD)
+	  OS="NetBSD"
+	  OS_NAME="NetBSD"
+	  OS_FULLNAME=`uname -s -r`
+	  OS_KERNELVERSION=`uname -v`
+	  OS_VERSION=`uname -r`
+	  HARDWARE=`uname -m`
+	  FIND_BINARIES="whereis"
+	  SYSCTL_READKEY=""
+	;;
+
+	# OpenBSD
+	OpenBSD)
+	  OS="OpenBSD"
+	  OS_NAME="OpenBSD"
+	  OS_FULLNAME=`uname -s -r`
+	  OS_KERNELVERSION=`uname -v`
+	  OS_VERSION=`uname -r`
+	  HARDWARE=`uname -m`
+	  FIND_BINARIES="whereis"
+	  SYSCTL_READKEY=""
+
+	;;
+
+	# Solaris / OpenSolaris
+	SunOS)
+	  OS="Solaris"
+	  OS_NAME="Sun Solaris"
+	  OS_FULLNAME=`uname -s -r`
+	  OS_VERSION=`uname -r`
+	  HARDWARE=`uname -m`
+	  if [ -x /usr/bin/isainfo ]; then
+	      # Returns 32, 64
+	      OS_MODE=`/usr/bin/isainfo -b`
+	  fi
+	  SYSCTL_READKEY=""
+	;;
+	
+	# Unknown or unsupported systems
+        *)
+	  echo "[ ${WARNING}WARNING${NORMAL} ]"
+          echo "${WARNING}Error${NORMAL}: ${WHITE}Unknown SO encontrado. Nao há suporte disponível para este SO ou plataforma...${NORMAL}"
+	  echo "Por favor consulte o arquivo README/documentation para mais informacao."
+          exit 1
+        ;;
+
+    esac
+
+    # Set correct echo binary and parameters after detecting operating system
+    case ${OS} in
+           "MacOS")                         ECHOCMD="echo" ;;
+           "Solaris")                       ECHOCMD="echo" ;;
+           "Linux")
+              # Check if dash is used (Debian/Ubuntu)
+              DEFAULT_SHELL=`ls -l /bin/sh | awk -F'>' '{print $2}'`
+              case ${DEFAULT_SHELL} in
+                " dash")                    ECHOCMD="/bin/echo -e" ;;
+                *)                          ECHOCMD="echo -e" ;;
+              esac
+            ;;
+           *)                               ECHOCMD="echo -e" ;;
+    esac
+
+
+#================================================================================
+# HardeningOne - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao-  - 

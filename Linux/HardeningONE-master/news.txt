@@ -1,0 +1,410 @@
+
+1.2.10
+
+1. Ferramentas do Sistema
+/include/binaries
+====================================================================
+-	FILE-7502	Check all system binaries	
+
+2. Boot e serviço
+/include/tests_boot_services
+====================================================================
+-	BOOT-5121	Verificado por GRUB boot loader
+-	BOOT-5139	Check for LILO boot loader
+-	BOOT-5155	Check for YABOOT boot loader
+-	BOOT-5177	Check for Linux boot serviços (Red Hat style)
+-	BOOT-5180	Check for Linux boot serviços (Debian style)
+-	BOOT-5184	Check world writable startup scripts
+
+3. Kernel
+/include/tests_kernel
+====================================================================
+-	KRNL-5622	Check run level padrão on Linux machines
+-	KRNL-5677	Check CPU options and support (PAE, No eXecute, eXecute Disable) pae and nx bit are both visible on AMD and Intel CPU's if supported
+-	KRNL-5695	Determining Linux versão do kernel and release number
+-	KRNL-5723	Check if Linux is build as a monolithic kernel or not
+-	KRNL-5726	Verificado Linux módulos carregados do kernel
+-	KRNL-5728	Verificado for available Linux arquivo de configuração do kernel in /boot
+-	KRNL-5770	Verificado Solaris load modules
+-	KRNL-5788	Verificado availability new kernel
+-	KRNL-5820	Verificado configuração core dumps (Linux)
+
+4. Memoria e processos
+include/tests_memory_processes
+====================================================================
+-	PROC-3602	Query /proc/meminfo
+-	PROC-3604	Query /proc/meminfo
+-	PROC-3612	Localizando for dead and zombie processes
+-	PROC-3614	Localizando for heavy IO based waiting processes
+
+5. Usuários, Grupos e Autenticação
+/include/tests_authentication
+====================================================================
+-	Verificar login shells
+- 	Verificar /etc/group and shadow group files
+-	Verificar non unique accounts
+-	Verificar users com UID zero (0)
+-	Verificar Linux consistência do arquivo de password
+-	Verificar Solaris consistẽncia do arquivo de password
+-	Query NIS+ suporte à autenticação
+-	Query NIS suporte à autenticação
+-	Verificar for sudoers file
+-	Verificar for arquivo sudoers permissions
+-	Solaris test to check passwordless accounts
+-	Search for PAM password strength testing libraries
+-	Scan /etc/pam.conf file
+-	Searching available PAM configurations (/etc/pam.d)
+-	Searching available PAM files
+-	Audit PAM configuration files
+-	Search LDAP support in PAM files
+-	Search password protected accounts without expire (Linux)
+-	Verificar usuário com senhas antigas
+-	Verificar if single user mode login is properly configured in Solaris
+-	Verificar if authentication is needed to boot the system
+-	Verificar single user mode login for Linux
+-	Verificar default umask in common files
+-	Solaris account locking
+-	Query LDAP suporte à autenticação
+-	Verificar LDAP servers in client configuration
+-	Setar o comando 'at' para user/group 'root'
+
+6. Shells
+include/tests_shells
+====================================================================
+-	SHLL-6202	check all console TTYs in which root user can enter single user mode without password
+-	SHLL-6211	which shells are available according /etc/shells
+-	SHLL-6240	Check default umask
+
+7. Sistema de arquivos
+/include/tests_filesystems
+====================================================================
+-	FILE-6310	Verificado if /tmp and /home are separated from /
+-	FILE-6311	Verificado LVM Volume Groups
+-	FILE-6312	Verificado LVM volumes
+-	FILE-6323	Verificado Linux EXT2, EXT3, EXT4 file systems
+-	FILE-6329	Query all UFS mounts from /etc/fstab
+-	FILE-6354	Search files within /tmp which are older than 3 months
+-	FILE-6362	Check for sticky bit on /tmp
+-	FILE-6368	Verificado Linux root file system ACL support
+-	FILE-6372	Check / mount options for Linux
+-	FILE-6374	Check /boot mount options for Linux
+-	FILE-6410	Verificado locate database (file index)
+
+8. Storage
+include/tests_storage
+====================================================================
+-	STRG-1840	Check for disabled USB storage
+-	STRG-1846	Check for disabled firewire storage
+
+9.Software: name services
+include/tests_nameservices
+====================================================================
+-	NAME-4016	Check main domain (domain <domain name> in /etc/resolv.conf)
+-	NAME-4018	Check search domains in /etc/resolv.conf
+-	NAME-4020	Check non default resolv.conf options
+-	NAME-4024	Check Solaris uname -n output
+-	NAME-4026	Check Solaris /etc/nodename
+-	NAME-4028	Check DNS domain name
+-	NAME-4032	Check name service caching daemon (NSCD) status
+-	NAME-4202	Check if BIND is running
+-	NAME-4204	Check configuration file of BIND
+-	NAME-4206	Check BIND configuration file consistency
+-	NAME-4210	Check if we can determine useful information from banner
+-	NAME-4230	Check if PowerDNS is running
+-	NAME-4232	Check PowerDNS configuration file
+-	NAME-4236	Check PowerDNS backends
+-	NAME-4302	Check NIS ypbind daemon status
+-	NAME-4306	Check NIS domain
+
+10. Ports e pacotes
+include/tests_ports_packages
+====================================================================
+
+-	PKGS-7306	Solaris packages
+-	PKGS-7308	RPM package based systems
+-	PKGS-7345	Debian package based systems (dpkg)
+-	PKGS-7348	Show unneeded distfiles if present
+-	PKGS-7384	Search for YUM utils package
+-	PKGS-7386	Search for YUM security package
+-	PKGS-7388	Check security repository in Debian/ubuntu apt sources.list file
+-	PKGS-7392	Check Ubuntu vulnerable packages
+
+
+11. Networking
+include/tests_networking
+====================================================================
+
+-	NETW-2704	Basic nameserver configuration tests (connectivity)
+-	NETW-2705	Basic nameserver configuration tests (connectivity)
+-	NETW-3001	Find default gateway (route)
+-	NETW-3006	Get network MAC addresses
+-	NETW-3008	Get network IPv4/6 addresses
+-	NETW-3012	Check listening ports
+-	NETW-3014	Verificado promiscuous interfaces (BSD)
+-	NETW-3015	Verificado promiscuous interfaces (Linux)
+-	NETW-3028	Verificado for many waiting connections
+
+12. Impressoras e Spools
+include/tests_printers_spools
+====================================================================
+-	PRNT-2302	Check printcap file consistency
+-	PRNT-2304	Check cupsd status
+-	PRNT-2306	Check cupsd configuration file
+-	PRNT-2308	Check cupsd address configuration
+
+13. Software: e-mail e mensageiros
+/include/tests_mail_messaging
+====================================================================
+-	MAIL-8802	Check Exim process status
+-	MAIL-8814	Check Postfix process
+-	MAIL-8816	Check Postfix configuration
+-	MAIL-8818	Check Postfix configuration
+-	MAIL-8838	Check Dovecot process
+-	MAIL-8940	Check Qmail (SMTP) process status
+
+14. Software: firewalls
+/include/tests_firewalls
+====================================================================
+-	FIRE-4511	Check iptables kernel module
+-	FIRE-4512	Check iptables for empty ruleset
+-	FIRE-4513	Check iptables for unused rules
+-	FIRE-4526	Check ipf (Solaris)
+-	FIRE-4590	Check if at least one firewall if active
+
+15. Software: webserver		OK
+/include/tests_webserver
+====================================================================
+-	HTTP-6622	Test for Apache installation
+-	HTTP-6624	Testing main Apache configuration file
+-	HTTP-6626	Testing other Apache configuration files
+-	HTTP-6628	Testing other Apache configuration files (teste)
+-	HTTP-6630	Search for all loaded modules
+-	HTTP-6680	Search for ModSecurity
+-	HTTP-6702	Search for nginx process
+-	HTTP-6704	Search for nginx process
+-	HTTP-6706	Search for nginx virtual hosts
+-	HTTP-6708	Check if nginx is running as a reverse proxy
+-	HTTP-6720	Search for nginx log files
+
+16. SSH
+include/tests_ssh
+====================================================================
+-	SSH-7402	Check for a running SSH daemon
+-	SSH-7404	Determine SSH daemon configuration file location
+-	SSH-7408	Check SSH specific defined options
+-	SSH-7412	Check SSH PermitRootLogin option
+-	SSH-7414	Check SSH Protocol option
+-	SSH-7416	Check SSH StrictModes option
+-	SSH-7418	Check SSH Port option
+-	SSH-7440	AllowUsers / AllowGroups
+-	SSH-7464	HashKnownHosts
+
+17. SNMP
+include/tests_snmp
+====================================================================
+-	SNMP-3302	Check for a running SNMP daemon
+-	SNMP-3304	Determine SNMP daemon configuration file location
+-	SNMP-3306	Determine SNMP communities
+
+18. Banco de dados
+/include/tests_databases
+====================================================================
+-	DBS-1804	Check if MySQL is being used
+-	DBS-1816	Check empty MySQL root password
+-	DBS-1826	Check if PostgreSQL is being used
+-	DBS-1840	Check if Oracle is being used
+
+19. Serviços LDAP
+/include/tests_ldap
+====================================================================
+-	LDAP-2219	Check running OpenLDAP instance
+-	LDAP-2224	Search slapd.conf
+
+20. Software: PHP
+include/tests_php
+====================================================================
+
+-	PHP-2211	Check php.ini presence
+-	PHP-2320	Check php disable functions option
+-	PHP-2368	Check php register_globals option
+-	PHP-2372	Check php expose_php option
+-	PHP-2375	Check PHP apache_child_terminate option
+-	PHP-2374	Check PHP enable_dl option
+-	PHP-2376	Check PHP allow_url_fopen option
+-	PHP-2378	Check PHP allow_url_include option
+-	PHP-2380	Check PHP escapeshellcmd option
+-	PHP-2381	Check PHP leak option
+-	PHP-2382	Check PHP passthru option
+-	PHP-2383	Check PHP passthru option
+-	PHP-2384	Check PHP passthru option
+-	PHP-2385	Check PHP phpinfo option
+-	PHP-2386	Check PHP posix_kill option
+-	PHP-2387	Check PHP posix_mkfifo option
+-	PHP-2388	Check PHP posix_setpgid option
+-	PHP-2389	Check PHP posix_setsid option
+-	PHP-2390	Check PHP posix_setuid option
+-	PHP-2391	Check PHP proc_get_status option
+-	PHP-2392	Check PHP proc_open option
+-	PHP-2393	Check PHP proc_terminate option
+-	PHP-2394	Check PHP shell_exec option
+-	PHP-2395	Check PHP show_source option
+-	PHP-2396	Check PHP system option
+-	PHP-2397	Check PHP proc_nice option
+-	PHP-2398	Check PHP proc_get_status option
+
+21. Squid
+include/tests_squid
+====================================================================
+-	SQD-3602	Check for a running Squid daemon
+-	SQD-3604	Determine Squid daemon configuration file location
+-	SQD-3606	Check Squid version
+-	SQD-3610	Check Squid configuration options
+-	SQD-3613 [T]	Check Squid configuration options
+-	SQD-3614	Check Squid authentication
+-	SQD-3616	Check external Squid authentication
+-	SQD-3620	Check ACLs
+-	SQD-3624 [T]	Check unsecure ports in Safe_ports list
+-	SQD-3630 [T]	Check ACLs
+
+22. Logging e arquivo
+/include/tests_logging
+====================================================================
+-	LOGG-2130	Check for a running syslog daemon
+-	LOGG-2132	Check for a running syslog-ng daemon
+-	LOGG-2134	Check for Syslog-NG configuration file consistency
+-	LOGG-2210	Check for a running metalog daemon
+-	LOGG-2230	Check for a running rsyslog daemon
+-	LOGG-2240	Check for a running RFC 3195 compliant daemon (syslog via TCP)
+-	LOGG-2138	Check for kernel log daemon (klogd) presence on Linux systems
+-	LOGG-2142	Check for minilogd presence on Linux systems
+-	LOGG-2146	Check for logrotate (/etc/logrotate.conf and logrotate.d)
+-	LOGG-2148	Checking log files rotated with logrotate
+-	LOGG-2150	Checking log directories rotated with logrotate
+-	LOGG-2152	Check for Solaris 'loghost' entry in /etc/inet/hosts, or succesful resolving via DNS or any other name service.
+-	LOGG-2154	Check to see if remote logging is enabled
+-	LOGG-2162	Check for directories in /etc/newsyslog.conf
+-	LOGG-2164	Check for files in /etc/newsyslog.conf
+-	LOGG-2170	Search available log paths
+-	LOGG-2180	Search open log file
+-	LOGG-2190	Checking deleted files
+
+
+23. Serviços Inseguros e Ferramentas de Hacking
+/include/tests_insecure_services
+====================================================================
+-	INSE-8002	Check for inetd status
+-	INSE-8004	Check for inetd configuration file
+-	INSE-8010	Check for proftpd status
+-	INSE-8011	Check for proftpd configuration file
+-	INSE-8012	Check for smbd/smbclient status
+-	INSE-8013	Check for smbd/smbclient configuration file
+-	INSE-8014	Check for snmpd status
+-	INSE-8015	Check for snmp configuration file
+-	INSE-8018	Check for telnetd status
+-	INSE-8019	Check for telnetd configuration file
+-	INSE-8016	Check for nmap-os-fingerprint file
+-	INSE-8006	Check for inetd configuration file contents if inetd is NOT active
+-	INSE-8016	Check for telnet enabled via inetd
+-	INSE-8017	Verificar permissões no log do syslog (ver ainda)
+
+24. Banners E Identificação
+/include/tests_banners
+====================================================================
+-	BANN-7119	Check MOTD banner file
+-	BANN-7122	Check motd file to see if it contains some form of message to discourage unauthorized users to leave the system alone
+-	BANN-7124	Check issue banner file
+-	BANN-7126	Check issue file to see if it contains some form of message to discourage unauthorized users to leave the system alone
+-	BANN-7128	Check issue.net banner file
+-	BANN-7130	Check issue.net file to see if it contains some form of message to discourage unauthorized users to leave the system alone	
+-	BANN-8021	verifica se há banner por uname -a evitando usuários não autorizados tenham visualização qual versão e arquitrtura do SO
+
+25. Tarefas agendadas
+include/tests_scheduling
+====================================================================
+-	SCHD-7704	Check crontab / cronjobs
+-	SCHD-7718	Check atd status
+-	SCHD-7720	Check at users
+-	SCHD-7724	Check scheduled at jobs
+
+26. Auditoria
+/include/tests_accounting
+====================================================================
+-	Check availability Linux accounting data
+-	Check sysstat accounting data
+-	Check auditd status
+-	Check auditd rules
+-	Check auditd Arquivo de Configuração
+-	Check auditd log file
+-	Check Solaris audit daemon presence
+-	Check Solaris auditd service status
+-	Check Solaris Basic Security Mode (BSM) in /etc/system
+-	Check Solaris BSM (c2audit) module status
+-	Check location for audit events
+-	check auditstat
+
+
+27. Criptografia
+/include/tests_crypto
+====================================================================
+-	CRYP-7902	check for expired SSL certificates
+
+
+29. Frameworks de Segurança
+/include/tests_mac
+====================================================================
+-	MACF-6204	Check if AppArmor is installed
+-	MACF-6208	Check AppArmor active status
+-	MACF-6232	Check SELINUX for installation
+-	MACF-6234	Check SELINUX status
+-	RBAC-6272	Check if grsecurity is installed
+
+30. Software: Integridade de Arquivos
+/include/tests_file_integrity
+====================================================================
+-	FINT-4310	Check if AFICK is installed
+-	FINT-4314	Check if AIDE is installed
+-	FINT-4318	Check if Osiris is installed
+-	FINT-4322	Check if Samhain is installed
+-	FINT-4326	Check if Tripwire is installed
+-	FINT-4350	Check if at least one file integrity tool is installed
+
+31. Software: Scanners Malware
+include/tests_malware
+====================================================================
+-	MALW-3275	Check for installed tool (chkrootkit)
+-	MALW-3276	Check for installed tool (Rootkit Hunter) 
+-	MALW-3282	Check if clamscan is installed
+-	MALW-3284	Check running clamd process
+-	MALW-3286	Check running freshclam if clamd process is running
+
+32. Ferramentas do Sistema
+/include/tests_file_permissions
+====================================================================
+-	FILE-7524	Perform file permissions check
+-	Pemissões 4000 - Scanning por root SUID BIT (verificar ainda)
+-	Scanning por UID 0 (verificar ainda)
+-	Scanning Permissao 777 (verificar ainda)
+-	Scanning por SUID BIT (verificar ainda)
+-	Scanning por SYICKY BIT (verificar ainda)
+-	Scanning por root SUID BIT (verificar ainda)
+-	Scanning por services - chkconfig (verificar ainda)
+-	Scanning por Groups Default nao usados (verificar ainda)
+-	Scanning por users UID = 0 alem do root (veirificar ainda)
+
+33. Diretorios Home
+/include/tests_homedirs		OK
+====================================================================
+-	HOME-9302	Create list with home directories
+-	HOME-9310	Check for suspicious shell history files
+
+34. Kernel Hardening		OK
+/include/tests_kernel_hardening
+====================================================================
+-	KRNL-6000	Check sysctl parameters
+
+35. Hardening		
+/include/tests_hardening	OK
+====================================================================
+-	HRDN-7220	Check for installed compilers
+-	HRDN-7230	Check for installed malware scanners
+

@@ -1,0 +1,333 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Ports and packages
+#
+#################################################################################
+#
+    InsertSection "" #10. Ports e pacotes"
+    report "[Software]"
+#
+#################################################################################
+#
+    Display --indent 2 --text "" #- Localizando gerenciador de pacotes..."
+
+    # Test        : PKGS-7302
+    # Description : Query FreeBSD pkg_info
+    if [ -x /usr/sbin/pkg_info ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7302 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Query FreeBSD pkg_info"
+    if [ ${SKIPTEST} -eq 0 ]; then    
+	Display --indent 4 --text "" #- Localizando pkg_info..." --result ENCONTRADO --color GREEN
+	logtext "Resultado: Found pkg_info"
+	logtext "Teste: Querying pkg_info to get package list..."
+	Display --indent 6 --text "" #- Consultando pkg_info for installed packages..."
+	logtext "Saída:"; logtext "-----"
+	SPACKAGES=`/usr/sbin/pkg_info | sort | tr -s ' ' | cut -d ' ' -f1 | sed -e 's/^\(.*\)-\([0-9].*\)$/\1,\2/g'`
+	for J in ${SPACKAGES}; do
+            sPKG_NAME=`echo ${J} | cut -d ',' -f1`
+            sPKG_VERSION=`echo ${J} | cut -d ',' -f2`
+	    logtext "Installed package: ${sPKG_NAME} (version: ${sPKG_VERSION})"
+	    report "installed_package[]=${sPKG_NAME},${sPKG_VERSION},"
+	done
+    fi	    
+#
+#################################################################################
+#
+# Temporary disabled due false positives
+# Packages like docbook, gcc, automake report multiple installed versions
+#    # Test        : PKGS-7303
+#    # Description : Query FreeBSD pkg_info
+#    if [ -x /usr/sbin/pkg_info ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PKGS-7303 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Query FreeBSD for double installed packages"
+#    if [ ${SKIPTEST} -eq 0 ]; then    
+#	SDOUBLEINSTALLED=`pkg_info | sort | sed -e 's/-[0-9].*$//' | uniq -c | grep -v '^[[:space:]]*1' | tr -s ' ' | cut -d ' ' -f3`
+#	if [ "${SDOUBLEINSTALLED}" = "" ]; then
+#	    Display --indent 6 --text "" #- Consultando pkg_info for double installed packages..." --result OK --color GREEN	
+#	    logtext "Ok, no packages show up twice or more in the package listing."
+#	  else
+#	    Display --indent 6 --text "" #- Consultando pkg_info for double installed packages..." --result ATENÇÃO --color RED
+#	    for J in ${SDOUBLEINSTALLED}; do
+#	        ReportWarning ${TEST_NO} "" #M" "Found probably incorrect installed package (${J})"
+#		logtext "This package ${J} is visible twice or more in the pkg_info listing."
+#		ReportSuggestion ${TEST_NO} "" #(FreeBSD) run pkgdb -F and check this manually."
+#	        ReportSuggestion ${TEST_NO} "" #(OpenBSD) check dependencies to see if one of the double "
+#		logtext "installed packages is unneeded."
+#		report "double_installed_package[]=${J}"
+#	    done
+#	fi
+#      else
+#        Display --indent 4 --text "" #- Localizando pkg_info..." --result "NOT FOUND" --color WHITE
+#	logtext "Resultado: pkg_info can NOT be found on this system"
+#    fi    
+#
+#################################################################################
+#
+    # Test        : PKGS-7306
+    # Description : Solaris packages
+    if [ -x /usr/bin/pkginfo ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7306 --os Solaris --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Querying Solaris packages"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	Display --indent 4 --text "" #- Localizando pkginfo..." --result ENCONTRADO --color GREEN
+	    logtext "Resultado: Found Solaris pkginfo"
+	    logtext "Teste: Querying pkginfo to get package list"
+	    Display --indent 4 --text "" #- Consultando pkginfo for installed packages..."
+	    logtext "Saída:"; logtext "-----"
+	    # Strip SUNW from strings
+	    SPACKAGES=`/usr/bin/pkginfo -i | tr -s ' ' | cut -d ' ' -f2 | sed "s#^SUNW##"`
+	    for J in ${SPACKAGES}; do
+	        logtext "Found package ${J}"
+		report "installed_package[]=${J}"
+	    done
+      else
+	logtext "Resultado: pkginfo can NOT be found on this system"
+    fi
+#
+#
+#################################################################################
+#
+    # Test        : PKGS-7308
+    # Description : RPM package based systems
+    if [ ! "${RPMBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7308 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Checking package list with RPM"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	Display --indent 4 --text "" #- Localizando gerenciado de pacotes RPM ..." --result ENCONTRADO --color GREEN
+	logtext "Resultado: Found rpm binary (${RPMBINARY})"
+	logtext "Teste: Querying 'rpm -qa' to get package list"
+	Display --indent 6 --text "" #- Consultando gerenciado de pacotes RPM ..."	    
+	logtext "Saída:"; logtext "--------"
+	SPACKAGES=`${RPMBINARY} -qa | sort`
+	for J in ${SPACKAGES}; do
+	    logtext "Found package: ${J}"
+	report "installed_package[]=${J}"
+	done
+      else
+	logtext "Resultado: RPM binary NOT found on this system, test skipped"
+    fi    
+#
+#################################################################################
+#
+    # Test        : PKGS-7312
+    # Description : HP-UX packages
+    # Notes       : swlist -l fileset (|grep patch) / print_manifest
+#
+#################################################################################
+#
+    # Test        : PKGS-7316
+    # Description : AIX patches
+    # Notes       : /usr/sbin/instfix -c -i | cut -d":" -f1
+#
+#################################################################################
+#
+    # Test        : PKGS-7345
+    # Description : Debian package based systems (dpkg)
+    if [ -x /usr/bin/dpkg ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7345 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Querying dpkg"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        Display --indent 4 --text "" #- Localizando dpkg gerenciador de pacotes..." --result ENCONTRADO --color GREEN
+	logtext "Resultado: Found dpkg binary"
+	logtext "Teste: Querying dpkg -l to get package list"
+	Display --indent 6 --text "" #- Consultando gerenciador de pacotes..."
+	logtext "Saída:"
+	SPACKAGES=`dpkg -l 2>/dev/null | grep "^ii" | tr -s ' ' | tr ' ' '#' | sort`
+	for J in ${SPACKAGES}; do
+	    PACKAGE_NAME=`echo ${J} | cut -d '#' -f2`
+	    PACKAGE_VERSION=`echo ${J} | cut -d '#' -f3`
+	    logtext "Found package: ${PACKAGE_NAME} (version: ${PACKAGE_VERSION})"
+	    report "installed_package[]=${PACKAGE_NAME},${PACKAGE_VERSION},"
+	done
+      else
+	logtext "Resultado: dpkg can NOT be found on this system"
+    fi    
+#
+#################################################################################
+#
+    # Test        : PKGS-7348
+    # Description : Show unneeded distfiles if present
+    # Notes       : Portsclean seems to be gone from the ports, so no suggestion or warning is
+    #               issued when it's missing.
+    #               Add portmaster --clean-distfiles-all
+    Register --test-no PKGS-7348 --os FreeBSD --weight L --network NO --description "" #Check for old distfiles"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        if [ -x /usr/local/sbin/portsclean ]; then
+            FIND=`/usr/local/sbin/portsclean -n -DD | grep 'Delete' | wc -l | tr -d ' '`
+	    if [ ${FIND} -eq 0 ]; then
+    		Display --indent 2 --text "" #- Verificando presence old distfiles..." --result OK --color GREEN
+		logtext "Resultado: no unused distfiles found"
+	      else
+    	        Display --indent 2 --text "" #- Verificando presence old distfiles..." --result ATENÇÃO --color YELLOW
+		logtext "Resultado: found ${FIND} unused distfiles"
+        	ReportSuggestion ${TEST_NO} "" #Unused distfiles found. Use portsclean to delete these files. For example: portsclean -DD."
+            fi
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PKGS-7382
+    # Description : Check for vulnerable FreeBSD packages
+    Register --test-no PKGS-7382 --os FreeBSD --weight L --network NO --description "" #Check for vulnerable FreeBSD packages"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        if [ -x /usr/local/sbin/portaudit ]; then
+            FIND=`/usr/local/sbin/portaudit | grep 'problem(s) in your installed packages found' | grep -v '0 problem(s) in your installed packages found'`
+            if [ "${FIND}" = "" ]; then
+	        logtext "Resultado: Portaudit results are clean"
+	      else
+	        Display --indent 2 --text "" #- Verificando portaudit to obtain vulnerabilities..." --result ATENÇÃO --color RED
+	        logtext "Resultado: Portaudit found one or more installed packages which are vulnerable."
+	        ReportWarning ${TEST_NO} "" #M" "Found one or more vulnerable packages."
+	        ReportSuggestion ${TEST_NO} "" #Update your system with portupgrade or other tools"
+	        logtext "List of vulnerable packages/version:"	    
+	        for I in `/usr/local/sbin/portaudit | grep "Affected package" | cut -d ' ' -f3 | sort | uniq`; do
+	            report "vulnerable_package[]=${I}"
+	            logtext "Vulnerable package: ${I}"
+		    # Decrease hardening points for every found vulnerable package
+		    AddHP 1 2
+	        done
+            fi
+          else
+    	    Display --indent 2 --text "" #- Portaudit not installed" --result SUGESTÃO --color YELLOW
+	    logtext "Resultado: Portaudit not installed, can't perform vulnerability test."
+	    ReportSuggestion "Install portaudit from the ports collection to query outdated (vulnerable) packages."
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PKGS-7384
+    # Description : Search for YUM utils package
+    if [ -x /usr/bin/yum ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7384 --preqs-met ${PREQS_MET} --os Linux --weight L --network NO --description "" #Check for YUM utils package"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        if [ -x /usr/bin/package-cleanup ]; then
+	    logtext "Resultado: found YUM utils package (/usr/bin/package-cleanup)"
+	    
+	    # Check for duplicates
+	    logtext "Teste: Checking for duplicate packages"
+	    FIND=`/usr/bin/package-cleanup -q --dupes > /dev/null; echo $?`
+	    if [ "${FIND}" = "0" ]; then
+	        logtext "Resultado: No duplicate packages found"
+		Display --indent 2 --text "" #- Verificando package database duplicates..." --result OK --color GREEN
+	      else
+	        logtext "Resultado: One or more duplicate packages found"
+		Display --indent 2 --text "" #- Verificando package database duplicates..." --result ATENÇÃO --color RED
+		ReportWarning ${TEST_NO} "" #L" "Found one or more duplicate packages installed"
+		ReportSuggestion ${TEST_NO} "" #Run package-cleanup to solve duplicate package problems"
+	    fi
+
+	    # Check for package database problems
+	    logtext "Teste: Checking for database problems"
+            FIND=`/usr/bin/package-cleanup --problems > /dev/null; echo $?`
+	    if [ "${FIND}" = "0" ]; then
+	        logtext "Resultado: No package database problems found"
+		Display --indent 2 --text "" #- Verificando package database for problems..." --result OK --color GREEN
+	      else
+	        logtext "Resultado: One or more duplicate packages found"
+		Display --indent 2 --text "" #- Verificando package database for problems..." --result ATENÇÃO --color RED
+		ReportWarning ${TEST_NO} "" #L" "Found one or more problems in the package database"
+		ReportSuggestion ${TEST_NO} "" #Run package-cleanup to solve package problems"
+	    fi
+	  else
+	    Display --indent 2 --text "" #- yum-utils package not installed" --result SUGESTÃO --color YELLOW
+	    logtext "Resultado: YUM utils package not found"
+	    ReportSuggestion ${TEST_NO} "" #Install package 'yum-utils' for better consistency checking of the package database"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PKGS-7386
+    # Description : Search for YUM security package
+    if [ -x /usr/bin/yum ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7386 --preqs-met ${PREQS_MET} --os Linux --weight L --network NO --description "" #Check for YUM security package"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        # Use yum-security package when possible (Fedora, RHEL, CentOS)
+	logtext "Teste: Determining if yum-security package installed"
+	# Check if the option "list-sec" is available when retrieving help
+	#FIND=`/usr/bin/yum -h | grep "list-sec" | wc -l | tr -s ' ' | tr -d ' '`
+	FIND=`rpm -q yum-security`
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "Resultado: found yum-security package"
+	    logtext "Teste: Checking for vulnerable packages"
+            FIND2=`/usr/bin/yum list-sec security | awk '{ if($2=="security") print $3","$5 }'`
+	    if [ "${FIND2}" = "" ]; then
+	        logtext "Resultado: no vulnerable packages found"
+	        Display --indent 6 --text "" #Resultado: no vulnerable packages found" --result OK --color GREEN
+	      else
+	        logtext "Resultado: found multiple vulnerable packages"
+	        Display --indent 6 --text "" #Resultado: found multiple vulnerable packages" --result ATENÇÃO --color RED
+	        for I in ${FIND2}; do
+	            report "vulnerable_package[]=${I}"
+	    	    logtext "Vulnerable package: ${I}"
+		    AddHP 1 2
+		done
+    		ReportWarning ${TEST_NO} "" #M" "Found one or more vulnerable packages."
+		ReportSuggestion ${TEST_NO} "" #Use 'yum --security update' to update your system"
+	    fi
+	  else
+	    logtext "Resultado: yum-security package not found"
+	    Display --indent 2 --text "" #- yum-security package not installed" --result SUGESTÃO --color YELLOW
+	    ReportSuggestion ${TEST_NO} "" #Install package yum-security if possible, to maintain security updates easier"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PKGS-7388
+    # Description : Check security repository in Debian/ubuntu apt sources.list file
+#
+#################################################################################
+#
+    # Test        : PKGS-7390
+    # Description : Check Ubuntu database consistency
+    if [ "${LINUX_VERSION}" = "Ubuntu" -a -x /usr/bin/apt-get ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7390 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check Ubuntu database consistency"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	logtext "Teste: Package database consistency by running apt-get check"
+	FIND=`/usr/bin/apt-get -q=2 check; echo $?`
+	if [ "${FIND}" = "0" ]; then
+	    Display --indent 2 --text "" #- Verificando APT package database..." --result OK --color GREEN
+	    logtext "Resultado: package database seems to be consistent."
+	  else
+	    logtext "Resultado: package database is most likely NOT consistent"
+	    Display --indent 2 --text "" #- Verificando APT package database..." --result ATENÇÃO --color RED
+	    ReportWarning ${TEST_NO} "" #M" "apt-get check returned a non successful exit code."
+	    ReportSuggestion ${TEST_NO} "" #Executar apt-get para realizar uma verificação manual dos pacotes e consistência do banco de dados"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PKGS-7392
+    # Description : Check Ubuntu vulnerable packages
+    if [ "${LINUX_VERSION}" = "Ubuntu" -a -x /usr/bin/apt-get ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PKGS-7392 --os Linux --preqs-met ${PREQS_MET} --weight L --network YES --description "" #Check for Ubuntu security updates"
+   
+#
+#################################################################################
+#
+    # Test        : PKGS-7394
+    # Description : Check Ubuntu upgradeable packages
+#
+#################################################################################
+#
+# check for popularity-contest (Debian/Ubuntu)
+# check for yum-changelog
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

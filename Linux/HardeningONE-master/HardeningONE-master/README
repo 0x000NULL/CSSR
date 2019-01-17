@@ -1,0 +1,145 @@
+
+================================================================================
+
+  hardeningone - README
+
+================================================================================
+
+  Author:                   Mauro Risonho de Paula Assumpção <mauro.risonho@gmail.com>
+  Description:              Security and system auditing tool
+  Web site:                 http://
+  Development start:        
+  Support policy:           See section 'Support'
+  Documentation:            See web site, README, FAQ and CHANGELOG file
+
+================================================================================
+
+
+  == Web site contains up-to-date documentation ==
+
+  See http:///files/hardeningone-documentation.html
+
+
+[+] Introduction
+-------------------------------
+
+  hardeningone is an auditing tool which tests and gathers (security) information from
+  Unix based systems. The audience for this tool are security and system
+  auditors, network specialists and system maintainers.
+  
+  Some of the (future) features and usage options:
+  - System and security audit checks
+  - File Integrity Assessment
+  - System and file forensics
+  - Usage of templates/baselines (reporting and monitoring)
+  - Extended debugging features
+    
+  The name hardeningone is fictive and does not have a special meaning. Everyone is free
+  to use hardeningone under the conditions of the GPL v3 license (see LICENSE file).
+  
+  ========================
+   Quick facts
+  ========================
+   - Name:     hardeningone
+   - Type:     audit, security, forensics tool
+   - License:  GPL v3
+   - Language: Shell script
+   - Author:   Mauro Risonho de Paula Assumpção
+   - Web site: http://
+   - Required permissions: root or equivalent
+   - Other requirements: write access to /var/log and /tmp
+   
+
+
+[+] Installation
+-------------------------------
+
+  hardeningone doesn't have to be installed, so it can be used directly from a
+  (removable) disk. If you want the program to be installed, use one of the
+  following methods:
+
+  - Create a custom directory (ie. /usr/local/hardeningone) and unpack the tarball
+    (tar xfvz hardeningone-version.tar.gz) into this directory.
+  - Create a RPM package by using the hardeningone.spec file (see web site)
+    run 'rpmbuild -ta hardeningone-version.tar.gz' (= build RPM package)
+    run 'rpm -ivh <filename>' (= install RPM package)
+
+  ========================
+   Upgrade tip:
+  ========================
+  If you want to upgrade easily, make a shell script which removes an old
+  installation, then unpacks and installs the new version. However, don't
+  forget to migrate your dynamic files (like report / profile files).
+  Or better: split these files up and make sure that you always use the right ones
+  (especially with automated scanning).
+
+
+
+[+] Supported systems
+-------------------------------
+
+  Since the complexity of auditing different systems and platforms, hardeningone is
+  developed on BSD and Linux.
+  
+  This tool is tested or confirmed to work with:
+  Linux, FreeBSD, OpenBSD, Mac OS X, Solaris
+
+
+
+[+] Usage
+-------------------------------
+
+  See online documentation for more information about using hardeningone.
+  
+
+
+[+] Development
+-------------------------------
+
+  If you have input to improve hardeningone, let me know via the contact form. Although
+  no additional developers are needed at this moment, you are free to send patches or
+  input for consideration.
+
+
+
+[+] Support
+-------------------------------
+
+  hardeningone is tested on the most common operating systems. The documentation (README,
+  FAQ) and the debugging information in the log file should cover most questions and
+  problems. Bugs can be reported by filling in the contact form at the web site.
+  
+  NOTE: User related questions should not be asked via the contact form. Read the
+  documentation, the website resources and the log file for answers to common problems.
+
+  Commercial support is available under strict conditions and depends on the request.
+  For more information fill in the contact form and describe what kind of service is
+  requested.
+
+
+
+[+] Project donations
+-------------------------------
+
+  Individuals and companies which use this software for more than 10 systems, should
+  consider the value of this tool. To improve my tools, I rely on internet sources,
+  lots of books and a huge amount of time (spare time) investment. Book donations 
+  are highly appreciated and stimulate development.
+  
+
+
+[+] Thanks
+-------------------------------
+
+  Thanks to the community for using and supporting open source software and my tools
+  in particular. Many comments, bugs/patches and questions are the key to success
+  and motivation in developing tools like this.
+  
+  A special thanks to anyone who donated a book or input in the past!
+
+
+
+
+================================================================================
+ hardeningone - Copyright 2010-2011, Mauro Risonho de Paula Assumpção - 
+ http://

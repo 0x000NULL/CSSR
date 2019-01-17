@@ -1,0 +1,133 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+#  File permissions
+#
+#################################################################################
+#
+    InsertSection "" #32. Ferramentas do Sistema"
+#
+#################################################################################
+#
+    # Test        : FILE-7524
+    # Description : Perform file permissions check
+#    Register --test-no FILE-7524 --weight L --network NO --description "Executar as permissões do arquivo "
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        Display --indent 2 --text "- R-TEC-FILE-7524-Iniciando verificação em permissão de arquivos..."
+#        logtext "R-TEC-FILE-7524-Teste: Verificado permissões em arquivos"
+#        logtext "R-TEC-FILE-7524-Usando profile ${PROFILE} para baseline."
+#        FIND=`cat ${PROFILE} | egrep '^permfile:|^permdir:' | cut -d: -f2`
+#        for I in ${FIND}; do
+#            logtext "R-TEC-FILE-7524-Verificado  ${I}"
+#            CheckFilePermissions ${I}
+#            logtext "  R-TEC-FILE-7524-Permissões Esperadas: ${PROFILEVALUE}"
+#            logtext "  R-TEC-FILE-7524-Permissões Atuais: ${FILEVALUE}"
+#            logtext "  R-TEC-FILE-7524-Resultado: $PERMS"
+#            if [ "${PERMS}" = "FILE_NOT_FOUND" ]; then
+#    	        Display --indent 4 --text "${I}" --result "NAO OK" --color WHITE
+#    	      elif [ "${PERMS}" = "OK" ]; then
+#    	        Display --indent 4 --text "${I}" --result OK --color GREEN
+#	      elif [ "${PERMS}" = "BAD" ]; then
+#	        Display --indent 4 --text "${I}" --result ATENÇÃO --color RED
+#		ReportWarning ${TEST_NO} "M" "R-TEC-FILE-7524-Permissões incorretas para arquivo  ${I}"
+#	      else
+#	        logtext "R-TEC-FILE-7524-UNKNOWN status for file"
+#	  fi
+#        done
+#    fi    
+##
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##Display --indent 4 --text "- Pemissões 4000 - Scanning por root SUID BIT"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##Display --indent 4 --text "${I}" --result ATENÇÃO --color RED
+##find / -user root -perm -4000
+##echo"/n"
+##echo"/n"
+##3echo"/n"
+##echo "Scanning por UID 0"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##Display --indent 4 --text "${I}" --result ATENÇÃO --color RED
+##find / -uid 0 -printf %p'\n' -exec echo '[PERM UID 0 ]'{} \;|Display --indent 4 --text "${I}" --result ATENÇÃO --color RED
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning Permissao 777"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##find / -perm 777 -printf %p'\n' -exec echo '[PERM 777 ]' {} \;echo "Permissão 777"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning por SUID BIT"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##find \ -perm -4000 -printf %p'\n' -exec echo '[PERM SUID ]' {} \;>>logtext
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning por SYICKY BIT"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##find / -perm 2750 -printf '\r' -exec echo '[PERM Sticky Bit ]' {} \;>>logtext
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning por root SUID BIT"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##find / -perm 1750 -printf %p'\n' -exec echo '[PERM SUID BIT ]' {} \;>>/root/ho/v.0.0.1/hardeningone/tmp/report.txt
+##find / -perm 1750 -printf %p'\n' -exec echo '[PERM SUID BIT ]' {} \;>>logtext
+##echo "Scanning por services - chkconfig"
+##chkconfig --list
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning por Groups Default nao usados"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##cat /etc/group|grep lp && echo "GROUP LP remover"
+##echo"/n"
+##echo"/n"
+##echo"/n"
+##echo "Scanning por users UID = 0 alem do root"
+##echo '[UID = 0 ]' && cat /etc/passwd|grep :0:
+##echo"/n"
+##echo"/n"
+##echo"/n"
+
+
+
+
+
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 
