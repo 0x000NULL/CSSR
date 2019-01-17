@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+  Nomad.cpp
+c:\users\ethan aldrich\desktop\cyberpatriot\new folder\nomad-master\nomad.cpp(148): warning C4129: 'w': unrecognized character escape sequence
+c:\users\ethan aldrich\desktop\cyberpatriot\new folder\nomad-master\nomad.cpp(148): warning C4129: 's': unrecognized character escape sequence
+c:\users\ethan aldrich\desktop\cyberpatriot\new folder\nomad-master\nomad.cpp(150): warning C4129: '*': unrecognized character escape sequence
+c:\users\ethan aldrich\desktop\cyberpatriot\new folder\nomad-master\nomad.cpp(162): warning C4129: 'W': unrecognized character escape sequence
+c:\users\ethan aldrich\desktop\cyberpatriot\new folder\nomad-master\nomad.cpp(162): warning C4129: 'T': unrecognized character escape sequence
+  Nomad.vcxproj -> C:\Users\ethan aldrich\Desktop\CyberPatriot\New folder\nomad-master\Debug\Nomad.exe
