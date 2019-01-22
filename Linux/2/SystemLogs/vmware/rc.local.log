@@ -1,0 +1,127 @@
++ eject sr0
+eject: unable to eject, last error: Inappropriate ioctl for device
++ true
++ eject sr1
+eject: unable to eject, last error: Inappropriate ioctl for device
++ true
++ count=0
++ found=0
++ cp /etc/apt/sources.list /etc/apt/sources.bak
++ sed -i -e 's/^deb.cdrom/#deb cdrom/' /etc/apt/sources.list
++ '[' 0 -lt 3 ']'
++ count=1
++ nslookup us.archive.ubuntu.com -timeout=4
++ '[' 0 -eq 0 ']'
++ found=1
++ break
++ '[' 1 -eq 1 ']'
++ apt-get update
+Hit:1 http://us.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://us.archive.ubuntu.com/ubuntu xenial-updates InRelease
+Hit:3 http://security.ubuntu.com/ubuntu xenial-security InRelease
+Hit:4 http://us.archive.ubuntu.com/ubuntu xenial-backports InRelease
+Reading package lists...
++ apt-get install -q -y --force-yes --no-install-recommends open-vm-tools
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libdumbnet1 libmspack0 libxmlsec1 libxmlsec1-openssl
+Suggested packages:
+  open-vm-tools-desktop cloud-init
+Recommended packages:
+  zerofree
+The following NEW packages will be installed:
+  libdumbnet1 libmspack0 libxmlsec1 libxmlsec1-openssl open-vm-tools
+0 upgraded, 5 newly installed, 0 to remove and 265 not upgraded.
+Need to get 784 kB of archives.
+After this operation, 3,026 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu xenial/main amd64 libdumbnet1 amd64 1.12-7 [25.7 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmspack0 amd64 0.5-1ubuntu0.16.04.3 [37.4 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu xenial/main amd64 libxmlsec1 amd64 1.2.20-2ubuntu4 [118 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu xenial/main amd64 libxmlsec1-openssl amd64 1.2.20-2ubuntu4 [65.0 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu xenial-updates/main amd64 open-vm-tools amd64 2:10.2.0-3~ubuntu0.16.04.1 [538 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Fetched 784 kB in 2s (266 kB/s)
+Selecting previously unselected package libdumbnet1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 177102 files and directories currently installed.)
+Preparing to unpack .../libdumbnet1_1.12-7_amd64.deb ...
+Unpacking libdumbnet1:amd64 (1.12-7) ...
+Selecting previously unselected package libmspack0:amd64.
+Preparing to unpack .../libmspack0_0.5-1ubuntu0.16.04.3_amd64.deb ...
+Unpacking libmspack0:amd64 (0.5-1ubuntu0.16.04.3) ...
+Selecting previously unselected package libxmlsec1.
+Preparing to unpack .../libxmlsec1_1.2.20-2ubuntu4_amd64.deb ...
+Unpacking libxmlsec1 (1.2.20-2ubuntu4) ...
+Selecting previously unselected package libxmlsec1-openssl.
+Preparing to unpack .../libxmlsec1-openssl_1.2.20-2ubuntu4_amd64.deb ...
+Unpacking libxmlsec1-openssl (1.2.20-2ubuntu4) ...
+Selecting previously unselected package open-vm-tools.
+Preparing to unpack .../open-vm-tools_2%3a10.2.0-3~ubuntu0.16.04.1_amd64.deb ...
+Unpacking open-vm-tools (2:10.2.0-3~ubuntu0.16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for systemd (229-4ubuntu21.4) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Setting up libdumbnet1:amd64 (1.12-7) ...
+Setting up libmspack0:amd64 (0.5-1ubuntu0.16.04.3) ...
+Setting up libxmlsec1 (1.2.20-2ubuntu4) ...
+Setting up libxmlsec1-openssl (1.2.20-2ubuntu4) ...
+Setting up open-vm-tools (2:10.2.0-3~ubuntu0.16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for systemd (229-4ubuntu21.4) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+W: --force-yes is deprecated, use one of the options starting with --allow instead.
++ apt-get install -q -y --force-yes --no-install-recommends open-vm-tools-desktop
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Recommended packages:
+  xserver-xorg-input-vmmouse
+The following NEW packages will be installed:
+  open-vm-tools-desktop
+0 upgraded, 1 newly installed, 0 to remove and 265 not upgraded.
+Need to get 131 kB of archives.
+After this operation, 465 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu xenial-updates/universe amd64 open-vm-tools-desktop amd64 2:10.2.0-3~ubuntu0.16.04.1 [131 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Fetched 131 kB in 1s (100 kB/s)
+Selecting previously unselected package open-vm-tools-desktop.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 177256 files and directories currently installed.)
+Preparing to unpack .../open-vm-tools-desktop_2%3a10.2.0-3~ubuntu0.16.04.1_amd64.deb ...
+Unpacking open-vm-tools-desktop (2:10.2.0-3~ubuntu0.16.04.1) ...
+Processing triggers for man-db (2.7.5-1) ...
+Setting up open-vm-tools-desktop (2:10.2.0-3~ubuntu0.16.04.1) ...
+W: --force-yes is deprecated, use one of the options starting with --allow instead.
++ cp /etc/apt/sources.bak /etc/apt/sources.list
++ grep open-vm-tools
++ grep '^ii'
++ dpkg --list
++ '[' 0 -ne 0 ']'
++ echo open-vm-tools install Succeeded.
+open-vm-tools install Succeeded.
++ vmware-rpctool 'guest.upgrader_send_cmd_line_args --default'
+
++ vmware-rpctool 'upgrader.setGuestFileRoot /tmp'
+Failed
++ vmware-rpctool 'toolinstall.installerActive 1'
+
++ vmware-rpctool 'toolinstall.installerActive 100'
+
++ mv /opt/vmware-tools-installer/lightdm.conf /etc/init/
++ rm -rf /opt/vmware-tools-installer
++ /sbin/initctl start lightdm
++ rm -f /etc/rcS.d/S05rc.local
++ mv /etc/rc.local.backup /etc/rc.local

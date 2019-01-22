@@ -1,0 +1,32 @@
+[Jan 17 12:52:51.870] [ message] [vmsvc] Log caching is enabled with maxCacheEntries=4096.
+[Jan 17 12:52:51.874] [ message] [vmsvc] Core dump limit set to -1
+[Jan 17 12:52:51.874] [ message] [vmtoolsd] Tools Version: 10.2.0.1608 (build-7253323)
+[Jan 17 12:52:52.109] [ message] [vmtoolsd] Plugin 'hgfsServer' initialized.
+[Jan 17 12:52:52.109] [ message] [vix] QueryVGAuthConfig: vgauth usage is: 1
+[Jan 17 12:52:52.109] [ message] [vmtoolsd] Plugin 'vix' initialized.
+[Jan 17 12:52:52.109] [ message] [vmtoolsd] Plugin 'deployPkg' initialized.
+[Jan 17 12:52:52.133] [ message] [vmtoolsd] Plugin 'grabbitmqProxy' initialized.
+[Jan 17 12:52:52.133] [ message] [vmtoolsd] Plugin 'guestInfo' initialized.
+[Jan 17 12:52:52.133] [ message] [vmtoolsd] Plugin 'powerops' initialized.
+[Jan 17 12:52:52.147] [ message] [resolutionCommon] resolutionCheckForKMS: dlopen succeeded.
+[Jan 17 12:52:52.152] [ message] [resolutionCommon] resolutionCheckForKMS: System support available for resolutionKMS.
+[Jan 17 12:52:52.152] [ message] [vmtoolsd] Plugin 'resolutionKMS' initialized.
+[Jan 17 12:52:52.152] [ message] [vmtoolsd] Plugin 'timeSync' initialized.
+[Jan 17 12:52:52.152] [ message] [vmtoolsd] Plugin 'vmbackup' initialized.
+[Jan 17 12:52:52.177] [ message] [vix] VixTools_ProcessVixCommand: command 62
+[Jan 17 12:52:53.078] [ message] [vix] VixTools_ProcessVixCommand: command 62
+[Jan 17 12:52:53.078] [ message] [vix] ToolsDaemonTcloReceiveVixCommand: command 62, additionalError = 17
+[Jan 17 12:52:53.079] [ message] [powerops] Executing script: '/etc/vmware-tools/poweron-vm-default'
+[Jan 17 12:52:53.234] [ message] [powerops] Script exit code: 0, success = 1
+[Jan 17 12:56:28.431] [ message] [powerops] Executing script: '/etc/vmware-tools/poweroff-vm-default'
+[Jan 17 12:56:28.523] [ message] [powerops] Script exit code: 0, success = 1
+[Jan 17 12:56:28.525] [ message] [powerops] Initiating halt.
+[Jan 17 12:56:28.717] [ message] [vmtoolsd] Unloading plugin 'vmbackup'.
+[Jan 17 12:56:28.717] [ message] [vmtoolsd] Unloading plugin 'timeSync'.
+[Jan 17 12:56:28.725] [ message] [vmtoolsd] Unloading plugin 'resolutionKMS'.
+[Jan 17 12:56:28.728] [ message] [vmtoolsd] Unloading plugin 'powerops'.
+[Jan 17 12:56:28.736] [ message] [vmtoolsd] Unloading plugin 'guestInfo'.
+[Jan 17 12:56:28.746] [ message] [vmtoolsd] Unloading plugin 'grabbitmqProxy'.
+[Jan 17 12:56:28.754] [ message] [vmtoolsd] Unloading plugin 'deployPkg'.
+[Jan 17 12:56:28.754] [ message] [vmtoolsd] Unloading plugin 'vix'.
+[Jan 17 12:56:28.754] [ message] [vmtoolsd] Unloading plugin 'hgfsServer'.

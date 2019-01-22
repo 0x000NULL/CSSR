@@ -1,0 +1,2 @@
+localhost - - [22/Jan/2019:08:00:17 -0800] "POST / HTTP/1.1" 200 349 Create-Printer-Subscriptions successful-ok
+localhost - - [22/Jan/2019:08:00:17 -0800] "POST / HTTP/1.1" 200 176 Create-Printer-Subscriptions successful-ok
