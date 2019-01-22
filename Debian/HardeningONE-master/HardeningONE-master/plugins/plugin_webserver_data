@@ -1,0 +1,14 @@
+#!/bin/sh
+#########################################################################
+#
+#    * DO NOT REMOVE *
+#-----------------------------------------------------
+# PLUGIN_AUTHOR=Mauro Risonho de Paula Assumpção <mauro.risonho@gmail.com>
+# PLUGIN_CATEGORY=Data
+# PLUGIN_DESC=Webserver data analysis
+# PLUGIN_NAME=webserver_data
+#-----------------------------------------------------
+#########################################################################
+#
+# Test: search default names, like test, sample, samples
+

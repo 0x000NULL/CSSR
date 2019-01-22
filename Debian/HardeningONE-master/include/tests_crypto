@@ -1,0 +1,71 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Cryptography
+#
+#################################################################################
+#
+    InsertSection "" #27. Criptografia"
+#
+#################################################################################
+#
+    # Test        : CRYP-7902
+    # Description : check for expired SSL certificates
+    if [ ! -z "${OPENSSLBINARY}" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no CRYP-7902 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Verificado expire date SSL certificates"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	FOUNDPROBLEM=0
+	# Check profile for paths to check
+	sSSL_PATHS=`grep "^ssl:certificates:" ${PROFILE} | cut -d ':' -f3` 
+	for I in ${sSSL_PATHS}; do
+	    if [ -d ${I} ]; then
+	        logtext "R-TEC-CRYP-7902-Resultado: diretório encontrado ${I}"
+		# Search for CRT files
+	        sFINDCRTS=`find ${I} -name "*.crt" -type f -print`
+	        for J in ${sFINDCRTS}; do
+	            logtext "R-TEC-CRYP-7902-Teste: verificando certificado ${J}"
+		    # Check certificate where 'end date' has been expired
+		    FIND=`${OPENSSLBINARY} x509 -noout -checkend 0 -in ${J} -enddate > /dev/null ; echo $?`
+		    if [ "${FIND}" = "0" ]; then
+		        logtext "R-TEC-CRYP-7902-Resultado: certificado ${J} parece ser correto e ainda em vigor"
+		      else
+		        FOUNDPROBLEM=1
+		        logtext "R-TEC-CRYP-7902-Resultado: certificado ${J} has been exired"
+			#ReportWarning ${TEST_NO} "M" "R-TEC-CRYP-7902-Found SSL certificate expiration ($J)"
+			#YYY Dump more information to log file
+		    fi
+	        done
+	      else
+	        logtext "R-TEC-CRYP-7902-Resultado: SSL path ${I} does not exist"
+	    fi      
+	done
+
+        if [ ${FOUNDPROBLEM} -eq 0 ]; then
+	    Display --indent 2 --text "" #- R-TEC-CRYP-7902-Verificado certificado de expiracao SSL..." --result OK --color GREEN
+          else
+	    Display --indent 2 --text "" #- R-TEC-CRYP-7902-Verificado certificado de expiracao SSL..." --result WARNING --color RED
+    	    #ReportSuggestion ${TEST_NO} "R-TEC-CRYP-7902-Renew SSL expired certificates."
+	fi
+    fi
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

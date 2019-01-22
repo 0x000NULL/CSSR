@@ -1,0 +1,247 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# E-mail and messaging
+#
+#################################################################################
+#
+    InsertSection "" #13. Software: e-mail e mensageiros"
+#
+#################################################################################
+#
+    DOVECOT_RUNNING=0
+    EXIM_RUNNING=0
+    POSTFIX_RUNNING=0
+#
+#################################################################################
+#
+    # Test        : MAIL-8802
+    # Description : Check Exim process status
+    Register --test-no MAIL-8802 --weight L --network NO --description "" #Check Exim status"
+    if [ ${SKIPTEST} -eq 0  ]; then
+    	logtext "Teste: check Exim status"
+	FIND=`${PSBINARY} ax | grep "/exim" | grep -v "grep"`
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "Resultado: found running Exim process"
+	    Display --indent 2 --text "" #- Verificado Exim status..." --result EXECUÇÃO --color GREEN
+	    EXIM_RUNNING=1
+	  else
+	    logtext "Resultado: no running Exim processes found"
+	    Display --indent 2 --text "" #- Verificado Exim status..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8804
+    # Description : Check Exim configuration
+    #if [ ${EXIM_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    #Register --test-no MAIL-8804 --weight L --network NO --description "" #Check Exim configuration"
+    #if [ ${SKIPTEST} -eq 0  ]; then
+    #    if [ ! "${EXIMBINARY}" = "" ]; then
+    #        logtext "Teste: Searching Exim configuration file..."
+    #	FIND=`${EXIMBINARY} -d | grep "configuration file is" | sed 's/configuration file is//'`
+    #	if [ ! "${FIND}" = "" ]; then	
+    #	    Display --indent 2 --text "" #- Verificado Exim configuration..." --result ENCONTRADO --color GREEN
+    #	    Display --indent 4 --text "" #Resultado: configuration file is ${FIND}"
+    #	    logtext "Resultado: found Exim"
+    #	    logtext "Resultado: configuration file is ${FIND}"
+    #	  else
+    #	    Display --indent 2 --text "" #- Verificado Exim configuration..." --result ATENÇÃO --color RED
+    #	    logtext "Couldn't find the Exim configuration file, however Exim seems to be installed."
+    #	fi
+    #      else
+    #	logtext "Exim binary not found, no tests performed"
+    #    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8814
+    # Description : Check Postfix process
+    # Notes       : qmgr and pickup run under postfix uid, without full path to binary
+    Register --test-no MAIL-8814 --weight L --network NO --description "" #Check postfix process status"
+    if [ ${SKIPTEST} -eq 0  ]; then
+	logtext "Teste: check Postfix status"
+	FIND1=`${PSBINARY} ax | grep "/master" | grep -v "grep"`
+	FIND2=`${PSBINARY} ax | grep "qmgr" | grep -v "grep"`
+	FIND3=`${PSBINARY} ax | grep "pickup" | grep -v "grep"`
+	if [ ! "${FIND1}" = "" -a ! "${FIND2}" = "" -a ! "${FIND3}" = "" ]; then
+	    logtext "Resultado: found running Postfix process"
+	    Display --indent 2 --text "" #- Verificado Postfix status..." --result EXECUÇÃO --color GREEN
+	    POSTFIX_RUNNING=1
+	  else
+	    logtext "Resultado: no running Postfix processes found"
+	    Display --indent 2 --text "" #- Verificado Postfix status..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8816
+    # Description : Check Postfix configuration
+    if [ ${POSTFIX_RUNNING} -eq 1 -a ! "${POSTFIXBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no MAIL-8816 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check Postfix configuration"
+    if [ ${SKIPTEST} -eq 0  ]; then
+        Display --indent 2 --text "" #- Verificado Postfix configuration..." --result ENCONTRADO --color GREEN
+        POSTFIX_CONFIGDIR=`${POSTCONFBINARY} | grep '^config_directory' | awk '{ print $3 }'`
+        POSTFIX_CONFIGFILE="${POSTFIX_CONFIGDIR}/main.cf"
+        logtext "Postfix configuration directory: ${POSTFIX_CONFIGDIR}"
+        logtext "Postfix configuration file: ${POSTFIX_CONFIGFILE}"    
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8818
+    # Description : Check Postfix configuration
+    if [ ${POSTFIX_RUNNING} -eq 1 -a ! "${POSTFIXBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no MAIL-8818 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check Postfix configuration: banner"
+    if [ ${SKIPTEST} -eq 0  ]; then
+        logtext "Teste: Checking Postfix banner"
+        FIND1=`${POSTCONFBINARY} | grep '^smtpd_banner' | grep 'postfix'`
+        FIND2=`${POSTCONFBINARY} | grep '^smtpd_banner' | grep '$mail_name'`
+        FIND3=`${POSTCONFBINARY} | grep '^mail_name' | grep -i 'postfix'`
+	#YYY Check if OS name shows up in banner
+	#FIND4=`${POSTCONFBINARY} | grep '^smtpd_banner' | egrep "${OS}|${LINUX_VERSION}`	
+        SHOWWARNING=0
+        if [ ! "${FIND1}" = "" ]; then
+            SHOWWARNING=1
+          else
+            if [ ! "${FIND2}" = "" -a ! "${FIND3}" = "" ]; then
+    	        SHOWWARNING=1
+	      else	  
+	        Display --indent 4 --text "" #- Verificado Postfix banner..." --result OK --color GREEN
+	    fi
+        fi
+        if [ ${SHOWWARNING} -eq 1 ]; then
+	    Display --indent 4 --text "" #- Verificado Postfix banner..." --result ATENÇÃO --color RED
+	    logtext "Resultado: found mail_name in SMTP banner, and/or mail_name contains 'Postfix'."
+	    ReportWarning ${TEST_NO} "L" "Found mail_name in SMTP banner, and/or mail_name contains 'Postfix'"
+	    ReportSuggestion ${TEST_NO} "" #Aconselha-se esconder banner do mail_name (opção: smtpd_banner) de sua configuração do postfix. Use postconf-e ou alterar o seu arquivo main.cf (/etc/postfix/main.cf) (${POSTFIX_CONFIGFILE})"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8838
+    # Description : Check Dovecot process
+    Register --test-no MAIL-8838 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check dovecot process"
+    if [ ${SKIPTEST} -eq 0  ]; then
+	logtext "Teste: check dovecot status"
+	FIND=`${PSBINARY} ax | grep "/dovecot" | grep -v "grep"`
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "Resultado: found running dovecot process"
+	    Display --indent 2 --text "" #- Verificado Dovecot status..." --result EXECUÇÃO --color GREEN
+	    DOVECOT_RUNNING=1
+	  else
+	    logtext "Resultado: dovecot not found"
+	    Display --indent 2 --text "" #- Verificado Dovecot status..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8842
+    # Description : Check Dovecot logging locations
+    #Register --test-no MAIL-8842 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check dovecot logging locations"
+    #if [ ${SKIPTEST} -eq 0  ]; then
+#	CONF="/etc/dovecot/dovecot.conf"
+#	FIND=`cat ${CONF} | grep "^log_path" | awk '{ if ($1=="") { print "syslog" } else { print $3 } }'`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "Resultado: output for error messages = ${FIND}"
+#	fi
+#
+#	FIND=`cat ${CONF} | grep "^log_info_path" | awk '{ if ($1=="") { print "syslog" } else { print $3 } }'`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "Resultado: output for informational messages = ${FIND}"
+#	fi
+#
+#    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8860
+    # Description : Check Qmail process status
+    #Register --test-no MAIL-8860 --weight L --network NO --description "" #Check Exim status"
+    #if [ ${SKIPTEST} -eq 0  ]; then
+#
+#################################################################################
+#
+    # Test        : MAIL-8880
+    # Description : Check Sendmail process status
+    #Register --test-no MAIL-8880 --weight L --network NO --description "" #Check Exim status"
+    #if [ ${SKIPTEST} -eq 0  ]; then
+#
+#################################################################################
+#
+    # Test        : MAIL-8920
+    # Description : Check OpenBSD smtpd process status
+    Register --test-no MAIL-8920 --os OpenBSD --weight L --network NO --description "" #Check smtpd status"
+    if [ ${SKIPTEST} -eq 0  ]; then
+	logtext "Teste: check smtpd status"
+	FIND=`${PSBINARY} ax | grep "/smtpd" | grep -v "grep"`
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "Resultado: found running smtpd process"
+	    Display --indent 2 --text "" #- Verificado OpenBSD smtpd status..." --result EXECUÇÃO --color GREEN
+	    DOVECOT_RUNNING=1
+	  else
+	    logtext "Resultado: smtpd not found"
+	    Display --indent 2 --text "" #- Verificado OpenBSD smtpd status..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-8940
+    # Description : Check Qmail (SMTP) process status
+    Register --test-no MAIL-8940 --weight L --network NO --description "" #Check Qmail smtp daemon status"
+    if [ ${SKIPTEST} -eq 0  ]; then
+	logtext "Teste: check Qmail status"
+	FIND=`${PSBINARY} ax | grep "qmail-smtpd" | grep -v "grep"`
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "Resultado: found running Qmail smtp daemon process"
+	    Display --indent 2 --text "" #- Verificado Qmail smtpd status..." --result EXECUÇÃO --color GREEN
+	    DOVECOT_RUNNING=1
+	  else
+	    logtext "Resultado: Qmail smtp daemon not found"
+	    Display --indent 2 --text "" #- Verificado Qmail smtpd status..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MAIL-xxxx
+    # Description : Check if outgoing mail is obscured (increased privacy)
+    #Register --test-no MAIL-xxxx --weight L --network NO --description "" #Check XXX"
+    #if [ ${SKIPTEST} -eq 0  ]; then
+#
+#################################################################################
+#
+    #YYY Add support for mail, procmail
+    #YYY Add support for MUAs: Thunderbird, Kmail, Evolution
+    # Other software : Cyrus-IMAP, Amavisd-new, SpamAssassin, Fetchmail, Procmail, maildrop
+    #- Dovecot : \'/usr/local/etc/dovecot.conf\'
+    #- For Sendmail : \'/var/mail/sendmail.cf\'
+    #- Fetchmail : \'~/.fetchmailrc\' (not only root)
+    #- Cyrus-IMAP : \'/usr/local/etc/imapd.conf\' for parameters and \'/usr/local/etc/cyrus.conf\' for the services launched
+#
+#################################################################################
+#
+    
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

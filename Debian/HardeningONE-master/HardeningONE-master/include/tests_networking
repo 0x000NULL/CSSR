@@ -1,0 +1,392 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Networking
+#
+#################################################################################
+#
+    FOUNDPROMISC=0				    # Promiscuous interfaces
+    LOCAL_DNSRESOLVER_FOUND=0			    # Local DNS resolver
+    NUMBERACTIVENS=0				    # Number of active nameservers
+#
+#################################################################################
+#
+    InsertSection "" #11. Networking"
+#
+#################################################################################
+#
+    # Test        : NETW-2704 (YYY move to nameservices section)
+    # Description : Basic nameserver configuration tests (connectivity)
+    Register --test-no NETW-2704 --weight L --network YES --description "" #Basic nameserver configuration tests"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        Display --indent 2 --text "" #- R-TEC-NETW-2704-Verificado configured nameservers..."
+        logtext "R-TEC-NETW-2704-Teste: Verificado /etc/resolv.conf file"
+        if [ -f /etc/resolv.conf ]; then
+            logtext "R-TEC-NETW-2704-Resultado: Found /etc/resolv.conf file"
+            FIND=`cat /etc/resolv.conf | grep '^nameserver' | tr -d '\t' | sed 's/nameserver*//g'`
+            if [ ! "${FIND}" = "" ]; then
+    	        Display --indent 4 --text "" #- R-TEC-NETW-2704-Testando nameservers..."
+		logtext "R-TEC-NETW-2704-Teste: Querying nameservers"
+	        for I in ${FIND}; do
+		    logtext "R-TEC-NETW-2704-Found nameserver: ${I}"
+	    	    report "nameserver[]=${I}"
+		    # Check if a local resolver is available (like DNSMasq) 
+		    if [ "${I}" = "::1" -o "${I}" = "127.0.0.1" -o "${I}" = "0.0.0.0" ]; then
+		         LOCAL_DNSRESOLVER_FOUND=1
+		    fi
+		    if [ ! "${DIGBINARY}" = "" ]; then
+		        # See if we can query something at the nameserver
+	    	        # 0=good, other=bad
+			DNSRESPONSE=`${DIGBINARY} +noall +time=3 +retry=0 @${I} ${I} > /dev/null ; echo $?`
+		    	if [ "${DNSRESPONSE}" = "0" ]; then
+		    	    Display --indent 8 --text "" #R-TEC-NETW-2704-Nameserver: ${I}..." --result OK --color GREEN
+		    	    logtext "R-TEC-NETW-2704-Nameserver ${I} seems to respond to queries from this host."
+		    	    # Count responsive nameservers
+                            NUMBERACTIVENS=`expr ${NUMBERACTIVENS} + 1`
+		          else
+		    	    Display --indent 8 --text "" #R-TEC-NETW-2704-Nameserver: ${I}..." --result "SEM RESPOSTA" --color RED
+			    logtext "R-TEC-NETW-2704-Resultado: nameserver ${I} does NOT respond"
+			    logtext "R-TEC-NETW-2704-Exit-code from dig: ${DNSRESPONSE}"
+		    	    ReportSuggestion ${TEST_NO} "" #R-TEC-NETW-2704-Check connection to this nameserver and make sure no outbound DNS queries are blocked (port 53 UDP and TCP)."
+			    ReportWarning ${TEST_NO} "" #L" "R-TEC-NETW-2704-Nameserver ${I} does not respond"
+			fi
+		      else
+		        logtext "R-TEC-NETW-2704-Resultado: Nameserver test for ${I} skipped, 'dig' not installed"
+		    	Display --indent 6 --text "" #R-TEC-NETW-2704-Nameserver: ${I}... " --result PULADO --color YELLOW
+		    fi			
+		done      
+	    fi
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-2705
+    # Description : Basic nameserver configuration tests (connectivity)
+    if [ ${LOCAL_DNSRESOLVER_FOUND} -eq 0  ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no NETW-2705 --preqs-met ${PREQS_MET} --weight L --network YES --description "" #Check availability two nameservers"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ ! "${DIGBINARY}" = "" ]; then
+	    if [ ${NUMBERACTIVENS} -lt 2 ]; then
+	        Display --indent 4 --text "" #- R-TEC-NETW-2705-Minimal of 2 responsive nameservers..." --result ATENÇÃO --color RED
+	        logtext "R-TEC-NETW-2705-Resultado: less than 2 responsive nameservers found"
+	        ReportWarning ${TEST_NO} "" #L" "R-TEC-NETW-2705-Couldn't find 2 responsive nameservers"
+	        logtext "R-TEC-NETW-2705-Note: Non responsive nameservers can give problems for your system(s). Like the lack of recursive lookups, bad connectivity to update servers etc."
+	        ReportSuggestion ${TEST_NO} "" #R-TEC-NETW-2705-Check your resolv.conf file and fill in a backup nameserver if possible"
+		AddHP 1 2
+	      else
+	        Display --indent 4 --text "" #- R-TEC-NETW-2705-Minimal of 2 responsive nameservers..." --result OK --color GREEN
+	        logtext "R-TEC-NETW-2705-Resultado: found at least 2 responsive nameservers"
+		AddHP 3 3
+	    fi
+	  else
+	    Display --indent 4 --text "" #- R-TEC-NETW-2705-Minimal of 2 responsive nameservers..." --result PULADO --color YELLOW
+	    logtext "R-TEC-NETW-2705-Resultado: dig not installed, test can't be fully performed"
+	fi    
+      else
+        logtext "R-TEC-NETW-2705-Resultado: Test most likely skipped due having local resolver in /etc/resolv.conf"
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3001
+    # Description : Find default gateway (route)
+    # More info   : FreeBSD/OpenBSD: ^default   Linux: 0.0.0.0
+    Register --test-no NETW-3001 --weight L --network NO --description "" #Find default gateway (route)"
+    if [ $SKIPTEST -eq 0 ]; then    
+        logtext "R-TEC-NETW-3001-Teste: Searching default gateway(s)..."
+        FIND=`netstat -rn | egrep "^0.0.0.0|default" | tr -s ' ' | cut -d ' ' -f2`
+	if [ ! "${FIND}" = "" ]; then
+	    for I in ${FIND}; do
+    		logtext "R-TEC-NETW-3001-Resultado: Found default gateway ${I}"
+    	        report "default_gateway[]=${I}"
+    	    done
+	    Display --indent 2 --text "" #- R-TEC-NETW-3001-Verificado default gateway..." --result PRONTO --color GREEN
+	  else
+	    logtext "R-TEC-NETW-3001-Resultado: No default gateway found"
+	    Display --indent 2 --text "" #- R-TEC-NETW-3001-Verificado default gateway..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3004
+    # Description : Find available FreeBSD network interfaces
+    Register --test-no NETW-3004 --os FreeBSD --weight L --network NO --description "" #Search FreeBSD available network interfaces"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        FIND=`${IFCONFIGBINARY} -l`
+	N=0
+	for I in ${FIND}; do
+	    logtext "R-TEC-NETW-3004-Found network interface: ${I}"
+	    N=`expr ${N} + 1`
+	    report "network_interface[]=${I}"
+	done
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3006
+    # Description : Get network MAC addresses
+    Register --test-no NETW-3006 --weight L --network NO --description "" #Get network MAC addresses"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        FIND=""
+	case ${OS} in
+	    AIX)
+	        FIND=`lscfg -vl ent* | fgrep "Network Address" | cut -d"." -f14 | awk '{ ctr=1; i=1; while (ctr <= 6) { d[ctr++]=substr($0,i,2);i=i+2 } printf("%s:%s:%s:%s:%s:%s\n",d[1],d[2],d[3],d[4],d[5],d[6]) }'`
+		;;
+	    FreeBSD)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="ether") print $2 }' | sort | uniq`
+		;;
+	    Linux)
+	        FIND=`${IFCONFIGBINARY} -a | grep "HWaddr" | awk '{ if ($4=="HWaddr") print $5 }' | sort | uniq`
+		;;
+	    MacOS)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="lladdr" || $1=="ether") print $2 }' | sort | uniq`
+		;;
+	    OpenBSD)
+		FIND=`${IFCONFIGBINARY} -A | awk '{ if ($1=="lladdr") print $2 }' | sort | uniq`
+		;;
+	    Solaris)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="ether") print $2 }' | sort | uniq`	    
+		;;
+	    *)
+	        logtext "R-TEC-NETW-3004-Atenção: no support for this OS (${OS}) to find MAC information"
+		;;
+	esac
+	N=0
+	for I in ${FIND}; do
+	    logtext "R-TEC-NETW-3004-Found MAC address: ${I}"
+	    N=`expr ${N} + 1`
+	    report "network_mac_address[]=${I}"
+	done
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3008
+    # Description : Get network IPv4/6 addresses
+    Register --test-no NETW-3008 --weight L --network NO --description "" #Get network IP addresses"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        FIND=""; FIND2=""
+	case ${OS} in
+	    AIX)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet") print $2 }'`
+	        # IPv6 support in AIX? (YYY)
+		;;
+	    FreeBSD)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet") print $2 }'`
+		FIND2=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet6") print $2 }'`
+		;;
+	    Linux)
+		FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet") print $2 }' | cut -d ':' -f2`	    
+	        FIND2=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet6") print $3 }'`
+		;;
+	    MacOS)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet") print $2 }'`	    
+		FIND2=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet6") print $2 }'`	    
+	        ;;
+	    OpenBSD)
+		FIND=`${IFCONFIGBINARY} -A | awk '{ if ($1=="inet") print $2 }'`
+		FIND2=`${IFCONFIGBINARY} -A | awk '{ if ($1=="inet6") print $2 }'`
+		;;
+	    Solaris)
+	        FIND=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet") print $2 }'`	    
+		FIND2=`${IFCONFIGBINARY} -a | awk '{ if ($1=="inet6") print $2 }'`	    
+		;;
+	    *)
+	        logtext "R-TEC-NETW-3008-Atenção: no support yet for this OS (${OS}) to find IP address information"
+		;;
+	esac
+	N=0
+	# IPv4
+	for I in ${FIND}; do
+	    logtext "R-TEC-NETW-3008-Found IPv4 address: ${I}"
+	    N=`expr ${N} + 1`
+	    report "network_ipv4_address[]=${I}"
+	done
+	# IPv6
+	for I in ${FIND2}; do
+	    logtext "R-TEC-NETW-3008-Found IPv6 address: ${I}"
+	    N=`expr ${N} + 1`
+	    report "network_ipv6_address[]=${I}"
+	done
+
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3012
+    # Description : Check listening ports
+    # Notes       : Add netstat check for other OSes (YYY)
+    if [ ! "${SOCKSTATBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no NETW-3012 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check listening ports"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        # Retrieve information from sockstat, when available
+	logtext "R-TEC-NETW-3012-Teste: Retrieving sockstat information to find listening ports..."
+	#SOCKSTATOUTPUT=`sockstat | grep '*:*' | cut -c 1-55 | grep '*:' | cut -c 39-47 | tr -d ' ' | sort | grep -v '*' | uniq`
+	SOCKSTATOUTPUT=`sockstat | awk '{ if ($7 ~ /\*:\*/) print $5","$6 }' | sort | uniq`
+	for I in ${SOCKSTATOUTPUT}; do
+	        SOCKPROTO=`echo ${I} | cut -d ',' -f1`
+	        SOCKPORT=`echo ${I} | cut -d ',' -f2`
+	        logtext "R-TEC-NETW-3012-Found listening port: ${SOCKPORT}, proto ${SOCKPROTO}"
+    	done
+	Display --indent 2 --text "" #- R-TEC-NETW-3012-Getting listening ports (sockstat)..." --result PRONTO --color GREEN
+    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3014
+    # Description : Verificado promiscuous interfaces (BSD)
+    # Note        : FreeBSD and others
+    Register --test-no NETW-3014 --os FreeBSD --weight L --network NO --description "" #Verificado promiscuous interfaces (BSD)"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-NETW-3014-Teste: Verificado promiscuous interfaces (FreeBSD)..."
+        FIND=`${IFCONFIGBINARY} | grep PROMISC | cut -d ':' -f1`
+        if [ ! "${FIND}" = "" ]; then
+            logtext "R-TEC-NETW-3014-Resultado: Promiscuous interfaces: ${FIND}"
+            for I in ${FIND}; do
+                ISWHITELISTED=`grep "^if_promisc:${I}:" ${PROFILE}`
+    	        if [ "${ISWHITELISTED}" = "" ]; then
+		    FOUNDPROMISC=1
+		    ReportWarning ${TEST_NO} "" #H" "R-TEC-NETW-3014-Found promiscuous interface (${I})"
+		    logtext "R-TEC-NETW-3014-Note: some tools put an interface into promiscuous mode, to capture/log network traffic"
+		  else
+		    logtext "R-TEC-NETW-3014-Resultado: Found promiscuous interface ${I} (*whitelisted via profile*)"
+    	        fi
+	    done
+        fi
+
+	# Show result	
+        if [ ${FOUNDPROMISC} -eq 0 ]; then
+    	    Display --indent 2 --text "" #- R-TEC-NETW-3014-Verificado promiscuous interfaces..." --result OK --color GREEN
+	    logtext "R-TEC-NETW-3014-Resultado: No promiscuous interfaces found"	
+	  else
+	    Display --indent 2 --text "" #- R-TEC-NETW-3014-Verificado promiscuous interfaces..." --result ATENÇÃO --color RED
+	fi
+    fi    
+#
+#################################################################################
+#
+    # Test        : NETW-3015
+    # Description : Verificado promiscuous interfaces (Linux)
+    # Note        : Linux
+    Register --test-no NETW-3015 --os Linux --weight L --network NO --description "" #Verificado promiscuous interfaces (Linux)"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-NETW-3015-Teste: Verificado promiscuous interfaces (Linux)..."
+	NETWORK=`${IFCONFIGBINARY} | grep Link | tr -s ' ' | cut -d ' ' -f1`
+	if [ ! "${NETWORK}" = "" ]; then
+	    for I in ${NETWORK}; do
+	        FIND=`${IFCONFIGBINARY} ${I} | grep PROMISC`
+		if [ ! "${FIND}" = "" ]; then
+    		    logtext "R-TEC-NETW-3015-Resultado: Promiscuous interface: ${I}"
+            	    ISWHITELISTED=`grep "^if_promisc:${I}:" ${PROFILE}`
+    	    	    if [ "${ISWHITELISTED}" = "" ]; then
+			FOUNDPROMISC=1
+			ReportWarning ${TEST_NO} "" #H" "R-TEC-NETW-3015-Found promiscuous interface (${I})"
+		        logtext "R-TEC-NETW-3015-Note: some tools put an interface into promiscuous mode, to capture/log network traffic"
+		      else
+		        logtext "R-TEC-NETW-3015-Resultado: Found promiscuous interface ${I} (*whitelisted via profile*)"
+    		    fi
+	        fi
+	    done
+        fi
+
+	# Show result	
+        if [ ${FOUNDPROMISC} -eq 0 ]; then
+    	    Display --indent 2 --text "" #- R-TEC-NETW-3015-Verificado promiscuous interfaces..." --result OK --color GREEN
+	    logtext "R-TEC-NETW-3015-Resultado: No promiscuous interfaces found"	
+	  else
+	    Display --indent 2 --text "" #- R-TEC-NETW-3015-Verificado promiscuous interfaces..." --result ATENÇÃO --color RED
+	fi
+    fi    
+#
+#################################################################################
+#
+    # Test        : NETW-3020
+    # Description : Verificado multipath configuration (Solaris)
+#
+#################################################################################
+#
+    # Test        : NETW-3024
+    # Description : Netstat/socktstat compare (FreeBSD)
+    #	    echo -n "        - Comparing output sockstat and netstat... "
+    #	    logtext "Comparing output of sockstat and netstat... "
+    #	    NETSTATOUTPUT=`netstat -an | grep -v 'TIME_WAIT' | grep -v 'ESTABLISHED' | grep -v 'SYN_SENT' | grep -v 'CLOSE_WAIT' | grep -v 'LAST_ACK' | grep -v 'SYN_RECV' | grep -v 'CLOSING' | cut -c 1-44 | grep '*.' | cut -c 24-32 | tr -d ' ' | tr -d '\t' | grep -v '*' | sort | uniq`
+    #
+    #	    if [ "${SOCKSTATOUTPUT}" = "${NETSTATOUTPUT}" ]; then
+    #	        ShowResult OK
+    #	      else
+    #	        echo "[ ${BAD}Warning!${NORMAL} ]"
+    #		logtext "WARNING!"
+    #		logtext "Sockstat tested output: ${SOCKSTAT}"
+    #		logtext "Netstat tested output: ${NETSTAT}"
+    #	    fi
+#
+#################################################################################
+#
+    # Test        : NETW-3028
+    # Description : Verificado for many waiting connections
+    Register --test-no NETW-3028 --weight L --network NO --description "" #Verificado connections in WAIT state"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-NETW-3028-Teste: Using netstat for check for connections in WAIT state..."
+	FIND=`netstat -an | grep WAIT | wc -l | awk '{ print $1 }'`
+	if [ "${OPTIONS_CONN_MAX_WAIT_STATE}" = "" ]; then OPTIONS_CONN_MAX_WAIT_STATE="100"; fi	
+	logtext "R-TEC-NETW-3028-Resultado: currently ${FIND} connections are in a waiting state (max configured: ${OPTIONS_CONN_MAX_WAIT_STATE})."
+	if [ ${FIND} -gt ${OPTIONS_CONN_MAX_WAIT_STATE} ]; then
+	    Display --indent 2 --text "" #- R-TEC-NETW-3028-Verificado waiting connections..." --result ATENÇÃO --color YELLOW
+	    ReportWarning ${TEST_NO} "" #H" "R-TEC-NETW-3028-Found too much connections in WAIT state (${FIND})"
+	  else
+    	    Display --indent 2 --text "" #- R-TEC-NETW-3028-Verificado waiting connections..." --result OK --color GREEN
+	    logtext "R-TEC-NETW-3028-Resultado: ${FIND} connections are in WAIT state"	
+	fi
+    fi    
+#
+#################################################################################
+#
+    # Test        : NETW-3060
+    # Description : Check if IPv6 is configured AND used
+    # /etc/modprobe.d (add 'install ipv6 /bin/true' if IPv6 isn't used)
+    #  or
+    # aliased (/etc/modprobe.d/aliases?): alias net-pf-10 off ipv6 (to disable)
+    #Register --test-no NETW-3060 --weight L --network NO --description "" #Verificado IPv6 connectivity"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+    # Test        : NETW-3080
+    # Description : Check TCP wrapper files
+    #Register --test-no NETW-3080 --weight L --network NO --description "" #Verificado IPv6 connectivity"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+    # Test        : NETW-3084
+    # Description : Check TCP wrapper support in daemons
+    #Register --test-no NETW-3084 --weight L --network NO --description "" #Verificado IPv6 connectivity"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+# Linux: net.ipv4.ip_always_defrag
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

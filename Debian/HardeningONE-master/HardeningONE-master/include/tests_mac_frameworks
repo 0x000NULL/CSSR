@@ -1,0 +1,162 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+    MAC_FRAMEWORK_ACTIVE=0		# Default no MAC framework active
+    RBAC_FRAMEWORK_ACTIVE=0		# Default no RBAC framework active
+
+    InsertSection "" #29. Frameworks de Segurança"
+
+    APPARMORFOUND=0			# Set default for test MACF-6208
+    # Test        : MACF-6204
+    # Description : Check if AppArmor is installed
+    Register --test-no MACF-6204 --weight L --network NO --description "" #Check AppArmor presence"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ "${AASTATUSBINARY}" = "" ]; then
+	    APPARMORFOUND=0	
+	    logtext "R-TEC-MACF-6204-Resultado: aa-status binary not found, AppArmor not installed"
+	    Display --indent 2 --text "" #- R-TEC-MACF-6204-Verificado presence AppArmor" --result "NAO OK" --color WHITE
+	  else
+	    APPARMORFOUND=1
+	    logtext "R-TEC-MACF-6204-Resultado: aa-status binary found, AppArmor is installed"	  
+	    Display --indent 2 --text "" #- R-TEC-MACF-6204-Verificado presence AppArmor" --result "OK" --color GREEN
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MACF-6208
+    # Description : Check AppArmor active status
+    if [ ${APPARMORFOUND} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no MACF-6208 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check if AppArmor is enabled"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        if [ ! "${AASTATUSBINARY}" = "" ]; then
+	    # Checking AppArmor status
+	    FIND=`${AASTATUSBINARY} > /dev/null; echo $?`
+	    #0 if apparmor is enabled and policy is loaded.
+            #1 if apparmor is not enabled/loaded.
+	    #2 if apparmor is enabled but no policy is loaded.
+	    if [ ${FIND} -eq 0 ]; then
+	        MAC_FRAMEWORK_ACTIVE=1
+	        logtext "R-TEC-MACF-6208-Resultado: AppArmor is enabled and a policy is loaded"
+	        Display --indent 4 --text "" #- R-TEC-MACF-6208-Verificado AppArmor status" --result "HABILITADO" --color GREEN	      
+	      elif [ ${FIND} -eq 2 ]; then
+	        logtext "R-TEC-MACF-6208-Resultado: AppArmor is enabled, but no policy is loaded"
+		ReportSuggestion ${TEST_NO} "" # "R-TEC-MACF-6208-Disable AppArmor or load a policy"
+	        Display --indent 4 --text "" #- R-TEC-MACF-6208-Verificado AppArmor status" --result "NÃO-ATIVADO" --color GREEN	      
+	      elif [ ${FIND} -eq 1 ]; then
+	        Display --indent 4 --text "" #- R-TEC-MACF-6208-Verificado AppArmor status" --result "DESABILITADO" --color YELLOW	      
+	    fi
+
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MACF-6232
+    # Description : Check SELINUX for installation
+    Register --test-no MACF-6232 --weight L --network NO --description "" #Check SELINUX presence"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ ! "${SESTATUSBINARY}" = "" ]; then
+	    logtext "R-TEC-MACF-6232-Resultado: found sestatus binary (${SESTATUSBINARY})"
+	    Display --indent 2 --text "" #- R-TEC-MACF-6232-Verificado presence SELinux" --result "OK" --color GREEN
+	  else
+	    logtext "R-TEC-MACF-6232-Resultado: sestatus binary NOT found"
+	    Display --indent 2 --text "" #- R-TEC-MACF-6232-Verificado presence SELinux" --result "NAO OK" --color WHITE
+	fi
+    fi    
+#
+#################################################################################
+#
+    # Test        : MACF-6234
+    # Description : Check SELINUX status
+    if [ ! "${SESTATUSBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no MACF-6234 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check SELINUX status"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        # Status: Enabled/Disabled
+        FIND=`${SESTATUSBINARY} | grep "^SELinux status" | awk '{ print $3 }'`
+	if [ "${FIND}" = "enabled" ]; then
+	        MAC_FRAMEWORK_ACTIVE=1
+		logtext "R-TEC-MACF-6234-Resultado: SELinux framework is enabled"
+		Display --indent 4 --text "" #- R-TEC-MACF-6234-Verificado SELinux status" --result "HABILITADO" --color GREEN
+		FIND=`${SESTATUSBINARY} | grep "^Current mode" | awk '{ print $3 }'`
+		FIND2=`${SESTATUSBINARY} | grep "^Mode from config file" | awk '{ print $5 }'`
+		Display --indent 8 --text "" #R-TEC-MACF-6234-Current SELinux mode: ${FIND}"
+		logtext "R-TEC-MACF-6234-Resultado: current SELinux mode is ${FIND}"
+		logtext "R-TEC-MACF-6234-Resultado: mode configured in config file is ${FIND2}"
+		if [ "${FIND}" = "${FIND2}" ]; then
+		    logtext "R-TEC-MACF-6234-Resultado: Current SeLINUX mode is the same as in config file."
+		    Display --indent 6 --text "" # R-TEC-MACF-6234-Verificado current mode and config file" --result "OK" --color GREEN
+		  else
+		    logtext "R-TEC-MACF-6234-Resultado: Current SeLINUX mode (${FIND}) is NOT the same as in config file (${FIND2})."
+		    ReportWarning ${TEST_NO} "M" "R-TEC-MACF-6234-Current SELinux mode is different from config file (current: ${FIND}, config file: ${FIND2})" 
+		    Display --indent 6 --text "" # Verificado current mode and config file" --result "ATENCAO" --color RED
+		fi
+	  else
+		logtext "R-TEC-MACF-6234-Resultado: SELinux framework is disabled"
+		Display --indent 4 --text "" #- R-TEC-MACF-6234-Verificado SELinux status" --result "DESABILITADO" --color YELLOW		
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : RBAC-6272
+    # Description : Check if grsecurity is installed
+    # Notes       : Solaris doesn't support test -e
+    if [ ! "${OS}" = "Solaris" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no RBAC-6272 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check grsecurity presence"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ -e /dev/grsec ]; then
+	    GRSECFOUND=1
+	    logtext "R-TEC-RBAC-6272-Resultado: grsecurity available (/dev/grsec found)"
+	    Display --indent 2 --text "" #- R-TEC-RBAC-6272-Verificado presence grsecurity" --result "OK" --color GREEN
+	  else
+	    GRSECFOUND=0
+	    logtext "R-TEC-RBAC-6272-Resultado: grsecurity not present (/dev/grsec not found)"
+	    Display --indent 2 --text "" #- R-TEC-RBAC-6272-Verificado presence grsecurity" --result "NAO OK" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : MACF-6296
+    # Description : Check if at least one MAC framework is implemented
+    # Register --test-no MACF-6296 --weight L --network NO --description "" #Check for implemented MAC framework"
+    # if [ ${SKIPTEST} -eq 0 ]; then
+    #     if [ ${MAC_FRAMEWORK_ACTIVE} -eq 1 ]; then
+    #         Display --indent 2 --text "" #- Verificado for implemented MAC framework" --result OK --color GREEN
+    # AddHP 3 3
+    #       else
+    #         Display --indent 2 --text "" #- Verificado for implemented MAC framework" --result WARNING --color RED
+    # AddHP 0 3
+    #     fi
+    # fi
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+# To implement:
+#   FMAC (OpenSolaris, MAC)
+#   LSM (Linux Security Modules)
+#   TrustedBSD (MAC)
+#   RSBAC (RBAC)
+#   Apple sandbox technology
+#   PAX
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

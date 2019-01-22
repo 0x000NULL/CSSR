@@ -1,0 +1,257 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Firewalls
+#
+#################################################################################
+#
+    InsertSection "" #14. Software: firewalls"
+#
+#################################################################################
+#
+    IPTABLES_ACTIVE=0
+    IPTABLES_INKERNEL_ACTIVE=0
+    IPTABLES_MODULE_ACTIVE=0
+    FIREWALL_ACTIVE=0
+#
+#################################################################################
+#
+# YYY Improvement needed for iptables to check if kernel modules are used or not.
+# If they are not used and iptables is not found in configuration, no checks should be performed.
+#
+
+    # Test        : FIRE-4511
+    # Description : Check iptables kernel module
+#    Register --test-no FIRE-4511 --os Linux --weight L --network NO --description "Check iptables kernel module"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`lsmod | awk '{ print $1 }' | grep "^ip*_tables"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    FIREWALL_ACTIVE=1
+#	    IPTABLES_ACTIVE=1
+#	    IPTABLES_MODULE_ACTIVE=1
+#	    Display --indent 2 --text "- R-TEC-FIRE-4511-Verificado iptables kernel module..." --result OK --color GREEN
+#	    logtext "R-TEC-FIRE-4511-Resultado: Found iptables in loaded kernel modules"
+#	    for I in ${FIND}; do
+#	        logtext "R-TEC-FIRE-4511-Found module: ${I}"
+#	    done
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FIRE-4511-Verificado iptables kernel module..." --result "NAO OK" --color WHITE
+
+#	    # If we can't find an active module, try to find the Linux configuration file and check that
+#	    if [ -f /proc/config.gz ]; then
+#	        LINUXCONFIGFILE="/proc/config.gz"; tCATCMD="zcat";
+#	    fi
+#	    sLINUXCONFIGFILE="/boot/config-`uname -r`"
+#	    if [ -f ${sLINUXCONFIGFILE} ]; then
+#		LINUXCONFIGFILE=${sLINUXCONFIGFILE}; tCATCMD="cat";
+#	    fi
+#	
+#	    # If we have a kernel configuration file, use it for testing
+#	    # Do not perform test if we already found it in kernel module list, to avoid triggered it in the upcoming
+#	    # tests, when using iptables --list
+#	    if [ ! "${LINUXCONFIGFILE}" = "" -a -f ${LINUXCONFIGFILE} -a ${IPTABLES_MODULE_ACTIVE} -eq 0 ]; then
+#		logtext "R-TEC-FIRE-4511-Resultado: found kernel configuration file (${LINUXCONFIGFILE})"
+#		FIND=`${tCATCMD} ${LINUXCONFIGFILE} | grep -v '^#' | grep "CONFIG_IP_NF_IPTABLES" | head -n 1`
+#		if [ ! "${FIND}" = "" ]; then
+#		    HAVEMOD=`echo ${FIND} | cut -d '=' -f2`
+#		    # Do not use iptables if it's compiled as a module (=m), since we already tested for it in the
+#		    # active list.
+#		    if [ "${HAVEMOD}" = "y" ]; then
+#			    logtext "R-TEC-FIRE-4511-Resultado: iptables available as a module in the configuration"
+#			    IPTABLES_ACTIVE=1
+#			    IPTABLES_INKERNEL_ACTIVE=1
+#			    FIREWALL_ACTIVE=1
+#		    	    Display --indent 2 --text "- R-TEC-FIRE-4511-Verificado iptables in config file" --result OK --color GREEN
+#		      else
+#			logtext "R-TEC-FIRE-4511-Resultado: no iptables found in Linux kernel config file"
+#	            fi
+#		  else
+#		    logtext "R-TEC-FIRE-4511-Resultado: no Linux configuration file found"
+#		    Display --indent 2 --text "- R-TEC-FIRE-4511-Verificado iptables in config file" --result "NAO OK" --color WHITE
+#		fi
+#	    fi
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FIRE-4512
+#    # Description : Check iptables for empty ruleset
+#    if [ ! "${IPTABLESBINARY}" = "" -a ${IPTABLES_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FIRE-4512 --preqs-met ${PREQS_MET} --os Linux --weight L --network NO --description "Check iptables for empty ruleset"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`${IPTABLESBINARY} --list --numeric | egrep -v "^(Chain|target|$)" | wc -l | tr -d ' '`
+#	if [ "${FIND}" = "0" ]; then
+#	    FIREWALL_ACTIVE=0
+#	    logtext "R-TEC-FIRE-4512-Resultado: as regras do iptables estão vazias"
+#	    logtext "R-TEC-FIRE-4512-modulo(s) do iptables estao carregados, mas sem regras ativas"
+#	    logtext "R-TEC-FIRE-4512-Desativar iptables no modulo do kernel se não for utilizado ou regras estão sendo usados"
+#	    Display --indent 4 --text "- R-TEC-FIRE-4512-Verificado for empty ruleset..." --result ATENCAO --color RED	
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FIRE-4512-modulo(s) do iptables estao carregados, mas sem regras ativas"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FIRE-4512-Desativar iptables no modulo do kernel se não for utilizado ou regras estão sendo usados"
+#	  else
+#	    logtext "R-TEC-FIRE-4512-Resultado: um ou mais regras estão disponíveis"
+#	    Display --indent 4 --text "- R-TEC-FIRE-4512-Verificado por regras vazias..." --result OK --color GREEN
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FIRE-4513
+#    # Description : Check iptables for unused rules
+#    if [ ! "${IPTABLESBINARY}" = "" -a ${IPTABLES_ACTIVE} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FIRE-4513 --preqs-met ${PREQS_MET} --os Linux --weight L --network NO --description "Check iptables for unused rules"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`${IPTABLESBINARY} --list --numeric --line-numbers --verbose | awk '{ if ($2=="0") print $1 }' | xargs`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 4 --text "- R-TEC-FIRE-4513-Verificado for unused rules..." --result OK --color GREEN
+#	    logtext "R-TEC-FIRE-4513-Resultado: There are no unused rules present"
+#	  else
+#	    Display --indent 4 --text "- R-TEC-FIRE-4513-Verificado for unused rules..." --result ATENCAO --color YELLOW	
+#	    logtext "R-TEC-FIRE-4513-Resultado: Found one or more possible unused rules"
+#	    logtext "R-TEC-FIRE-4513-Description: Unused rules can be a sign that the firewall rules aren't optimized or up-to-date"
+#	    logtext "R-TEC-FIRE-4513-Note: Sometimes rules aren't triggered but still in use. Keep this in mind before cleaning up rules."
+#	    logtext "R-TEC-FIRE-4513-Output: iptables rule numbers: ${FIND}"
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FIRE-4513-Found possible unused iptables rules ($FIND)"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FIRE-4513-Check iptables rules to see which rules are currently not used (iptables --list --numeric --verbose)"
+#        fi
+#    fi
+##
+##################################################################################
+##
+#    PFFOUND=0; PFLOGDFOUND=0
+#    # Test        : FIRE-4518
+#    # Description : Check pf kernel loadable module
+#    Register --test-no FIRE-4518 --weight L --network NO --description "Check pf kernel loadable module"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FIRE-4518-Searching for pf KLD and pf log daemon..."
+#        if [ ! "${KLDSTATBINARY}" = "" ]; then
+#	    PFFOUND=0
+#	    FIND=`${KLDSTATBINARY} | grep 'pf.ko'`
+#	    FIND2=`${PSBINARY} ax | grep 'pflogd' | grep -v 'grep'`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-FIRE-4518-Resultado: Can not find pf KLD"
+#	      else
+#	        logtext "R-TEC-FIRE-4518-Resultado: pf KLD loaded"
+#	        PFFOUND=1
+#	    fi
+#	    if [ "${FIND2}" = "" ]; then
+#	        logtext "R-TEC-FIRE-4518-Resultado: pflog daemon not found in process list"
+#	      else
+#	        logtext "R-TEC-FIRE-4518-Resultado: Found pflog daemon in process list"
+#	        PFFOUND=1
+#		PFLOGDFOUND=1
+#	    fi	
+#	    if [ ${PFFOUND} -eq 1 ]; then
+#		Display --indent 2 --text "- R-TEC-FIRE-4518-Verificado pf module..." --result OK --color GREEN
+#		FIREWALL_ACTIVE=1
+#	      else
+#		Display --indent 2 --text "- R-TEC-FIRE-4518-Verificado pf configuration..." --result "NAO OK" --color WHITE
+#		logtext "R-TEC-FIRE-4518-Resultado: no pf configuration found"
+#	    fi
+#         else
+#	    Display --indent 2 --text "- R-TEC-FIRE-4518-Verificado pf configuration..." --result "NAO OK" --color WHITE
+#	    logtext "R-TEC-FIRE-4518-Resultado: no pf configuration found"
+#        fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FIRE-4520
+#    # Description : Check pf configuration consistency
+#    if [ ${PFFOUND} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FIRE-4520 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check pf configuration consistency"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FIRE-4520-Test: check /etc/pf.conf"
+#	# Test for warnings (-n don't load the rules)	    
+#    	if [ -f /etc/pf.conf ]; then
+#	    logtext "R-TEC-FIRE-4520-Resultado: /etc/pf.conf exists"
+#	    # Check results from pfctl
+#	    PFWARNINGS=`pfctl -n -f /etc/pf.conf -vvv 2>&1 | grep -i 'warning'`
+#	    if [ "${PFWARNINGS}" = "" ]; then
+#	        Display --indent 4 --text "- R-TEC-FIRE-4520-Verificado pf configuration consistency" --result OK --color GREEN
+#	        logtext "R-TEC-FIRE-4520-Resultado: no pf filter warnings found"
+#	      else
+#	        Display --indent 4 --text "- R-TEC-FIRE-4520-Verificado pf configuration consistency" --result ATENCAO --color RED
+#		logtext "R-TEC-FIRE-4520-Resultado: found one or more warnings in the pf filter rules"
+#		ReportWarning ${TEST_NO} "H" "R-TEC-FIRE-4520-Found one or more warnings in pf configuration file"			
+#		ReportSuggestion ${TEST_NO} "R-TEC-FIRE-4520-Run 'pfctl -n -f /etc/pf.conf -vvv' to see available pf warnings"
+#	    fi
+#	  else  
+#	    logtext "R-TEC-FIRE-4520-Resultado: /etc/pf.conf does NOT exist"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FIRE-4522
+#    # Description : Check ipchains
+##
+##################################################################################
+##
+#    # Test        : FIRE-4526
+#    # Description : Check ipf (Solaris)
+#    if [ ! "${IPFBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FIRE-4526 --os Solaris --preqs-met ${PREQS_MET} --weight L --network NO --description "Check ipf status"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FIND=`${IPFBINARY} -n -V | grep "^Running" | awk '{ print $2 }'`
+#	if [ "${FIND}" = "yes" ]; then
+#	    Display --indent 4 --text "- R-TEC-FIRE-4526-Verificado ipf status" --result OK --color GREEN
+#    	    logtext "R-TEC-FIRE-4526-Resultado: ipf is enabled and running"
+#	    FIREWALL_ACTIVE=1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-FIRE-4526-Verificado ipf status" --result "NAO OK" --color YELLOW	  
+#    	    logtext "R-TEC-FIRE-4526-Resultado: ipf is not running"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FIRE-4530
+#    # Description : Check ipfw
+##
+##################################################################################
+##
+#    # Test        : FIRE-4590
+#    # Description : Check if at least one firewall if active
+#    Register --test-no FIRE-4590 --weight L --network NO --description "Check firewall status"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ ${FIREWALL_ACTIVE} -eq 1 ]; then
+#	    Display --indent 2 --text "- R-TEC-FIRE-4590-Verificado host based firewall" --result OK --color GREEN
+#	    logtext "R-TEC-FIRE-4590-Resultado: host based firewall or packet filter is active"
+#	    #YYY add manual item to report
+#	    logtext "R-TEC-FIRE-4590-Manual action: verify if there is a formal process for testing and applying firewall rules"
+#	    logtext "R-TEC-FIRE-4590-Manual action: verify all traffic is filtered the right way between the different security zones"
+#	    logtext "R-TEC-FIRE-4590-Manual action: verify if a list is available with all required services"
+#	    # YYY Solaris ipf (determine default policy)
+#	    logtext "R-TEC-FIRE-4590-Manual action: make sure an explicit deny all is the default policy for all unmatched traffic"
+#	    AddHP 5 5
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FIRE-4590-Verificado host based firewall" --result "NAO OK" --color YELLOW
+#	    logtext "R-TEC-FIRE-4590-Resultado: no host based firewall/packet filter found or configured"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FIRE-4590-Configurar um firewall/filtro de pacotes para filtrar o tráfego de entrada e de saída"
+#	    AddHP 0 5
+#	fi
+#    fi
+##
+##################################################################################
+##
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

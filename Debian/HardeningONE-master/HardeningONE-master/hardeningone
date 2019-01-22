@@ -1,0 +1,629 @@
+#!/bin/bash
+#set -xv
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyright 2010-2011, Mauro Risonho de Paula Assumpção <mauro.risonho@gmail.com>
+# Web site: 
+#
+# HardeningOne comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# HardeningOne is an automated auditing tool for Unix based operating systems.
+#
+#################################################################################
+#
+# Inicio do processo de contagem de scanning
+datainicial=`date +%s`
+
+
+# Program information
+PROGRAM_name="HardeningOne"
+PROGRAM_version="1.2.13a"
+PROGRAM_releasedate="18 de Outubro de 2010"
+PROGRAM_author="Mauro Risonho de Paula Assumpção"
+PROGRAM_author_contact="mauro.risonho@gmail.com"
+PROGRAM_website=" "
+PROGRAM_copyright="Copyleft GPL3 - 2010-2011 - ${PROGRAM_author}, ${PROGRAM_website}"
+PROGRAM_license="${PROGRAM_name} comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+ welcome to redistribute it under the terms of the GNU General Public License.
+ See LICENSE file for details about using this software."
+ 
+PROGRAM_extrainfo=""
+# Release version (beta || final)
+PROGRAM_releasetype="final"
+# Version number of report files (when format changes in future)
+REPORT_version_major="1"; REPORT_version_minor="0"
+REPORT_version="${REPORT_version_major}.${REPORT_version_minor}"
+
+#
+#################################################################################
+#
+# Configure Include path and files
+#
+#################################################################################
+#
+    #####
+    # Test from which directory we can use all functions and tests
+    #####
+    
+    # Set default to none for later testing
+    INCLUDEDIR=""; PLUGINDIR="";
+    # Default paths to check (CWD as last option, in case we run from standalone)
+    tINCLUDE_TARGETS="/usr/local/include/hardeningone /usr/local/hardeningone/include /usr/share/hardeningone/include ./include"
+    tPLUGIN_TARGETS="/usr/local/hardeningone/plugins /usr/local/share/hardeningone/plugins /usr/share/hardeningone/plugins /etc/hardeningone/plugins ./plugins"
+    tDB_TARGETS="/usr/local/share/hardeningone/db /usr/local/hardeningone/db /usr/share/hardeningone/db ./db"
+    
+    for I in ${tINCLUDE_TARGETS}; do if [ -d ${I} ]; then INCLUDEDIR=${I}; fi; done
+    for I in ${tPLUGIN_TARGETS};  do if [ -d ${I} ]; then PLUGINDIR=${I};  fi; done
+    for I in ${tDB_TARGETS};      do if [ -d ${I} ]; then DBDIR=${I};      fi; done    
+    
+    # Drop out if our include directory can't be found
+    if [ "${INCLUDEDIR}" = "" ]; then
+        echo "Erro Fatal: Não pode encontrar o diretório de include"
+	echo "Make sure to execute ${PROGRAM_name} from untarred directory or check installation"
+        exit 1
+    fi
+
+    # Drop out if our plugin directory can't be found
+    if [ "${PLUGINDIR}" = "" ]; then
+        echo "Erro Fatal: não pode localizar o diretório de plugins"
+	echo "Make sure to execute ${PROGRAM_name} from untarred directory or check installation"
+        exit 1
+    fi
+
+#
+#################################################################################
+#
+# Consts
+# (bin paths, text strings, colors)
+#
+#################################################################################
+#
+    . ${INCLUDEDIR}/consts 	#diretório Include/ setado no arquivo consts
+#
+#################################################################################
+#
+# Include functions, traps
+#
+#################################################################################
+#
+    . ${INCLUDEDIR}/functions
+    
+    trap Maid INT
+    
+    # Use safe umask for the files we create
+    umask 027
+    
+    # Drop out on unintialised variables / fatal errors
+    #set -u
+#
+#################################################################################
+#
+# Parameter checks (Verificar os parâmetros configurados no prompt)
+#
+#################################################################################
+#
+    . ${INCLUDEDIR}/parameters
+#
+#################################################################################
+#
+# Program information
+#
+#################################################################################
+#
+    # CV - Current Version
+    PROGRAM_AC=`echo ${PROGRAM_version} | awk '{ print $1 }' | sed 's/[.]//g'`
+    DB_MALWARE_CV=`grep "^#version=" ${DBDIR}/malware.db | cut -d '=' -f2`
+    DB_FILEPERMS_CV=`grep "^#version=" ${DBDIR}/fileperms.db | cut -d '=' -f2`
+
+    # Number of signatures
+    DB_MALWARE_IC=`grep -v "^#" ${DBDIR}/malware.db | wc -l | tr -s ' ' | tr -d ' '`
+    
+    if [ ${VIEWUPDATEINFO} -eq 1 ]; then
+
+	CheckUpdates
+
+	# Reset everything if we can't determine our current version or the latest
+	# available version (due lack of internet connectivity for example)
+        if [ "${PROGRAM_AC}" = "" -o "${PROGRAM_LV}" = "" ]; then
+    	    # Set both to safe values
+    	    PROGRAM_AC=0; PROGRAM_LV=0
+	    DB_MALWARE_LV=0; DB_MALWARE_CV=0
+	    DB_FILEPERMS_LV=0; DB_FILEPERMS_CV=0
+	fi
+    
+	echo ""; echo " == ${WHITE}${PROGRAM_name}${NORMAL} =="
+	echo -n "  Version       :   ${PROGRAM_version}"
+	if [ ${PROGRAM_LV} -gt ${PROGRAM_AC} ]; then echo " [ ${WARNING}Outdated${NORMAL} ]"; else echo ""; fi
+	echo "  Release date  :   ${PROGRAM_releasedate}"; echo ""
+	echo " == ${WHITE}Databases${NORMAL} =="
+        echo "                    Current          Latest            Status"
+        echo "  -----------------------------------------------------------------------------"    
+        echo -n "  Malware       :   ${DB_MALWARE_CV}       ${DB_MALWARE_LV}       "
+	if [ ${DB_MALWARE_LV} -gt ${DB_MALWARE_CV} ]; then echo "${WARNING}Outdated${NORMAL}"; else echo "${OK}Up-to-date${NORMAL}"; fi
+        echo -n "  File perms    :   ${DB_FILEPERMS_CV}       ${DB_FILEPERMS_LV}       "
+	if [ ${DB_FILEPERMS_LV} -gt ${DB_FILEPERMS_CV} ]; then echo "${WARNING}Outdated${NORMAL}"; else echo "${OK}Up-to-date${NORMAL}"; fi
+	echo ""; echo ""
+	echo "${PROGRAM_copyright}"; echo ""
+	
+	# Quit program
+        ExitClean
+    fi
+#
+#################################################################################
+#
+# Initialize and default settings
+#
+#################################################################################
+#
+
+echo "Processando... Aguarde..."
+    if [ "${PROGRAM_releasetype}" = "beta" ]; then
+        echo "${YELLOW}"
+#	echo "  #########################################################"
+#	echo "  #   BETA SOFTWARE                                       #"
+#        echo "  #########################################################"
+#        echo ""
+#        echo "  Thank you for testing a beta release. Make sure to read"
+#        echo "  all available documentation before proceeding and/or"
+#        echo "  requesting support. Due the nature of beta releases, it"
+#        echo "  is possible new features give unexpected warnings."
+#    	echo ""
+#        echo "  Press [ENTER] to continue or [CTRL] + C to break"
+#        echo ""
+#        echo "  #########################################################"
+#        echo "${NORMAL}"; echo ""
+        if [ ${NEVERBREAK} -eq 0 ]; then read void; fi
+    fi
+    
+    if [ ${QUIET} -eq 0 ]; then
+        echo ""
+#        echo "${WHITE}[ ${PROGRAM_name} ${PROGRAM_version} ]${NORMAL}"
+#        echo ""
+#        echo "################################################################################"
+#        echo " ${PROGRAM_license}"
+#        echo ""
+#        echo " ${PROGRAM_copyright}"
+#        echo "################################################################################"
+    fi
+#
+#################################################################################
+#
+    InsertSection "Inicializando programa"
+
+
+    # Check hostname
+    case ${OS} in
+	HP-UX)
+	            HOSTNAME=`hostname` ;;
+        Solaris)
+                    HOSTNAME=`uname -n` ;;
+        *)
+                    HOSTNAME=`hostname -s 2> /dev/null` ;;
+    esac
+    FQDN=`hostname 2> /dev/null`
+
+    
+    #Variáveis para data/hora no nome do arquivo de report e log
+    DATA=`date +%d%m%Y_%H%M%S`.log
+
+    # Try to find a default profile file, if none is specified
+    if [ "${PROFILE}" = "" ]; then
+        tPROFILE_TARGETS="/usr/local/etc/hardeningone/default.prf /etc/hardeningone/default.prf ./default.prf"
+        for I in ${tPROFILE_TARGETS}; do
+            if [ -f ${I} ]; then PROFILE=${I}; fi
+	done
+    fi
+    # Initialize and check profile file, auditor name, log file and report file
+    if [ ! -r ${PROFILE} ];		then echo "Fatal error: Can't open profile file (${PROFILE})"; exit 1; fi
+    if [ "${AUDITORNAME}" = "" ];	then AUDITORNAME="[Desconhecido]"; fi
+    if [ "${LOGFILE}" = "" ];		then LOGFILE="/var/log/ho-${HOSTNAME}-data-$DATA"; fi
+    if [ "${REPORTFILE}" = "" ];	then REPORTFILE="/var/log/ho-${HOSTNAME}-report-$DATA"; fi
+
+	
+#
+#################################################################################
+#
+# PID :: Check PID file, to avoid multiple instances running at the same time.
+#
+#################################################################################
+#
+    MYID=""
+    # Check user. We need root to be able to audit and use all required system tools
+    # If we encounter Solaris, use that instead
+    if [ -x /usr/xpg4/bin/id ]; then
+	MYID=`/usr/xpg4/bin/id -u`
+      else
+        MYID=`id -u`
+    fi
+    if [ ! ${MYID} -eq 0 ]; then
+        echo "${WARNING}Fatal error${NORMAL}: ${NOTICE}Incorrect UID.${NORMAL}"
+        echo "Você tem que estar como root (ou equivalente) para realizar uma auditoria. Por favor, use o su(do) e tente novamente. "
+        exit 1
+    fi
+
+    # Check PID file
+    if [ -f hardeningone.pid -o -f /var/run/hardeningone.pid ]; then
+#        echo "      ${WARNING}Warning${NORMAL}: ${WHITE}PID arquivo existe, provavelmente outro processo do hardeningone está em execução.${NORMAL}"
+#        echo "      ------------------------------------------------------------------------------"
+#        echo "      Se você não tem certeza que outro processo do hardeningone está executando corretamente, você pode decidir"
+#        echo "      para o atual processo e verificar o processo na lista  primeiro. Você pode cancelar"
+#        echo "      (usando CTRL+C) ou você pode ignorar esta mensagem."
+#	echo "      "
+#	echo "      Você pode decidir verificar os arquivos temporários depois da execução completa  do software."
+#        echo "      ------------------------------------------------------------------------------"
+#        echo ""
+#        echo "      ${YELLOW}Note: ${WHITE}Cancelling the program can leave temporary files behind${NORMAL}"
+#        echo ""    
+        wait_for_keypress
+        if [ -f hardeningone.pid ]; then rm -f hardeningone.pid
+	  elif [ -f /var/run/hardeningone.pid ]; then rm -f /var/run/hardeningone.pid; fi
+	Display --indent 2 --text "" #"- Deleting old PID file..." --result PRONTO --color GREEN
+    fi
+
+    # Create new PID file (use work directory if /var/run is not available)
+    if [ -d /var/run ]; then PIDFILE="/var/run/hardeningone.pid"; else PIDFILE="hardeningone.pid"; fi
+    OURPID=`echo $$`
+    echo ${OURPID} > ${PIDFILE}
+    chmod 600 ${PIDFILE}
+#
+#################################################################################
+#
+# Check program parameters
+#
+#################################################################################
+#
+    # Bail out if we didn't get any parameter, or incorrect ones
+    if [ ${PARAMCOUNT} -eq 0 -o ${WRONGOPTION} -eq 1 -o ${VIEWHELP} -eq 1 ]; then
+        #echo "  =================================================="
+        echo "  ${WHITE}Valid parameters:${NORMAL}"
+        echo "    --auditor \"<name>\"            	: Nome do Auditor"
+        echo "    --check-all (-c)              	: Verificar Sistema"
+        echo "    --check-update                	: Verificar po updates"
+	echo "    --no-colors                   	: Não usar cores na saida do relatorio na Tela"
+        echo "    --no-log                      	: Não criar um arquivo de log file"
+        echo "    --profile <profile>           	: Scanning no sistema através do arquivo determinado no perfil [Profile]"
+        echo "    --quick (-Q)                  	: Modo rápido, sem interveção do usuário"
+	echo "    --quiet (-q)                  	: Sem saída na tela, exceto avisos (warnings)"
+	echo "    --reverse-colors              	: Otimizar a cores na tela para fundos claros "
+	echo "    --tests \"<tests>\"             	: Execute somente os testes definidos por <tests> "
+	echo "    --tests-category \"<category>\" 	: Executar apenas os testes definidos em <category>"
+        echo "    --view-manpage (--man)        	: Exibir man page"
+        echo "    --version (-V)                	: Exibe a versao do software e Sai"
+        echo ""
+
+        if [ ${WRONGOPTION} -eq 1 ]; then
+            echo "  ${RED}Error${NORMAL}: ${WHITE}Invalid option ${WRONGOPTION_value}!${NORMAL}"
+          else
+	    if [ ${VIEWHELP} -eq 0 ]; then
+                echo "  ${RED}Error${NORMAL}: ${WHITE}No parameters specified!${NORMAL}"
+	    fi
+        fi
+        echo "  See man page and documentation for all available options."
+        echo ""
+        echo "Saindo..."
+        # Cleanup PID file if we drop out earlier
+        RemovePIDFile    
+        # Exit with exit code 1
+        exit 1
+    fi
+#
+#################################################################################
+#
+# OS Detection
+#
+#################################################################################
+#
+    . ${INCLUDEDIR}/osdetection
+   clear
+   Display --indent 2 --text "" #"- Detectando SO ..." --result PRONTO --color GREEN
+
+    # Check hostname
+    case ${OS} in
+	HP-UX)
+	            HOSTNAME=`hostname` ;;
+        Solaris)
+                    HOSTNAME=`uname -n` ;;
+        *)
+                    HOSTNAME=`hostname -s 2> /dev/null` ;;
+    esac
+    FQDN=`hostname 2> /dev/null`
+#
+#################################################################################
+#
+# Clear log and report files 
+#
+#################################################################################
+#
+    # Clear log file and test if it's writable
+    logtext "### Iniciando ${PROGRAM_name} ${PROGRAM_version} com PID ${OURPID}, build date ${PROGRAM_releasedate} ###" > ${LOGFILE}
+    if [ $? -eq 0 ]; then
+	clear
+	Display --indent 2 --text "" #"- Limpando arquivo de log (${LOGFILE})... " --result PRONTO --color GREEN
+      else
+	clear
+	Display --indent 2 --text "" #"- Limpando arquivo de log (${LOGFILE})... " --result WARNING --color RED
+        echo "${WARNING}Fatal error${NORMAL}: problem while writing to log file. Check location and permissions."
+	RemovePIDFile    
+        exit 1
+    fi
+    logtext "### ${PROGRAM_copyright} ###"
+
+    # Clear report file (to avoid appending to an existing file)
+    echo "# ${PROGRAM_name} Report" > ${REPORTFILE}
+    report "[General]"
+    report "report_version_major=${REPORT_version_major}"
+    report "report_version_minor=${REPORT_version_minor}"
+    CDATE=`date "+%H:%M:%S"`
+    report "report_datetime=${CDATE}"
+    report "auditor=${AUDITORNAME}"
+    report "hardeningone_version=${PROGRAM_version}"
+    report "[Operating System]"
+    report "os=${OS}"
+    report "os_fullname=${OS_FULLNAME}"
+    report "hostname=${HOSTNAME}"
+#
+#################################################################################
+#
+# Show program information to display
+#
+#################################################################################
+#
+
+DATA=`date +%d%m%Y_%H%M%S`
+
+
+
+    if [ ${QUIET} -eq 0 ]; then
+#        echo ""
+#        echo "  ---------------------------------------------------"
+#        echo "  Software Versao:		${PROGRAM_version}"
+#        echo "  Sistema Operacional:		${OS}"
+#        echo "  Sistema Operacional nome:     ${OS_NAME}"
+#        echo "  Sistema Operacional versao:  	${OS_VERSION}" 
+#        if [ ! "${OS_MODE}" = "" ]; then 
+#	echo "  Modo Sistema Operacional:   	${OS_MODE}"; fi
+#        echo "  Kernel versao:            	${OS_KERNELVERSION}"
+#        echo "  Arquitetura de Hardware:	${HARDWARE}"
+#        echo "  Hostname:                  	${HOSTNAME}"
+#	echo "  MD5SUM			"
+#	echo "  ${HOSTNAME}  $DATA" |  md5sum
+#        echo "  Auditor:                   	${AUDITORNAME}"
+#        echo "  Perfil:               	${PROFILE}"
+#        echo "  Arquivo de Log:               ${LOGFILE}"
+#        echo "  Arquivo de Relatorio:         ${REPORTFILE}"
+#        echo "  Versao de Relatorio:          ${REPORT_version}"
+	
+	#echo "`md5sum ${HOSTNAME}"
+	# gerando os MD5sum dos arquivos em arquivos de LOG
+	#vMD5sum_LOGFILE= echo `md5sum ${LOGFILE}`>>/var/log/md5sum_ho_logfile.log
+	#vMD5sum_REPORTFILE= echo `md5sum ${REPORTFILE}`>>/var/log/md5sum_ho_reportfile.log
+
+	# exbindo os MD5sum dos arquivos	
+	#vMD5sum_LOGFILE= `md5sum ${LOGFILE}`
+	#vMD5sum_REPORTFILE= `md5sum ${REPORTFILE}`
+
+	#echo "  ${vMD5sum_LOGFILE}"
+	#echo "  ${vMD5sum_REPORTFILE}"
+
+        #echo "  ---------------------------------------------------"
+    #fi
+
+    logtext "Software Versao:           ${PROGRAM_version}"
+    logtext "Sistema Operacional:          ${OS}"
+    logtext "Sistema Operacional nome:     ${OS_NAME}"
+    logtext "Sistema Operacional versao:  ${OS_VERSION}"
+    if [ ! "${OS_MODE}" = "" ]; then logtext "Modo Sistema Operacional:     ${OS_MODE}"; fi
+    logtext "Kernel versao:            ${OS_KERNELVERSION}"
+    logtext "Arquitetura de Hardware:         ${HARDWARE}"
+    logtext "Hostname:                  ${HOSTNAME}"
+    logtext "Auditor:                   ${AUDITORNAME}"
+    logtext "Profile - Perfil:                   ${PROFILE}"
+    logtext "Arquivo de Log:                  ${LOGFILE}"
+    logtext "Arquivo de Relatorio:               ${REPORTFILE}"
+    logtext "Versao de Relatorio:            ${REPORT_version}"
+    logtext "-----------------------------------------------------"
+    logtext "Incluir Diretorio:         ${INCLUDEDIR}"
+    logtext "Diretorio de Plugin:          ${PLUGINDIR}"
+    logtext "Diretorio Database:        ${DBDIR}"
+    logtextbreak
+    wait_for_keypress
+
+#
+#################################################################################
+#
+# Read profile/template/plugins
+#
+#################################################################################
+#
+    . ${INCLUDEDIR}/profiles  
+#
+#################################################################################
+#
+# Check for program update (people tend to be lazy and don't perform updates =))
+#
+#################################################################################
+#
+    logtext "Teste: Verificação de atualização do Software ..."
+
+    if [ ${SKIP_UPGRADE_TEST} -eq 1 ]; then
+        logtext "Teste de Upgrade ignorado devido opção de perfil (skip_upgrade_test)"
+        PROGRAM_LV="${PROGRAM_AC}"
+      else  
+        CheckUpdates
+    fi
+    if [ "${PROGRAM_AC}" = "" -o "${PROGRAM_LV}" = "" ]; then
+	clear
+        Display --indent 2 --text "" #"- Status do Update do Software... " --result DESCONHECIDO --color YELLOW
+        logtext "Resultado: Falha na atualização de seleção Sem conexão? ".
+        # Set both to safe values
+        PROGRAM_AC=0; PROGRAM_LV=0
+      else
+        logtext "Instalado a versao atual  : ${PROGRAM_AC}"
+        logtext "A última versao estável      : ${PROGRAM_LV}"
+        if [ ${PROGRAM_LV} -gt ${PROGRAM_AC} ]; then
+	    # Check if current version is REALLY outdated (10 versions ago)
+	    PROGRAM_MINVERSION=`expr ${PROGRAM_LV} - 10`
+	    logtext "Versao mínima requirida   : ${PROGRAM_MINVERSION}"
+	    if [ ${PROGRAM_MINVERSION} -gt ${PROGRAM_AC} ]; then
+		clear
+	        Display --indent 2 --text "" #"- Status do Update do Software... " --result "ATENÇÃO" --color RED
+		logtext "Result: This version is VERY outdated. Newer ${PROGRAM_name} release available!"
+              else
+		clear
+	        Display --indent 2 --text "" #"- Status do Update do Software... " --result "ATUALIZAÇÃO DISPONÍVEL" --color YELLOW
+		logtext "Result: newer ${PROGRAM_name} release available!"
+	    fi
+	    logtext "Suggestion: update to the latest stable release."
+#	    echo ""
+#    	    echo "      ==============================================================================="
+#    	    echo "        ${NOTICE}Notice: ${WHITE}${PROGRAM_name} update available${NORMAL}"
+#    	    echo "          Current version : ${YELLOW}${PROGRAM_AC}${NORMAL}   Latest version : ${GREEN}${PROGRAM_LV}${NORMAL}"
+#	    echo "          ${WHITE}Please update to the latest version for new features, bug fixes, tests"
+#	    echo "          and baselines.${NORMAL}"
+#    	    echo "      ==============================================================================="
+#	    echo ""
+    	    wait_for_keypress
+	  else
+	    clear
+    	    Display --indent 2 --text "" #"- Status do Update do Software... " --result "SEM ATUALIZAÇÕES" --color GREEN
+    	    logtext "No ${PROGRAM_name} update available."
+        fi  
+    fi
+
+    logtextbreak
+#
+#################################################################################
+#
+    # Check which binaries are available to the scanning process
+    if [ -f ${INCLUDEDIR}/binaries ]; then
+        . ${INCLUDEDIR}/binaries
+    fi
+#
+#################################################################################
+#
+    # Test sections
+    if [ "${TESTS_CATEGORY_TO_PERFORM}" = "" ]; then
+	#YYY insert plugin support
+    	    INCLUDE_TESTS="boot_services kernel memory_processes authentication shells \
+                       filesystems storage storage_nfs \
+		       nameservices ports_packages networking printers_spools \
+		       mail_messaging firewalls \
+		       webservers ssh snmp databases ldap php squid logging \
+		       insecure_services banners scheduling accounting \
+		       time crypto virtualization mac_frameworks file_integrity hardening_tools \
+		       malware file_permissions homedirs kernel_hardening hardening"
+      else
+        INCLUDE_TESTS="${TESTS_CATEGORY_TO_PERFORM}"
+    fi
+    # Include available tests
+    for INCLUDE_TEST in ${INCLUDE_TESTS}; do
+      if [ -f ${INCLUDEDIR}/tests_${INCLUDE_TEST} ]; then
+          . ${INCLUDEDIR}/tests_${INCLUDE_TEST}
+	else
+	  echo "Error: Can't find file (category: ${INCLUDE_TEST})"
+      fi
+    done
+#
+
+
+#################################################################################
+#
+    # Custom tests
+    if [ -f ${INCLUDEDIR}/tests_custom ]; then . ${INCLUDEDIR}/tests_custom; fi
+#
+#################################################################################
+#
+    logtextbreak
+    
+    # Search plugins
+    logtext "Searching plugins..."
+    logtext "NOTE: Plugins aren't supported yet!"
+    #YYY
+    FIND=`find ${PLUGINDIR} -type f -name "[a-z]*" -exec echo \{\} \;`
+    
+    for I in ${FIND}; do
+        logtext "Found plugin file: ${I}"
+	# Double check if output is a valid file name
+	if [ -f ${I} ]; then
+	    FIND2=`grep "^# PLUGIN_NAME=" ${I} | ${AWKBINARY} -F= '{ print $2 }'`
+	    if [ ! "${FIND2}" = "" ]; then
+		FIND3=`grep "^plugin=${FIND2}" ${PROFILE}`
+		if [ ! "${FIND3}" = "" ]; then
+		    logtext "Plugin ${FIND2} is enabled"
+		    PLUGINFILE="${PLUGINDIR}/${FIND2}"
+		    if [ -f ${PLUGINFILE} ]; then
+		        FIND4=`ls -l ${PLUGINFILE} | cut -c 2-10`
+			if [ "${FIND4}" = "r--------" ]; then
+			    logtext "Including plugin file: ${PLUGINFILE}"
+			    . ${PLUGINFILE}
+			  else
+			    logtext "Plugin ${FIND2}: Skipped (bad file permissions, should be 400)"
+			fi	
+		      else
+		        logtext "Plugin ${FIND2}: Skipped (can't find file ${PLUGINFILE})"
+		    fi
+		  else
+		    logtext "Plugin ${FIND2}: Skipped (not enabled)"
+		fi
+	      else
+	        logtext "Skipping plugin file ${I} (no valid plugin name found)"
+	    fi
+	fi
+    done
+#
+#################################################################################
+#
+# Show test results overview
+#
+#################################################################################
+#
+
+    # Final de processo de contagem de tempo
+    datafinal=`date +%s`
+    soma=`expr $datafinal - $datainicial`
+    resultado=`expr 10800 + $soma`
+    tempo=`date -d @$resultado +%H:%M:%S`
+
+    # Store total performed tests
+    report "hardeningone_tests_done=${CTESTS_PERFORMED}"
+    
+    # Show report
+    if [ -f ${INCLUDEDIR}/report ]; then . ${INCLUDEDIR}/report; fi
+    
+    logtext "================================================================================"
+    logtext "Testes realizados:     ${CTESTS_PERFORMED}"
+    logtext "Total testes:         ${TOTAL_TESTS}"
+    logtext "================================================================================"
+    logtext "${PROGRAM_name} ${PROGRAM_version}"
+    logtext "${PROGRAM_copyright}";	echo " Tempo gasto: $tempo "
+
+    # Delete PID file
+    RemovePIDFile
+
+
+    logtext "Software Finalizado com Sucesso"
+
+
+#--
+
+    # The End
+    exit 0
+# devido aos comentários
+clear
+fi
+
+###########################################################################
+##%HASH-SHA1%----------------------------%
+###########################################################################
+
+#
+#================================================================================
+# hardeningone - Copyright 2010-2011, Mauro Risonho de Paula Assumpção-  - 

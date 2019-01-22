@@ -1,0 +1,316 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Kernel
+#
+#################################################################################
+#
+    InsertSection "" #3. Kernel"
+#
+#################################################################################
+#
+    CORE_DUMPS_DESABILITADO=0
+#
+#################################################################################
+#
+    # Test        : KRNL-5622
+    # Description : Check run level padrão on Linux machines
+    Register --test-no KRNL-5622 --os Linux --weight L --network NO --description "" #Determine Linux run level padrão"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	logtext "R-TEC-KRNL-5622-Teste: Verificado /etc/inittab"
+        if [ -f /etc/inittab ]; then
+            logtext "R-TEC-KRNL-5622-Resultado: file /etc/inittab ENCONTRADO"
+    	    logtext "R-TEC-KRNL-5622-Teste: Verificado default Linux run level..."
+	    FIND=`awk -F: '/^id/ { print $2; }' /etc/inittab | head -n 1`
+            if [ "${FIND}" = "" ]; then
+                Display --indent 2 --text "" # R-TEC-KRNL-5622-Verificado run level padrão" --result DESCONHECIDO --color YELLOW
+                logtext "R-TEC-KRNL-5622-Resultado: Can't determine run level padrão from /etc/inittab"
+              else
+                Display --indent 2 --text "" # R-TEC-KRNL-5622-Verificado run level padrão..." --result "${FIND}" --color GREEN
+                logtext "R-TEC-KRNL-5622-ENCONTRADO run level padrão '${FIND}'"
+    	        report "R-TEC-KRNL-5622-linux_default_runlevel=${FIND}"
+            fi
+          else
+            logtext "R-TEC-KRNL-5622-Resultado: file /etc/inittab not ENCONTRADO"
+            if [ "${LINUX_VERSION}" = "Debian" -o "${LINUX_VERSION}" = "Ubuntu" ]; then
+        	logtext "R-TEC-KRNL-5622-Teste: Verificado run level with who -r, for Debian based systems"
+                FIND=`who -r | awk '{ if ($1=="run-level") { print $2 } }'`
+                if [ ! "${FIND}" = "" ]; then
+                    logtext "R-TEC-KRNL-5622-Resultado: ENCONTRADO run level padrão '${FIND}'"
+    	            report "R-TEC-KRNL-5622-linux_default_runlevel=${FIND}"
+    	            Display --indent 2 --text "" # R-TEC-KRNL-5622-Verificado run level padrão..." --result "RUNLEVEL ${FIND}" --color GREEN
+    	          else
+    	            logtext "R-TEC-KRNL-5622-Resultado: Can't determine run level padrão from who -r"
+    	            Display --indent 2 --text "" # R-TEC-KRNL-5622-Verificado run level padrão..." --result DESCONHECIDO --color YELLOW
+    	        fi
+    	    fi
+	fi
+    fi 
+#
+#################################################################################
+#
+    # Test        : KRNL-5677
+    # Description : Check CPU options and support (PAE, No eXecute, eXecute Disable)
+    # More info   : pae and nx bit are both visible on AMD and Intel CPU's if supported
+    Register --test-no KRNL-5677 --os Linux --weight L --network NO --description "" #Check CPU options and support"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        Display --indent 2 --text "" # R-TEC-KRNL-5677-Verificado CPU support (NX/PAE)"
+	logtext "R-TEC-KRNL-5677-Teste: Verificado /proc/cpuinfo..."
+        if [ -f /proc/cpuinfo ]; then
+	    logtext "R-TEC-KRNL-5677-Resultado: ENCONTRADO /proc/cpuinfo"
+	    logtext "R-TEC-KRNL-5677-Teste: Verificado CPU options (XD/NX/PAE)..."
+	    FIND=`cat /proc/cpuinfo | grep " pae " | grep " nx "`
+	    if [ "${FIND}" = "" ]; then
+	        Display --indent 6 --text  "" #R-TEC-KRNL-5677-CPU does not seem to support PAE or No eXecute" --result "NAO OK" --color YELLOW
+		logtext "R-TEC-KRNL-5677-Resultado: PAE or No eXecute option(s) not ENCONTRADO"
+	      else
+	        Display --indent 6 --text  "" #R-TEC-KRNL-5677-CPU suporta PAE e NoeXecute" --result OK --color GREEN
+		logtext "R-TEC-KRNL-5677-Resultado: PAE and NoExecute ENCONTRADO."
+		#ReportSuggestion ${TEST_NO} "Make sure a PAE HABILITADO kernel is used when possible to gain native No eXecute/eXecute Disable support, as this CPU supports these options. This helps against buffer overflow attacks."
+	    fi
+	  else
+	    Display --indent 4 --text "" #R-TEC-KRNL-5677-No CPU information ENCONTRADO" --result DESCONHECIDO --color YELLOW
+	    logtext "R-TEC-KRNL-5677-Resultado: /proc/cpuinfo not ENCONTRADO"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5680
+    # Description : Check if installed kernel has PAE support
+    # Dependency  : KRNL-5677
+    # More info   : RedHat/CentOS/Fedora uses the package name 'kernel-PAE'
+#
+#################################################################################
+#
+    # Test        : KRNL-5695
+    # Description : Determining Linux versão do kernel and release number
+    Register --test-no KRNL-5695 --os Linux --weight L --network NO --description "" #Determine Linux versão do kernel and release number"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        # Kernel number (and suffix)
+        LINUX_KERNEL_RELEASE=`uname -r`
+	report "linux_kernel_release=${LINUX_KERNEL_RELEASE}"
+	logtext "R-TEC-KRNL-5695-Resultado: ENCONTRADO kernel release ${LINUX_KERNEL_RELEASE}"	
+	# Type and build date
+	LINUX_KERNEL_VERSION=`uname -v`
+	report "linux_kernel_version=${LINUX_KERNEL_VERSION}"
+	logtext "R-TEC-KRNL-5695-Resultado: ENCONTRADO versão do kernel ${LINUX_KERNEL_VERSION}"
+	Display --indent 2 --text "" # R-TEC-KRNL-5695-Verificado versão do kernel" --result PRONTO --color GREEN
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5723
+    # Description : Check if Linux is build as a monolithic kernel or not
+    Register --test-no KRNL-5723 --os Linux --weight L --network NO --description "" #Determining if Linux kernel is monolithic"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	logtext "R-TEC-KRNL-5723-Teste: Verificado if kernel is monolithic or modular"
+        # Verificado if any modules are loaded
+        FIND=`lsmod | grep -v "^Module" | wc -l | tr -s ' ' | tr -d ' '`
+        Display --indent 2 --text "" # R-TEC-KRNL-5723-Verificado tipo de kernel" --result PRONTO --color GREEN	
+	if [ "${FIND}" = "0" ]; then
+	    logtext "R-TEC-KRNL-5723-Resultado: ENCONTRADO monolithic kernel"
+	    report "linux_kernel_type=monolithic"
+	    MONOLITHIC_KERNEL=1
+	  else
+	    logtext "R-TEC-KRNL-5723-Resultado: ENCONTRADO modular kernel"
+	    report "linux_kernel_type=modular"
+	    MONOLITHIC_KERNEL=0
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5726
+    # Description : Verificado Linux módulos carregados do kernel
+    Register --test-no KRNL-5726 --os Linux --weight L --network NO --description "" #Verificado Linux módulos carregados do kernel"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	FIND=`lsmod | awk '{ if ($1!="Module") print $1 }' | sort`
+        Display --indent 2 --text "" # R-TEC-KRNL-5726-Verificado módulos carregados do kernel" --result PRONTO --color GREEN
+	if [ ! "${FIND}" = "" ]; then
+	    logtext "R-TEC-KRNL-5726-Loaded modules according lsmod:"
+	    N=0
+	    for I in ${FIND}; do
+		    logtext "R-TEC-KRNL-5726-Loaded module: ${I}"
+		    report "loaded_kernel_module[]=${I}"
+		    N=`expr ${N} + 1`
+	    done
+	    Display --indent 6 --text  "" #R-TEC-KRNL-5726-ENCONTRADO ${N} módulos ativos"
+	  else
+	    logtext "R-TEC-KRNL-5726-Resultado: no loaded modules ENCONTRADO"
+	    logtext "R-TEC-KRNL-5726-Notice: No módulos carregados do kernel could indicate a broken/malformed lsmod, or a (custom) monolithic kernel"
+	fi	
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5728
+    # Description : Verificado for available Linux arquivo de configuração do kernel in /boot
+    Register --test-no KRNL-5728 --os Linux --weight L --network NO --description "" #Verificado Linux kernel config"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        LINUXCONFIGFILE="/boot/config-`uname -r`"
+	if [ -f ${LINUXCONFIGFILE} ]; then
+	    logtext "R-TEC-KRNL-5728-Resultado: ENCONTRADO config (${LINUXCONFIGFILE})"
+	    Display --indent 2 --text "" # R-TEC-KRNL-5728-Verificado Linux arquivo de configuração do kernel..." --result ENCONTRADO --color GREEN
+	  else
+	    logtext "R-TEC-KRNL-5728-Resultado: no Linux arquivo de configuração do kernel ENCONTRADO in /boot"
+	    Display --indent 2 --text "" # R-TEC-KRNL-5728-Verificado Linux arquivo de configuração do kernel..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5745
+    # Description : Verificado FreeBSD módulos carregados do kernel
+    Register --test-no KRNL-5745 --os FreeBSD --weight L --network NO --description "" #Verificado FreeBSD módulos carregados do kernel"
+    if [ ${SKIPTEST} -eq 0 ]; then
+
+        Display --indent 2 --text "" # R-TEC-KRNL-5745-Verificado active kernel modules..."
+        logtext "R-TEC-KRNL-5745-Teste: ${KERNEL_ACTIVE_MODULES_TITLE}"
+        logtext "R-TEC-KRNL-5745-Description: ${KERNEL_ACTIVE_MODULES_DESCRIPTION}"
+        logtext "R-TEC-KRNL-5745-Action: Verificado modules"
+        if [ -f /sbin/kldstat ]; then
+            FIND=`kldstat | grep -v 'Name' | tr -s ' ' | cut -d ' ' -f6`
+            if [ $? -eq 0 ]; then
+	        logtext "R-TEC-KRNL-5745-Loaded modules according kldstat:"
+		N=0
+	        for I in ${FIND}; do
+		    logtext "R-TEC-KRNL-5745-Loaded module: ${I}"
+		    report "R-TEC-KRNL-5745-loaded_kernel_module[]=${I}"
+		    N=`expr ${N} + 1`
+		done
+		Display --indent 4 --text "" #R-TEC-KRNL-5745-ENCONTRADO ${N} kernel modules" --result OK --color GREEN
+    	      else
+		Display --indent 4 --text "" #R-TEC-KRNL-5745-Test failed" --result ATENCAO --color RED
+	        logtext "R-TEC-KRNL-5745-Resultado: Problem with executing kldstat"
+	    fi
+          else
+    	    echo "[ ${WHITE}SKIPPED${NORMAL} ]"
+	    logtext "R-TEC-KRNL-5745-Resultado: no results, can't find /sbin/kldstat"
+        fi
+    fi
+
+#
+#################################################################################
+#
+    # Test        : KRNL-5770
+    # Description : Verificado Solaris load modules
+    Register --test-no KRNL-5770 --os Solaris --weight L --network NO --description "" #Verificado active kernel modules"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-KRNL-5745-Teste: searching módulos carregados do kernel"
+	FIND=`modinfo -c -w | grep -v "UNLOADED" | grep LOADED | awk '{ print $3 }' | sort`
+	if [ ! "${FIND}" = "" ]; then
+	    for I in ${FIND}; do
+	        logtext "R-TEC-KRNL-5745-ENCONTRADO module: ${I}"
+	        report "loaded_kernel_module[]=${I}"
+	    done
+	    Display --indent 2 --text "" # R-TEC-KRNL-5745-Verificado Solaris active kernel modules" --result PRONTO --color GREEN
+          else
+	    logtext "R-TEC-KRNL-5745-Resultado: no output"
+	    Display --indent 2 --text "" # R-TEC-KRNL-5745-Verificado Solaris active kernel modules" --result DESCONHECIDO --color YELLOW
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5788
+    # Description : Verificado availability new kernel
+    if [ "${LINUX_VERSION}" = "Debian" -o "${LINUX_VERSION}" = "Ubuntu" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no KRNL-5788 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Verificado availability new kernel"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-KRNL-5788-Teste: Searching apt-cache, to determine if a newer kernel is available"
+	if [ -x /usr/bin/apt-cache ]; then
+	    logtext "R-TEC-KRNL-5788-Resultado: ENCONTRADO /usr/bin/apt-cache"
+            # Test for presence /usr/bin/apt-cache and dpkg
+            logtext "R-TEC-KRNL-5788-Teste: Using apt-cache to determine if there is an update available"
+            FINDKERNFILE=`readlink -f /vmlinuz`
+            FINDKERNEL=`dpkg -S ${FINDKERNFILE} | awk -F : '{print $1}'`
+            FINDINST=`apt-cache policy ${FINDKERNEL} | egrep 'Installed' | cut -d ':' -f2 | tr -d ' '`
+            FINDCAND=`apt-cache policy ${FINDKERNEL} | egrep 'Candidate' | cut -d ':' -f2 | tr -d ' '`
+            logtext "R-TEC-KRNL-5788-Kernel installed: ${FINDINST}"
+            logtext "R-TEC-KRNL-5788-Kernel candidate: ${FINDCAND}"
+            if [ "${FINDINST}" = "${FINDCAND}" ]; then
+                Display --indent 2 --text "" # R-TEC-KRNL-5788-Verificado por atualização disponível do kernel... " --result OK --color GREEN
+        	logtext "R-TEC-KRNL-5788-Resultado: no kernel update available"
+              else
+                Display --indent 2 --text "" # R-TEC-KRNL-5788-Verificado por atualização disponível do kernel... " --result "NEW UPDATE" --color YELLOW
+        	logtext "R-TEC-KRNL-5788-Resultado: kernel update available according 'apt-cache policy'."
+            fi
+	  else
+	    logtext "R-TEC-KRNL-5788-Resultado: could NOT find /usr/bin/apt-cache, skipped other tests."
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5820
+    # Description : Verificado configuração core dumps (Linux)
+    Register --test-no KRNL-5820 --os Linux --weight L --network NO --description "" #Verificado configuração core dumps"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	logtext "R-TEC-KRNL-5720-Teste: Verificado presence /etc/security/limits.conf"
+	if [ -f /etc/security/limits.conf ]; then
+	    logtext "R-TEC-KRNL-5720-Resultado: file /etc/security/limits.conf exists" 
+	    logtext "R-TEC-KRNL-5720-Teste: Verificado if core dumps are DESABILITADO in /etc/limits.conf"
+	    FIND1=`cat /etc/security/limits.conf | awk '{ if ($1=="*" && $2=="soft" && $3=="core" && $4=="0") { print "soft core DESABILITADO" } else { print "soft core HABILITADO" } }'`
+	    FIND2=`cat /etc/security/limits.conf | awk '{ if ($1=="*" && $2=="hard" && $3=="core" && $4=="0") { print "hard core DESABILITADO" } else { print "hard core HABILITADO" } }'`
+	    if [ "${FIND1}" = "soft core DESABILITADO" -a "${FIND2}" = "hard core DESABILITADO" ]; then
+	        logtext "R-TEC-KRNL-5720-Resultado: core dumps (soft and hard) are both DESABILITADO"
+	        Display --indent 2 --text "" # R-TEC-KRNL-5720-Verificado configuração core dumps... " --result DESABILITADO --color GREEN	    
+		CORE_DUMPS_DESABILITADO=1
+		AddHP 3 3
+	      else
+	        logtext "R-TEC-KRNL-5720-Resultado: core dumps (soft or hard) are HABILITADO"
+	        Display --indent 2 --text "" # R-TEC-KRNL-5720-Verificado configuração core dumps... " --result HABILITADO --color YELLOW
+		#YYY suggestion
+		AddHP 1 2
+	    fi
+	    
+	    # Sysctl option
+	    logtext "R-TEC-KRNL-5720-Teste: Verificado sysctl value of fs.suid_dumpable"
+	    FIND=`sysctl fs.suid_dumpable | awk '{ if ($1=="fs.suid_dumplable") { print $3 } }'`
+	    logtext "R-TEC-KRNL-5720-Resultado: value ${FIND} ENCONTRADO"
+	    if [ "${FIND}" = "1" ]; then
+	        logtext "R-TEC-KRNL-5720-Resultado: setuid programs can perform core dumps"
+	        Display --indent 2 --text "" # R-TEC-KRNL-5720-Verificado configuração setuid core dumps... " --result HABILITADO --color YELLOW
+		#YYY suggestion
+		AddHP 1 1
+	      else
+	        logtext "R-TEC-KRNL-5720-Resultado: setuid programs can't perform core dumps"
+	        Display --indent 4 --text "" #- R-TEC-KRNL-5720-Verificado configuração setuid core dumps... " --result DESABILITADO --color GREEN	    
+		AddHP 0 1
+	    fi
+            # Check ulimit settings and harden it
+            # echo 'ulimit -S -c 0 > /dev/null 2>&1' >> /etc/profile
+	  else
+	    logtext "R-TEC-KRNL-5720-Resultado: file /etc/security/limits.conf does not exist, skipping test" 
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : KRNL-5826
+    # Description : Verificado configuração core dumps (Solaris)
+    #Register --test-no KRNL-5826 --os Linux --weight L --network NO --description "" #Verificado configuração core dumps"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 
