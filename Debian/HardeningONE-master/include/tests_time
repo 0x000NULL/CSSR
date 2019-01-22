@@ -1,0 +1,325 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Time
+#
+#################################################################################
+#
+    InsertSection "" #26. Hora e Sincronização"
+#
+#################################################################################
+#
+    NTPD_RUNNING=0
+#
+#################################################################################
+#
+    # Test        : TIME-3104
+    # Description : Check for a running NTP daemon
+#    if [ -f /sys/hypervisor/type ]; then
+#          # Skip NTP tests if we are in a DomU xen instance YYY
+#          FIND=`cat /sys/hypervisor/type`
+#	  if [ "${FIND}" = "xen" ]; then PREQS_MET="NO"; else PREQS_MET="YES"; fi
+#        else
+#	  PREQS_MET="YES"
+#    fi
+#    Register --test-no TIME-3104 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check for running NTP daemon"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        # Linux/FreeBSD (ntpdate), OpenBSD (ntpd, rdate)
+#	logtext "Test: Searching for a running NTP daemon or available client... "
+#	FOUND=0
+#	
+#	# Check running processes
+#	FIND=`${PSBINARY} ax | grep "ntpd" | grep -v "grep"`
+#	    if [ ! "${FIND}" = "" ]; then
+#		FOUND=1;
+#		Display --indent 2 --text "- Verificado execução NTP daemon..." --result ENCONTRADO --color GREEN
+#	      else
+#	        Display --indent 2 --text "- Verificado execução NTP daemon..." --result "NÃO ENCONTRADO" --color WHITE
+#	    fi
+
+#        # Check crontab for OpenBSD/FreeBSD
+#	if [ -f /etc/crontab ]; then
+#	    FIND=`cat /etc/crontab | egrep "ntpdate|rdate" | grep -v '^#'`
+#	    if [ ! "${FIND}" = "" ]; then
+#		FOUND=1;
+#		Display --indent 2 --text "- Verificado NTP client no arquivo do crontab..." --result ENCONTRADO --color GREEN
+#	      else
+#	        Display --indent 2 --text "- Verificado NTP client no arquivo do crontab..." --result "NÃO ENCONTRADO" --color WHITE
+#	    fi
+#	fi
+
+#	# Don't run check in cron job directory on Solaris
+#	# /etc/cron.d/FIFO is a special file and test get stuck at this file
+#	if [ ! "${OS}" = "Solaris" ]; then
+#	    # Check cron jobs
+#	    if [ -d /etc/cron.d ]; then
+#		FIND=`ls /etc/cron.d`
+#		if [ ! "${FIND}" = "" ]; then
+#		    FIND2=`egrep "rdate|ntpdate" /etc/cron.d/*`
+#		    if [ ! "${FIND2}" = "" ]; then
+#			FOUND=1;
+#			Display --indent 2 --text "- Verificado NTP client no arquivo cron.d..." --result ENCONTRADO --color GREEN
+#			logtext "Resultado: found ntpdate or rdate in /etc/cron.d directory"
+#			logtext "Saída: ${FIND2}"
+#		      else
+#		        Display --indent 2 --text "- Verificado NTP client no arquivo cron.d..." --result "NÃO ENCONTRADO" --color WHITE
+#		    fi
+#	          else
+#	    	    logtext "Resultado: /etc/cron.d is empty, skipping search in cron.d directory"
+#		fi
+#	    fi
+
+#	    if [ -d /var/spool/crontabs ]; then
+#		FIND=`ls /var/spool/crontabs`
+#		if [ ! "${FIND}" = "" ]; then
+#    	    	    FIND2=`egrep "rdate|ntpdate" /var/spool/crontabs/*`
+#	    	    if [ ! "${FIND2}" = "" ]; then
+#    	    		FOUND=1;
+#			Display --indent 2 --text "- Verificado NTP client in crontabs files..." --result ENCONTRADO --color GREEN
+#			logtext "Resultado: found ntpdate or rdate in /var/spool/crontabs directory"
+#			logtext "Saída: ${FIND2}"
+#		      else
+#		        Display --indent 2 --text "- Verificado NTP client in crontabs files..." --result "NÃO ENCONTRADO" --color WHITE
+#		    fi
+#	          else
+#		    logtext "Resultado: /var/spool/crontabs is empty, skipping search in /vars/spool/crontabs directory"
+#		fi
+#	    fi
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 -a ${OS} = "FreeBSD" ]; then
+#	    logtext "Test: Verificado if ntpdate is enabled at startup in FreeBSD"
+#	    if [ -f /etc/rc.conf ]; then
+#	        FIND=`grep 'ntpdate_enable="YES"' /etc/rc.conf`
+#	        if [ ! "${FIND}" = "" ]; then
+#	            logtext "Resultado: ntpdate is enabled in rc.conf"
+#	            # Mark system having a NTP client, but remind user to improve it
+#	            FOUND=1
+#		    ReportSuggestion ${TEST_NO} "Although ntpdate is enabled in rc.conf, it is adviced to run it at least daily or use a NTP daemon"
+#	          else
+#	            logtext "Resultado: ntpdate is not enabled in rc.conf"
+#	        fi
+#	    fi
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 ]; then    
+#	    Display --indent 2 --text "- Verificado for a running NTP daemon or client..." --result ATENÇÃO --color RED
+#	    logtext "Resultado: Could not find a NTP daemon or client"
+#	    ReportSuggestion ${TEST_NO} "Verifique se algum daemon NTP está rodando ou um cliente NTP é executadO diariamente, para evitar grandes diferenças de tempo e evitar problemas com serviços como o Kerberos, autenticação ou registro diferenças."
+#	    ReportWarning ${TEST_NO} "M" "No running NTP daemon or available client found"
+#	    AddHP 0 2
+#	  else
+#	    Display --indent 2 --text "- Verificado for a running NTP daemon or client..." --result OK --color GREEN
+#	    logtext "Resultado: Found a time syncing daemon/client."
+#	    AddHP 3 3
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3108
+    # Description : Check for a running NTP daemon
+    # Notes       : Overlaps 3104 partially
+#    Register --test-no TIME-3108 --weight L --network NO --description "Check for running NTP daemon"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check running processes
+#	logtext "Test: Check running NTP daemon process"
+#	FIND=`${PSBINARY} ax | grep "ntpd" | grep -v "grep"`
+#	    if [ ! "${FIND}" = "" ]; then
+#    		NTPD_RUNNING=1;
+#		Display --indent 2 --text "- Verificado NTP daemon..." --result ENCONTRADO --color GREEN
+#		logtext "Resultado: found running NTP daemon"
+#	      else
+#	        Display --indent 2 --text "- Verificado NTP daemon..." --result "NÃO ENCONTRADO" --color WHITE
+#		logtext "Resultado: no NTP daemon found"
+#	    fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3112
+    # Description : Check for valid associations from ntpq peers list
+
+#	FIND=`${NTPQBINARY} -p -n | awk '{ if ($3=="16") { print $1 } }'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado high stratum ntp peers..." --result OK --color GREEN
+#	    logtext "Resultado: All peers are lower than stratum 16"
+#	  else
+#	    for I in ${FIND}; do
+#	        logtext "Found stratum 16 peer: ${I}"
+#	        FIND2=`egrep "^ntp:ignore_stratum_16_peer:${I}:" ${PROFILE}`
+#	        if [ "${FIND2}" = "" ]; then
+#	            N=`expr ${N} + 1`
+#	          else
+#	            logtext "Saída: host ${I} ignored by profile"
+#	        fi
+#	    if [ ${N} -eq 0 ]; then
+#		Display --indent 2 --text "- Verificado high stratum ntp peers..." --result OK --color GREEN
+#		logtext "Resultado: all non local servers are lower than stratum 16, or whitelisted within the scan profile"
+#	      else
+#	        Display --indent 2 --text "- Verificado high stratum ntp peers..." --result ATENÇÃO --color RED
+#	        logtext "Resultado: Found one or more high stratum (16) peers)"
+#	    fi
+#	    done
+#	    ReportSuggestion ${TEST_NO} "Check ntpq peers output"
+#	    ReportWarning ${TEST_NO} "L" "Found one or more stratum 16 peers"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3120
+    # Description : Check unreliable peers from peer list
+    # Notes       : Items with # are too far away (network distance)
+    #               Items with - are not chosing due clustering algoritm
+#    if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no TIME-3120 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check unreliable NTP peers"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Verificado unreliable ntp peers"
+#	FIND=`${NTPQBINARY} -p -n | egrep "^(-|#)" | awk '{ print $1 }' | sed 's/^-//g'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado unreliable ntp peers..." --result ENCONTRADO --color GREEN
+#	    logtext "Resultado: No unreliable peers found"
+#	  else
+#	    Display --indent 2 --text "- Verificado unreliable ntp peers..." --result NOTICE --color YELLOW
+#	    logtext "Resultado: Found one or more unreliable peers (marked with a minus or dash sign)"
+#	    for I in ${FIND}; do
+#	        logtext "Unreliable peer: ${I}"
+#	    done
+#	    ReportSuggestion ${TEST_NO} "Check ntpq peers output for unreliable ntp peers and correct/replace them"
+#	    #ReportWarning ${TEST_NO} "L" "Found one or more unreliable ntp peers"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3124
+    # Description : Check selected time source
+
+#    if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no TIME-3124 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check selected time source"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Verificado selected time source"
+#	FIND=`${NTPQBINARY} -p -n | grep '^*' | awk '{ if ($4=="l") { print $1 } }'`
+#	FIND2=`${NTPQBINARY} -p -n | grep '^*' | awk '{ print $1 }'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado selected time source..." --result OK --color GREEN
+#	    FIND2=`echo ${FIND2} | sed 's/*//g'`
+#	    logtext "Resultado: Found selected time source (value: ${FIND2})"
+#	  else
+#	    Display --indent 2 --text "- Verificado selected time source..." --result ATENÇÃO --color RED
+#	    logtext "Resultado: Found local source as selected time source. This could indicate that no external sources are available to sync with."
+#	    logtext "Local source: ${FIND}"
+#	    ReportSuggestion ${TEST_NO} "Check ntpq peers output"
+#	    ReportWarning ${TEST_NO} "L" "Found local source as selected time source"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3128
+    # Description : Check time source candidates
+#    if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no TIME-3128 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check preffered time source"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Verificado preferred time source"
+#	FIND=`${NTPQBINARY} -p -n | grep '^+' | awk '{ print $1 }'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado time source candidates..." --result NENHUM --color YELLOW
+#	    logtext "Resultado: No other time source candidates found"
+#	    ReportSuggestion ${TEST_NO} "Check ntpq peers output for time source candidates"
+#	  else
+#	    Display --indent 2 --text "- Verificado time source candidates..." --result OK --color GREEN
+#	    logtext "Resultado: Found one or more candidates to synchronize time with."
+#	    for I in ${FIND}; do
+#	        I=`echo ${I} | sed 's/+//g'`
+#	        logtext "Candidate found: ${I}"
+#	    done
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3132
+    # Description : Check ntpq falsetickers
+#    if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no TIME-3132 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check NTP falsetickers"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Verificado preferred time source"
+#	FIND=`${NTPQBINARY} -p -n | grep '^x'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado falsetickers..." --result OK --color GREEN
+#	    logtext "Resultado: No falsetickers found (items preceeding with an 'x')"
+#	  else
+#	    Display --indent 2 --text "- Verificado falsetickers..." --result NENHUM --color YELLOW
+#	    logtext "Resultado: Found one or more falsetickers  (items preceeding with an 'x')"
+#	    for I in ${FIND}; do
+#	        I=`echo ${I} | sed 's/x//g'`
+#	        echo "Falseticker found: ${I}"
+#	    done
+#	    ReportSuggestion ${TEST_NO} "Check ntpq peers output for falsetickers"
+#	    ReportWarning ${TEST_NO} "L" "Found one or more falsetickers in NTP peers list"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3136
+    # Description : Check ntpq reported ntp version (Linux)
+    # Notes       : Test could be improved by Verificado every host (YYY)
+#    if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no TIME-3136 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Check NTP protocol version"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Test: Verificado NTP protocol version (ntpq -c ntpversion)"
+#	FIND=`${NTPQBINARY} -c ntpversion | awk '{ if ($1=="NTP" && $2=="version" && $5=="is") { print $6 } }'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- Verificado NTP version..." --result DESCONHECIDO --color YELLOW
+#	    logtext "Resultado: No NTP version found"
+#	  else
+#	    Display --indent 2 --text "- Verificado NTP version..." --result ENCONTRADO --color GREEN
+#	    logtext "Resultado: Found NTP version ${FIND}"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : TIME-3146
+    # Description : Check /etc/default/ntpdate (Linux)
+    # Notes       : ntpdate-debian binary
+    #if [ ${NTPD_RUNNING} -eq 1 -a ! "${NTPQBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    #Register --test-no TIME-3146 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Check /etc/default/ntpdate"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#################################################################################
+#
+
+    # OS        Time daemons  Configuration file
+    # --------------------------------------------
+    # AIX       xntpd         /etc/ntp.conf
+    # HP
+    # Linux     ntpd          /etc/ntp.conf
+    # OpenBSD   ntpd          /etc/ntpd.conf
+    # Solaris   xntpd         /etc/inet/ntp.conf
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

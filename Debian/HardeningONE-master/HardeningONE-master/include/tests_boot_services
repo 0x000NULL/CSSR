@@ -1,0 +1,331 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Category: Boot and serviços
+#
+#################################################################################
+#
+    InsertSection "" #"2. Boot e serviço"
+#
+#################################################################################
+#
+    Display --indent 2 --text "" #"- Verificado por boot loaders"
+#
+#################################################################################
+#
+    # Teste     : BOOT-5102
+    # Descrição : Check for tasks which are autostarted via /etc/inittab
+    #Register --test-no BOOT-5102 --weight L --network NO --description "Verificado inittab for serviços"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #fi
+    #YYY check against static list?
+#
+#################################################################################
+#
+
+#    # Teste     : BOOT-5121
+#    # Descrição : Verificado por GRUB boot loader
+#    Register --test-no BOOT-5121 --weight L --network NO --description "Verificado presença do GRUB boot loader"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FOUND=0
+#        logtext "Teste: Verificado presença do arquivo de configuração do GRUB (/boot/grub/grub.conf or /boot/grub/menu.lst)..."
+#	if [ -f /boot/grub/grub.conf -o -f /boot/grub/menu.lst ]; then
+#	    FOUND=1
+#	    Display --indent 4 --text "- Verificado presença do GRUB... " --result "OK" --color GREEN
+#	    if [ -f /boot/grub/grub.conf ]; then GRUBCONFFILE="/boot/grub/grub.conf"; else GRUBCONFFILE="/boot/grub/menu.lst"; fi
+#	    logtext "Encontrado arquivo ${GRUBCONFFILE}, continuando os testes."
+#	    FIND=`cat ${GRUBCONFFILE} | grep 'password --md5' | grep -v '^#'`
+#	    if [ "${FIND}" = "" ]; then
+#		Display --indent 6 --text "- Verificado por proteção de senha..." --result WARNING --color RED
+#		logtext "Resultado: Não foi encontrado linha de senha no arquivo de boot GRUB com MD5 hash! "
+#		logtext "Risco: Escolhendo como single user mode, devido itens do menu atual, pode-se atacar por bypass."
+#	        logtext "Do NOT use a plaintext password, since the grub.conf or menu.lst file is most likely to be world readable!"
+#		logtext "If an unsecured OS like DOS is used, add 'lock' below that entry and setup a password with the password option, to prevent direct system access."
+#		ReportWarning ${TEST_NO} "M" "No password set on GRUB bootloader"	
+##	        ReportSuggestion ${TEST_NO} "Run grub-md5-crypt and create a hashed password. After that, add a line below the line saying timeout=<value>: password --md5 <password hash>"
+#		AddHP 0 2
+#	      else
+#	        Display --indent 6 --text "- Verificado for password protection..." --result OK --color GREEN
+#	        logtext "Resultado: GRUB has password protection."
+#		AddHP 4 4
+#	    fi
+#        fi
+
+#	# GRUB2 configuration file
+#	if [ -f /boot/grub/grub.cfg ]; then
+#	    FOUND=1
+#	    Display --indent 4 --text "- Verificado presença do GRUB2... " --result "OK" --color GREEN	
+#	    logtext "Resultado: encontrado GRUB2 arquivo de configuração (/boot/grub/grub.cfg)"
+#	    # YYY password check, when documentation of GRUB2 project is improved
+#	    # YYY Add check permission check (600)
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 ]; then
+#	    Display --indent 4 --text "- Verificado presença GRUB... " --result "NÃO ENCONTRADO" --color WHITE
+#    	    logtext "Resultado: no GRUB configuration file found."
+#	fi    
+#    fi
+#
+#################################################################################
+#
+#################################################################################
+#
+#    # Teste     : BOOT-5139
+#    # Descrição : Check for LILO boot loader
+#    Register --test-no BOOT-5139 --weight L --network NO --description "Verificado presença do boot loader LILO"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado por presença de arquivo de configuração do LILO..."
+#	if [ -f /etc/lilo.conf ]; then
+#	    Display --indent 4 --text "- Verificado presença do LILO... " --result "OK" --color GREEN
+#	    logtext "Verificado opção de senha no LILO..."
+#	    FIND=`cat /etc/lilo.conf | grep 'password=' | grep -v "^#"`
+#	    if [ "${FIND}" = "" ]; then
+#	        Display --indent 6 --text "- Presença de opção de senha  " --result "ATENÇÃO" --color RED
+#	        logtext "Resultado: no password set for LILO. Bootloader is unprotected to"
+#	        logtext "dropping to single user mode or unauthorized access to devices/data."
+#    	        ReportSuggestion ${TEST_NO} "Add a password to LILO, by adding a line to the lilo.conf file, above the first line saying 'image=<name>': password=<password>"
+#		ReportWarning ${TEST_NO} "M" "No password set on LILO bootloader"
+#		AddHP 0 2
+#	      else
+#	        Display --indent 6 --text "- Password option presença " --result "OK" --color GREEN
+#	        logtext "Resultado: LILO password option set"
+#		AddHP 4 4
+#	    fi
+#	    #YYY (making /etc/lilo.conf immutable is a good idea, chattr +i /etc/lilo.conf)
+#          else
+#            Display --indent 4 --text "- Verificado presença LILO... " --result "NÃO ENCONTRADO" --color WHITE
+#    	    logtext "Resultado: LILO configuration file not found."
+#        fi
+#    fi
+#
+#################################################################################
+#
+#    # Teste     : BOOT-5155
+#    # Descrição : Check for YABOOT boot loader
+#    Register --test-no BOOT-5155 --weight L --network NO --description "Verificado for YABOOT boot loader configuration file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Check for /etc/yaboot.conf"
+#        if [ -f /etc/yaboot.conf ]; then
+#	    logtext "Resultado: encontrado YABOOT configuration file (/etc/yaboot.conf)"
+#	    Display --indent 4 --text "- Verificado presença YABOOT..." --result "OK" --color GREEN
+#	    #YYY add permission check
+#	  else
+#	    logtext "Resultado: no YABOOT configuration file found."
+#	    Display --indent 4 --text "- Verificado presença YABOOT..." --result "NÃO ENCONTRADO" --color WHITE
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Teste     : BOOT-5159
+    # Descrição : Check for OpenBSD boot loader
+    # More info   : only OpenBSD && i386 platform
+#    Register --test-no BOOT-5159 --os OpenBSD --platform i386 --weight L --network NO --description "Verificado for OpenBSD i386 boot loader presença"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        if [ -f /etc/boot.conf ]; then
+#    	    Display --indent 2 --text "- Verificado /etc/boot.conf..." --result "ENCONTRADO" --color GREEN
+#            FIND=`grep '^boot' /etc/boot.conf`
+#	    if [ "${FIND}" = "" ]; then
+#		Display --indent 4 --text "- Verificado boot option..." --result WARNING --color RED
+#		ReportSuggestion ${TEST_NO} "Add 'boot' to the /etc/boot.conf file to disable the default 5 seconds waiting time, to disallow booting into single user mode."
+#		ReportWarning ${TEST_NO} "M" "System can be booted into single user mode without password"
+#	      else
+#		Display --indent 4 --text "- Verificado boot option..." --result OK --color GREEN
+#		logtext "Ok, boot option is enabled."	
+#	    fi
+#	  else
+#    	    Display --indent 2 --text "- Verificado /etc/boot.conf..." --result "NÃO ENCONTRADO" --color YELLOW
+#	    logtext "Resultado: no /etc/boot.conf found. When using the default boot loader, physical"
+#	    logtext "access to the server can be used to possibly enter single user mode."
+#	    ReportSuggestion ${TEST_NO} "Add 'boot' to the /etc/boot.conf file to disable the default 5 seconds waiting time."
+#	fi
+#    fi
+#
+#################################################################################
+#
+#    # Teste     : BOOT-5177
+#    # Descrição : Check for Linux boot serviços (Red Hat style)
+#    if [ ! "${CHKCONFIGBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BOOT-5177 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado for Linux boot serviços (Red Hat style)"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Linux (use only chkconfig for now)
+#        logtext "Searching for serviços na inicialização (chkconfig, runlevel 3 and 5)... "
+#        FIND=`${CHKCONFIGBINARY} --list | egrep '3:on|5:on' | awk '{ print $1 }'`
+#        N=0
+#        for I in ${FIND}; do
+#            logtext "Encontrado service (at boot, runlevel 3 or 5): ${I}"
+#	    N=`expr ${N} + 1`
+#        done
+#        logtext "Run chkconfig --list to see all serviços and disable unneeded serviços"
+#        Display --indent 2 --text " - Verificado serviços na inicialização (chkconfig)... " --result "PRONTO" --color GREEN
+#        Display --indent 8 --text "Resultado: encontrado $N serviços"
+#    	logtext "Encontrado $N serviços"
+#    fi
+#
+#################################################################################
+#
+    # Teste     : BOOT-5178
+    # Descrição : Check for Linux boot serviços (Red Hat style)
+    #    if [ ! "${CHKCONFIGBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    #    Register --test-no BOOT-5178 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado for unneeded Linux boot serviços (Red Hat style)"
+    #    if [ ${SKIPTEST} -eq 0 ]; then
+    #	N=0
+    #	N=`expr ${N} + 1`
+
+	#* mctrans (if selinux is NOT enabled)
+	#* restorecond (if selinux is NOT enabled) --> and is it really needed? 
+	#
+	# if profile is server, warn if found:
+	#* pcscd (if profile=server)
+	#* avahi-daemon
+	#	Redhat: /etc/sysconfig/network
+	#		check if NOZEROCONF=yes is available
+	#
+	#* xfs (if /usr/bin/startx is not found)
+	#
+	#if [ ! -f /etc/mdadm.conf -a ! -f /etc/mdadm/mdadm.conf ]; then
+	#* mdmonitor
+	#
+	#
+	#* firstboot
+	#  Display warning if [ ! -f /etc/reconfigSys ]
+	#    AND "RUN_FIRSTBOOT=YES" is NOT in /etc/sysconfig/firstboot
+	#
+	#* acpid
+	#  Display warning if no modules are loaded (lsmod | grep -i acpi)
+	#
+	#
+	#    fi
+#
+#################################################################################
+#
+
+    # Teste     : BOOT-5180
+#    # Descrição : Check for Linux boot serviços (Debian style)
+#    if [ "${LINUX_VERSION}" = "Debian" -o "${LINUX_VERSION}" = "Ubuntu" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BOOT-5180 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado for Linux boot serviços (Debian style)"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        # YYY runlevel check
+#	sRUNLEVEL=`runlevel | grep "N 2"`
+#	if [ ! "${sRUNLEVEL}" = "" ]; then
+#            FIND=`find /etc/rc2.d -type l -print | cut -d '/' -f4 | sed "s/S[0-9][0-9]//g" | sort`
+#    	    if [ ! "${FIND}" = "" ]; then
+#        	N=0
+#	        for I in ${FIND}; do
+#    	            logtext "Encontrado service (at boot, runlevel 2): ${I}"
+#		    N=`expr ${N} + 1`
+#	        done
+#    	        Display --indent 2 --text " - Verificado serviços na inicialização (rc2.d)... 	" --result "PRONTO" --color WHITE
+#        	Display --indent 8 --text "Resultado: encontrado $N serviços"
+#    		logtext "Encontrado $N serviços"
+#	    fi
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Teste     : BOOT-5182
+    # Descrição : Check for SILO boot loader
+#
+#################################################################################
+#
+    # Teste     : BOOT-5184
+    # Descrição : Check world script startup gravavels
+    Register --test-no BOOT-5184 --os Linux --weight L --network NO --description "" #"Verificado for Linux boot serviços (Debian style)"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        FOUND=0
+	logtext "R-TEC-BOOT-5184-Resultado: Verificado /etc/init.d scripts gravaveis"
+        if [ -d /etc/init.d ]; then
+	    FILE=`find /etc/init.d -type f -print`
+	    for I in ${FIND}; do
+	        IsWorldWritable ${I}
+		if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+		    #ReportWarning ${TEST_NO} "H" "R-TEC-BOOT-5184-Encontrado script startup gravavel ${I}"
+		    FOUND=1
+		fi
+	    done
+	fi
+
+        if [ -d /etc/rc.d ]; then
+	    logtext "R-TEC-BOOT-5184-Teste: Verificado /etc/rc.d scripts se sao gravaveis"
+	    FILE=`find /etc/rc.d -type f -print`
+	    for I in ${FIND}; do
+	        IsWorldWritable ${I}
+		if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+		    #ReportWarning ${TEST_NO} "H" "R-TEC-BOOT-5184-Encontrado script startup gravavel ${I}"
+		    FOUND=1
+		fi
+	    done
+	fi
+
+        if [ -d /etc/rcS.d ]; then
+	    logtext "R-TEC-BOOT-5184-Teste: Verificado /etc/rc.d scripts gravavel"
+	    FILE=`find /etc/rcS.d -type f -print`
+	    for I in ${FIND}; do
+	        IsWorldWritable ${I}
+		if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+		    #ReportWarning ${TEST_NO} "H" "R-TEC-BOOT-5184-Encontrado script startup gravavel ${I}"
+		    FOUND=1
+		fi
+	    done
+	fi
+
+	# /etc/rc[0-6].d
+	for NO in 0 1 2 3 4 5 6; do
+	    logtext "R-TEC-BOOT-5184-Teste: Verificado /etc/rc${NO}.d scripts for writable bit"
+	    if [ -d /etc/rc${NO}.d ]; then
+		FILE=`find /etc/rc${NO}.d -type f -print`
+		for I in ${FIND}; do
+		    IsWorldWritable ${I}
+		    if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+		        #ReportWarning ${TEST_NO} "H" "R-TEC-BOOT-5184-Encontrado script startup gravavel ${I}"
+			FOUND=1
+		    fi
+	        done
+	    fi
+	done
+	
+	# Other files
+	CHECKFILES="/etc/rc /etc/rc.local /etc/rc.d/rc.sysinit"
+	for I in ${CHECKFILES}; do
+	    if [ -f ${I} ]; then
+		logtext "R-TEC-BOOT-5184-Teste: Verificado ${I} file for writable bit"
+	        IsWorldWritable ${I}
+	        if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+	            #ReportWarning ${TEST_NO} "H" "R-TEC-BOOT-5184-Encontrado script startup gravavel ${I}"
+		    FOUND=1
+	        fi
+	    fi
+	done
+	
+	if [ ${FOUND} -eq 1 ]; then
+	    #ReportSuggestion ${TEST_NO} "R-TEC-BOOT-5184-Verificado script startup gravavel, mudar as permissoes se necessario"
+	    logtext "R-TEC-BOOT-5184-Resultado: encontrado um ou mais scripts com possibilidade de gravacao por outros usuarios"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Add autostart serviços, like from KDE/Gnome
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

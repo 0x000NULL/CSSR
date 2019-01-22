@@ -1,0 +1,140 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   HardeningOne
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao(mauro.risonho@gmail.com), 
+# Web site: 
+#
+# HardeningOne comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Check which tools are installed - 
+# secao "[+] Ferramentas do Sistema"
+#
+#################################################################################
+#
+    COMPILER_INSTALLED=0
+    IDLE_SESSION_KILLER_INSTALLED=0
+    MALWARE_SCANNER_INSTALLED=0
+#
+#################################################################################
+#
+    InsertSection "" #"1. Ferramentas do Sistema"
+#
+#################################################################################
+#
+#    Display --indent 2 --text "- Scanning por Ferramentas Disponiveis..."
+    logtext "Iniciando o Scanning de Auditoria em binários  e ferramentas disponíveis..."
+
+    # Test        : FILE-7502
+    # Description : Check all system binaries
+    Register --test-no FILE-7502 --weight L --network NO --description "" # "Verificando todos os binários do sistema"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        SCANNEDPATHS=""
+        Display --indent 2 --text "" #"- Verificando os binários de sistema..."
+        logtext "Status: Iniciando Scanning em binário..."
+        for SCANDIR in ${BINPATHS}; do
+            logtext "Teste: Verificar os binários no diretório ${SCANDIR}"
+	    if [ -d ${SCANDIR} ]; then
+	        Display --indent 4 --text "" #"- Verificado ${SCANDIR}... " --result ENCONTRADO --color GREEN
+	        SCANNEDPATHS="${SCANNEDPATHS}, ${SCANDIR}"
+    	        logtext "Diretorio ${SCANDIR} existe. Iniciando Scanning no diretorio..."
+    		FIND=`ls ${SCANDIR}`
+	        for I in ${FIND}; do
+		    BINARY="${SCANDIR}/${I}"
+	            logtext "Binario: ${BINARY}"
+		    case ${I} in
+			auditctl)		AUDITCTLBINARY="${BINARY}";							logtext "Encontrado binário conhecido: auditctl (daemon/utilitário de controle para auditoria)"	;;
+		        autolog)		AUTOLOGBINARY="${BINARY}"; 		IDLE_SESSION_KILLER_INSTALLED=1;    	logtext "Encontrado binário conhecido: autolog (idle session killer)"			;;
+			chkrootkit) 		CHKROOTKITBINARY="${BINARY}";           MALWARE_SCANNER_INSTALLED=1;	    	logtext "Encontrado binário conhecido: chkrootkit (malware scanner)"			;;
+			dnsdomainname)          DNSDOMAINNAMEBINARY="${BINARY}";						logtext "Encontrado binário conhecido: dnsdomainname (DNS domain)"			;;
+			domainname)             DOMAINNAMEBINARY="${BINARY}";							logtext "Encontrado binário conhecido: domainname (NIS domain)"				;;
+			find)                   FINDBINARY="${BINARY}";								logtext "Encontrado binário conhecido: find (search tool)"				;;
+		        gcc)	      		GCCBINARY="${SCANDIR}/${I}";		COMPILER_INSTALLED=1;		    	logtext "Encontrado binário conhecido: gcc (compiler)"					;;
+			lvdisplay)              LVDISPLAYBINARY="${BINARY}";							logtext "Encontrado binário conhecido: lvdisplay (LVM tool)"				;;
+			named-checkconf)	NAMEDCHECKCONFBINARY="${BINARY}";						logtext "Encontrado binário conhecido: named-checkconf (BIND configuration analyzer)"	;;
+			rkhunter) 		RKHUNTERBINARY="${BINARY}";             MALWARE_SCANNER_INSTALLED=1;	    	logtext "Encontrado binário conhecido: rkhunter (malware scanner)"			;;
+			vgdisplay)              VGDISPLAYBINARY="${BINARY}";							logtext "Encontrado binário conhecido: vgdisplay (LVM tool)"				;;
+		    esac
+		done
+	      else
+		Display --indent 4 --text "" #"- Verificando ${SCANDIR}... " --result "NAO ENCONTRADO" --color WHITE
+    	        logtext "Diretorio ${SCANDIR} NAO existe."
+	    fi
+	    logtextbreak        
+	done
+	SCANNEDPATHS=`echo ${SCANNEDPATHS} | sed 's/^, //g'`
+        logtext "Diretorios Scaneados: ${SCANNEDPATHS}"
+    fi
+
+    for I in ${BINPATHS}; do
+      J=${I}"/aa-status";    	if [ -f ${J} ]; then APPARMORFOUND=1;    AASTATUSBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/afick.pl";    	if [ -f ${J} ]; then AFICKFOUND=0;	 AFICKBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/aide";    	if [ -f ${J} ]; then AIDEFOUND=1;   	 AIDEBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/apache2";      	if [ -f ${J} ]; then HTTPDFOUND=1;    	 HTTPDBINARY=${J};   	logtext "Encontrado ${J}";   fi
+      J=${I}"/auditd";    	if [ -f ${J} ]; then AUDITDFOUND=1;      AUDITDBINARY=${J}; 	logtext "Encontrado ${J}";	fi    
+      J=${I}"/awk";    		if [ -f ${J} ]; then AWKFOUND=0;	 AWKBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/chkconfig"; 	if [ -f ${J} ]; then CHKCONFIGFOUND=1;   CHKCONFIGBINARY=${J};	logtext "Encontrado ${J}";   fi
+      J=${I}"/clamscan"; 	if [ -f ${J} ]; then CLAMSCANFOUND=1;    CLAMSCANBINARY=${J};	logtext "Encontrado ${J}";   fi
+      J=${I}"/dig"; 		if [ -f ${J} ]; then DIGFOUND=1; 	 DIGBINARY=${J};  	logtext "Encontrado ${J}";  	fi
+      J=${I}"/exim";      	if [ -f ${J} ]; then EXIMFOUND=1;	 EXIMBINARY=${J};	EXIMVERSION=`${J} -bV | grep 'Exim version' | awk '{ print $3 }' | xargs`; 	logtext "Encontrado ${J} (version ${EXIMVERSION})";		fi
+      J=${I}"/grpck";      	if [ -f ${J} ]; then GRPCKFOUND=1;       GRPCKBINARY=${J};      logtext "Encontrado ${J}"; 	fi
+      J=${I}"/httpd";      	if [ -f ${J} ]; then HTTPDFOUND=1;       HTTPDBINARY=${J};      logtext "Encontrado ${J}";   fi
+      J=${I}"/ip";      	if [ -f ${J} ]; then IPFOUND=1;          IPBINARY=${J};         logtext "Encontrado ${J}"; 	fi
+      J=${I}"/ipf";      	if [ -f ${J} ]; then IPFFOUND=1;         IPFBINARY=${J};        logtext "Encontrado ${J}"; 	fi
+      J=${I}"/ifconfig";	if [ -f ${J} ]; then IFCONFIGFOUND=1;    IFCONFIGBINARY=${J};   logtext "Encontrado ${J}";   fi
+      J=${I}"/iptables";    	if [ -f ${J} ]; then IPTABLESFOUND=1;	 IPTABLESBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/kldstat";		if [ -f ${J} ]; then KLDSTATFOUND=1;     KLDSTATBINARY=${J};    logtext "Encontrado ${J}";   fi
+      J=${I}"/locate";    	if [ -f ${J} ]; then LOCATEFOUND=1;	 LOCATEBINARY=${J};     logtext "Encontrado ${J}";   fi
+      J=${I}"/logrotate";	if [ -f ${J} ]; then LOGROTATEFOUND=1;   LOGROTATEBINARY=${J};  logtext "Encontrado ${J}";   fi
+      J=${I}"/ls";      	if [ -f ${J} ]; then logtext "Encontrado ${J}"; LSFOUND=1;   	LSBINARY=${J};         fi
+      J=${I}"/lsattr";     	if [ -f ${J} ]; then logtext "Encontrado ${J}"; LSATTRFOUND=1;  	LSATTRBINARY=${J};     fi
+      J=${I}"/lsmod";      	if [ -f ${J} ]; then logtext "Encontrado ${J}"; LSMODFOUND=1;    	LSMODBINARY=${J};      fi
+      J=${I}"/lsof";    	if [ -f ${J} ]; then logtext "Encontrado ${J}"; LSOFFOUND=1;    	LSOFBINARY=${J};       fi
+      J=${I}"/lynx";    	if [ -f ${J} ]; then LYNXFOUND=1;	 LYNXBINARY=${J}; 	LYNXVERSION=`${J} -version | grep "^Lynx Version" | cut -d ' ' -f3`;		 logtext "Encontrado ${J} (version ${LYNXVERSION})";		fi
+      J=${I}"/md5";     	if [ -f ${J} ]; then logtext "Encontrado ${J}"; MD5FOUND=1;     	MD5BINARY=${J};        fi
+      J=${I}"/md5sum";  	if [ -f ${J} ]; then logtext "Encontrado ${J}"; MD5FOUND=1;     	MD5BINARY=${J};        fi
+      J=${I}"/mysql";    	if [ -f ${J} ]; then MYSQLCLIENTFOUND=1; MYSQLCLIENTBINARY=${J}; MYSQLCLIENTVERSION=`${J} -V | awk '{ if ($4=="Distrib") { print $5 }}' | sed 's/,//g'` ;       logtext "Encontrado ${J} (version: ${MYSQLCLIENTVERSION})"; fi
+      J=${I}"/netstat";  	if [ -f ${J} ]; then logtext "Encontrado ${J}"; NETSTATFOUND=1;     	NETSTATBINARY=${J};    fi
+      J=${I}"/nmap";    	if [ -f ${J} ]; then NMAPFOUND=1; 	 NMAPBINARY=${J};   	NMAPVERSION=`${J} -V | grep "^Nmap version" | awk '{ print $3 }'`;	  	 logtext "Encontrado ${J} (version ${NMAPVERSION})";         fi
+      J=${I}"/ntpq";    	if [ -f ${J} ]; then NTPQFOUND=1; 	 NTPQBINARY=${J};   		 logtext "Encontrado ${J}";         fi      
+      #NTPQVERSION=`${J} --version | awk '{ if ($8=="Ver.") { print $9 } }'`;	  
+      J=${I}"/openssl";    	if [ -f ${J} ]; then OPENSSLFOUND=1;  	 OPENSSLBINARY=${J};	OPENSSLVERSION=`${J} version | head -n 1 | awk '{ print $2 }' | xargs`;		 logtext "Encontrado ${J} (version ${OPENSSLVERSION})";	fi
+      J=${I}"/osiris";    	if [ -f ${J} ]; then OSIRISFOUND=1;	 OSIRISBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/perl";        	if [ -f ${J} ]; then PERLFOUND=1;	 PERLBINARY=${J};	PERLVERSION=`${J} -V:version | ${J} -pi -e "s/^version='(.*)';$/\1/" | xargs`;   logtext "Encontrado ${J} (version ${PERLVERSION})";		fi
+      J=${I}"/postconf";   	if [ -f ${J} ]; then logtext "Encontrado ${J}"; POSTCONFFOUND=1; 	POSTCONFBINARY=${J};   fi
+      J=${I}"/postfix";   	if [ -f ${J} ]; then logtext "Encontrado ${J}"; POSTFIXFOUND=1; 	POSTFIXBINARY=${J};    fi
+      J=${I}"/prelink";   	if [ -f ${J} ]; then logtext "Encontrado ${J}"; PRELINKFOUND=1; 	PRELINKBINARY=${J};    fi
+      J=${I}"/ps";      	if [ -f ${J} ]; then logtext "Encontrado ${J}"; PSFOUND=1;      	PSBINARY=${J};         fi
+      J=${I}"/readlink";      	if [ -f ${J} ]; then READLINKFOUND=1;	 READLINKBINARY=${J};	logtext "Encontrado ${J}";              fi
+
+      J=${I}"/rpm";    		if [ -f ${J} ]; then logtext "Encontrado ${J}"; RPMFOUND=1;	 	 RPMBINARY=${J};        fi  
+      J=${I}"/samhain";    	if [ -f ${J} ]; then SAMHAINFOUND=1;   	 SAMHAINBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/sestatus";    	if [ -f ${J} ]; then SESTATUSFOUND=1;    SESTATUSBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/slocate";    	if [ -f ${J} ]; then logtext "Encontrado ${J}"; LOCATEFOUND=1;	 LOCATEBINARY=${J};     fi
+      J=${I}"/smbd";    	if [ -f ${J} ]; then SMBDFOUND=1;    	 SMBDBINARY=${J}; 	SMBDVERSION=`${J} -V | grep "^Version" | awk '{ print $2 }'`;  		logtext "Encontrado ${J} (version ${SMBDVERSION})";			fi      
+      J=${I}"/sockstat";   	if [ -f ${J} ]; then logtext "Encontrado ${J}"; SOCKSTATFOUND=1;	 SOCKSTATBINARY=${J};   fi
+      J=${I}"/squid";   	if [ -f ${J} ]; then logtext "Encontrado ${J}"; SQUIDFOUND=1;	 SQUIDBINARY=${J};   fi
+      J=${I}"/stat"; 		if [ -f ${J} ]; then logtext "Encontrado ${J}"; STATFOUND=1;	   	 STATBINARY=${J};       fi
+      J=${I}"/sshd"; 		if [ -f ${J} ]; then SSHDFOUND=1;	 SSHDBINARY=${J};	SSHDVERSION=`${J} -t -d 2>&1 | head -n 1 | awk '{ print $4 }' | cut -d '_' -f2 | xargs`; logtext "Encontrado ${J} (version ${SSHDVERSION})";		fi
+      J=${I}"/strings"; 	if [ -f ${J} ]; then logtext "Encontrado ${J}"; STRINGSFOUND=1; 	 STRINGSBINARY=${J};    fi
+      J=${I}"/syslog-ng";	if [ -x ${J} ]; then SYSLOGNGFOUND=1;	 SYSLOGNGBINARY=${J};	SYSLOGNGVERSION=`${J} -V 2>&1 | grep "^syslog-ng" | awk '{ print $2 }'`		logtext "Encontrado ${J} (version ${SYSLOGNGVERSION})";		fi
+      J=${I}"/tripwire";    	if [ -f ${J} ]; then TRIPWIREFOUND=1;    TRIPWIREBINARY=${J}; 	logtext "Encontrado ${J}";	fi
+      J=${I}"/wget";    	if [ -f ${J} ]; then WGETFOUND=1;    	 WGETBINARY=${J}; 	WGETVERSION=`${J} -V | grep "^GNU Wget" | awk '{ print $3 }'`;  		logtext "Encontrado ${J} (version ${WGETVERSION})";			fi
+    done
+#
+#################################################################################
+#
+clear
+
+wait_for_keypress
+
+#
+#================================================================================
+# HardeningOne - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao-  - 

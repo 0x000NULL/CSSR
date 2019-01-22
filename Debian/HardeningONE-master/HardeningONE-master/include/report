@@ -1,0 +1,340 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   HardeningOne
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao(mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# HardeningOne comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Report
+#
+#################################################################################
+#
+
+    logtextbreak
+
+
+    #if [ ${QUIET} -eq 0 ]; then
+#        echo ""
+#        echo "  ---------------------------------------------------"
+#        echo "  Software Release:          ${PROGRAM_version}"
+#        echo "  SO:          		    ${OS_NAME}"
+#        echo "  SO Versao:  		    ${OS_VERSION}" 
+#        if [ ! "${OS_MODE}" = "" ]; then echo "  SO em Modo:     ${OS_MODE}"; fi
+#        echo "  Kernel Versao:            ${OS_KERNELVERSION}"
+#        echo "  Arquitetura de Hardware:   ${HARDWARE}"
+#        echo "  Hostname:                  ${HOSTNAME}"
+#        echo "  Auditor:                   ${AUDITORNAME}"
+#        echo "  Perfil:                    ${PROFILE}"
+#        echo "  Log :                      ${LOGFILE}"
+#        echo "  Relatorio:                 ${REPORTFILE}"
+#        echo "  relatorio versao:          ${REPORT_version}"
+#        echo "  ---------------------------------------------------"
+#    fi
+
+	echo "Processando...Aguarde"
+
+#
+#################################################################################
+#
+# Hardening Index
+# Define approximately how strong a machine has been hardened
+#
+#################################################################################
+#
+	# If no hardening has been found, set value to 1
+	if [ ${HPPOINTS} -eq 0 ]; then HPPOINTS=1; HPTOTAL=1; fi
+	HPINDEX=`expr $HPPOINTS \* 100 / $HPTOTAL`
+	HPAOBLOCKS=`expr $HPPOINTS \* 20 / $HPTOTAL`
+	# Set color related to rating
+	if [ ${HPINDEX} -lt 50 ]; then
+	    HPCOLOR="${RED}"
+	    HIDESCRIPTION="Sistema nao tem uma quantidade mínima ou é muito baixa de hardening"
+	fi
+	if [ ${HPINDEX} -gt 49 -a ${HPINDEX} -lt 80 ]; then
+	    HPCOLOR="${YELLOW}"
+	    HIDESCRIPTION="Sistema tem Hardening, mas poderia usar o Hardening adicional"
+	fi
+	if [ ${HPINDEX} -gt 79 -a ${HPINDEX} -lt 90 ]; then
+	    HPCOLOR="${GREEN}"
+	    HIDESCRIPTION="Sistema parece está com Hardening decente"
+	fi
+	if [ ${HPINDEX} -gt 89 ]; then
+	    HPCOLOR="${GREEN}"
+	    HIDESCRIPTION="Sistema parece estar com bons niveis de Hardening"
+	fi
+
+        case ${HPAOBLOCKS} in
+	    0)  HPBLOCKS=""; HPEMPTY="                    " ;;
+	    1)  HPBLOCKS="#"; HPEMPTY="                   " ;;
+	    2)  HPBLOCKS="##"; HPEMPTY="                  " ;;
+	    3)  HPBLOCKS="###"; HPEMPTY="                 " ;;
+	    4)  HPBLOCKS="####"; HPEMPTY="                " ;;
+	    5)  HPBLOCKS="#####"; HPEMPTY="               " ;;
+	    6)  HPBLOCKS="######"; HPEMPTY="              " ;;
+	    7)  HPBLOCKS="#######"; HPEMPTY="             " ;;
+	    8)  HPBLOCKS="########"; HPEMPTY="            " ;;
+	    9)  HPBLOCKS="#########"; HPEMPTY="           " ;;
+	    10) HPBLOCKS="##########"; HPEMPTY="          " ;;
+	    11) HPBLOCKS="###########"; HPEMPTY="         " ;;
+	    12) HPBLOCKS="############"; HPEMPTY="        " ;;
+	    13) HPBLOCKS="#############"; HPEMPTY="       " ;;
+	    14) HPBLOCKS="##############"; HPEMPTY="      " ;;
+	    15) HPBLOCKS="###############"; HPEMPTY="     " ;;
+	    16) HPBLOCKS="################"; HPEMPTY="    " ;;
+	    17) HPBLOCKS="#################"; HPEMPTY="   " ;;
+	    18) HPBLOCKS="##################"; HPEMPTY="  " ;;
+	    19) HPBLOCKS="###################"; HPEMPTY=" " ;;
+	    20) HPBLOCKS="####################"; HPEMPTY="" ;;	    
+	esac	    
+
+	HPGRAPH="[${HPCOLOR}${HPBLOCKS}${NORMAL}${HPEMPTY}]"
+		
+	logtext "Hardening index : [${HPINDEX}] [${HPBLOCKS}${HPEMPTY}]"
+	logtext "Hardening : ${HIDESCRIPTION}"
+
+
+	# Banner Hardening
+	# Hardening Index Ranking
+	# comparar ranking entre
+	#	fraco
+	#	medio
+	#	forte
+        echo "================================================================================"	
+	echo "  -[ ${WHITE}${PROGRAM_name} ${PROGRAM_version} - Resultados${NORMAL} ]-"
+	echo ""
+	echo "  ${YELLOW}NOTA DE CORTE${NORMAL}:"
+	echo "  Hardening index : [${HPINDEX}]     ${HPGRAPH}"
+
+	# Nível de corte
+	#if [ ${HPINDEX} = 55 ]; then
+	#	echo "  Nível de hardening Médio "
+	#fi
+
+	#if [ ${HPINDEX} = 55 ]; then
+	#	echo "  Nível de hardening Médio "
+	#fi
+
+	case ${HPINDEX} in
+		"0") echo "	Hardening nível - fraco" && echo "	Totatlmente inaceitável para produção";;
+   		"1") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"2") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"3") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"4") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"5") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"6") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"7") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"8") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"9") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"10") echo "	Hardening nível - fraco" && echo "	Não ideal para produção";;
+   		"11") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"12") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"13") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"14") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"15") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"16") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"17") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"18") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"19") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"20") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"21") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"22") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"23") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"24") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"25") echo "	Hardening nível - fraco" && echo "	Extremamente fraco";;
+   		"26") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"27") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"28") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"29") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"30") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"31") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"32") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"33") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"34") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"35") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"36") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"37") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"38") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"39") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"40") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"41") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"42") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"43") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"44") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"45") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"46") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"47") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"48") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"49") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"50") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"51") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"52") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"53") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"54") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"55") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+		"56") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"57") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"58") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"59") echo "	Hardening nível - fraco" && echo "	Ideal para Ambientes Não-Críticos";;
+		"60") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"61") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"62") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"63") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"64") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"65") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"66") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"67") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"68") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"69") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"70") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"71") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"72") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"73") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"74") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"75") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+		"76") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"77") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"78") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+   		"79") echo "	Hardening nível - médio" && echo "	Ideal para Ambientes Não-Críticos";;
+		"80") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"81") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"82") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"83") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"84") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"85") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"86") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"87") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"88") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"89") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"90") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"91") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"92") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"93") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"94") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"95") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+		"96") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"97") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"98") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"99") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		"100") echo "	Hardening nível - forte" && echo "	Ideal para Ambientes Críticos";;
+   		*) echo "	Nivel de hardening não está no nível de corte";;
+	esac
+
+
+    # Only show overview if not running in quiet mode
+    if [ ${QUIET} -eq 0 ]; then
+        #echo ""; echo "================================================================================"
+        #echo ""; echo "  -[ ${WHITE}${PROGRAM_name} ${PROGRAM_version} - Resultados${NORMAL} ]-"
+        #echo ""; echo "  ${SECTION}Testes Realizados${NORMAL}: ${CTESTS_PERFORMED}"
+        echo "  ${SECTION}Total de testes realizados${NORMAL}: ${CTESTS_PERFORMED}"
+    
+        # Show warnings from logfile
+        SWARNINGS=`cat ${LOGFILE} | grep -i 'warning:' | sed 's/ /!space!/g'`
+
+#        if [ "${SWARNINGS}" = "" ]; then
+#	    #echo ""; echo "  ${OK}Todos os Testes OK${NORMAL}"; echo ""
+#	    #echo "  ${OK}Todos os Testes OK${NORMAL}"; #echo ""
+#	  echo ""
+#          else
+#            echo "  ${WARNING}Warnings${NORMAL}:"
+#            #echo "  ----------------------------"
+#            for WARNING in ${SWARNINGS}; do
+#                SHOWWARNING=`echo ${WARNING} | sed 's/!space!/ /g'`
+#                echo "   - ${SHOWWARNING}"
+#            done
+        fi
+
+
+# Banner executivo
+
+    if [ ${QUIET} -eq 0 ]; then
+        echo "================================================================================"
+	echo "  ${YELLOW}Sistema${NORMAL}:"
+        echo "  Software Versao:		${PROGRAM_version}"
+        echo "  Sistema Operacional:		${OS}"
+        echo "  Sistema Operacional nome:     ${OS_NAME}"
+        echo "  Sistema Operacional versao:  	${OS_VERSION}" 
+        if [ ! "${OS_MODE}" = "" ]; then 
+	echo "  Modo Sistema Operacional:   	${OS_MODE}"; fi
+        echo "  Kernel versao:            	${OS_KERNELVERSION}"
+        echo "  Arquitetura de Hardware:	${HARDWARE}"
+        echo "  Hostname:                  	${HOSTNAME}"
+	echo "  MD5SUM			"; echo "  ${HOSTNAME}  $DATA" |  md5sum
+        echo "  Auditor:                   	${AUDITORNAME}"
+        echo "  Perfil:               	${PROFILE}"
+        echo "  Arquivo de Log:               ${LOGFILE}"
+        echo "  Arquivo de Relatorio:         ${REPORTFILE}"
+        echo "  Versao de Relatorio:          ${REPORT_version}"
+
+#        echo "  Software Release:          ${PROGRAM_version}"
+#        echo "  SO:          		   ${OS_NAME}"
+#        echo "  SO Versao:  		   ${OS_VERSION}" 
+#        if [ ! "${OS_MODE}" = "" ]; then echo "  SO em Modo:     ${OS_MODE}"; fi
+#        echo "  Kernel Versao:             ${OS_KERNELVERSION}"
+#        echo "  Arquitetura de Hardware:   ${HARDWARE}"
+#        echo "  Hostname:                  ${HOSTNAME}"
+#        echo "  Auditor:                   ${AUDITORNAME}"
+#        echo "  Perfil:                    ${PROFILE}"
+#        echo "  Log :                      ${LOGFILE}"
+#        echo "  Relatorio:                 ${REPORTFILE}"
+#        echo "  relatorio versao:          ${REPORT_version}"
+        #echo "  ---------------------------------------------------"
+    fi
+
+        echo "================================================================================"
+        echo "  ${SECTION}Arquivos${NORMAL}:"
+        echo "  - Testar e depurar informacões      : ${WHITE}${LOGFILE}${NORMAL}"
+        echo "  - Dados do relatório                : ${WHITE}${REPORTFILE}${NORMAL}"
+        echo "================================================================================"
+        if [ $PROGRAM_LV -gt $PROGRAM_AC ]; then
+            echo "  ${NOTICE}Notice: ${WHITE}${PROGRAM_name} update disponivel${NORMAL}"
+            echo "  Atual versao : ${WHITE}${PROGRAM_AC}${NORMAL}    Ultima versao : ${WHITE}${PROGRAM_LV}${NORMAL}"
+            echo "================================================================================"
+        fi
+
+#
+#################################################################################
+#
+# Show test results overview
+#
+#################################################################################
+#
+
+
+        # Show suggestions from logfile
+#        SSUGGESTIONS=`grep -i 'sugestao:' ${LOGFILE} | sed 's/ /!space!/g'`
+
+#        if [ ! "${SSUGGESTIONS}" = "" ]; then
+#	    #echo ""
+#            echo "  ${YELLOW}Sugestões${NORMAL}:"
+#            #echo "  ----------------------------"
+#            for SUGGESTION in ${SSUGGESTIONS}; do
+#                SHOWSUGGESTION=`echo ${SUGGESTION} | sed 's/!space!/ /g'`
+#                echo "   - ${SHOWSUGGESTION}"
+#            done
+#        fi
+
+#        echo "================================================================================"
+        echo "  ${PROGRAM_name} ${PROGRAM_version}"
+        echo "  ${PROGRAM_copyright}"
+        echo "================================================================================"
+        echo ""; echo ""
+
+
+
+
+# novo md5sum
+#md5sum /var/log/hardeningone.log>>/var/log/md5sumHO.log
+#md5sum /var/log/hardeningone-report.dat>>/var/log/md5sumHO.log
+#cat /var/log/md5sumHO.log
+#
+#================================================================================
+# HardeningOne - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao-  - 

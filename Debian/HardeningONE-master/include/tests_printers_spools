@@ -1,0 +1,152 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Printers and spools
+#
+#################################################################################
+#
+    CUPSD_CONFIG_LOCS="/etc/cups /usr/local/etc/cups"
+    CUPSD_CONFIG_FILE=""
+    CUPSD_RUNNING=0
+    CUPSD_FOUND=0
+#
+#################################################################################
+#
+    InsertSection "" #12. Impressoras e Spools"
+#
+#################################################################################
+#
+    # Test        : PRNT-2302
+    # Description : Check printcap file consistency
+    Register --test-no PRNT-2302 --os FreeBSD --weight L --network NO --description "" #Check for available accounting information"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Searching /usr/sbin/chkprintcap"
+        if [ ! -f /usr/sbin/chkprintcap ]; then
+            Display --indent 2 --text "" #- Verificado chkprintcap..." --result "NÃO ENCONTRADO" --color WHITE
+            logtext "Resultado: /usr/sbin/chkprintcap NOT found, test skipped."
+          else
+            logtext "Resultado: /usr/sbin/chkprintcap found"
+    	    FIND=`/usr/sbin/chkprintcap > /dev/null ; echo $?`
+    	    # Only an exit code of zero should come back. Use string instead of integer, due unexpected trash
+    	    if [ "${FIND}" = "0" ]; then	    
+    	        Display --indent 2 --text "" #- Verificado chkprintcap..." --result OK --color GREEN
+	        logtext "Resultado: chkprintcap did NOT gave any warnings"
+	      else
+	        Display --indent 2 --text "" #- Verificado chkprintcap..." --result ATENÇÃO --color RED
+	        ReportWarning ${TEST_NO} "L" # "Possible corrupted /etc/printcap file."
+		ReportSuggestion ${TEST_NO} "" #Run chkprintcap manually to test printcap file."
+	        logtext "Output from chkprintcap: ${FIND}"
+	        logtext "Run chkprintcap and check the /etc/printcap file."
+	    fi
+        fi        
+    fi
+#
+#################################################################################
+#
+    # Test        : PRNT-2304
+    # Description : Check cupsd status
+    Register --test-no PRNT-2304 --weight L --network NO --description "" #Check cupsd status"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Verificado cupsd status"
+	FIND=`${PSBINARY} ax | grep "cupsd" | grep -v "grep" | grep -v apcupsd`
+	if [ ! "${FIND}" = "" ]; then	    
+	    Display --indent 2 --text "" #- Verificado cups daemon..." --result EXECUÇÃO --color GREEN
+	    logtext "Resultado: cups daemon running"
+	    CUPSD_RUNNING=1
+	  else
+	    Display --indent 2 --text "" #- Verificado cups daemon..." --result "NÃO ENCONTRADO" --color WHITE
+	    logtext "Resultado: cups daemon not running, cups daemon tests skipped"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PRNT-2306
+    # Description : Check cupsd configuration file
+    if [ ${CUPSD_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PRNT-2306 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check cupsd configuration file"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Searching cupsd configuration file"
+	for I in ${CUPSD_CONFIG_LOCS}; do
+	    if [ -f ${I}/cupsd.conf ]; then
+	        CUPSD_CONFIG_FILE="${I}/cupsd.conf"
+		logtext "Resultado: found ${CUPSD_CONFIG_FILE}"
+	    fi
+	done
+    	if [ ! "${CUPSD_CONFIG_FILE}" = "" ]; then	    
+    	    Display --indent 2 --text "" #- Verificado cups configuration file..." --result OK --color GREEN
+	    logtext "Resultado: configuration file found (${CUPSD_CONFIG_FILE})"
+	    CUPSD_FOUND=1
+	  else
+	    Display --indent 2 --text "" #- Verificado cups configuration file..." --result "NÃO ENCONTRADO" --color RED
+	    logtext "Resultado: configuration file not found"
+	    logtext "Development: no CUPS configuration file found"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PRNT-2308
+    # Description : Check cupsd address configuration
+    if [ ${CUPSD_FOUND} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PRNT-2308 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check cupsd address configuration"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	# Verificado network addresses
+        logtext "Teste: Verificado cups daemon listening network addresses"
+	FIND=`grep "^Listen" ${CUPSD_CONFIG_FILE} | grep -v "/" | awk '{ print $2 }'`
+	N=0
+	for I in ${FIND}; do
+	    logtext "Found network address: ${I}"
+	    N=`expr ${N} + 1`
+	done
+
+	# Verificado sockets
+	logtext "Teste: Verificado cups daemon listening sockets"
+	FIND=`grep "^Listen" ${CUPSD_CONFIG_FILE} | grep "/" | awk '{ print $2 }'`
+	for I in ${FIND}; do
+	    logtext "Found socket address: ${I}"
+	    N=`expr ${N} + 1`
+	done
+
+	if [ ${N} -eq 0 ]; then
+	    Display --indent 2 --text "" #- Verificado cups addresses/sockets..." --result "NENHUM" --color WHITE
+	    logtext "Resultado: no addresses found on which cups daemon is listening"
+	  else
+	    Display --indent 2 --text "" #- Verificado cups addresses/sockets..." --result "ENCONTRADO" --color GREEN
+	    logtext "Resultado: found one or more addresses on which cups daemon is listening"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PRNT-23xx
+    # Description : Test Linux printcap file
+    #if [ ${CUPSD_RUNNING} -eq 1 -a ! "${CUPSD_CONFIG_FILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    #Register --test-no PRNT-23xx--preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check cupsd address configuration"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #if [ "${OS}" = "Linux" ]; then
+    #    echo "        - Testing printcap file... [Test not implemented yet]"
+    #    # Check printcap with checkpc command
+    #fi
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

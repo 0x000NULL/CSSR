@@ -1,0 +1,140 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Parameter checks
+#
+#################################################################################
+#
+
+    # Check number of parameters submitted (at least one is needed)
+    PARAMCOUNT=$#
+    while [ $# -ge 1 ]; do
+      case $1 in
+      
+          # Assign auditor to report
+          --auditor)
+             shift
+    	     AUDITORNAME=$1
+          ;;
+	  
+          # Perform tests
+          -c | --check-all | --checkall)
+             CHECK=1
+          ;;
+	  
+          # Cronjob support
+	  --cronjob | --cron)
+	     CRONJOB=1;
+    	     # Use some defaults (-c, -Q, no colors)
+	     CHECK=1; QUICKMODE=1; NEVERBREAK=1
+	     # Get rid of the colors
+	     NORMAL=""; WARNING=""; SECTION=""; NOTICE=""; OK=""; BAD=""; YELLOW=""; WHITE=""; GREEN=""; RED=""
+          ;;
+	  
+	  # View help
+	  --help | -h)
+	      VIEWHELP=1
+	  ;;
+	  
+	  # View program/database information
+	  --check-update | --info)
+	      VIEWUPDATEINFO=1
+	  ;;
+
+	  # Don't use colors
+	  --no-colors)
+	      NORMAL=""; WARNING=""; SECTION=""; NOTICE=""; OK=""; BAD=""; YELLOW=""; WHITE=""; GREEN=""; RED=""
+	  ;;
+	  
+          # Disable logging
+	  --no-log | --nolog)
+	     LOGFILE="/dev/null"
+	  ;;	  
+	  
+          # Define a custom profile file
+	  --profile)
+             shift
+             PROFILE=$1
+          ;;
+	  
+	  # Quiet mode
+	  -q | --quiet)
+	     QUIET=1
+	     # Run non-interactive
+	     QUICKMODE=1
+	  ;;
+	  
+	  # Non-interactive mode
+	  -Q | --quick)
+    	     QUICKMODE=1
+          ;;
+
+	  # Strip the colors which aren't clearly visible on light backgrounds
+	  --reverse-colors)
+	      #NORMAL="";
+	      SECTION="${NORMAL}";
+	      NOTICE="${NORMAL}";
+	      #OK="";
+	      #BAD="";
+	      YELLOW="${NORMAL}";
+	      WHITE="${NORMAL}";
+	      #GREEN="";
+	      #RED=""
+	  ;;
+
+	  # Only scan these tests
+	  --tests)
+	     shift
+	     TESTS_TO_PERFORM=$1
+	  ;;
+	  
+	  # Scan one or more categories only
+	  --tests-category)
+	     shift
+	     TESTS_CATEGORY_TO_PERFORM=$1
+	  ;;
+	  
+	  # Version number
+          -V | --version)
+    	     echo "${PROGRAM_version}"
+	     exit 0
+	  ;;
+	  
+	  # View man page
+	  --view-manpage | --man)
+    	     if [ -f hardeningone.8 ]; then
+	         nroff -man hardeningone.8
+		 exit 0
+	       else
+	         echo "Erro: arquivo de man page nao foi encontrado (hardeningone.8)"
+		 echo "Se você está executando uma versao instalada do hardeningone, use 'man hardeningone'"
+		 exit 1
+	     fi
+	  ;;
+	  
+	  # Drop out when using wrong option(s)
+    	  *)
+              # Wrong option used, we bail out later
+              WRONGOPTION=1
+	      WRONGOPTION_value=$1
+          ;;
+      esac
+      shift
+    done
+
+
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao -  - 

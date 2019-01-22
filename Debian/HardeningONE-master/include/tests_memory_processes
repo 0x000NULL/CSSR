@@ -1,0 +1,137 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Memory and processes
+#
+#################################################################################
+#
+    InsertSection "" #4. Memoria e processos"
+#
+#################################################################################
+#
+    # Test        : PROC-3602
+    # Description : Query /proc/meminfo
+    Register --test-no PROC-3602 --os Linux --weight L --network NO --description "" #Verificado /proc/meminfo for memory details"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-PROC-3602-Teste: Localizando /proc/meminfo"
+	if [ -f /proc/meminfo ]; then
+	    logtext "R-TEC-PROC-3602-Resultado: ENCONTRADO /proc/meminfo"
+	    logtext "R-TEC-PROC-3602-Teste: Reading file"
+            Display --indent 2 --text "" #- R-TEC-PROC-3602-Verificado /proc/meminfo... " --result ENCONTRADO --color GREEN
+            FIND=`cat /proc/meminfo | grep "^MemTotal" | tr -s ' ' | awk '{ print $2" "$3 }'`
+            MEMORY_SIZE=`echo ${FIND} | awk '{ print $1 }'`
+            MEMORY_UNITS=`echo ${FIND} | awk '{ print $2 }'`
+            logtext "R-TEC-PROC-3602-Resultado: Found ${MEMORY_SIZE} ${MEMORY_UNITS} memory"
+            report "memory_size=${MEMORY_SIZE}"
+            report "memory_units=${MEMORY_UNITS}"
+          else
+	    logtext "R-TEC-PROC-3602-Resultado: /proc/meminfo file not found on this system"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PROC-3604
+    # Description : Query /proc/meminfo
+    Register --test-no PROC-3604 --os Solaris --weight L --network NO --description "" #Consulte prtconf para mais detalhes da memória"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "R-TEC-PROC-3604-Teste: Localizando /usr/sbin/prtconf"
+        if [ -x /usr/sbin/prtconf ]; then
+            Display --indent 2 --text "" #- R-TEC-PROC-3604-Consultando prtconf for installed memory..." --result PRONTO --color GREEN
+            MEMORY_SIZE=`/usr/sbin/prtconf | grep "^Memory size:" | cut -d ' ' -f3`
+            MEMORY_UNITS=`/usr/sbin/prtconf | grep "^Memory size:" | cut -d ' ' -f4`
+            logtext "R-TEC-PROC-3604-Resultado: Found ${MEMORY_SIZE} ${MEMORY_UNITS} memory"
+            report "memory_size=${MEMORY_SIZE}"
+            report "memory_units=${MEMORY_UNITS}"
+          else
+            Display --indent 2 --text "" #- R-TEC-PROC-3604-Consultando prtconf for installed memory..." --result PULADO --color WHITE
+    	    logtext "R-TEC-PROC-3604-Resultado: /usr/sbin/prtconf not found"
+        fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PROC-3612
+    # Description : Localizando for dead and zombie processes
+    # Notes       : Don't perform test on Solaris    
+    if [ ! "${OS}" = "Solaris" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PROC-3612 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check dead or zombie processes"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ "${OS}" = "AIX" ]; then
+	    FIND=`${PSBINARY} -Ae -o pid,wchan,stat,comm | awk '{ if ($3 ~ /Z|X/) print $1 }' | xargs`
+	  else
+	    FIND=`${PSBINARY} x -o pid,wchan,stat,comm | awk '{ if ($3 ~ /Z|X/) print $1 }' | xargs`
+	fi
+	if [ "${FIND}" = "" ]; then
+	    logtext "R-TEC-PROC-3612-Resultado: no zombie processes found"
+	    Display --indent 2 --text "" #- R-TEC-PROC-3612-Localizando por processos mortos/zumbis..." --result OK --color GREEN
+	  else
+	    logtext "R-TEC-PROC-3612-Resultado: found one or more dead or zombie processes"
+	    logtext "R-TEC-PROC-3612-Output: PIDs ${FIND}"
+	    Display --indent 2 --text "" #- R-TEC-PROC-3612-Localizando por processos mortos/zumbis..." --result ATENÇÃO --color RED
+	    ReportATENÇÃO ${TEST_NO} "L" #"R-TEC-PROC-3612-Found one or more zombie processes (${FIND})"
+	    ReportSuggestion ${TEST_NO} "" #R-TEC-PROC-3612-Check the output of ps for dead or zombie processes"
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : PROC-3614
+    # Description : Localizando for heavy IO based waiting processes
+    # Notes       : Don't perform test on Solaris    
+    if [ ! "${OS}" = "Solaris" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no PROC-3614 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check heavy IO waiting based processes"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	if [ "${OS}" = "AIX" ]; then
+	    FIND=`${PSBINARY} -Ae -o pid,wchan,stat,comm | awk '{ if ($3=="D") print $1 }' | xargs`
+	  else
+    	    FIND=`${PSBINARY} x -o pid,wchan,stat,comm | awk '{ if ($3=="D") print $1 }' | xargs`
+    	fi
+	if [ "${FIND}" = "" ]; then
+	    logtext "R-TEC-PROC-3614-Resultado: No processes were waiting for IO requests to be handled first"
+	    Display --indent 2 --text "" #- R-TEC-PROC-3614-Localizando por processos com IO em espera..." --result OK --color GREEN
+	  else
+	    logtext "R-TEC-PROC-3614-Resultado: found one or more processes which were waiting to get IO requests handled first"
+	    logtext "R-TEC-PROC-3614-More info: processes which show up with the status flag 'D' are often stuck, until a disk IO event finished. This can happen for example with network storage, where the connection or protocol settings are not logtext well configured."
+	    logtext "R-TEC-PROC-3614-Output: PIDs ${FIND}"
+	    Display --indent 2 --text "" #- R-TEC-PROC-3614-Localizando por processos com IO em espera..." --result ATENÇÃO --color RED
+	    ReportATENÇÃO ${TEST_NO} "L" #"R-TEC-PROC-3614-Found one or more waiting processes, until IO requests were finished (PIDs: ${FIND})"
+	    ReportSuggestion ${TEST_NO} "" #R-TEC-PROC-3614-Check the output of ps with the 'D' status flag."
+	fi
+    fi
+#
+#################################################################################
+#
+    # Ubuntu test: dead processes
+    # who -d
+#
+#################################################################################
+#
+    # Test        : PROC-3624
+    # Description : Check shared memory (ipcs -m)
+    # Notes       : if it's empty, check /dev/shm and warn if any files are left behind
+    #Register --test-no PROC-3614 --os Linux --weight L --network NO --description "" #Check shared memory"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

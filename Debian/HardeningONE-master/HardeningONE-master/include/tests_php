@@ -1,0 +1,689 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Software: PHP
+#
+#################################################################################
+#
+    InsertSection "" #20. Software: PHP"
+
+    # Possible locations of php.ini
+    PHPINILOCS="/etc/php.ini \
+		/etc/php/cgi-php5/php.ini /etc/php/cli-php5/php.ini /etc/php/apache2-php5/php.ini \
+		/etc/php5/cgi/php.ini /etc/php5/cli/php.ini /etc/php5/apache2/php.ini \
+	        /private/etc/php.ini \
+	        /var/www/conf/php.ini \
+                /usr/local/etc/php.ini /usr/local/lib/php.ini"
+
+    #Display --indent 2 --text "- Verificado PHP..." --result FOUND --color WHITE
+#
+#################################################################################
+##
+#    # Test        : PHP-2211
+#    # Description : Check php.ini presence
+#    Register --test-no PHP-2211 --weight L --network NO --description "Vericar presença php.ini"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2211-Teste: Verificado a presença do arquivo php.ini"
+#	PHPINIFILE=""
+#	for I in ${PHPINILOCS}; do
+#	    if [ -f ${I} ]; then
+#	        PHPINIFILE=${I}
+#	        logtext "R-TEC-PHP-2211-Encontrado arquivo php.ini (${PHPINIFILE})"
+#	    fi
+#	done
+#	if [ ! "${PHPINIFILE}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-PHP-2211-Verificado PHP..." --result "OK" --color GREEN
+#	  else
+#    	    Display --indent 2 --text "- R-TEC-PHP-2211-Verificado PHP..." --result "NAO OK" --color WHITE
+#	    logtext "R-TEC-PHP-2211-Resultado: arquivo php.ini não foi encontrado"
+#	fi
+#    fi
+##
+###################################################################################
+###
+##    # Test        : PHP-2320
+##    # Description : Check php disable functions option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2320 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP disabled functions"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-PHP-2320-Teste: Verificado for PHP function hardening options"
+#	FIND1=`grep "^disabled_functions=" ${PHPINIFILE}`
+#	FIND2=`grep "^suhosin.executor.func.blacklist" ${PHPINIFILE}`
+#	if [ "${FIND1}" = "" -a "${FIND2}" = "" ]; then
+#	    logtext "R-TEC-PHP-2320-Resultado: uma ou mais funções PHP está desabilitadas/blacklisted"
+#	    Display --indent 2 --text "- R-TEC-PHP-2320-Verificado PHP funções desabilitadas..." --result "OK" --color GREEN
+#	    AddHP 3 3
+#	  else
+#	    logtext "R-TEC-PHP-2320-Resultado: all PHP functions can be executed"
+#	    Display --indent 2 --text "- R-TEC-PHP-2320-Verificado PHP funções desabilitadas..." --result "NENHUM" --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2320-Para um Hardening em PHP deve-se desabilitar as seguintes funções (funções interessantes: chown, diskfreespace, disk_free_space, disk_total_space, dl, exec, escapeshellarg, escapeshellcmd, fileinode, highlight_file(), max_execution_time, passthru, pclose, phpinfo, popen, proc_close, proc_open, proc_get_status, proc_nice, proc_open, proc_terminate, set_time_limit(), shell_exec, show_source(), system)"
+#	    AddHP 0 1
+#	fi
+#    fi
+###
+
+##################################################################################
+##
+#    # Test        : PHP-2368
+#    # Description : Check php register_globals option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2368 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP register_globals option"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2320-Teste: Verificado register_globals option.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'register_globals.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2320-Verificado register_globals option..." --result ATENCAO --color RED
+#	    ReportWarning ${TEST_NO} "M" "R-TEC-PHP-2320-Opção em PHP register_globals opção é ativada, o que pode ser um risco para substituir valor da variável "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2320-Mude o register_globals na linha: register_globals = Off"
+#	    logtext "R-TEC-PHP-2320-Resultado: register_globals option está ON, que pode ser um risco para substituir o valor da variável. "
+#	    AddHP 1 2
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2320-Verificado register_globals option..." --result OK --color GREEN
+#	    logtext "R-TEC-PHP-2320-Resultado: Encontrado 'register_globals' está com status de desabilitado (0, no, or off), o que é bom. "
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2372
+#    # Description : Check php expose_php option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2372 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP expose_php option"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2372-Teste: Verificado expose_php option.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'expose_php.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2372-Verificado expose_php option..." --result ON --color RED
+#	    ReportWarning ${TEST_NO} "M" "R-TEC-PHP-2372-Opção em PHP expose_php está possivelmente ON, o que pode revelar informações úteis para os atacantes ".
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2372-Mude o expose_php na linha: expose_php = Off"
+#	    report "R-TEC-PHP-2372-Resultado: expose_php option está ON, o que pode expor informações úteis para um invasor "
+#	    AddHP 1 2
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2372-Verificado expose_php option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2372-Resultado: Encontrado 'expose_php' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+
+##################################################################################
+##
+#    # Test        : PHP-2375
+#    # Description : Check PHP apache_child_terminate option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2375 --preqs-met ${PREQS_MET} --weight L --network NO --description "Vericar opção no PHP apache_child_terminate"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2375-Teste: Verificado a opção no PHP apache_child_terminate.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'apache_child_terminate.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2375-Verificado apache_child_terminate option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2375-Resultado: apache_child_terminate option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2375-Mude o apache_child_terminate na linha: apache_child_terminate = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2375-Verificado enable_dl option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2375-Resultado: Encontrado 'apache_child_terminate' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+
+##################################################################################
+##
+#    # Test        : PHP-2374
+#    # Description : Check PHP enable_dl option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2374 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP enable_dl option"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2374-Teste: Verificado PHP enable_dl option.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'enable_dl.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2374-Verificado enable_dl option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2374-Resultado: enable_dl option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2374-Mude o enable_dl na linha: enable_dl = Off, to disable downloads via PHP"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2374-Verificado enable_dl option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2374-Resultado: Encontrado 'enable_dl' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2376
+#    # Description : Check PHP allow_url_fopen option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2376 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP allow_url_fopen option"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2376-Teste: Verificado PHP allow_url_fopen option.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'allow_url_fopen.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2376-Verificado allow_url_fopen option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2376-Resultado: allow_url_fopen option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2376-Mude o allow_url_fopen na linha: allow_url_fopen = Off, to disable downloads via PHP"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2376-Verificado allow_url_fopen option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2376-Resultado: Encontrado 'allow_url_fopen' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2378
+#    # Description : Check PHP allow_url_include option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2378 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar PHP allow_url_include option"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2378-Teste: Verificado PHP allow_url_include option.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'allow_url_include.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2378-Verificado allow_url_include option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2378-Resultado: allow_url_include option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2378-Mude o allow_url_include na linha: allow_url_include = Off, to disable downloads via PHP"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2378-Verificado allow_url_include option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2378-Resultado: Encontrado 'allow_url_include' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2380
+#    # Description : Check PHP escapeshellcmd option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2380 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP escapeshellcmd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2380-Teste: Verificado a opção no PHP escapeshellcmd.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'escapeshellcmd.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2380-Verificado escapeshellcmd option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2380-Resultado: escapeshellcmd option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2380-Mude o escapeshellcmd na linha: escapeshellcmd = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2380-Verificado escapeshellcmd option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2380-Resultado: Encontrado 'escapeshellcmd' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2381
+#    # Description : Check PHP leak option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2381 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP leak"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2381-Teste: Verificado a opção no PHP leak.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'leak.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2381-Verificado leak option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2381-Resultado: leak option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2381-Mude o leak na linha: leak = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2381-Verificado leak option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2381-Resultado: Encontrado 'leak' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2382
+#    # Description : Check PHP passthru option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2382 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP passthru"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2382-Teste: Verificado a opção no PHP passthru.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'passthru.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2382-Verificado passthru option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2382-Resultado: passthru option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2382-Mude o passthru na linha: leak = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2382-Verificado passthru option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2382-Resultado: Encontrado 'passthru' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2383
+#    # Description : Check PHP passthru option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2383 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP pclose"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-PHP-2383-Teste: Verificado a opção no PHP pclose.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'pclose.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- R-TEC-PHP-2383-Verificado pclose option..." --result ON --color YELLOW
+#	    report "R-TEC-PHP-2383-Resultado: pclose option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "R-TEC-PHP-2383-Mude o pclose na linha: leak = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- R-TEC-PHP-2383-Verificado pclose option..." --result OFF --color GREEN
+#	    logtext "R-TEC-PHP-2383-Resultado: Encontrado 'pclose' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##################################################################################
+##
+#    # Test        : PHP-2384
+#    # Description : Check PHP passthru option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2384 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP pcntl_exec"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP pcntl_exec.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'pcntl_exec.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado pcntl_exec option..." --result ON --color YELLOW
+#	    report "Resultado: pcntl_exec option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o pcntl_exec na linha: leak = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado pcntl_exec option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'pcntl_exec' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2385
+#    # Description : Check PHP phpinfo option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2385 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP phpinfo"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP phpinfo.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'phpinfo.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado phpinfo option..." --result ON --color YELLOW
+#	    report "Resultado: phpinfo option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o phpinfo na linha: phpinfo = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado phpinfo option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'phpinfo' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : PHP-2386
+#    # Description : Check PHP posix_kill option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2386 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP posix_kill"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP posix_kill.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'posix_kill.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado posix_kill option..." --result ON --color YELLOW
+#	    report "Resultado: posix_kill option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o posix_kill na linha: posix_kill = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado posix_kill option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'posix_kill' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2387
+#    # Description : Check PHP posix_mkfifo option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2387 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP posix_mkfifo"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP posix_mkfifo.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'posix_mkfifo.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado posix_mkfifo option..." --result ON --color YELLOW
+#	    report "Resultado: posix_mkfifo option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o posix_mkfifo na linha: posix_mkfifo = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado posix_mkfifo option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'posix_mkfifo' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2388
+#    # Description : Check PHP posix_setpgid option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2388 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP posix_setpgid"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP posix_setpgid.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'posix_setpgid.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado posix_setpgid option..." --result ON --color YELLOW
+#	    report "Resultado: posix_setpgid option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o posix_setpgid na linha: posix_setpgid = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado posix_setpgid option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'posix_setpgid' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2389
+#    # Description : Check PHP posix_setsid option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2389 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP posix_setsid"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP posix_setsid.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'posix_setsid.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado posix_setsid option..." --result ON --color YELLOW
+#	    report "Resultado: posix_setsid option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o posix_setsid na linha: posix_setpgid = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado posix_setsid option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'posix_setsid' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2390
+#    # Description : Check PHP posix_setuid option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2390 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP posix_setuid"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP posix_setuid.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'posix_setuid.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado posix_setuid option..." --result ON --color YELLOW
+#	    report "Resultado: posix_setuid option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o posix_setuid na linha: posix_setuid = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado posix_setuid option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'posix_setuid' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2391
+#    # Description : Check PHP proc_get_status option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2391 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP proc_get_status"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP proc_get_status.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'proc_get_status.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado proc_get_status option..." --result ON --color YELLOW
+#	    report "Resultado: proc_get_status option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o proc_get_status na linha: posix_setuid = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado proc_get_status option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'proc_get_status' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2392
+#    # Description : Check PHP proc_open option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2392 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP proc_open"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP proc_open.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'proc_open.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado proc_open option..." --result ON --color YELLOW
+#	    report "Resultado: proc_open option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o proc_open na linha: proc_open = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado proc_open option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'proc_open' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2393
+#    # Description : Check PHP proc_terminate option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2392 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP proc_terminate"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP proc_terminate.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'proc_terminate.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado proc_terminate option..." --result ON --color YELLOW
+#	    report "Resultado: proc_terminate option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o proc_terminate na linha: proc_terminate = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado proc_terminate option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'proc_terminate' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2394
+#    # Description : Check PHP shell_exec option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2394 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP shell_exec"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP shell_exec.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'shell_exec.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado shell_exec option..." --result ON --color YELLOW
+#	    report "Resultado: shell_exec option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o shell_exec na linha: shell_exec = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado shell_exec option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'shell_exec' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2395
+#    # Description : Check PHP show_source option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2395 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP show_source"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP show_source.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'show_source.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado show_source option..." --result ON --color YELLOW
+#	    report "Resultado: show_source option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o show_source na linha: show_source = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado show_source option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'show_source' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2396
+#    # Description : Check PHP system option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2396 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP system"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP system.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'system.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado system option..." --result ON --color YELLOW
+#	    report "Resultado: system option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o system na linha: system = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado system option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'system' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2397
+#    # Description : Check PHP proc_nice option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2397 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP proc_nice"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP proc_nice.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'proc_nice.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado proc_nice option..." --result ON --color YELLOW
+#	    report "Resultado: proc_nice option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o system na linha: proc_nice = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado proc_nice option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'proc_nice' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+##
+##################################################################################
+##
+#    # Test        : PHP-2398
+#    # Description : Check PHP proc_get_status option
+#    if [ ! "${PHPINIFILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no PHP-2398 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar opção no PHP proc_get_status"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: Verificado a opção no PHP proc_get_status.."
+#        FIND=`cat ${PHPINIFILE} | egrep -i 'proc_get_status.*(off|no|0)' | grep -v '^;'`
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "- Verificado proc_get_status option..." --result ON --color YELLOW
+#	    report "Resultado: proc_get_status option está ON, que pode ser usada para fazer downloads sendo uma opção muito perigosa via PHP "
+#	    ReportSuggestion ${TEST_NO} "Mude o system na linha: proc_get_status = Off"
+#	    AddHP 0 1
+#	  else
+#    	    Display --indent 4 --text "- Verificado proc_get_status option..." --result OFF --color GREEN
+#	    logtext "Resultado: Encontrado 'proc_get_status' está com status de desabilitado (0, no, or off)"
+#	    AddHP 2 2
+#	fi	
+#    fi
+##
+##################################################################################
+
+
+
+##
+## Disable/use functions:
+## safe_mode (only for PHP5?)
+## open_basedir (limits access to defined directory, comparable with chrooting)
+## disable_classes
+## session.save_path
+## session.referer_check
+## upload_tmp_dir
+## file_uploads Off, if possible
+## Set display_errors to Off
+## Set log_errors to On and define error_log (with value Syslog or a filename)
+##
+##################################################################################
+##
+#    # mod_suexec
+#    # suPHP (/etc/suphp.conf)
+##
+##################################################################################
+##
+
+#    # Test        : PHP-2388
+#    # Description : Check php version number
+##
+##################################################################################
+##
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

@@ -1,0 +1,126 @@
+Linux Hardening Points and ideas
+License: GNU Free Documentation License - Version 1.3, 3 November 2008 (for details, see LICENSE.txt)
+Author: 51x
+
+=========
+Debian hardening points for workstations
+
+- While installing, set up LVM with LUKS encryption (/boot cannot be encrypted, you can keep it on a pendrive or a cryptostick)
+
+- Recommended mount options (add "discard" for SSD):
+    /home     rw,nodev,nouser,noexec,nosuid
+    /tmp      rw,nodev,noexec,nouser,nosuid
+    /var/tmp  rw,nodev,noexec,nouser,nosuid
+    /var      rw,nodev,nouser,nosuid
+    # /var could be noexec too, but it would break apt that way.
+    
+- Hide processes that the user don't need to see (fstab too)
+    proc    /proc    proc    defaults,hidepid=2  0  0
+
+- Configure auto update to run everyday (on Debian "unattended-upgrades", on Ubuntu you can do it with Software Center settings)
+    https://wiki.debian.org/UnattendedUpgrades
+
+- Remove unnecessary programs (eg. avahi-daemon and rpcbind)
+    netstat -tulnp  # Check listening apps and if not needed remove them
+    apt-get remove avahi-daemon # "remove" will keep config files, purge deletes everythin!
+
+- Disable USB Mass Storages if you don't need them
+    echo "blacklist usb-storage" | tee -a /etc/modprobe.d/blacklist.conf
+    update-initramfs -u
+
+- Use apparmor for stricter privileges.
+   # https://wiki.debian.org/AppArmor/HowToUse
+   # https://help.ubuntu.com/12.04/serverguide/apparmor.html
+   apt-get update
+   apt-get install apparmor apparmor-profiles apparmor-utils apparmor-profiles-extra apparmor-easyprof -y
+   sed -i -e 's/GRUB_CMDLINE_LINUX_DEFAULT="/&security=apparmor /' /etc/default/grub
+   sed -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+   update-grub
+
+- Setup auditd if you'd like. You can also send the logs to remote syslog-ng. Example audit.rules for EXEC logs:
+    -a exit,always -F arch=b64 -F euid=0 -S execve
+    -a exit,always -F arch=b32 -F euid=0 -S execve
+
+
+=====
+Kernel
+
+- If you are compiling the kernel you may want ideas from:
+    https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project/Recommended_Settings
+
+- Sysctl hardening options
+    echo '''kernel.dmesg_restrict=1\nkernel.kptr_restrict=1\nkernel.kexec_load_disabled=1\nkernel.yama.ptrace_scope=1\nuser.max_user_namespaces=0''' >> /etc/sysctl.conf
+
+
+
+=====
+Firewall
+
+- Disable IPv6
+    echo 'blacklist ipv6' >> /etc/modprobe.d/blacklist
+    echo net.ipv6.conf.all.disable_ipv6=1 > /etc/sysctl.d/disableipv6.conf
+    echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6
+    echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+
+- Configure firewall to DROP everything by default and allow only manadotory connections for root and the first user. For IPv4.
+    #!/bin/bash
+    IPT=/sbin/iptables
+    $IPT -F
+    $IPT -F -t nat
+    $IPT -X
+    $IPT -N Allower
+    $IPT -A OUTPUT -j Allower
+    $IPT -A Allower -m owner --uid-owner 0 -j ACCEPT
+    $IPT -A Allower -m owner --uid-owner 1000 -j ACCEPT
+    $IPT -A INPUT --in-interface lo -j ACCEPT
+    $IPT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+    $IPT -P OUTPUT DROP
+    $IPT -P INPUT DROP
+    $IPT -P FORWARD DROP
+
+- Additional firewall hardening: match UID and only allow the users that really need network. The following example is DNS server ACCEPT.
+    $IPT -A OUTPUT -m owner --uid-owner 112 -d 185.121.177.177 -p udp --dport 53 -j ACCEPT
+
+
+=====
+Remote management
+
+- For enterprise, configure central management (eg. puppy, cf-engine or similar), that makes sure all users have the same config.
+
+- SSH for remote management if needed, example settings:
+    Port 1234
+    ListenAddress 0.0.0.0
+    PermitRootLogin without-password  # Use keys!
+    PermitEmptyPasswords no
+    PasswordAuthentication no  # Generate your SSH key with a password!
+    AllowUsers user1 user2  # No other users will be allowed
+    X11Forwarding no
+    PermitTunnel no
+    GatewayPorts no  # Note that it won't allow port forawrding!
+
+
+=====
+Browser basics
+
+- Use the following extenstions for FireFox:
+NoScript
+HTTPS Everywhere
+Privacy Badger
+
+
+- Use the following extenstions for Chromium:
+ScriptBlock
+HTTPS Everywhere
+Privacy Badger
+
+You can also use privoxy in the place of Privacy Badger: https://www.privoxy.org/
+
+Know that allowing javascript exposes you to hardcore tracking (eg. javascript audio API fingerprinting which is used by several big sites).
+
+
+
+=========
+Gentoo hardening points
+
+Gentoo + musl + openrc or runit + luks (or zfs native enc) + zfs + apparmor or selinux
+Plus CACert and repobuilds.

@@ -1,0 +1,72 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Virtualization
+#
+#################################################################################
+#
+    InsertSection "" #28. Virtualização"
+#
+#################################################################################
+#
+    # Test        : VIRT-1902
+    # Description : Query running Solaris zones
+    if [ -x /usr/sbin/zoneadm ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no VIRT-1902 --os Solaris --weight L --network NO --description "" #Query running Solaris zones"
+    if [ ${SKIPTEST} -eq 0 ]; then
+	logtext "Teste: query zoneadm to list all running zones"
+        FIND=`/usr/sbin/zoneadm list -p | awk -F: '{ if ($2!="global") print $0 }'`
+	if [ ! "${FIND}" = "" ]; then
+	    N=0
+	    for I in ${FIND}; do
+	        N=`expr ${N} + 1`
+		ZONEID=`echo ${I} | cut -d ':' -f1`
+		ZONENAME=`echo ${I} | cut -d ':' -f2`
+		logtext "Resultado: found zone ${ZONENAME} (running)"
+		report "solaris_running_zone[]=${ZONENAME} [id:${ZONEID}]"
+	    done
+	    logtext "Resultado: total of ${N} running zones"
+    	    Display --indent 2 --text "" #- Checking Solaris Zones..." --result ENCONTRADO --color GREEN
+	  else
+	    logtext "Resultado: no running zones found"
+    	    Display --indent 2 --text "" #- Checking Solaris Zones..." --result NENHUM --color WHITE
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : VIRT-1906
+    # Description : Query running Xen zones
+    #if [ -x /usr/bin/xm ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    #Register --test-no VIRT-1906 --weight L --network NO --description "" #Query Xen guests"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+	# Show Xen guests
+	#FIND=`xm list | awk '$1 != "Name|Domain-0" {print $1","$2}'`
+	#for I in ${FIND}; do
+	    #XENGUESTNAME=`echo ${I} | cut -d ':' -f1`
+	    #XENGUESTID=`echo ${I} | cut -d ':' -f2`
+	    #logtext "Resultado: found Xen guest ${XENGUESTNAME} (ID: ${XENGUESTID})"
+	#done
+    #fi
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

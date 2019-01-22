@@ -1,0 +1,1101 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao (mauro.risonho@gmail.com), 
+# Web site: 
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# User, Group and authentication tests
+#
+#################################################################################
+#
+    LDAP_AUTH_ENABLED=0
+    LDAP_CONF_LOCATIONS="/etc/ldap.conf /etc/ldap/ldap.conf /etc/openldap/ldap.conf /usr/local/etc/ldap.conf /usr/local/etc/openldap/ldap.conf"
+    PAM_FILES_LOCS="/lib/security /lib64/security"
+    SUDOERS_LOCATIONS="/etc/sudoers /usr/local/etc/sudoers"
+    SUDOERS_FILE=""
+#
+#################################################################################
+#
+    InsertSection "" #"5. Usuários, Grupos e Autenticacao"
+
+    # Test        : AUTH-9204
+    # Description : Verificar users com UID zero (0)
+#    Register --test-no AUTH-9204 --weight L --network NO --description "Verificando users com um UID de zero. Ex.UID=0"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        # Localizando contas com UID 0
+#        logtext "R-TEC-AUTH-9204-Teste: Verificando por contas com UID 0"
+#	FIND=`grep ':0:' /etc/passwd | egrep -v '^#|^root:|^:0:0:::' | cut -d ":" -f1,3 | grep ':0'`
+#        if [ ! "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9212-Verificado por Contas de Administrador..." --result ATENCAO --color RED
+#	    logtext "R-TEC-AUTH-9204-Resultado: Encontrado mais de uma conta administrador no sistema"
+#	    ReportATENCAO "${TEST_NO}" "H" "R-TEC-AUTH-9204-Multiplos users com UID 0 encontrados no arquivo passwd"
+#	    for I in ${FIND}; do
+#	      logtext "Conta Administrador: ${I}"
+#	    done
+#	    if [ "${OS}" = "FreeBSD" ]; then
+#	        logtext "R-TEC-AUTH-9204-FreeBSD nota: 'toor' é um usuário padrao instalado. Essa conta é considerada inútil, a menos que"
+#		logtext "R-TEC-AUTH-9204-é atribuída uma senha e usado para operacões diárias ou emergências. ex: shell ruim para o usuário root."
+#		logtext ${TEST_NO} "R-TEC-AUTH-9204-Use vipw para excluir o usuário "toor" se nao for usado.."
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9204-Use vipw para excluir o usuário "toor" se nao for usado.."
+#    	    fi
+#          else
+#	    Display --indent 2 --text "- Verificado por Contas de Administrador..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9204-Resultado: Nao há contas com UID 0 outras como root."
+#        fi
+#    fi
+#
+#################################################################################
+##
+#    # Test        : AUTH-9208
+#    # Description : Verificar non unique accounts
+#    Register --test-no AUTH-9208 --os FreeBSD --weight L --network NO --description "Check non unique accounts"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Teste: ${USER_PASSWD_DOUBLEUID_AUDIT_TITLE}"
+#        logtext "Descricao: ${USER_PASSWD_DOUBLEUID_AUDIT_DESCRIPTION}"
+#        logtext "Acao: Verificado por non unique accounts"
+#    
+#        # Check master.passwd
+#        if [ -f /etc/master.passwd ]; then
+#	    FIND=`cat /etc/master.passwd | grep -v '^#' | cut -d ':' -f3 | uniq -d`
+#	    if [ "${FIND}" = "" ]; then
+#		Display --indent 2 --text "- Verificado UIDs... " --result OK --color GREEN
+#		logtext "Resultado: Todas contas encontradas em /etc/master.passwd sao unique"
+#	      else
+#	        Display --indent 2 --text "- Verificado UIDs... " --result ATENCAO --color RED
+#		logtext "Resultado: Encontrado múltiplas contas com algum UID"
+#    	        logtext "Saída (non unique UIDs): ${FIND}"
+#	        logtext "Impacto: ALTO"
+#	        ReportATENCAO ${TEST_NO} "H" "Multiplas contas encontradas com algum UID"
+#            fi
+#	  else
+#	    Display --indent 2 --text "- Verificado UIDs... " --result PULADO --color WHITE
+#	    logtext "Resultado: teste PULADO, /etc/master.passwd pois o arquivo nao está disponível"
+#        fi
+#        logtext "Remarks: ${USER_PASSWD_DOUBLEUID_AUDIT_TEXT}"
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9212
+    # Description : Test group file with chkgrp tool (ie FreeBSD)
+#    if [ -f /usr/sbin/chkgrp ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9212 --preqs-met ${PREQS_MET} --weight L --network NO --description "Teste group file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#    	Display --indent 2 --text "- R-TEC-AUTH-9212-Verificado ferramenta chkgrp..." --result ENCONTRADO --color GREEN
+#	logtext "R-TEC-AUTH-9212-Resultado: /usr/sbin/chkgrp binary encontrado. Usando para executar o próximo(s) teste(s)."
+#	logtext "R-TEC-AUTH-9212-Teste: Testando consistência do arquivo /etc/group ... "
+#	FIND=`/usr/sbin/chkgrp | grep -v 'is fine'`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 4 --text "- R-TEC-AUTH-9212-Verificado consistência do arquivo /etc/group ..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9212-Resultado: O teste com chkgrp foi executado, Group file está ok."
+#	    logtext ${TEST_NO} "M" "R-TEC-AUTH-9212-chkgrp reportou inconsistência do arquivo /etc/group"
+#	  else
+#	    Display --indent 4 --text "- R-TEC-AUTH-9212-Verificado consistência do arquivo /etc/group ..." --result ATENCAO --color RED
+#	    logtext "R-TEC-AUTH-9212-Resultado: chkgrp ENCONTRADO some errors. Run the tool manually to see details."
+#	    logtext "R-TEC-AUTH-9212-chkgrp saída: ${FIND}"
+#	    ReportATENCAO ${TEST_NO} "R-TEC-AUTH-9212-Reportado inconsistência do arquivo /etc/group"
+#	    logtext ${TEST_NO} "M" "R-TEC-AUTH-9212-chkgrp reportou inconsistência do arquivo /etc/group"
+
+
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9216
+    # Description : Verificar /etc/group and shadow group files
+#    if [ ! "${GRPCKBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9216 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar nos grupos e shadow group files"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Test            : run grpck to test group files (most likely /etc/group and shadow group files)
+#        # Expected result : 0 (exit code)
+#        logtext "R-TEC-AUTH-9216-Teste: Verificado o binário grpck ..."
+
+#	if [ "${OS}" = "Linux" ]; then
+#	    # Read only mode
+#	    FIND=`${GRPCKBINARY} -r 2> /dev/null ; echo $?`
+#	  elif [ "${OS}" = "AIX" ]; then
+#	    FIND=`${GRPCKBINARY} -n 2> /dev/null ; echo $?`
+#	  else
+#	    FIND=`${GRPCKBINARY} 2> /dev/null ; echo $?`
+#	fi
+#	
+#	# Overrule for SuSE
+#	if [ "${LINUX_VERSION}" = "SuSE" ]; then
+#	    FIND=`${GRPCKBINARY} -q -r > /dev/null ; echo $?`	
+#	fi
+#	
+#	# Check exit-code
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9216-Verificado consistência grupos de arquivos (grpck)..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9216-Resultado: O binário grpck nao encontrou qualquer erro no group files"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9216-Verificado consistência grupos de arquivos (grpck)..." --result ATENCAO --color RED
+#	    ReportATENCAO ${TEST_NO} "R-TEC-AUTH-9216-Encontrado erros em um e mais group files"
+#	    ReportSuggestion ${TEST_NO} "Executar grpck manualmente e verificando seu group files"
+#	    logtext ${TEST_NO} "M" "R-TEC-AUTH-9216-O binário grpck encontrou erros em um e mais group files"
+#	    logtext ${TEST_NO} "R-TEC-AUTH-9216-Executando grpck manualmente e verificando seu group files"
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9218
+    # Description : Verificar login shells
+#    Register --test-no AUTH-9218 --os FreeBSD --weight L --network NO --description "Verificado nível de falhas login shells"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FOUND=0
+#        logtext "R-TEC-AUTH-9218-Teste: Verificado login shells"
+#	if [ -f /etc/master.passwd ]; then
+#	    # Check for all shells, except: /sbin/nologin
+#	    FIND=`cat /etc/master.passwd | grep "[a-z]:\*:" | egrep -v '^#|/sbin/nologin|/nonexistent' | sed 's/ /!space!/g'`
+#	    if [ "${FIND}" = "" ]; then
+#	        Display --indent 2 --text "- R-TEC-AUTH-9218-Verificado login shells..." --result OK --color GREEN
+#	      else
+#    		Display --indent 2 --text "- R-TEC-AUTH-9218-Verificado login shells..." --result ATENCAO --color RED
+#		for I in ${FIND}; do
+#		    I=`echo ${I} | sed 's/!space!/ /g'`
+#		    J=`echo ${I} | awk -F: '{ print $10 }'`
+#		    logtext "R-TEC-AUTH-9218-Saída: ${I}"
+#		    logtext "R-TEC-AUTH-9218-Resultado: nao foi possível achar falhas no shell ${J}"
+#		    if [ -f ${J} ]; then
+#		        logtext "R-TEC-AUTH-9218-Resultado: shell ${J} existe"
+#		        FOUND=1
+#		      else
+#		        logtext "R-TEC-AUTH-9218-Resultado: shell ${J} nao existe"
+#		    fi
+#		done
+#		if [ ${FOUND} -eq 1 ]; then
+#		    ReportATENCAO ${TEST_NO} "H" "R-TEC-AUTH-9218-Possível falha encontradas no shell (senhas fracas na conta!)"
+#		fi
+#             fi
+#          else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9218-Verificado login shells..." --result PULADO --color WHITE
+#	    logtext "R-TEC-AUTH-9218-Resultado: Nao foi encontrado arquivo /etc/master.passwd"
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9222
+    # Description : Verificar non unique groups
+#    Register --test-no AUTH-9222 --weight L --network NO --description "Verificar por non unique groups"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9222-Teste: Verificando por non unique group ID no /etc/group"
+#	FIND=`cat /etc/group | grep -v '^#' | grep -v '^$' | awk -F: '{ print $3 }' | sort | uniq -d`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9222-Verificado non unique group ID ..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9222-Resultado: Todos os group ID sao unique"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9222-Verificado non unique group ID ..." --result ATENCAO --color RED
+#	    logtext "R-TEC-AUTH-9222-Resultado: Encontrado algum group ID"
+#	    logtext "R-TEC-AUTH-9222-Saída: ${FIND}"
+#	    ReportATENCAO ${TEST_NO} "H" "R-TEC-AUTH-9222-Encontrado multiplos grupos com algum group ID"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9222-Verifique seu arquivo /etc/group corrija as inconsistências"
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9226
+    # Description : Verificar non unique group names
+#    if [ -f /etc/group ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9226 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check non unique group names"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-AUTH-9226-Teste: Verificando por nomes de non unique group no /etc/group"
+#	FIND=`cat /etc/group | grep -v '^#' | grep -v '^$' | awk -F: '{ print $1 }' | sort | uniq -d`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9226-Verificado non unique group names..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9226-Resultado: Todos os nomes do grupo sao unique"
+#          else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9226-Verificado non unique group names..." --result ATENCAO --color ATENCAO
+#	    logtext "R-TEC-AUTH-9226-Resultado: Encontrado alguns group name várias vezes"
+#	    logtext "R-TEC-AUTH-9226-Saída: ${FIND}"
+#	    ReportATENCAO ${TEST_NO} "M" "R-TEC-AUTH-9226-Encontrado inconsistências no arquivo group (múltiplas ocorrências com single group)"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9226-Verifique seu arquivo /etc/group e corrija as inconsistências"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9228
+    # Description : Verificar Linux consistência do arquivo de password
+
+#    if [ -x /usr/sbin/pwck ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9228 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Check consistẽncia do arquivo de password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9228-Teste: Verificando consistẽncia do arquivo de password (pwck)"
+#	FIND=`/usr/sbin/pwck -q -r 2> /dev/null; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9228-Verificado consistẽncia do arquivo de password..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9228-Resultado: pwck finished didn't find problems"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9228-Verificado consistẽncia do arquivo de password..." --result ATENCAO --color RED
+#	    logtext "R-TEC-AUTH-9228-Resultado: pwck encontrou um ou mais erros no arquivo de senhas."
+#	    ReportATENCAO ${TEST_NO} "M" "R-TEC-AUTH-9228-pwck encontrou um ou mais erros no arquivo de senhas"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9228-Execute o pwck manualmente e verifique os erros encontrados."
+#	fi
+#    fi
+#    
+    
+#
+#################################################################################
+#
+#    # Test        : AUTH-9229
+#    # Description : Verificar AIX consistẽncia do arquivo de password
+#    # Notes       : Read only mode?
+#    if [ -x /usr/bin/usrck ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9229 --os AIX --preqs-met ${PREQS_MET} --weight L --network NO --description "Check consistẽncia do arquivo de password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Verificando consistẽncia do arquivo de password (usrck)"
+#	FIND=`/usr/bin/usrck -n ALL 2>; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- Verificado consistẽncia do arquivo de password..." --result OK --color GREEN
+#	    logtext "Resultado: usrck finished didn't find problems"
+#	  else
+#	    Display --indent 2 --text "- Verificado consistẽncia do arquivo de password..." --result ATENCAO --color RED
+#	    logtext "Resultado: usrck found one or more errors/ATENCAOs in the password file."
+#	    ReportATENCAO ${TEST_NO} "M" "usrck found one or more errors/ATENCAOs in the password file"
+#	    ReportSuggestion ${TEST_NO} "Run usrck manually and correct found issues."
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9230
+    # Description : Verificar Solaris consistẽncia do arquivo de password
+#    if [ -x /usr/sbin/pwck ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9230 --os Solaris --preqs-met ${PREQS_MET} --weight L --network NO --description "Check consistẽncia do arquivo de password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9230-Teste: Verificando consistẽncia do arquivo de password (pwck)"
+#	FIND=`/usr/sbin/pwck 2> /dev/null; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9230-Verificado consistẽncia do arquivo de password..." --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9230-Resultado: pwck finished didn't find problems"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9230-Verificado consistẽncia do arquivo de password..." --result ATENCAO --color RED
+#	    logtext "R-TEC-AUTH-9230-Resultado: pwck found one or more errors/ATENCAOs in the password file."
+#	    ReportATENCAO ${TEST_NO} "M" "R-TEC-AUTH-9230-pwck found one or more errors/ATENCAOs in the password file"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9230-Run pwck manually and correct found issues."
+#	fi
+#    fi
+#
+#################################################################################
+#
+#    # Test        : AUTH-9231
+#    # Description : Verificar HP-UX consistẽncia do arquivo de password
+#    # Notes       : Read only mode?
+#    if [ -x /usr/sbin/pwck ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9231 --os HP-UX --preqs-met ${PREQS_MET} --weight L --network NO --description "Check consistẽncia do arquivo de password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Verificando consistẽncia do arquivo de password (pwck)"
+#	FIND=`/usr/sbin/pwck 2> /dev/null; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- Verificado consistẽncia do arquivo de password..." --result OK --color GREEN
+#	    logtext "Resultado: pwck finished didn't find problems"
+#	  else
+#	    Display --indent 2 --text "- Verificado consistẽncia do arquivo de password..." --result ATENCAO --color RED
+#	    logtext "Resultado: pwck found one or more errors/ATENCAOs in the password file."
+#	    ReportATENCAO ${TEST_NO} "M" "pwck found one or more errors/ATENCAOs in the password file"
+#	    ReportSuggestion ${TEST_NO} "Run pwck manually and correct found issues."
+#	fi
+#    fi
+#
+#################################################################################
+#
+#    # Test        : AUTH-9232
+#    # Description : Verificar HP-UX group file consistency
+#    if [ -x /usr/sbin/grpck ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9231 --os HP-UX --preqs-met ${PREQS_MET} --weight L --network NO --description "Check consistẽncia do arquivo de password"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: Verificando group file consistency (grpck)"
+#	FIND=`/usr/sbin/grpck 2> /dev/null; echo $?`
+#	if [ "${FIND}" = "0" ]; then
+#	    Display --indent 2 --text "- Verificado group file consistency..." --result OK --color GREEN
+#	    logtext "Resultado: grpck finished didn't find problems"
+#	  else
+#	    Display --indent 2 --text "- Verificado group file consistency..." --result ATENCAO --color RED
+#	    logtext "Resultado: grpck found one or more errors/ATENCAOs in the group file."
+#	    ReportATENCAO ${TEST_NO} "M" "grpck found one or more errors/ATENCAOs in the group file"
+#	    ReportSuggestion ${TEST_NO} "Run grpck manually and correct found issues."
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9234
+    # Description : Query user accounts (YYY)
+    # Notes       : HPUX > 100
+    #               MacOS: need to be improved (just reading passwd file is not enough)
+    #               OpenBSD/NetBSD: unknown
+#    Register --test-no AUTH-9234 --os Linux --weight L --network NO --description "Query user accounts"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-AUTH-9234-Teste: Read real system users (including root user) from /etc/passwd..."
+#        FIND=""
+#    
+#        if [ "${OS}" = "FreeBSD" ]; then
+#          logtext "R-TEC-AUTH-9234-FreeBSD real users output (ID > 1000, but not 65534):"
+#          FIND=`awk -F: '($3 > 1000) && ($3 != 65534) || ($3 == 0) { print $1","$3 }' /etc/passwd`
+#        fi
+
+#        if [ "${OS}" = "Linux" ]; then
+#          logtext "R-TEC-AUTH-9234-Linux real users output (ID > 500, but not 65534):"
+#          FIND=`awk -F: '($3 > 500) && ($3 != 65534) || ($3 == 0) { print $1","$3 }' /etc/passwd`
+#        fi
+
+#        if [ "${OS}" = "Solaris" ]; then
+#          logtext "R-TEC-AUTH-9234-Solaris real users output (ID > 100, but not 60001/65534):"
+#          FIND=`awk -F: '($3 > 100 && $3 != 60001 && $3 != 65534) || ($3 == 0) { print $1","$3 }' /etc/passwd`
+#        fi
+
+#	Display --indent 2 --text "- R-TEC-AUTH-9234-Consultando usuários do sistema (nao daemons)..." --result PRONTO --color GREEN
+#        # Check if we got any output
+#        if [ "${FIND}" = "" ]; then
+#            Display --indent 4 --text "R-TEC-AUTH-9234-Resultado: No users found/unknown result"
+#            logtext "R-TEC-AUTH-9234-Resultado: Querying of system users PULADO"
+#          else
+#            for I in ${FIND}; do
+#              logtext "R-TEC-AUTH-9234-Real user: ${I}"
+#              report "real_user[]=${I}"
+#            done
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9240
+    # Description : Query NIS+ suporte à autenticacao
+#    Register --test-no AUTH-9240 --weight L --network NO --description "Query NIS+ suporte à autenticacao"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ -f /etc/nsswitch.conf ]; then
+#    	    FIND=`egrep "^passwd" /etc/nsswitch.conf | egrep "compat|nisplus"`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9240-Resultado: NIS+ authentication not enabled"
+#		Display --indent 2 --text "- R-TEC-AUTH-9240-Verificado NIS+ suporte à autenticacao" --result "DESABILITADO" --color WHITE
+#	      else
+#	        FIND2=`egrep "^passwd_compat" /etc/nsswitch.conf | grep "nisplus"`
+#	        FIND3=`egrep "^passwd" /etc/nsswitch.conf | grep "nisplus"`
+#	        if [ ! "${FIND2}" = "" -o ! "${FIND3}" = "" ]; then
+#	            logtext "R-TEC-AUTH-9240-Resultado: NIS+ authentication enabled"
+#    	    	    Display --indent 2 --text "- R-TEC-AUTH-9240-Verificado NIS+ suporte à autenticacao" --result "HABILITADO" --color GREEN
+#	          else
+#	    	    logtext "Resultado: R-TEC-AUTH-9240-NIS+ authentication not enabled"
+#	    	    Display --indent 2 --text "- R-TEC-AUTH-9240-Verificado NIS+ suporte à autenticacao" --result "DESABILITADO" --color WHITE
+#		fi
+#	    fi      
+#	  else
+#	    logtext "Resultado: /etc/nsswitch.conf not found"
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9242
+    # Description : Query NIS suporte à autenticacao
+#    Register --test-no AUTH-9242 --weight L --network NO --description "Query NIS suporte à autenticacao"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ -f /etc/nsswitch.conf ]; then
+#	    FIND=`egrep "^passwd" /etc/nsswitch.conf | egrep "compat|nis" | grep -v "nisplus"`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9242-Resultado: NIS authentication not enabled"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9242-Verificado NIS suporte à autenticacao" --result "DESABILITADO" --color WHITE
+#	      else
+#	        FIND2=`egrep "^passwd_compat" /etc/nsswitch.conf | grep "nis" | grep -v "nisplus"`
+#	        FIND3=`egrep "^passwd" /etc/nsswitch.conf | grep "nis" | grep -v "nisplus"`
+#	        if [ ! "${FIND2}" = "" -o ! "${FIND3}" = "" ]; then
+#	            logtext "R-TEC-AUTH-9242-Resultado: NIS authentication enabled"
+#	    	Display --indent 2 --text "- R-TEC-AUTH-9242-Verificado NIS suporte à autenticacao" --result "HABILITADO" --color GREEN
+#	          else
+#	            logtext "R-TEC-AUTH-9242-Resultado: NIS authentication not enabled"
+#	            Display --indent 2 --text "- R-TEC-AUTH-9242-Verificado NIS suporte à autenticacao" --result "DESABILITADO" --color WHITE
+#	        fi
+#	    fi      
+#	  else
+#	    logtext "Resultado: /etc/nsswitch.conf not found"
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9244
+    # Description : Query NIS servers
+    #Register --test-no AUTH-9244 --weight L --network NO --description "Query NIS servers"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9246
+    # Description : Query NIS active
+    #Register --test-no AUTH-9246 --weight L --network NO --description "Query active NIS servers"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+    #if
+    #grep '^+' /etc/passwd /etc/group
+#
+#################################################################################
+#
+    # Test        : AUTH-9250
+    # Description : Verificar for sudoers file
+#    Register --test-no AUTH-9250 --weight L --network NO --description "- Verificado arquivo sudoers"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FOUND=0
+#        for I in ${SUDOERS_LOCATIONS}; do
+#	    logtext "R-TEC-AUTH-9250-Teste: Verificando presence ${I}"
+#	    if [ -f ${I} ]; then
+#	        FOUND=1
+#		SUDOERS_FILE="${I}"
+#		logtext "R-TEC-AUTH-9250-Resultado: found file (${SUDOERS_FILE})"
+#	      else
+#	        logtext "R-TEC-AUTH-9250-Resultado: file ${I} not found"
+#	    fi
+#	done
+#	if [ ${FOUND} -eq 1 ]; then
+#	    logtext "R-TEC-AUTH-9250-Resultado: arquivo sudoers found (${SUDOERS_FILE})"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9250-Verificado arquivo sudoers" --result ENCONTRADO --color GREEN
+#	    # YYY add more tests to audit arquivo sudoers
+#	  else
+#	    logtext "R-TEC-AUTH-9250-Resultado: arquivo sudoers NOT found"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9250-Verificado arquivo sudoers" --result "Nao ENCONTRADO" --color YELLOW
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9252
+    # Description : Verificar for arquivo sudoers permissions
+#    if [ ! "${SUDOERS_FILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9252 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check arquivo sudoers"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9252-Teste: Verificando arquivo sudoers (${SUDOERS_FILE}) permissions"
+#	FIND=`ls -l ${SUDOERS_FILE} | cut -c 2-10`
+#	logtext "R-TEC-AUTH-9252-Resultado: Found file permissions: ${FIND}"
+#	if [ "${FIND}" = "rw-------" -o "${FIND}" = "rw-rw----" -o "${FIND}" = "r--r-----" ]; then
+#	    logtext "R-TEC-AUTH-9252-Resultado: file ${SUDOERS_FILE} has correct permissions"
+#	    Display --indent 4 --text "- R-TEC-AUTH-9252-Verificado permissões arquivo em sudoers " --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-AUTH-9252-Resultado: file has possibly unsafe file permissions"
+#	    Display --indent 4 --text "- R-TEC-AUTH-9252-Verificado permissões arquivo em sudoers " --result ATENCAO --color RED
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9254
+    # Description : Solaris test to check passwordless accounts
+#    Register --test-no AUTH-9254 --os Solaris --weight L --network NO --description "Solaris passwordless accounts"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`logins -p | awk '{ print $1 }'`
+#	if [ "${FIND}" = "" ]; then
+#	    logtext "R-TEC-AUTH-9254-Resultado: no passwordless accounts found"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9254-Verificado passwordless accounts on Solaris" --result OK --color GREEN
+#	  else
+#	    for I in ${FIND}; do
+#		ReportATENCAO ${TEST_NO} "H" "R-TEC-AUTH-9254-Found passwordless account (${I})"
+#	    done
+#	    Display --indent 2 --text "- R-TEC-AUTH-9254-Verificado passwordless accounts on Solaris" --result ATENCAO --color RED
+#	fi
+#    fi
+#
+#################################################################################
+#
+#    # Test        : AUTH-9255
+#    # Description : Solaris test for unique UIDs
+#    Register --test-no AUTH-9255 --os Solaris --weight L --network NO --description "Solaris unique UIDs"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FIND=`logins -d | awk '{ print $1 }'`
+#	if [ "${FIND}" = "" ]; then
+#	    logtext "Resultado: no duplicate accounts found, all accounts have an unique ID"
+#	    Display --indent 2 --text "- Verificado unique UIDs on Solaris" --result OK --color GREEN
+#	  else
+#	    for I in ${FIND}; do
+#		ReportATENCAO ${TEST_NO} "H" "Found passwordless account (${I})"
+#	    done
+#	    Display --indent 2 --text "- Verificado unique UIDs on Solaris" --result ATENCAO --color RED
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9260 [T]
+    # Description : Search for account lockout on Linux
+    # Notes       : lib directory should be fixed
+#    Register --test-no AUTH-9260 --os Linux --weight L --network NO --description "- Verificado account lockout"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "Teste: searching for /lib/security/pam_tally.so"
+#	if [ -f /lib/security/pam_tally.so ]; then
+#	    logtext "Resultado: /lib/security/pam_tally.so found"
+#	    AddHP 1 1
+#	    Display --indent 2 --text "- Verificado account lockout module (pam_tally)" --result ENCONTRADO --color GREEN
+#	    if [ -f /etc/pam.d/system-auth ]; then
+#		logtext "Teste: search for enable pam_tally module in system-auth, with a deny value higher than zero"
+#		FIND=`grep "account required" /etc/pam.d/system-auth | grep "pam_tally.so" | grep "deny=" | grep -v "deny=0"`
+#		if [ "${FIND}" = "" ]; then
+#		    logtext "Resultado: pam_tally properly configured"
+#		    logtext "Saída: ${FIND}"
+#		    AddHP 1 1
+#		    Display --indent 4 --text "- Verificado lockout policy" --result ENCONTRADO --color GREEN
+#		  else
+#		    logtext "Resultado: pam_tally not (properly) configured"
+#		    logtext "Saída: ${FIND}"
+#		    Display --indent 4 --text "- Verificado lockout policy" --result SUGESTAO --color YELLOW
+#		    AddHP 0 1
+#		    ReportSuggestion ${TEST_NO} "Configure pam_tally in system-auth: account required /lib/security/pam_tally.so deny=3 no_magic_root reset"
+#		fi
+#	      else
+#	        logtext "Resultado: PULADO, /etc/pam.d/system-auth not found"
+#	    fi
+#	  else
+#	    logtext "Resultado: /lib/security/pam_tally.so not found"
+#	    AddHP 0 1
+#	    Display --indent 2 --text "- Verificado account lockout module (pam_tally)" --result "SUGESTAO" --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "Install a PAM module for account lockout to counter brute force attacks"
+#	fi
+#
+#################################################################################
+#
+    # Test        : AUTH-9262
+    # Description : Search for PAM password strength testing libraries
+    # Notes       : YYY (combine with other módulos PAM)
+#    if [ -d /lib/security -o -d /lib64/security ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9262 --preqs-met ${PREQS_MET} --weight L --network NO --description "- Verificado presence password strength testing tools (PAM)"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FOUND=0
+#	logtext "R-TEC-AUTH-9262-Resultado: /lib/security exists"
+#	if [ -f /lib/security/pam_cracklib.so -o -f /lib64/security/pam_cracklib.so ]; then
+#	    FOUND=1
+#	    logtext "R-TEC-AUTH-9262-Resultado: found pam_cracklib.so (crack library PAM)"
+#	    AddHP 3 3
+#	  else
+#	    logtext "R-TEC-AUTH-9262-Resultado: pam_cracklib.so NOT found (crack library PAM)"
+#	    AddHP 1 3
+#	fi
+
+#	if [ -f /lib/security/pam_passwdqc.so -o -f /lib64/security/pam_passwdqc.so ]; then
+#	    FOUND=1
+#	    logtext "R-TEC-AUTH-9262-Resultado: found pam_passwdqc.so (passwd quality control PAM)"
+#	    AddHP 3 3
+#	  else
+#	    logtext "R-TEC-AUTH-9262-Resultado: pam_passwdqc.so NOT found (passwd quality control PAM)"
+#	    AddHP 1 3
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9262-Verificado ferramentas PAM de forca de senha" --result "SUGESTAO" --color YELLOW
+#	    logtext "R-TEC-AUTH-9262-Resultado: no módulos PAM for password strength testing found"
+#	    logtext "R-TEC-AUTH-9262-Instalar um módulo PAM para testar a forca da senha como pam_cracklib ou pam_passwdqc"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9262-Instalar um módulo PAM para testar a forca da senha."
+#	  else
+#	    Display --indent 2 --text "- R-TEC-AUTH-9262-Verificado ferramentas PAM de forca de senha" --result OK --color GREEN
+#	    logtext "R-TEC-AUTH-9262-Resultado: found at least one PAM module for password strength testing"
+#	fi
+#      else
+#        logtext "R-TEC-AUTH-9262-Resultado: /lib/security e /lib64/security nao encontrado, Testes PULADOs"
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9264
+#    # Description : Scan /etc/pam.conf file
+#    Register --test-no AUTH-9264 --weight L --network NO --description "- Verificado presence pam.conf"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9264-Teste: Verificando file /etc/pam.conf"
+#	if [ -f /etc/pam.conf ]; then
+#	    logtext "R-TEC-AUTH-9264-Resultado: file /etc/pam.conf exists"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9264-Verificado arquivos de configuracao PAM (pam.conf)" --result ENCONTRADO --color GREEN
+#	    logtext "R-TEC-AUTH-9264-Teste: searching PAM configuration files"
+#	    FIND=`cat /etc/pam.conf | grep -v "^#" | grep -v "^$" | sed 's/ /!space!/g'`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9264-Resultado: File has no configuration options defined (empty, or only filled with comments and empty lines)"
+#	      else
+#	        logtext "R-TEC-AUTH-9264-Resultado: found one or more configuration lines"
+#		for I in ${FIND}; do
+#		    I=`echo ${I} | sed 's/!space!/ /g'`
+#		    logtext "R-TEC-AUTH-9264-Found line: ${I}"
+#		done
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9264-Resultado: file /etc/pam.conf could not be found"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9264-Verificado PAM configuration file (pam.conf)" --result "Nao ENCONTRADO" --color WHITE
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9266
+#    # Description : Searching available PAM configurations (/etc/pam.d)
+#    Register --test-no AUTH-9266 --weight L --network NO --description "- Verificado presence pam.d files"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+# 	logtext "R-TEC-AUTH-9266-Teste: Verificando directory /etc/pam.d"
+#	if [ -d /etc/pam.d ]; then
+#	    logtext "R-TEC-AUTH-9266-Resultado: directory /etc/pam.d exists"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9266-Verificado arquivos de configuracao PAM (pam.d)" --result ENCONTRADO --color GREEN
+#	    logtext "R-TEC-AUTH-9266-Teste: searching PAM configuration files"
+#	    FIND=`find /etc/pam.d -type f -print | sort`
+#	    for I in ${FIND}; do
+#	        logtext "R-TEC-AUTH-9266-Encontrado arquivo: ${I}"
+#	    done
+#	  else
+#	    logtext "R-TEC-AUTH-9266-Resultado: directory /etc/pam.d could not be found"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9266-Verificado arquivos de configuracao PAM (pam.d)" --result "Nao ENCONTRADO" --color WHITE
+#	fi	
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9268
+#    # Description : Searching available PAM files
+#    # Notes       : PAM is used on AIX, Linux, HPUX, Solaris
+#    if [ ${OS} = "AIX" -o ${OS} = "Linux" -o ${OS} = "HPUX" -o ${OS} = "Solaris" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9268 --preqs-met ${PREQS_MET} --weight L --network NO --description "- Verificado presence pam.d files"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FOUND=1
+# 	logtext "R-TEC-AUTH-9268-Teste: Verificando por módulos pam"
+#	for I in ${PAM_FILES_LOCS}; do
+#	    logtext "R-TEC-AUTH-9268-Teste: Verificando ${I}"
+#	    if [ -d ${I} -a ! -L ${I} ]; then
+#	        logtext "R-TEC-AUTH-9268-Resultado: directory ${I} exists"
+#	        FIND=`find ${I} -type f -name "*.so" -print | sort`
+#		if [ ! "${FIND}" = "" ]; then FOUND=1; fi
+#	        for I in ${FIND}; do
+#	            logtext "R-TEC-AUTH-9268-Encontrado arquivo: ${I}"
+#		done
+#	      else
+#	        logtext "R-TEC-AUTH-9268-Resultado: directory ${I} could not be found or is a symlink to another directory"
+#	    fi
+#        done
+#	# Check if we found at least one module
+#	if [ ${FOUND} -eq 0 ]; then
+#	    Display --indent 2 --text "- R-TEC-AUTH-9268-Verificado módulos PAM" --result "Nao ENCONTRADO" --color WHITE
+#	    logtext "R-TEC-AUTH-9268-Resultado: no módulos PAM found"
+#	  else    
+#	    Display --indent 2 --text "- R-TEC-AUTH-9268-Verificado módulos PAM" --result ENCONTRADO --color GREEN
+#        fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9270
+#    # Description : Audit PAM configuration files
+##
+##################################################################################
+##
+#    # Test        : AUTH-9278
+#    # Description : Search LDAP support in PAM files
+#    Register --test-no AUTH-9278 --weight L --network NO --description "- Verificado LDAP pam status"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9278-Teste: Verificando presence /etc/pam.d/common-auth"
+#	if [ -f /etc/pam.d/common-auth ]; then
+#	    logtext "R-TEC-AUTH-9278-Resultado: file /etc/pam.d/common-auth exists"
+#	    logtext "R-TEC-AUTH-9278-Teste: Verificando presence LDAP module"
+#	    FIND=`cat /etc/pam.d/common-auth | grep "^auth" | grep "ldap"`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9278-Resultado: LDAP module present"
+#		logtext "R-TEC-AUTH-9278-Saída: ${FIND}"
+#		Display --indent 2 --text "- R-TEC-AUTH-9278-Verificado módulo LDAP para PAM" --result ENCONTRADO --color GREEN
+#	      else
+#	        logtext "R-TEC-AUTH-9278-Resultado: LDAP module not found"
+#		Display --indent 2 --text "- R-TEC-AUTH-9278-Verificado módulo LDAP para PAM" --result "Nao ENCONTRADO" --color WHITE
+#		# YYY display message when ldap is enabled in /etc/passwd, but not found in PAM
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9278-Resultado: file /etc/pam.d/common-auth not found, skipping test"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9282
+#    # Description : Search password protected accounts without expire (Linux)
+#    # Note        : Every Linux based operating system seem to have different passwd
+#    #               options, so we have to check the version first.
+#    Register --test-no AUTH-9282 --os Linux --weight L --network NO --description "- Verificado password protected account without expire date"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-AUTH-9282-Teste: Verificando Linux version and password expire date status"
+#        case ${LINUX_VERSION} in
+#	    "CentOS"|"Fedora"|"Red Hat")
+#	        logtext "R-TEC-AUTH-9282-Resultado: skipping test for this Linux version"
+#		FIND="SKIPTEST"
+#		;;
+#	    "SuSE")
+#	        FIND=`passwd -a -S | awk '{ if ($2=="P" && $5=="99999") print $1 }'` ;;
+#	    *)
+#	        FIND=`passwd --all --status | awk '{ if ($2=="P" && $5=="99999") print $1 }'` ;;
+#	esac
+#	if [ ! "${FIND}" = "SKIPTEST" ]; then
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9282-Resultado: all accounts seem to have an expire date"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9282-Verificado contas sem data de expiracao" --result OK --color GREEN	        
+#	      else
+#	        logtext "R-TEC-AUTH-9282-Resultado: found one or more accounts with expire date set"
+#	        for I in ${FIND}; do
+#	          logtext "R-TEC-AUTH-9282-Account without expire date: ${I}"
+#	        done
+#	        Display --indent 2 --text "- R-TEC-AUTH-9282-Verificado contas sem data de expiracao" --result SUGESTAO --color YELLOW
+#	        ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9282-Quando possível definir expirar datas para todos as contas protegidas por senha"
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9282-Resultado: test PULADO for this operating system"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9286
+#    # Description : Verificar usuário com senhas antigas
+#    if [ -f /etc/login.defs ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9286 --preqs-met ${PREQS_MET} --weight L --network NO --description "- Verificado usuário com senhas antigas"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9286-Teste: Verificando PASS_MAX_DAYS option in /etc/login.defs "
+#	FIND=`grep "^PASS_MAX_DAYS" /etc/login.defs | awk '{ if ($1=="PASS_MAX_DAYS") { print $2 } }'`
+#	if [ "${FIND}" = "" -o "${FIND}" = "99999" ]; then
+#	    # YYY check if LDAP is used with password policies
+#	    logtext "R-TEC-AUTH-9286-Resultado: password aging limits are not configured"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9286-Verificado usuário com senhas antigas" --result DESABILITADO --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9286-Configure uma senha que possua limites de expiracao para impor mudanca de senha em uma base regular"
+#	    AddHP 0 1
+#	  else
+#	    logtext "R-TEC-AUTH-9286-Resultado: accounts with password aging set are checked against PASS_MAX_DAYS"
+#	    logtext "R-TEC-AUTH-9286-Resultado: value of PASS_MAX_DAYS is ${FIND}"
+#	    Display --indent 2 --text "- R-TEC-AUTH-9286-Verificado usuário com senhas antigas" --result OK --color GREEN
+#	    AddHP 3 3
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9292
+#    # Description : Verificar locked accounts (exclamation mark as first char in second column)
+##
+##################################################################################
+##
+#    # Test        : AUTH-9304
+#    # Description : Verificar if single user mode login is properly configured in Solaris
+#    # Notes       : sulogin should be called from svm script (Solaris <10) in /etc/rcS.d (YYY)
+#    Register --test-no AUTH-9304 --os Solaris --weight L --network NO --description "Check single user login configuration"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check if file exists (Solaris 10 does not have this file by default)
+#	if [ -f /etc/default/sulogin ]; then
+#	    logtext "R-TEC-AUTH-9304-Resultado: file /etc/default/sulogin exists"
+#	    logtext "R-TEC-AUTH-9304-Teste: Verificando presence PASSREQ=NO"
+#	    FIND=`grep "^PASSREQ=NO" /etc/default/sulogin`
+#	    if [ "${FIND}" = "" ]; then
+#		logtext "R-TEC-AUTH-9304-Resultado: option not present or configured to request a password at single user mode login"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9304-Verificado Solaris /etc/default/sulogin file" --result OK --color GREEN
+#	        AddHP 1 1
+#	      else
+#	        logtext "R-TEC-AUTH-9304-Resultado: option present, no password needed at single user mode login"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9304-Verificado Solaris /etc/default/sulogin file" --result ATENCAO --color RED
+#	        ReportATENCAO ${TEST_NO} "H" "R-TEC-AUTH-9304-No password needed for single user mode login"
+#	        AddHP 0 1
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9304-Resultado: file /etc/default/sulogin does not exist"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9306
+#    # Description : Verificar if authentication is needed to boot the system
+#    # Notes       : :d_boot_authenticate: is a good option for production machines to
+#    #               avoid unauthorized booting of systems. Option :d_boot_autentication@:
+#    #               disabled a required login.
+#    Register --test-no AUTH-9306 --os HP-UX --weight L --network NO --description "Check single boot authentication"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check if file exists
+#	logtext "R-TEC-AUTH-9306-Teste: Searching /tcb/files/auth/system/default"
+#	if [ -f /tcb/files/auth/system/default ]; then
+#	    logtext "R-TEC-AUTH-9306-Resultado: file /tcb/files/auth/system/default exists"
+#	    logtext "R-TEC-AUTH-9306-Teste: Verificando presence :d_boot_authenticate@:"
+#	    FIND=`grep "^:d_boot_authenticate@" /tcb/files/auth/system/default`
+#	    if [ "${FIND}" = "" ]; then
+#		logtext "R-TEC-AUTH-9306-Resultado: option not set, password is needed at boot"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9306-Verificado HP-UX boot authentication" --result OK --color GREEN
+#	        AddHP 1 1
+#	      else
+#	        logtext "R-TEC-AUTH-9306-Resultado: option present, no password needed at single user mode login"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9306-Verificado HP-UX boot authentication" --result SUGESTAO --color YELLOW
+#	        ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9306-Set password for system boot"
+#	        AddHP 0 1
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9306-Resultado: file /tcb/files/auth/system/default does not exist"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9308
+#    # Description : Verificar single user mode login for Linux
+#    Register --test-no AUTH-9308 --os Linux --weight L --network NO --description "Check single user login configuration"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	# Check if file exists
+#	logtext "R-TEC-AUTH-9308-Teste: Searching /etc/inittab"
+#	if [ -f /etc/inittab ]; then
+#	    logtext "R-TEC-AUTH-9308-Resultado: file /etc/inittab exists"
+#	    logtext "R-TEC-AUTH-9308-Teste: Verificando presence sulogin for single user mode"
+#	    FIND=`grep "^~~:S:wait:/sbin/sulogin" /etc/inittab`
+#	    if [ "${FIND}" = "" ]; then
+#		logtext "R-TEC-AUTH-9308-Resultado: option set, password is needed at single user mode boot"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9308-Verificado Linux single user mode authentication" --result OK --color GREEN
+#	        AddHP 1 1
+#	      else
+#	        logtext "R-TEC-AUTH-9308-Resultado: option not set, no password needed at single user mode boot"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9308-Verificado Linux single user mode authentication" --result ATENCAO --color RED
+#	        ReportATENCAO ${TEST_NO} "L" "R-TEC-AUTH-9308-No password set for single mode"
+#	        ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9308-Set password for single user mode to minimize physical access attack surface"
+#	        AddHP 0 1
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9308-Resultado: file /etc/inittab does not exist"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9322
+#    # Description : Authentication time restrictions
+#    # /etc/security/time.conf
+##
+##################################################################################
+##
+#    # Test        : AUTH-9328
+#    # Description : Verificar default umask in common files
+#    # /etc/login.defs
+#    # pam_umask
+#    Register --test-no AUTH-9328 --weight L --network NO --description "Valores umask padrao"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	Display --indent 2 --text "- R-TEC-AUTH-9328-Determinar umask padrao"
+#	
+#	# /etc/profile
+#	logtext "R-TEC-AUTH-9328-Teste: Verificando /etc/profile"
+#	if [ -f /etc/profile ]; then
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/profile exists"
+#	    logtext "R-TEC-AUTH-9328-Teste: Verificando umask value in /etc/profile"
+#	    FIND=`grep "^umask" /etc/profile | awk '{ print $2 }'`
+#	    if [ "${FIND}" = "077" -o "${FIND}" = "027" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND}, which is fine"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/profile)" --result OK --color GREEN
+#		AddHP 2 2
+#	      else
+#	        logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND}, which could be improved"
+#		logtext "R-TEC-AUTH-9328-Umask padrao no /etc/profile poderia ser mais rigoroso, com permissao 027"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/profile)" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Umask padrao no /etc/profile poderia ser mais rigoroso"
+#		AddHP 0 2
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/profile nao existe"
+#	fi
+#	
+#	# /etc/login.defs
+#	logtext "R-TEC-AUTH-9328-Teste: Verificando /etc/login.defs"
+#	if [ -f /etc/login.defs ]; then
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/profile exists"
+#	    logtext "R-TEC-AUTH-9328-Teste: Verificando UMASK value in /etc/login.defs"
+#	    FIND=`grep "^UMASK" /etc/login.defs | awk '{ print $2 }'`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: UMASK value is not configured (most likely it will have the default 022 value)"
+#		logtext "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/login.defs nao pôde ser encontrado e padrões geralmente com permissao 022, poderiam ser mais rigorosos, com permissao 027"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/login.defs)" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/login.defs poderiam ser mais rigorosos"
+#		AddHP 1 2
+#	    elif [ "${FIND}" = "077" -o "${FIND}" = "027" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: umask is ${FIND}, which is fine"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/login.defs)" --result OK --color GREEN
+#		AddHP 2 2
+#	      else
+#	        logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND}, which could be improved"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/login.defs)" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Default umask in /etc/login.defs could be more strict like 027"
+#		AddHP 0 2
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/login.defs does not exist"
+#	fi
+
+#	# Red Hat /etc/init.d/functions
+#	logtext "R-TEC-AUTH-9328-Teste: Verificando /etc/init.d/functions"
+#	if [ -f /etc/init.d/functions ]; then
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/init.d/functions exists"
+#	    logtext "R-TEC-AUTH-9328-Teste: Verificando umask value in /etc/init.d/functions"
+#	    FIND=`grep "^umask" /etc/init.d/functions | awk '{ print $2 }'`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: umask is not configured"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/functions)" --result NONE --color WHITE
+#	    elif [ "${FIND}" = "077" -o "${FIND}" = "027" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: umask is ${FIND}, which is fine"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/functions)" --result OK --color GREEN
+#		AddHP 2 2
+#	      else
+#	        logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND}, which could be improved"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/functions)" --result SUGESTAO --color YELLOW
+#		AddHP 0 2
+#		#YYY
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/init.d/functions does not exist"
+#	fi
+
+#	# /etc/init.d/rc [T]
+#	# Always needed? (YYY)
+#	logtext "R-TEC-AUTH-9328-Teste: Verificando /etc/init.d/rc"
+#	if [ -f /etc/init.d/rc ]; then
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/init.d/rc exists"
+#	    logtext "R-TEC-AUTH-9328-Teste: Verificando UMASK value in /etc/init.d/rc"
+#	    FIND=`grep -i "^UMASK" /etc/init.d/rc | awk '{ print $2 }'`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: UMASK value is not configured (most likely it will have the default 022 value)"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rc)" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Default umask in /etc/init.d/rc could not be found and defaults usually to 022, which could be more strict like 027"
+#		AddHP 1 2
+#	    elif [ "${FIND}" = "077" -o "${FIND}" = "027" ]; then
+#	        logtext "R-TEC-AUTH-9328-Resultado: umask is ${FIND}, which is fine"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rc)" --result OK --color GREEN
+#		AddHP 2 2
+#	      else
+#	        logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND}, which could be improved"
+#		logtext "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/init.d/rc poderia ser mais rigorosa, com permissao 027"
+#		Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rc)" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/init.d/rc poderia ser mais rigorosa"
+#		AddHP 0 2
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9328-Resultado: arquivo /etc/init.d/rc nao existe"
+#	fi
+
+#	# /etc/init.d/rcS [T]
+#	# Always needed? (YYY)
+#	logtext "R-TEC-AUTH-9328-Teste: Verificando /etc/init.d/rcS"
+#	if [ -f /etc/init.d/rcS ]; then
+#	    logtext "R-TEC-AUTH-9328-Resultado: arquivo /etc/init.d/rcS existe"
+#	    logtext "R-TEC-AUTH-9328-Teste: Verificando se há outro script em execucao."
+#	    FIND=`grep -i "^exec " /etc/init.d/rcS | awk '{ print $2 }'`
+#	    if [ "${FIND}" = "" ]; then
+#		FIND2=`grep -i "^UMASK" /etc/init.d/rcS | awk '{ print $2 }'`
+#		if [ "${FIND2}" = "" ]; then
+#	    	    logtext "R-TEC-AUTH-9328-Resultado: UMASK value is not configured (most likely it will have the default 022 value)"
+#		    Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rcS)" --result SUGESTAO --color YELLOW
+#		    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Default umask in /etc/init.d/rcS could not be found and defaults usually to 022, which could be more strict like 027"
+#		    AddHP 1 2
+#		  elif [ "${FIND2}" = "077" -o "${FIND2}" = "027" ]; then
+#	    	    logtext "R-TEC-AUTH-9328-Resultado: umask is ${FIND2}, which is fine"
+#		    Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rcS)" --result OK --color GREEN
+#		    AddHP 2 2
+#	          else
+#	    	    logtext "R-TEC-AUTH-9328-Resultado: found umask ${FIND2}, which could be improved"
+#		    logtext "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/init.d/rcS poderia ser mais rigorosa"
+#		    Display --indent 4 --text "- R-TEC-AUTH-9328-Verificado umask (/etc/init.d/rcS)" --result SUGESTAO --color YELLOW
+#		    ReportSuggestion ${TEST_NO} "R-TEC-AUTH-9328-Umask padrao no arquivo /etc/init.d/rcS poderia ser mais rigorosa"
+#		    AddHP 0 2
+#		fi
+#	      else
+#	        # Improve check
+#	        logtext "R-TEC-AUTH-9328-Resultado: exec line present in file, setting of umask not needed in this script"
+#	        logtext "R-TEC-AUTH-9328-Saída: ${FIND}"
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9328-Resultado: file /etc/init.d/rcS does not exist"
+#	fi
+
+#    fi
+##
+##################################################################################
+##
+#    # Test        : AUTH-9402
+#    # Description : Query LDAP suporte à autenticacao
+#    Register --test-no AUTH-9402 --weight L --network NO --description "Consultar suporte a autenticacao LDAP"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ -f /etc/nsswitch.conf ]; then
+#	    FIND=`egrep "^passwd" /etc/nsswitch.conf | grep "ldap"`
+#	    if [ "${FIND}" = "" ]; then
+#	        logtext "R-TEC-AUTH-9402-Resultado: autenticacao LDAP nao habilidade"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9402-Verificado suporte de autenticacao LDAP" --result "DESABILITADO" --color WHITE
+#	      else
+#	        logtext "R-TEC-AUTH-9402-Resultado: LDAP authentication enabled"
+#	        Display --indent 2 --text "- R-TEC-AUTH-9402-Verificado LDAP suporte à autenticacao" --result "HABILITADO" --color GREEN
+#	        LDAP_AUTH_ENABLED=1
+#	    fi
+#	  else
+#	    logtext "R-TEC-AUTH-9402-Resultado: /etc/nsswitch.conf not found"
+#	fi
+#    fi
+##
+##################################################################################
+#    # Test        : AUTH-9406
+#    # Description : Verificar LDAP servers in client configuration
+#    if [ ${LDAP_AUTH_ENABLED} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no AUTH-9406 --preqs-met ${PREQS_MET} --weight L --network NO --description "Query LDAP servers in client configuration"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-AUTH-9406-Teste: verificado opcões do arquivo ldap.conf"    
+#	for I in ${LDAP_CONF_LOCATIONS}; do
+#	    logtext "R-TEC-AUTH-9406-Teste: verificado ${I}"
+#	    if [ -f ${I} ]; then
+#	        logtext "R-TEC-AUTH-9406-Resultado: arquivo ${I} existe"
+#		logtext "R-TEC-AUTH-9406-Teste: verificando arquivo de configuracao no LDAP servers ${I}"
+#		FIND2=`egrep "^host " ${I} | awk '{ print $2 }'`
+#		for I in ${FIND2}; do
+#		    Display --indent 6 --text "LDAP server: ${I}"
+#		    logtext "R-TEC-AUTH-9406-Resultado: encontrado LDAP server ${I}"
+#		    # YYY check if host(s) are reachable/respond to queries
+#		done
+#	      else
+#	        logtext "R-TEC-AUTH-9406-Resultado: ${I} NÂO existe"
+#	    fi
+#	done
+#    fi
+##
+
+##
+##################################################################################
+##
+#    # Test        : AUTH-9411
+#    # Description : Setar o comando 'at' para user/group 'root'
+#    Display --indent 4 --text " - R-TEC-AUTH-9411-Setar o comando 'at' para user/group 'root'"
+#    logtext "R-TEC-AUTH-9411-Teste: o comando 'at' para user/group 'root'"
+#    chown root:root /u
+#
+
+#################################################################################
+#
+    # Test        : AUTH-92xx
+    # Description : login.access checks
+    #Register --test-no AUTH-92xx --weight L --network NO --description "login.access checks"
+#
+#################################################################################
+#
+# pam_unix.so
+# pam_cracklib.so
+# pam_pwcheck.so
+# pam_env.so
+# pam_xauth.so
+# pam_tally.so
+# pam_wheel.so
+# pam_limits.so
+# pam_nologin.so
+# pam_deny.so
+# pam_securetty.so
+# pam_time.so
+# pam_access.so
+# pam_listfile.so
+# pam_lastlog.so
+# pam_warn.so
+# pam_console.so
+# pam_resmgr.so
+# pam_devperm.so
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpcao -  - 

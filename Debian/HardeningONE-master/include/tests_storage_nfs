@@ -1,0 +1,165 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# NFS
+#
+#################################################################################
+#
+    InsertSection "" #NFS"
+#
+#################################################################################
+#
+    NFS_DAEMON_RUNNING=0
+    NFS_EXPORTS_EMPTY=0
+#
+#################################################################################
+#
+
+    # Test        : STRG-1902
+    # Description : Check rpcinfo
+    if [ ! "${RPCINFOBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi    
+    Register --test-no STRG-1902 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check rpcinfo registered programs"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Verificado rpcinfo registered programs"
+	FIND=`${RPCINFOBINARY} -p | tr -s ' ' ','`
+	for I in ${FIND}; do
+	    logtext "rpcinfo: ${I}"
+	done
+	Display --indent 2 --text "" #- Consulta rpc registered programs..." --result "PRONTO" --color GREEN
+    fi
+#
+#################################################################################
+#
+    # Test        : STRG-1904
+    # Description : Check nfs versions in rpcinfo
+    if [ ! "${RPCINFOBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi    
+    Register --test-no STRG-1904 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check nfs rpc"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Verificado NFS registered versions"
+	FIND=`${RPCINFOBINARY} -p | ${AWKBINARY} '{ if ($5=="nfs") { print $2 } }' | uniq | sort`
+	for I in ${FIND}; do
+	    logtext "Found version: ${I}"
+	done
+	Display --indent 2 --text "" #- Consulta NFS versions..." --result "PRONTO" --color GREEN
+    fi
+#
+#################################################################################
+#
+    # Test        : STRG-1906
+    # Description : Check nfs protocols (TCP/UDP) and port in rpcinfo
+    if [ ! "${RPCINFOBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi    
+    Register --test-no STRG-1906 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Check nfs rpc"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Verificado protocolos registrados NFS"
+	FIND=`${RPCINFOBINARY} -p | ${AWKBINARY} '{ if ($5=="nfs") { print $3 } }' | uniq | sort`
+	for I in ${FIND}; do
+	    logtext "Encontrado o protocolo: ${I}"
+	done
+	if [ "${FIND}" = "" ]; then
+	    logtext "Saída: protocolo NFS não foi encontrado"
+	fi
+
+	# Check port number
+        logtext "Teste: Verificado NFS portas registradas"
+	FIND=`${RPCINFOBINARY} -p | ${AWKBINARY} '{ if ($5=="nfs") { print $3 } }' | uniq | sort`
+	for I in ${FIND}; do
+	    logtext "Found port: ${I}"
+	done
+	if [ "${FIND}" = "" ]; then
+	    logtext "Saída: número da porta NFS não foi encontrada"
+	fi
+	Display --indent 2 --text "" #- Consulta protocolos NFS ..." --result "PRONTO" --color GREEN
+    fi
+#
+#################################################################################
+#
+    # Test        : STRG-1920
+    # Description : Check for running NFS daemons
+    Register --test-no STRG-1920 --weight L --network NO --description "" #Verificado NFS daemon"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        logtext "Teste: Verficado executando NFS daemon"
+	FIND=`${PSBINARY} ax | grep "nfsd" | grep -v "grep"`
+	if [ "${FIND}" = "" ]; then
+	    logtext "Saída: NFS daemon não está em execução"
+	    Display --indent 2 --text "" #- Verficado executando NFS daemon..." --result "NÃO ENCONTRADO" --color WHITE
+	  else
+	    logtext "Saída: NFS daemon está em execução"
+	    Display --indent 2 --text "" #- Verificado executando NFS daemon.." --result "ENCONTRADO" --color GREEN
+	    NFS_DAEMON_RUNNING=1
+	fi
+    fi
+#
+#################################################################################
+#
+    # Test        : STRG-1924
+    # Description : Check missing nfs in rpcinfo while NFS is running
+    #Register --test-no STRG-1924 --weight L --network NO --description "" #Verificado NFS daemon"
+    #if [ ${SKIPTEST} -eq 0 ]; then
+#
+#################################################################################
+#
+    # Test        : STRG-1926
+    # Description : Check NFS exports
+    if [ ${NFS_DAEMON_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+    Register --test-no STRG-1926 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Verificado NFS exports"
+    if [ ${SKIPTEST} -eq 0 ]; then    
+	logtext "Teste: check /etc/exports"
+	if [ -f /etc/exports ]; then
+	    logtext "Resultado: /etc/exports exists"
+	    FIND=`cat /etc/exports | grep -v "^$" | grep -v "^#" | sed 's/ /!space!/g'`
+	    if [ ! "${FIND}" = "" ]; then
+	        for I in ${FIND}; do
+	            I=`echo ${I} | sed 's/!space!/ /g'`
+	            logtext "Found line: ${I}"
+	        done
+	      else
+	        logtext "Resultado: /etc/exports does not contain exported file systems"
+		NFS_EXPORTS_EMPTY=1
+	    fi
+	    Display --indent 4 --text "" #- Verificado /etc/exports..." --result "ENCONTRADO" --color GREEN
+	  else
+	    logtext "Resultado: file /etc/exports does not exist"
+	    Display --indent 4 --text "" #- Verificado /etc/exports..." --result "NÃO ENCONTRADO" --color WHITE
+	fi
+    fi    
+#
+#################################################################################
+#
+    # Test        : STRG-1928
+    # Description : Check for empty exports file while NFS is running
+    if [ ${NFS_DAEMON_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi    
+    Register --test-no STRG-1928 --preqs-met ${PREQS_MET} --weight L --network NO --description "" #Verificado empty /etc/exports"
+    if [ ${SKIPTEST} -eq 0 ]; then
+        if [ ${NFS_EXPORTS_EMPTY} -eq 1 ]; then
+    	    Display --indent 6 --text "" #- Verificado empty /etc/exports..." --result SUGGESTION --color YELLOW
+	    logtext "Resultado: /etc/exports seems to have no exported file systems"
+	    ReportSuggestion ${TEST_NO} "" #/etc/exports has no exported file systems, while NFS daemon is running. Check if NFS needs to run on this system"
+	fi
+    fi
+#
+#################################################################################
+#
+#	    ReportWarning ${TEST_NO} "M" "Message"
+#	    
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

@@ -1,0 +1,41 @@
+#!/bin/sh
+#########################################################################
+#
+#    * DO NOT REMOVE *
+#-----------------------------------------------------
+# PLUGIN_AUTHOR=Mauro Risonho de Paula Assumpção<mauro.assumpcao@abril.com.br>
+# PLUGIN_CATEGORY=Data
+# PLUGIN_DESC=File permissions and ownership
+# PLUGIN_NAME=files_permissions
+#-----------------------------------------------------
+#########################################################################
+#
+# Check for unowned files
+# Unowned files        : find / -path /proc -prune -o -nouser -o -nogroup
+#
+# Unused accounts      : find / -path /proc -prune -o -user <account> -ls
+#
+# Check for world writable files
+# World writable       : find / -path /proc -prune -o -perm -2 ! -type l -ls
+#
+# Check for world writable directories
+#   - Check if world writable directories have sticky bit
+#
+#
+#########################################################################
+#
+    # Check for files with SUID/SGID bit set
+
+#    if [ ! "${FINDBINARY}" = "" ]; then
+#	logtext "Test: Searching all files with a SUID and/or SGID bit set"
+#	logtext "Note: These files should be examined, since they can be used to gain additional privileges"
+#	logtext "----"
+#        FIND=`${FINDBINARY} /bin \( -fstype NFS -o -fstype nfs -o -fstype nfs4 -o -fstype afs -o -fstype binfmt_misc -o -fstype proc -o -fstype smbfs -o -fstype autofs -o -fstype iso9660 -o -fstype ncpfs -o -fstype coda -o -fstype devpts -o -fstype ftpfs -o -fstype devfs -o -fstype mfs -o -fstype shfs -o -fstype sysfs -o -fstype cifs -o -fstype lustre_lite -o -fstype tmpfs -o -fstype usbfs -o -fstype udf \) -prune -o -type f -perm +6000 -print`
+#	for I in ${FIND}; do
+#	    logtext "Found file with SUID/SGID bit: ${I}"
+#	done
+#	logtext "----"
+#
+#    fi
+
+

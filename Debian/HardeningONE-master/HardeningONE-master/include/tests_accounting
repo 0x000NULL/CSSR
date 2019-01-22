@@ -1,0 +1,178 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: 
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+    InsertSection "" #"26. Auditoria"
+#
+#################################################################################
+#
+    AUDITD_CONF_LOCS="/etc /etc/audit"
+    AUDITD_CONF_FILE=""
+    AUDITD_RUNNING=0
+    SOLARIS_AUDITD_RUNNING=0
+
+clear
+
+#
+#################################################################################
+#
+    # Test        : ACCT-9622-Linux
+    # Description : Check availability Linux accounting data
+#    Register --test-no ACCT-9622 --os Linux --weight L --network NO --description "Verificando por informações de auditorias disponíveis para o Linux"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-ACCT-9622-Linux-Teste: Verificar as informações de auditoria"
+#        if [ -f /var/account/pacct ]; then
+#	    Display --indent 2 --text "- ACCT-9622-Linux-Verificando por informações de auditorias... " --result OK --color GREEN
+#            logtext "R-TEC-ACCT-9622-Linux-Resultado: Auditoria disponível"
+#          else
+#	    Display --indent 2 --text "- ACCT-9622-Linux-Verificando por informações de auditorias... " --result "NAO OK" --color YELLOW
+#            logtext "R-TEC-ACCT-9622-Linux-Resultado:  Não há informações de auditorias disponíveis"
+#            logtext "R-TEC-ACCT-9622-Linux-Observação: Possivelmente, há outro local onde as informações de auditoria são armazenados"
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : ACCT-9626-Linux
+    # Description : Check sysstat accounting data
+#    Register --test-no ACCT-9626 --os Linux --weight L --network NO --description "Verificar Informações no sysstat"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "Testar: Verificar existência /etc/default/sysstat"
+#	if [ -f /etc/default/sysstat ]; then
+#	    logtext "Resultado: sysstat OK"
+#	    FIND=`grep "^ENABLED" /etc/default/sysstat | grep -i true`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-ACCT-9626-Linux-Resultado: sysstat habilitado"
+#	        Display --indent 2 --text "- ACCT-9626-Linux-Verificando informações de auditoria" --result HABILITADO --color GREEN
+#	      else
+#	        logtext "R-TEC-ACCT-9626-Linux-Resultado: sysstat desabilitado"	      
+#	        Display --indent 2 --text "- ACCT-9626-Linux-Verificando informações de auditoria" --result DESABILITADO --color WHITE
+#		ReportSuggestion ${TEST_NO} "R-TEC-ACCT-9626-Linux-Habilite sysstat para coletar informações"
+#	    fi
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : ACCT-9628-Linux
+    # Description : Check auditd status
+#    if [ ! "${AUDITDBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no ACCT-9628 --os Linux --weight L --network NO --description "Verificar auditd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-ACCT-9628-Linux-Teste: Verificado status auditd"
+#	FIND=`${PSBINARY} ax | grep "auditd" | grep -v "grep" | grep -v "kauditd"`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-ACCT-9628-Linux-Resultado: auditd em execução"
+#	    Display --indent 2 --text "- ACCT-9628-Linux-Verificado auditd" --result HABILITADO --color GREEN
+#	    AUDITD_RUNNING=1
+#	    report "audit_deamon_running=1"
+#	    AddHP 4 4
+#	  else
+#	    logtext "R-TEC-ACCT-9628-Linux-Resultado: auditd não está ativo"
+#	    logtext "R-TEC-ACCT-9628-Linux-Habilitar auditd para coletar informações de auditoria"
+#	    Display --indent 2 --text "- Verificado auditd" --result "NAO OK" --color WHITE
+#	    ReportSuggestion ${TEST_NO} "R-TEC-ACCT-9628-Linux-Habilitar auditd para coletar informações de auditoria"
+#	    AUDITD_RUNNING=0
+#	    report "audit_deamon_running=0"
+#	    AddHP 0 1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : ACCT-9630-Linux
+    # Description : Check auditd rules
+#    if [ ! "${AUDITDBINARY}" = "" -a ! "${AUDITCTLBINARY}" = "" -a ${AUDITD_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no ACCT-9630 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificar regras do auditd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-ACCT-9630-Linux-Teste: Verificado regras auditd"
+#	FIND=`${AUDITCTLBINARY} -l | grep -v "No rules"`
+#	if [ "${FIND}" = "" ]; then
+#	    logtext "R-TEC-ACCT-9630-Linux-Resultado: As regras do auditd estão vazias"
+#	    Display --indent 4 --text "- ACCT-9630-Linux-Verificado regras audit" --result SUGESTAO --color YELLOW
+#	    AddHP 0 2
+#	    ReportSuggestion ${TEST_NO} "R-TEC-ACCT-9630-Linux-Audit daemon está habilitado com as regras vazias. Defina as regras"
+#	  else
+#	    logtext "R-TEC-ACCT-9630-Linux-Resultado: OK regras do auditd"
+#	    Display --indent 4 --text "- ACCT-9630-Linux-Verificado regras do audit" --result OK --color GREEN
+#	    # Log audit daemon rules
+#	    FIND=`${AUDITCTLBINARY} -l | sed 's/ /!space!/g'`
+#	    for I in ${FIND}; do
+#	        I=`echo ${I} | sed 's/!space!/ /g'`
+#	        logtext "Saídas: ${I}"
+#	    done
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : ACCT-9632-Linux
+    # Description : Check auditd Arquivo de Configuração
+#    if [ ! "${AUDITDBINARY}" = "" -a ${AUDITD_RUNNING} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no ACCT-9632 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verifique o arquivo de configuração do auditd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-ACCT-9632-Linux-Teste: Verificado o arquivo de configuração do auditd"
+#	for I in ${AUDITD_CONF_LOCS}; do
+#	    if [ -f ${I}/auditd.conf ]; then
+#	        AUDITD_CONF_FILE="${I}/auditd.conf"
+#		logtext "R-TEC-ACCT-9632-Linux-Resultado: OK ${I}/auditd.conf"
+#	      else
+#	        logtext "R-TEC-ACCT-9632-Linux-Resultado: Não OK ${I}/auditd.conf"
+#	    fi
+#	done
+#	# Check if we have a valid Arquivo de Configuração
+#	if [ ! "${AUDITD_CONF_FILE}" = "" ]; then
+#	    Display --indent 4 --text "- ACCT-9632-Linux-Verificado o arquivo de configuração do audit" --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-ACCT-9632-Linux-Resultado: Não pode ser OK arquivo de configuração do auditd"
+#	    Display --indent 4 --text "- ACCT-9632-Linux-Verificado o arquivo de configuração do audit" --result ATENCAO --color RED
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : ACCT-9634-Linux
+    # Description : Check auditd log file
+#    if [ ! "${AUDITDBINARY}" = "" -a ${AUDITD_RUNNING} -eq 1 -a ! "${AUDITD_CONF_FILE}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no ACCT-9634 --os Linux --preqs-met ${PREQS_MET} --weight L --network NO --description "Verifique pelo arquivo de log do auditd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-ACCT-9634-Linux-Teste: Verificado arquivo de log do auditd"
+#	FIND=`grep "^log_file" ${AUDITD_CONF_FILE} | ${AWKBINARY} '{ if ($1=="log_file" && $2=="=") { print $3 } }'`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-ACCT-9634-Linux-Resultado: arquivo de log definido"
+#	    logtext "R-TEC-ACCT-9634-Linux-Valor definido: ${FIND}"
+#	    if [ -f ${FIND} ]; then
+#	        logtext "R-TEC-ACCT-9634-Linux-Resultado: Arquivo de log ${FIND} existe no disco"
+#	        Display --indent 4 --text "- ACCT-9634-Linux-Verificado auditd arquivo de log" --result OK --color GREEN
+#	        report "logfile[]=${FIND}"
+#	      else
+#	        logtext "R-TEC-ACCT-9634-Linux-Resultado: não pode ser OK arquivo de log ${FIND} no disco"
+#	        Display --indent 4 --text "- ACCT-9634-Linux-Verificado arquivo de log do auditd" --result SUGESTAO --color YELLOW
+#		ReportSuggestion ${TEST_NO} "R-TEC-ACCT-9634-Linux-Verifique localização do arquivo de log do auditd"
+#	    fi
+#	  else
+#	    logtext "R-TEC-ACCT-9634-Linux-Resultado: não foi OK arquivo de log"
+#	    Display --indent 4 --text "- ACCT-9634-Linux-Verificado arquivo de log do auditd" --result ATENCAO --color RED
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-ACCT-9634-Linux-Auditd - arquivo de log foi definido mas não pode ser OK no disco"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-ACCT-9634-Linux-Define no auditd a localização do arquivo de log"
+#	fi
+#    fi
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

@@ -1,0 +1,289 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# Banners and identification
+#
+#################################################################################
+#
+    InsertSection "" #"24. Banners E Identificação"
+    Display --indent 2 --text "" #"- Verificando banners..."
+#
+#################################################################################
+#
+    BANNER_FILES="/etc/issue /etc/issue.net /etc/motd"
+    LEGAL_BANNER_STRINGS="access authorized legal monitor owner policy policies private prohibited this unauthorized"
+#
+#################################################################################
+#
+    # Test        : BANN-7113
+    # Description : Check FreeBSD Copyleft GPL3 banner file
+#    Register --test-no BANN-7113 --os FreeBSD --weight L --network NO --description "Check Copyleft GPL3 banner file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-BANN-7113-Teste: Testing existence /Copyleft GPL3 or /etc/Copyleft GPL3"
+#        if [ -f /Copyleft GPL3 ]; then
+#	    Display --indent 2 --text "- R-TEC-BANN-7113-/Copyleft GPL3" --result OK --color GREEN
+#            if [ -s /Copyleft GPL3 ]; then
+#	        logtext "R-TEC-BANN-7113-Resultado: /Copyleft GPL3 available and contains text"
+#	     else
+#		logtext "R-TEC-BANN-7113-Resultado: /Copyleft GPL3 available, but empty"
+#	    fi
+#	  else
+#    	    Display --indent 2 --text "- R-TEC-BANN-7113-/Copyleft GPL3" --result "NOK" --color WHITE
+#	    logtext "R-TEC-BANN-7113-Resultado: /Copyleft GPL3 not found"
+#	fi
+
+#	if [ -f /etc/Copyleft GPL3 ]; then
+#	    Display --indent 2 --text "- R-TEC-BANN-7113-/etc/Copyleft GPL3" --result OK --color GREEN	
+#            if [ -s /etc/Copyleft GPL3 ]; then
+#	        logtext "R-TEC-BANN-7113-Resultado: /etc/Copyleft GPL3 available and contains text"
+#	      else
+#	        logtext "R-TEC-BANN-7113-Resultado: /etc/Copyleft GPL3 available, but empty"
+#	    fi
+#	  else
+#    	    Display --indent 2 --text "- R-TEC-BANN-7113-/etc/Copyleft GPL3" --result "NOK" --color WHITE
+#	    logtext "R-TEC-BANN-7113-Resultado: /etc/Copyleft GPL3 not found"
+#        fi
+
+#    fi    
+#
+#################################################################################
+#
+    # Test        : BANN-7119
+    # Description : Check MOTD banner file
+#    Register --test-no BANN-7119 --weight L --network NO --description "Check MOTD banner file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-BANN-7119-Teste: Testing existence /etc/motd"
+#        if [ -f /etc/motd  ]; then
+#	    logtext "R-TEC-BANN-7119-Resultado: file /etc/motd exists"
+#	    Display --indent 2 --text "- R-TEC-BANN-7119-/etc/motd..." --result OK --color GREEN
+#	    if [ ! -L /etc/motd ]; then
+#	        IsWorldWritable /etc/motd
+#		if [ "${FileIsWorldWritable}" = "TRUE" ]; then
+#		    Display --indent 4 --text "- R-TEC-BANN-7119-/etc/motd permissions..." --result WARNING --color RED
+#		    logtext "R-TEC-BANN-7119-Resultado: /etc/motd is world writable. Users can change this file!"
+#		    ReportWarning ${TEST_NO} "H" "R-TEC-BANN-7119-/etc/motd is world writable"
+#	         else
+#		    Display --indent 4 --text "- R-TEC-BANN-7119-/etc/motd permissions..." --result OK --color GREEN
+#		    logtext "R-TEC-BANN-7119-Resultado: /etc/motd is not world writable."
+#		fi
+#	      else
+#	        logtext "R-TEC-BANN-7119-Resultado: file /etc/motd is symlink"
+#	    fi
+#	  else
+#	    logtext "R-TEC-BANN-7119-Resultado: Test skipped"
+#	    Display --indent 2 --text "- R-TEC-BANN-7119-/etc/motd..." --result "NOK" --color WHITE
+#        fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : BANN-7122
+    # Description : Check motd file to see if it contains some form of message
+    #               to discourage unauthorized users to leave the system alone
+#    if [ -f /etc/motd -a ! -L /etc/motd ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BANN-7122 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check /etc/motd banner file contents"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        N=0
+#        logtext "R-TEC-BANN-7122-Teste: Checking file /etc/motd contents for legal key words"
+#        for I in ${LEGAL_BANNER_STRINGS}; do
+#	    FIND=`grep -i "${I}" /etc/motd`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-BANN-7122-Resultado: found string '${I}'"
+#	        N=`expr ${N} + 1`
+#	    fi
+#	done
+#	# Check if we have 5 or more key words
+#	if [ ${N} -gt 4 ]; then
+#	    logtext "R-TEC-BANN-7122-Resultado: Found ${N} key words, to warn unauthorized users"
+#	    Display --indent 4 --text "- R-TEC-BANN-7122-/etc/motd vendo o conteúdo..." --result OK --color GREEN
+#	    AddHP 2 2
+#	  else
+#	    logtext "R-TEC-BANN-7122-Resultado: Found only ${N} key words, to warn unauthorized users and could be increased"
+#	    Display --indent 4 --text "- R-TEC-BANN-7122-/etc/motd vendo o conteúdo..." --result NOK --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-BANN-7122-Add legal banner to /etc/motd, to warn unauthorized users"
+#	    AddHP 0 1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : BANN-7124
+    # Description : Check issue banner file
+#    Register --test-no BANN-7124 --weight L --network NO --description "Check issue banner file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-BANN-7124-Teste: Checking file /etc/issue"
+#        if [ -f /etc/issue ]; then
+#    	    # Check for symlink
+#    	    if [ -L /etc/issue ]; then
+#		logtext "R-TEC-BANN-7124-Resultado: file /etc/issue exists (symlink)"
+#		Display --indent 2 --text "- R-TEC-BANN-7124-/etc/issue..." --result SYMLINK --color GREEN
+#	      else
+#		Display --indent 2 --text "- R-TEC-BANN-7124-/etc/issue..." --result OK --color GREEN
+#	    fi
+#	  else
+#	    logtext "R-TEC-BANN-7124-Resultado: file /etc/issue does not exist"
+#	    Display --indent 2 --text "- R-TEC-BANN-7124-/etc/issue..." --result "NOK" --color WHITE
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : BANN-7126
+    # Description : Check issue file to see if it contains some form of message
+    #               to discourage unauthorized users to leave the system alone
+#    if [ -f /etc/issue ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BANN-7126 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check issue banner file contents"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        N=0
+#        logtext "R-TEC-BANN-7126-Teste: Checking file /etc/issue contents for legal key words"
+#        for I in ${LEGAL_BANNER_STRINGS}; do
+#	    FIND=`grep -i "${I}" /etc/issue`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-BANN-7126-Resultado: found string '${I}'"
+#	        N=`expr ${N} + 1`
+#	    fi
+#	done
+#	# Check if we have 5 or more key words
+#	if [ ${N} -gt 4 ]; then
+#	    logtext "R-TEC-BANN-7126-Resultado: Found ${N} key words, to warn unauthorized users"
+#	    Display --indent 4 --text "- R-TEC-BANN-7126-/etc/issue vendo o conteúdo..." --result OK --color GREEN
+#	    AddHP 2 2
+#	  else
+#	    logtext "R-TEC-BANN-7126-Resultado: Found only ${N} key words, to warn unauthorized users and could be increased"
+#	    Display --indent 4 --text "- R-TEC-BANN-7126-/etc/issue vendo o conteúdo..." --result NOK --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-BANN-7126-Adicionar banner para alertar os usuários não autorizados"
+#	    AddHP 0 1
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : BANN-7128
+    # Description : Check issue.net banner file
+#    Register --test-no BANN-7128 --weight L --network NO --description "Check issue.net banner file"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-BANN-7128-Teste: Verificando /etc/issue.net"
+#        if [ -f /etc/issue.net ]; then
+#    	    # Check for symlink
+#    	    if [ -L /etc/issue.net ]; then
+#		logtext "R-TEC-BANN-7128-Resultado: file /etc/issue.net exists (symlink)"
+#		Display --indent 2 --text "- R-TEC-BANN-7128-/etc/issue.net..." --result SYMLINK --color GREEN
+#	      else
+#	        logtext "R-TEC-BANN-7128-Resultado: file /etc/issue.net exists"
+#		Display --indent 2 --text "- R-TEC-BANN-7128-/etc/issue.net..." --result OK --color GREEN
+#	    fi
+#	  else
+#	    logtext "R-TEC-BANN-7128-Resultado: file /etc/issue.net does not exist"
+#	    Display --indent 2 --text "- R-TEC-BANN-7128-/etc/issue.net..." --result "NOK" --color WHITE
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : BANN-7130
+    # Description : Check issue.net file to see if it contains some form of message
+    #               to discourage unauthorized users to leave the system alone
+#    if [ -f /etc/issue.net ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BANN-7130 --preqs-met ${PREQS_MET} --weight L --network NO --description "Check issue.net banner file contents"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        N=0
+#        logtext "R-TEC-BANN-7130-Teste: Checking file /etc/issue.net contents for legal key words"
+#        for I in ${LEGAL_BANNER_STRINGS}; do
+#	    FIND=`grep -i "${I}" /etc/issue.net`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-BANN-7130-Resultado: found string '${I}'"
+#	        N=`expr ${N} + 1`
+#	    fi
+#	done
+#	# Check if we have 5 or more key words
+#	if [ ${N} -gt 4 ]; then
+#	    logtext "R-TEC-BANN-7130-Resultado: Found ${N} key words, to warn unauthorized users"
+#	    Display --indent 4 --text "- R-TEC-BANN-7130-/etc/issue.net vendo o conteúdo..." --result OK --color GREEN
+#	    AddHP 2 2
+#	  else
+#	    logtext "R-TEC-BANN-7130-Resultado: Found only ${N} key words, to warn unauthorized users and could be increased"
+#	    logtext "R-TEC-BANN-7130-Adicionar banner legal /etc/issue.net, para alertar os usuários não autorizados"
+#	    Display --indent 4 --text "- R-TEC-BANN-7130-/etc/issue.net vendo o conteúdo..." --result NOK --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-BANN-7130-Adicionar banner legal para alertar os usuários não autorizados"
+#	    AddHP 0 1
+#	fi
+#    fi
+
+#
+#################################################################################
+#
+#sh /home/a36724/Projetos/HardeningOne-1.0.0/mod/check/check_banner_so.sh
+
+#################################################################################
+#
+    # Test        : BANN-8021
+    # Description : verifica se há banner por uname -a
+    #               evitando usuários não autorizados tenham visualização qual versão e arquitrtura do SO
+#    if [ -f /etc/motd ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no BANN-8021 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificando o conteúdo arquivo de banner do motd"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        N=0
+#        logtext "R-TEC-BANN-8021-Teste: Checking file /etc/issue.net motd for legal key words"
+#        for I in ${LEGAL_BANNER_STRINGS}; do
+#	    FIND=`grep -i "${I}" /etc/motd`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        logtext "R-TEC-BANN-8021-Resultado: found string '${I}'"
+#	        N=`expr ${N} + 1`
+#	    fi
+#	done
+#	# Check if we have 5 or more key words
+#	if [ ${N} -gt 4 ]; then
+#	    logtext "R-TEC-BANN-8021-Resultado: OK ${N} palavras chaves, para alertar os usuários não autorizados"
+#	    Display --indent 4 --text "- R-TEC-BANN-8021-/etc/motd vendo o conteúdo..." --result OK --color GREEN
+#	    AddHP 2 2
+#	  else
+#	    logtext "R-TEC-BANN-8021-Resultado: Found only ${N} key words, to warn unauthorized users and could be increased"
+#	    logtext "R-TEC-BANN-8021-Adicionar banner legal /etc/motd, para alertar os usuários não autorizados"
+#	    Display --indent 4 --text "- R-TEC-BANN-8021-/etc/motd vendo o conteúdo..." --result NOK --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-BANN-8021-Adicionar banner legal para alertar os usuários não autorizados"
+#	    AddHP 0 1
+#	fi
+#    fi
+
+#
+#################################################################################
+#
+# /etc/dt/config/*/Xresources
+# /etc/default/telnetd (telnet without TCP wrappers)
+# /etc/default/ftpd (ftp without TCP wrappers)
+# /etc/ftpd/banner.msg (ftp without TCP wrappers on Solaris)
+# /etc/ftpaccess (HP-UX)
+# /etc/ftpmotd (AIX)
+# /etc/ftpaccess.ctl (AIX)
+# /etc/security/login.cfg (AIX)
+# /etc/X11/xdm/Xresources
+# /etc/X11/xdm/kdmrc
+# /etc/X11/gdm/gdm
+# /etc/vsftpd.conf
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#################################################################################
+#
+# Notes:
+# HPUX: /etc/Copyleft GPL3
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

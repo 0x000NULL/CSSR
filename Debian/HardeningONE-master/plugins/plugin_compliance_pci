@@ -1,0 +1,42 @@
+#!/bin/sh
+#########################################################################
+#
+#    * DO NOT REMOVE *
+#-----------------------------------------------------
+# PLUGIN_AUTHOR=Mauro Risonho de Paula Assumpção <mauro.risonho@gmail.com>
+# PLUGIN_CATEGORY=Compliancy
+# PLUGIN_DESC=PCI Compliancy
+# PLUGIN_NAME=compliance_pci
+#-----------------------------------------------------
+#########################################################################
+# Test: search credit card numbers in available log files
+
+# Test: search for weak ciphers in TLS/SSL protected services
+#       HTTPS, POP3S, IMAPS
+
+# MySQL do not use default values for passwords and security settings
+#	- SELECT User,Host,Password from mysql.user;
+
+# MySQL report manual action for CC information checks
+
+# MySQL check version
+
+# MySQL assign unique ID per person, with computer access
+
+# MySQL track access to sensitive information fields
+
+# If MySQL encryption is used, watch for log files
+# Do not use binary logs prior to version 5.1
+# Instead, use row-based replication in version 5.1+
+
+# Don't turn on query logging and watch out for slow query log
+
+# Check shell history files for password matches (like mysql, mysqladmin tools)
+# Reason: sensitve information can be stored in history files
+
+# Check caching tools, like memcache
+# Reason: Incorrect configuration can leak secure information from memory
+
+# Check if core dumps are disabled
+#   Variable: CORE_DUMPS_DISABLED
+# Reason: core dumps can contain sensitive information

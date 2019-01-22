@@ -1,0 +1,100 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: 
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+    InsertSection "" #8. Storage"
+#
+#################################################################################
+#
+#    # Test        : STRG-1840
+#    # Description : Check for disabled USB storage
+#    Register --test-no STRG-1840 --os Linux --weight L --network NO --description "Check if USB storage is disabled"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FOUND=0
+#	logtext "Teste: Checking USB storage driver in directory /etc/modprobe.d and configuration file /etc/modprobe.conf"
+#	if [ -d /etc/modprobe.d ]; then
+#	    FIND=`grep "install usb-storage /bin/true" /etc/modprobe.d | grep "usb-storage" | grep -v "#"`
+#	    if [ ! "${FIND}" = "" ]; then
+#		FOUND=1
+#		logtext "Resultado: found usb-storage driver in disabled state"	    
+#	    fi
+#	fi
+#	if [ -f /etc/modprobe.conf ]; then
+#	    FIND=`grep "install usb-storage /bin/true" /etc/modprobe.conf | grep "usb-storage" | grep -v "#"`
+#	    if [ ! "${FIND}" = "" ]; then
+#	        FOUND=1
+#		logtext "Resultado: encontrado o driver usb-storage em status desabilitado "
+#	    fi
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 ]; then
+#	    logtext "Resultado: usb-storage driver is not explicitly disabled"
+#	    Display --indent 2 --text "- Verificado driver usb-storage (modprobe config)..." --result "DESABILITADO" --color WHITE
+#	    ReportSuggestion ${TEST_NO} "Desabilitar drivers de armazenamento USB, quando não utilizado, para impedir que o armazenamento não-autorizado ou roubo de dados"
+
+#	    AddHP 2 3
+#	  else
+#	    logtext "Resultado: usb-storage driver is disabled"
+#	    Display --indent 2 --text "- Verificado driver usb-storage (modprobe config)..." --result "DESABILITADO" --color GREEN
+#	    AddHP 3 3
+#	fi
+#    fi
+#
+#################################################################################
+#
+    # Test        : STRG-1846
+    # Description : Check for disabled firewire storage
+#    Register --test-no STRG-1846 --os Linux --weight L --network NO --description "Check if firewire storage is disabled"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	FOUND=0
+#	logtext "Teste: Checking firewire storage driver in directory /etc/modprobe.d and configuration file /etc/modprobe.conf"
+#	if [ -d /etc/modprobe.d ]; then
+#	    FIND1=`egrep "blacklist (ohci1394|firewire-ohci)" /etc/modprobe.d | grep "ohci" | grep -v "#"`	
+#	    FIND2=`egrep "install (ohci1394|firewire-ohci) /bin/true" /etc/modprobe.d | grep "ohci" | grep -v "#"`
+#	    if [ ! "${FIND1}" = "" -o ! "${FIND2}" = "" ]; then
+#		FOUND=1
+#		logtext "Resultado: found firewire ohci driver in disabled state"	    
+#	    fi
+#	fi
+#	if [ -f /etc/modprobe.conf ]; then
+#	    FIND1=`egrep "blacklist (ohci1394|firewire-ohci)" /etc/modprobe.conf | grep "ohci" | grep -v "#"`	
+#	    FIND2=`egrep "install (ohci1394|firewire-ohci) /bin/true" /etc/modprobe.conf | grep "ohci" | grep -v "#"`
+#	    if [ ! "${FIND1}" = "" -o ! "${FIND2}" = "" ]; then
+#	        FOUND=1
+#		logtext "Resultado: found firewire ohci driver in disabled state"
+#	    fi
+#	fi
+#	
+#	if [ ${FOUND} -eq 0 ]; then
+#	    logtext "Resultado: firewire ohci driver is not explicitly disabled"
+#	    Display --indent 2 --text "- Verificado driver firewire ohci (modprobe config)..." --result "DESABILITADO" --color WHITE
+#	    ReportSuggestion ${TEST_NO} "Desabilitar drivers de armazenamento como firewire quando não usado, para evitar o armazenamento não- autorizado ou roubo de dados"
+#	    # after blacklisting modules, make sure to remove them from the initram filesystem: update-initramfs -u
+#	    AddHP 2 3
+#	  else
+#	    logtext "Resultado: firewire ohci driver is disabled"
+#	    Display --indent 2 --text "- Verificado driver firewire ohci (modprobe config)..." --result "DESABILITADO" --color GREEN
+#	    AddHP 3 3
+#	fi
+#    fi
+#
+#################################################################################
+#
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 

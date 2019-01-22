@@ -1,0 +1,48 @@
+
+================================================================================
+
+  hardeningone - Installation instructions
+
+================================================================================
+
+  Author:                   	Mauro Risonho de Paula Assumpção
+  Description:              	Security and system auditing tool
+  Web site:                 	
+  Support policy:           See section 'Support'
+  Documentation:         See web site, README, FAQ and CHANGELOG file
+
+================================================================================
+
+
+[+] Run directly
+-------------------------------
+
+  hardeningone can be executed directly (unpack tarball, enter hardeningone directory).
+
+  # sh hardeningone
+  or
+  # ./hardeningone
+  
+  Make sure you have root privileges.
+ 
+
+
+[+] Installation
+-------------------------------
+
+  If you want to install hardeningone, see the README file (section: Installation) for
+  more tips about how to install or create a custom package.
+
+
+
+[+] Documentation
+-------------------------------
+
+  Documentation about hardeningone can be found in the man page (man hardeningone, or
+  hardeningone --man-page), README file and website. Also the FAQ file covers some
+  often asked questions.
+
+
+
+================================================================================
+ hardeningone - Copyright 2010-2011 

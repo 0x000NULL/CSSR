@@ -1,0 +1,539 @@
+#!/bin/sh
+
+#################################################################################
+#
+#   hardeningone
+# ------------------
+#
+# Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção (mauro.risonho@gmail.com), 
+# Web site: http://
+#
+# hardeningone comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+# welcome to redistribute it under the terms of the GNU General Public License.
+# See LICENSE file for usage of this software.
+#
+#################################################################################
+#
+# File systems
+#
+#################################################################################
+#
+    # Number of days to mark a file as old
+    TMP_OLD_DAYS=90
+    LVM_VG_USED=0
+#
+#################################################################################
+#
+    InsertSection "" #7. Sistema de arquivos"
+#
+#################################################################################
+#
+    # Test        : FILE-6310
+    # Description : Verificado if /tmp and /home are separated from /
+    # Goal        : Users should not be able to fill their home directory or
+    #               temporary directory and creating a Denial of Service
+#    Register --test-no FILE-6310 --weight L --network NO --description "Verificado: /tmp and /home directory"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        Display --indent 2 --text "- R-TEC-FILE-6310-Verificado pontos de montagem"
+#	SEPARATED_FILESYTEMS="/home /tmp"
+#	for I in ${SEPARATED_FILESYTEMS}; do
+#            logtext "R-TEC-FILE-6310-Teste: Verificado if ${I} is mounted separately or mounted on / file system"
+#	    if [ -L ${I} ]; then
+#	        logtext "R-TEC-FILE-6310-Resultado: ${I} is a symlink. Manual check required to determine exact file system"
+#	        Display --indent 4 --text "- R-TEC-FILE-6310-Verificado ${I} ponto de montagem..." --result SYMLINK --color WHITE
+#	    elif [ -d ${I} ]; then
+#	        logtext "R-TEC-FILE-6310-Resultado: directory ${I} exists"
+#	        FIND=`mount | grep "${I}"`
+#	        if [ ! "${FIND}" = "" ]; then
+#	            logtext "R-TEC-FILE-6310-Resultado: found ${I} as a separated mount point"
+#	            Display --indent 4 --text "- R-TEC-FILE-6310-Verificado ${I} ponto de montagem..." --result OK --color GREEN
+#	          else
+#	            logtext "R-TEC-FILE-6310-Resultado: ${I} not found in mount list. Directory most likely stored on / file system"
+#	            Display --indent 4 --text "- R-TEC-FILE-6310-Verificado ${I} ponto de montagem..." --result SUGESTÃO --color YELLOW
+#	            ReportSuggestion ${TEST_NO} "R-TEC-FILE-6310-Para diminuir o impacto de um sistema de arquivo completo ${i}, local ${I} em uma partição separada"
+#		fi
+#	      else
+#	        logtext "R-TEC-FILE-6310-Resultado: directory ${I} does not exist"    
+#	    fi
+#	done
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6311
+#    # Description : Verificado LVM Volume Groups
+#    if [ ! "${VGDISPLAYBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FILE-6311 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado: LVM volume groups"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FILE-6311-Teste: Verificado for LVM volume groups"
+#        FIND=`${VGDISPLAYBINARY} | grep -v "No volume groups found" | grep "VG Name" | awk '{ print $3 }' | sort`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-FILE-6311-Resultado: found one or more volume groups"
+#	    for I in ${FIND}; do
+#	        logtext "R-TEC-FILE-6311-Found LVM volume group: ${I}"
+#		report "lvm_volume_group[]=${I}"
+#	    done
+#	    LVM_VG_USED=1
+#	    Display --indent 2 --text "- R-TEC-FILE-6311-Verificado LVM volume groups..." --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-FILE-6311-Resultado: no LVM volume groups found"
+#	    Display --indent 2 --text "- Verificado LVM volume groups..." --result NENHUM --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6312
+#    # Description : Verificado LVM volumes
+#    if [ ! "${LVDISPLAYBINARY}" = "" -a ${LVM_VG_USED} -eq 1 ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FILE-6312 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado: LVM volumes"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FILE-6312-Teste: Verificado for LVM volumes"
+#        FIND=`${LVDISPLAYBINARY} | grep -v "No volume groups found" | grep "LV Name" | awk '{ print $3 }' | sort`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-FILE-6312-Resultado: found one or more volumes"
+#	    for I in ${FIND}; do
+#	        logtext "R-TEC-FILE-6312-Found LVM volume: ${I}"
+#		report "lvm_volume[]=${I}"
+#	    done
+#	    Display --indent 4 --text "- R-TEC-FILE-6312-Verificado LVM volumes..." --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-FILE-6312-Resultado: no LVM volume groups found"
+#	    Display --indent 4 --text "- Verificado LVM volumes..." --result NENHUM --color WHITE
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6316
+#    # Description : Verificado /etc/fstab file permissions
+#    #Register --test-no FILE-6316 --os Linux --weight L --network NO --description "Verificado: /etc/fstab"
+#    #if [ ${SKIPTEST} -eq 0 ]; then
+#    # 644
+##
+##################################################################################
+##
+#    # Test        : FILE-6323
+#    # Description : Verificado Linux EXT2, EXT3, EXT4 file systems
+#    Register --test-no FILE-6323 --os Linux --weight L --network NO --description "Verificado: EXT file systems"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FILE-6323-Teste: Verificado for Linux EXT file systems"
+#        FIND=`mount -t ext2,ext3,ext4 | awk '{ print $3","$5 }'`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-FILE-6323-Resultado: found one or more EXT file systems"
+#	    for I in ${FIND}; do
+#	        FILESYSTEM=`echo ${I} | cut -d ',' -f1`
+#	        FILETYPE=`echo ${I} | cut -d ',' -f2`		
+#	        logtext "R-TEC-FILE-6323-File system: ${FILESYSTEM} (type: ${FILETYPE})"
+#	    done
+#	fi
+#    fi
+##
+##################################################################################
+##
+
+#    # Test        : FILE-6329
+#    # Description : Query all UFS mounts from /etc/fstab
+#    Register --test-no FILE-6329 --os FreeBSD --weight L --network NO --description "Verificado: UFS file systems"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	logtext "R-TEC-FILE-6329-Teste: Query /etc/fstab for available UFS pontos de montagem"
+#        FIND=`awk '{ if ($3 == "ufs") { print $1":"$2":"$3":"$4":" }}' /etc/fstab`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-FILE-6329-Querying UFS mount points (fstab)..." --result ATENCAO --color RED
+#	    logtext "R-TEC-FILE-6329-Resultado: unable to find any single mount point (UFS)"
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FILE-6329-No single UFS mount point found"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FILE-6329-Querying UFS mount points (fstab)..." --result OK --color GREEN
+#	    for I in ${FIND}; do
+#	        logtext "R-TEC-FILE-6329-UFS mount found: ${I}"
+#	        report "mountpoint[]=${I}"	
+#	    done
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6332
+#    # Description : Check FreeBSD swap partitions
+#    Register --test-no FILE-6332 --os FreeBSD --weight L --network NO --description "Verificado: swap partitions"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#    	FOUND=0
+#        logtext "R-TEC-FILE-6332-Teste: query swap partitions from /etc/fstab file"
+#	# Check if third field contains 'swap'
+#        FIND=`awk '{ if ($3=="swap") print $1 }' /etc/fstab`	
+#	for I in ${FIND}; do
+#	    FOUND=1
+#	    logtext "R-TEC-FILE-6332-Swap partition found: ${I}"
+#	    #YYY add to report file
+#	done
+#	if [ ${FOUND} -eq 1 ]; then
+#	    Display --indent 2 --text "- R-TEC-FILE-6332--Query swap partitions (fstab)..." --result OK --color GREEN
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FILE-6332--Query swap partitions (fstab)..." --result ATENCAO --color YELLOW
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FILE-6332--No swap partion found in /etc/fstab"
+#	    logtext "R-TEC-FILE-6332-Resultado: no swap partitions found in /etc/fstab"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6336
+#    # Description : Check FreeBSD swap mount options
+#    Register --test-no FILE-6336 --os FreeBSD --weight L --network NO --description "Verificado: swap mount options"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        # Swap partitions should be mounted with 'sw'
+#	logtext "R-TEC-FILE-6336-Teste: check swap partitions with incorrect mount options"
+#        FIND=`awk '{ if ($3=="swap" && $4 !~ "sw") print $1 }' /etc/fstab`
+#	if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-FILE-6336-Testing swap partitions..." --result OK --color GREEN
+#	    logtext "R-TEC-FILE-6336-Resultado: all swap partitions have correct options (=sw)"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FILE-6336-Testing swap partitions..." --result ATENCAO --color RED
+#	    logtext "R-TEC-FILE-6336-Resultado: possible incorrect mount options used for mounting swap partition (${FIND})"
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FILE-6336-Possible incorrect mount options used for swap parition (${FIND})"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FILE-6336-Check your /etc/fstab file. Swap parition usually have 'sw' in the options field (4th)."
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6354
+#    # Description : Search files within /tmp which are older than 3 months
+#    if [ -d /tmp  ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FILE-6354 --preqs-met ${PREQS_MET} --weight L --network NO --description "Searching por aquivos antigos em /tmp"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FILE-6354-Teste: Searching por aquivos antigos em /tmp..."
+#	# Search for files only in /tmp, with an access time older than X days
+#        FIND=`find /tmp -type f -atime +${TMP_OLD_DAYS} | sed 's/ /!space!/g'`
+#        if [ "${FIND}" = "" ]; then
+#	    Display --indent 2 --text "- R-TEC-FILE-6354-Verificado por aquivos antigos em /tmp..." --result OK --color GREEN
+#	    logtext "R-TEC-FILE-6354-Resultado: no files found in /tmp which are older than 3 months"
+#          else
+#	    Display --indent 2 --text "- R-TEC-FILE-6354-Verificado por aquivos antigos em /tmp..." --result ATENCAO --color RED
+#	    N=0
+#	    for I in ${FIND}; do
+#		FILE=`echo ${I} | sed 's/!space!/ /g'`
+#	        logtext "R-TEC-FILE-6354-Old temporary file: ${FILE}"
+#		N=`expr ${N} + 1`
+#	    done
+#	    logtext "R-TEC-FILE-6354-Resultado: found old files in /tmp, which were not modified in the last ${TMP_OLD_DAYS} days"
+#	    logtext "R-TEC-FILE-6354-Advice: check and clean up unused files in /tmp. Old files can fill up a disk or contain"
+#	    logtext "R-TEC-FILE-6354-private information and should be deleted it not being used actively. Use a tool like lsof to"
+#	    logtext "R-TEC-FILE-6354-see which programs possibly are using a particular file. Some systems can cleanup temporary"
+#	    logtext "R-TEC-FILE-6354-directories by setting a boot option."
+#	    ReportWarning ${TEST_NO} "L" "R-TEC-FILE-6354-Found ${N} files in /tmp which are older than ${TMP_OLD_DAYS} days"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FILE-6354-Clean up unused files in /tmp"
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test: scan the skel directory for bad permissions
+#    # Reason: bad permissions on these files will give new created users the same permissions
+#    #YYY enable skel test
+#    # Several differences between operating systems are present
+#    #SKELDIRS="/etc/skel /usr/share/skel"
+
+#    #for I in ${SKELDIRS}; do
+#    #    
+#    #    logtext "Searching skel directory ${I}..."
+#    #
+#    #    if [ -d ${I} ]; then
+#    #        logtext "Resultado: Directory found, scanning for unsafe file permissions"
+#    #	FIND=`ls -A ${I} | wc -l | sed 's/ //g'`
+#    #	if [ ! "${FIND}" = "0" ]; then
+#    #     	    FIND=`find ${I} -type f -a \( -perm -004 -o -perm -002 -o -perm -001 \)`
+#    #	    if [ "${FIND}" = "" ]; then
+#    #	        Display --indent 2 --text "- Verificado skel file permissions (${I})..." --result OK --color GREEN
+#    #		logtext "Resultado: Directory seems to be ok, no files found with read/write/execute bit set."
+#    #		logtext "Status: OK"
+#    #	      else	
+#    #	        Display --indent 2 --text "- Verificado skel file permissions (${I})..." --result ATENCAO --color RED
+#    #	        logtext "Resultado: The following files do have non restrictive permissions: ${FIND}"
+#    #	        ReportSuggestion ${TEST_NO} "Remove the read, write or execute bit from these files (chmod o-rwx)"
+#    #	    fi    
+#    #	  else
+#    #	    Display --indent 2 --text "- Verificado skel file permissions (${I})..." --result EMPTY --color WHITE
+#    #	    logtext "Directory ${I} is empty, no scan performed"    
+#    #	fi
+#    #      else
+#    #        Display --indent 2 --text "- Verificado skel file permissions (${I})..." --result "NAO OK" --color WHITE
+#    #	logtext "Resultado: Skel directory (${I}) not found"
+#    #    fi
+#    #done
+##
+##################################################################################
+##
+#    # Test        : FILE-6362
+#    # Description : Check for sticky bit on /tmp
+#    if [ -d /tmp -a ! -L /tmp ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FILE-6362 --preqs-met ${PREQS_MET} --weight L --network NO --description "Verificado: /tmp sticky bit"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        # Depending on OS, number of field with 'tmp' differs
+#        FIND=`ls -l / | tr -s ' ' | awk -F" " '{ if ( $8 == "tmp" || $9 == "tmp" ) { print $1 } }' | cut -c 10`
+#        if [ "${FIND}" = "t" -o "${FIND}" = "T" ]; then
+#    	    Display --indent 2 --text "- R-TEC-FILE-6362-Verificado /tmp sticky bit..." --result OK --color GREEN
+#            logtext "R-TEC-FILE-6362-Resultado: Sticky bit (${FIND}) found on /tmp directory"
+#	  else
+#	    Display --indent 2 --text "- R-TEC-FILE-6362-Verificado /tmp sticky bit..." --result ATENCAO --color RED
+#    	    ReportWarning ${TEST_NO} "H" "R-TEC-FILE-6362-No sticky bit found on /tmp directory, which can be dangerous!"
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FILE-6362-Consult documentation and place the sticky bit, to prevent users deleting (by other owned) files in the /tmp directory."
+#	fi
+#      else
+#        logtext "R-TEC-FILE-6362-Resultado: Sticky bit test (on /tmp) skipped. Possible reason: missing or symlinked directory, or test skipped."
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6366
+#    # Description : Check for noatime option
+#    # More info   : especially useful for profile 'desktop' and 'server-storage'
+##
+##################################################################################
+##
+#    # Test        : FILE-6368
+#    # Description : Verificado Linux root file system ACL support
+#    Register --test-no FILE-6368 --os Linux --weight L --network NO --description "Verificado: ACL support on root file system"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        FOUND=0
+#        logtext "R-TEC-FILE-6368-Teste: Verificado acl option on root file system"
+#        FIND=`mount | ${AWKBINARY} '{ if ($3=="/") { print $6 } }' | grep acl`
+#	if [ ! "${FIND}" = "" ]; then
+#	    logtext "R-TEC-FILE-6368-Resultado: found ACL option"
+#	    FOUND=1
+#	  else
+#	    logtext "R-TEC-FILE-6368-Resultado: mount point probably mounted with defaults"
+#	    logtext "R-TEC-FILE-6368-Teste: Verificado device which holds root file system"
+#	    # Get device on which root file system is mounted. Use /dev/root if it exists, or
+#	    # else check output of mount
+#	    if [ -b /dev/root ]; then
+#	        FIND1="/dev/root"
+#	      else
+#	        FIND1=`mount | grep ' / ' | awk '{ print $1 }' | sed 's/rootfs//'`
+#	    fi
+#	    if [ ! "${FIND1}" = "" ]; then
+#	        logtext "R-TEC-FILE-6368-Resultado: found ${FIND1}"
+#	    	logtext "R-TEC-FILE-6368-Teste: Verificado default options on ${FIND1}"
+#	        FIND2=`tune2fs -l ${FIND1} | grep "^Default mount options" | grep "acl"` 
+#		if [ ! "${FIND2}" = "" ]; then
+#		    logtext "R-TEC-FILE-6368-Resultado: found ACL option in default mount options"
+#		    FOUND=1
+#		  else
+#		    logtext "R-TEC-FILE-6368-Resultado: no ACL option found in default mount options list"
+#		fi
+#	      else
+#	        logtext "R-TEC-FILE-6368-Resultado: No file system found with root file system"
+#	    fi
+#	fi
+
+#	if [ ${FOUND} -eq 0 ]; then
+#	    logtext "R-TEC-FILE-6368-Resultado: ACL option NOT enabled on root file system"
+#	    logtext "R-TEC-FILE-6368-Additional information: if file access need to be more restricted, ACLs could be used. Install the acl utilities and remount the file system with the acl option"
+#	    logtext "R-TEC-FILE-6368-Activate acl support on and active file system with mount -o remount,acl / and add the acl option to the fstab file"
+#	    Display --indent 2 --text "- R-TEC-FILE-6368-Suporte a ACL root do sistema de arquivos" --result DESABILITADO --color YELLOW
+#	    AddHP 0 1
+#	  else    
+#	    logtext "R-TEC-FILE-6368-Resultado: ACL option enabled on root file system"
+#	    Display --indent 2 --text "- R-TEC-FILE-6368-Suporte a ACL root do sistema de arquivos" --result HABILITADO --color GREEN
+#	    AddHP 3 3
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6372
+#    # Description : Check / mount options for Linux
+#    # Notes       :
+#    Register --test-no FILE-6372 --os Linux --weight L --network NO --description "Verificado: / mount options"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ -f /etc/fstab ]; then
+#	    FIND=`echo /etc/fstab | awk '{ if ($2=="/") { print $4 } }'`
+#	    NODEV=`echo ${FIND} | awk '{ if ($1=="nodev") { print "YES" } else { print "NO" } }'`
+#	    NOEXEC=`echo ${FIND} | awk '{ if ($1=="noexec") { print "YES" } else { print "NO" } }'`
+#	    NOSUID=`echo ${FIND} | awk '{ if ($1=="nosuid") { print "YES" } else { print "NO" } }'`
+#	    
+#	    if [ ! "${FIND}" = "" ]; then
+#		logtext "R-TEC-FILE-6372-Resultado: mount system / is configured with options: ${FIND}"
+#		if [ "${FIND}" = "defaults" ]; then
+#		    Display --indent 2 --text "- R-TEC-FILE-6372-Mount options of /..." --result OK --color GREEN
+#		  else
+#		    Display --indent 2 --text "- R-TEC-FILE-6372-Mount options of /..." --result "NÃO PADRÃO" --color YELLOW
+#		fi
+#	      else
+#	        logtext "R-TEC-FILE-6372-Resultado: no mount point / or expected options found"
+#	    fi
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6374
+#    # Description : Check /boot mount options for Linux
+#    # Notes       : Expecting nodev,noexec,nosuid
+#    Register --test-no FILE-6374 --os Linux --weight L --network NO --description "Verificado: /boot mount options"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#	if [ -f /etc/fstab ]; then
+#	    HARDENED=0
+#	    FIND=`echo /etc/fstab | awk '{ if ($2=="/boot") { print $4 } }'`
+#	    NODEV=`echo ${FIND} | awk '{ if ($1=="nodev") { print "YES" } else { print "NO" } }'`
+#	    NOEXEC=`echo ${FIND} | awk '{ if ($1=="noexec") { print "YES" } else { print "NO" } }'`
+#	    NOSUID=`echo ${FIND} | awk '{ if ($1=="nosuid") { print "YES" } else { print "NO" } }'`
+#	    if [ "${NODEV}" = "YES" -a "${NOEXEC}" = "YES" -a "${NOSUID}" = "YES" ]; then HARDENED=1; fi
+#	    if [ ! "${FIND}" = "" ]; then
+#		logtext "R-TEC-FILE-6374-Resultado: mount system /boot is configured with options: ${FIND}"
+#		if [ ${HARDENED} -eq 1 ]; then
+#		    logtext "R-TEC-FILE-6374-Resultado: marked /boot options as hardenened"
+#		    Display --indent 2 --text "- R-TEC-FILE-6374-Mount options of /boot..." --result HARDENED --color GREEN
+#		    AddHP 5 5
+#		  else
+#		    if [ "${FIND}" = "defaults" ]; then
+#			logtext "R-TEC-FILE-6374-Resultado: marked /boot options as default (non hardened)"
+#			Display --indent 2 --text "- R-TEC-FILE-6374-Mount options of /boot..." --result "PADRÃO" --color RED
+#			AddHP 3 5
+#		      else
+#		        logtext "R-TEC-FILE-6374-Resultado: marked /boot options as non default (unclear about hardening)"
+#			Display --indent 2 --text "- R-TEC-FILE-6374-Mount options of /boot..." --result "NÃO PADRÃO" --color YELLOW
+#			AddHP 4 5
+#		    fi
+#		fi
+#	      else
+#	        logtext "R-TEC-FILE-6374-Resultado: no mount point /boot or expected options found"
+#	    fi
+#	fi
+#    fi
+##
+##################################################################################
+##
+
+#    # Test        : FILE-XXXX
+#    # Description : Check /home mount options for Linux
+#    # Notes       : Expecting nodev,nosuid
+##
+##################################################################################
+##
+
+#    # Test        : FILE-XXXX
+#    # Description : Check /var mount options for Linux
+#    # Notes       : Expecting nosuid
+##
+##################################################################################
+##
+#    
+#    # Test        : FILE-XXXX
+#    # Description : Check /var/log mount options for Linux
+#    # Notes       : Expecting nodev,noexec,nosuid
+##
+##################################################################################
+##
+#    
+#    # Test        : FILE-XXXX
+#    # Description : Check /var/log/audit mount options for Linux
+#    # Notes       : Expecting nodev,noexec,nosuid
+##
+##################################################################################
+##
+
+#    # Test        : FILE-XXXX
+#    # Description : Check /tmp mount options for Linux
+#    # Notes       : Expecting nodev,noexec,nosuid
+#    
+##
+##################################################################################
+##
+##
+##################################################################################
+##
+#    # Test        : FILE-6378
+#    # Description : Check for nodirtime option
+##
+##################################################################################
+##
+#    # Test        : FILE-6380
+#    # Description : Check for relatime
+##
+##################################################################################
+##
+#    # Test        : FILE-6390
+#    # Description : Check writeback/journalling mode (ext3)
+#    # More info   : data=writeback | data=ordered | data=journal
+##
+##################################################################################
+##
+#    # Test        : FILE-6394
+#    # Description : Check vm.swappiness (Linux)
+##
+##################################################################################
+##
+#    # Test        : FILE-6398
+#    # Description : Check if JBD (Journal Block Device) driver is loaded
+##
+##################################################################################
+##
+#    # Test        : FILE-6410
+#    # Description : Verificado locate database (file index)
+#    # Notes       : Linux     /var/lib/mlocate/mlocate.db or /var/lib/slocate/slocate.db
+#    #                       or /var/cache/locate/locatedb
+#    #               FreeBSD /var/db/locate.database
+#    if [ ! "${LOCATEBINARY}" = "" ]; then PREQS_MET="YES"; else PREQS_MET="NO"; fi
+#    Register --test-no FILE-6410 --os Linux --weight L --network NO --description "Verificado: Locate database"
+#    if [ ${SKIPTEST} -eq 0 ]; then
+#        logtext "R-TEC-FILE-6410-Teste: Verificado locate database (/var/lib/mlocate/mlocate.db)"
+#        if [ -f /var/lib/mlocate/mlocate.db ]; then
+#	    logtext "R-TEC-FILE-6410-Resultado: mlocate database exists"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result OK --color GREEN
+#	elif [ -f /var/lib/locatedb ]; then
+#	    logtext "R-TEC-FILE-6410-Resultado: locate database exists"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result OK --color GREEN
+#	elif [ -f /var/lib/slocate/slocate.db ]; then
+#	    logtext "R-TEC-FILE-6410-Resultado: slocate database exists"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result OK --color GREEN
+#	elif [ -f /var/cache/locate/locatedb ]; then
+#	    logtext "R-TEC-FILE-6410-Resultado: locate database exists"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result OK --color GREEN
+#	elif [ -f /var/db/locate.database ]; then
+#	    logtext "R-TEC-FILE-6410-Resultado: FreeBSD locate database exists"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result OK --color GREEN
+#	  else
+#	    logtext "R-TEC-FILE-6410-Resultado: database not found"
+#	    Display --indent 2 --text "- R-TEC-FILE-6410-Verificado Locate database..." --result "NAO OK" --color YELLOW
+#	    ReportSuggestion ${TEST_NO} "R-TEC-FILE-6410-The database required for 'locate' could not be found. Run 'updatedb' or 'locate.updatedb' to create this file."
+#	fi
+#    fi
+##
+##################################################################################
+##
+#    # Test        : FILE-6412
+#    # Description : Verificado age of locate database
+##
+##################################################################################
+##
+
+#    # Test        : FILE-6420
+#    # Description : Check automount process
+##
+##################################################################################
+##
+#    # Test        : FILE-6422
+#    # Description : Check automount maps (files or for example LDAP based)
+#    # Notes       : Warn when automounter is running
+##
+##################################################################################
+##
+#    # Test        : FILE-6424
+#    # Description : Check automount map files
+##
+##################################################################################
+##
+#    # Test        : FILE-6425
+#    # Description : Check mounted files systems via automounter
+#    # Notes       : Warn when no systems are mounted?
+##
+##################################################################################
+##
+
+
+wait_for_keypress
+
+#
+#================================================================================
+# hardeningone - Copyleft GPL3 2010-2011, Mauro Risonho de Paula Assumpção -  - 
