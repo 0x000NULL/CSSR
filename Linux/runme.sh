@@ -13,7 +13,6 @@ cd 2
 chmod +x ubuntu_16.04LTS.sh
 chmod +x ubuntu_16.10.sh
 ./ubuntu_16.04LTS.sh
-./ubuntu_16.10.sh
 cd ..
 
 cd ..

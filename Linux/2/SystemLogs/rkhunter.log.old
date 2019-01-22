@@ -1,0 +1,91 @@
+[07:58:35] Running Rootkit Hunter version 1.4.2 on ubuntu
+[07:58:35]
+[07:58:35] Info: Start date is Tue Jan 22 07:58:35 PST 2019
+[07:58:35]
+[07:58:35] Checking configuration file and command-line options...
+[07:58:35] Info: Detected operating system is 'Linux'
+[07:58:35] Info: Found O/S name: Ubuntu 16.04.5 LTS
+[07:58:35] Info: Command line is /usr/bin/rkhunter --update
+[07:58:35] Info: Environment shell is /bin/bash; rkhunter is using dash
+[07:58:35] Info: Using configuration file '/etc/rkhunter.conf'
+[07:58:35] Info: Installation directory is '/usr'
+[07:58:35] Info: Using language 'en'
+[07:58:35] Info: Using '/var/lib/rkhunter/db' as the database directory
+[07:58:35] Info: Using '/usr/share/rkhunter/scripts' as the support script directory
+[07:58:35] Info: Using '/usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/games /usr/local/games' as the command directories
+[07:58:35] Info: Using '/var/lib/rkhunter/tmp' as the temporary directory
+[07:58:35] Info: X will be automatically detected
+[07:58:35] Info: Using second color set
+[07:58:35] Info: Found the 'basename' command: /usr/bin/basename
+[07:58:35] Info: Found the 'diff' command: /usr/bin/diff
+[07:58:35] Info: Found the 'dirname' command: /usr/bin/dirname
+[07:58:35] Info: Found the 'file' command: /usr/bin/file
+[07:58:35] Info: Found the 'find' command: /usr/bin/find
+[07:58:35] Info: Found the 'ifconfig' command: /sbin/ifconfig
+[07:58:35] Info: Found the 'ip' command: /sbin/ip
+[07:58:35] Info: Found the 'ipcs' command: /usr/bin/ipcs
+[07:58:35] Info: Found the 'ldd' command: /usr/bin/ldd
+[07:58:35] Info: Found the 'lsattr' command: /usr/bin/lsattr
+[07:58:35] Info: Found the 'lsmod' command: /sbin/lsmod
+[07:58:35] Info: Found the 'lsof' command: /usr/bin/lsof
+[07:58:35] Info: Found the 'mktemp' command: /bin/mktemp
+[07:58:35] Info: Found the 'netstat' command: /bin/netstat
+[07:58:35] Info: Found the 'perl' command: /usr/bin/perl
+[07:58:35] Info: Found the 'pgrep' command: /usr/bin/pgrep
+[07:58:35] Info: Found the 'ps' command: /bin/ps
+[07:58:35] Info: Found the 'pwd' command: /bin/pwd
+[07:58:35] Info: Found the 'readlink' command: /bin/readlink
+[07:58:35] Info: Found the 'stat' command: /usr/bin/stat
+[07:58:35] Info: Found the 'strings' command: /usr/bin/strings
+[07:58:35] Info: Found the 'wget' command: /usr/bin/wget
+[07:58:35] Info: The mirrors file will be rotated
+[07:58:35] Info: Both local and remote mirrors will be used
+[07:58:35] Info: The mirrors file will be updated
+[07:58:35] Info: Logging to log file: /var/log/rkhunter.log
+[07:58:35] Info: Locking is not being used
+[07:58:35]
+[07:58:35] Checking rkhunter data files...
+[07:58:35] Info: Created temporary file '/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH'
+[07:58:35] Info: Created temporary file '/var/lib/rkhunter/tmp/mirrors.dat.NXDIWO7xyY'
+[07:58:35] Info: The mirrors file has been rotated: /var/lib/rkhunter/db/mirrors.dat
+[07:58:35] Info: Executing download command '/usr/bin/wget  -q -O "/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH" http://rkhunter.sourceforge.net/1.3/mirrors.dat 2>/dev/null'
+[07:58:35] Info: This version  : 2007060601
+[07:58:35] Info: Latest version: 2007060601
+[07:58:35] Checking file mirrors.dat                         [ No update ]
+[07:58:35] Info: Executing download command '/usr/bin/wget  -q -O "/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH" http://rkhunter.sourceforge.net/1.3/programs_bad.dat 2>/dev/null'
+[07:58:36] Info: This version  : 2010111601
+[07:58:36] Info: Latest version: 2014042901
+[07:58:36] Info: Update available
+[07:58:36] Checking file programs_bad.dat                    [ Updated ]
+[07:58:36] Info: Executing download command '/usr/bin/wget  -q -O "/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH" http://rkhunter.sourceforge.net/1.3/backdoorports.dat 2>/dev/null'
+[07:58:36] Info: This version  : 2010111401
+[07:58:36] Info: Latest version: 2010111401
+[07:58:36] Checking file backdoorports.dat                   [ No update ]
+[07:58:36] Info: Executing download command '/usr/bin/wget  -q -O "/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH" http://rkhunter.sourceforge.net/1.3/suspscan.dat 2>/dev/null'
+[07:58:36] Info: This version  : 2009112901
+[07:58:36] Info: Latest version: 2009112901
+[07:58:36] Checking file suspscan.dat                        [ No update ]
+[07:58:36] Info: Executing download command '/usr/bin/wget  -q -O "/var/lib/rkhunter/tmp/rkhunter.upd.VECuP4htMH" http://rkhunter.sourceforge.net/1.3/i18n/1.4.2/i18n.ver 2>/dev/null'
+[07:58:37] Info: This version  : 2009091601
+[07:58:37] Info: Latest version: 2009091601
+[07:58:37] Checking file i18n/cn                             [ No update ]
+[07:58:37] Info: This version  : 2014010301
+[07:58:37] Info: Latest version: 2014010301
+[07:58:37] Checking file i18n/de                             [ No update ]
+[07:58:37] Info: This version  : 2013112401
+[07:58:37] Info: Latest version: 2013112401
+[07:58:37] Checking file i18n/en                             [ No update ]
+[07:58:37] Info: This version  : 2014030201
+[07:58:37] Info: Latest version: 2014030201
+[07:58:37] Checking file i18n/tr                             [ No update ]
+[07:58:37] Info: This version  : 2014030201
+[07:58:37] Info: Latest version: 2014030201
+[07:58:37] Checking file i18n/tr.utf8                        [ No update ]
+[07:58:37] Info: This version  : 2009091601
+[07:58:37] Info: Latest version: 2009091601
+[07:58:37] Checking file i18n/zh                             [ No update ]
+[07:58:37] Info: This version  : 2009091601
+[07:58:37] Info: Latest version: 2009091601
+[07:58:37] Checking file i18n/zh.utf8                        [ No update ]
+[07:58:37]
+[07:58:37] Info: End date is Tue Jan 22 07:58:37 PST 2019

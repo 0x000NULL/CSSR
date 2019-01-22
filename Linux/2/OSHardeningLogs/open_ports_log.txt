@@ -1,0 +1,15 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1126/dnsmasq    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      4435/sshd       
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      61879/cupsd     
+tcp6       0      0 :::22                   :::*                    LISTEN      4435/sshd       
+tcp6       0      0 ::1:631                 :::*                    LISTEN      61879/cupsd     
+udp        0      0 0.0.0.0:34716           0.0.0.0:*                           937/avahi-daemon: r
+udp    38208      0 0.0.0.0:48034           0.0.0.0:*                           1126/dnsmasq    
+udp    36864      0 127.0.1.1:53            0.0.0.0:*                           1126/dnsmasq    
+udp     2176      0 0.0.0.0:68              0.0.0.0:*                           125168/dhclient 
+udp        0      0 0.0.0.0:631             0.0.0.0:*                           61881/cups-browsed
+udp    29248      0 0.0.0.0:5353            0.0.0.0:*                           937/avahi-daemon: r
+udp6       0      0 :::37232                :::*                                937/avahi-daemon: r
+udp6   20736      0 :::5353                 :::*                                937/avahi-daemon: r

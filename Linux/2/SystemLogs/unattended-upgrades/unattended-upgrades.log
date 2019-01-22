@@ -1,0 +1,10 @@
+2019-01-22 07:55:54,026 INFO Initial blacklisted packages: 
+2019-01-22 07:55:54,027 INFO Initial whitelisted packages: 
+2019-01-22 07:55:54,027 INFO Starting unattended upgrades script
+2019-01-22 07:55:54,027 INFO Allowed origins are: ['o=Ubuntu,a=xenial', 'o=Ubuntu,a=xenial-security', 'o=UbuntuESM,a=xenial']
+2019-01-22 07:56:40,269 INFO Initial blacklisted packages: 
+2019-01-22 07:56:40,270 INFO Initial whitelisted packages: 
+2019-01-22 07:56:40,270 INFO Starting unattended upgrades script
+2019-01-22 07:56:40,270 INFO Allowed origins are: ['o=Ubuntu,a=xenial', 'o=Ubuntu,a=xenial-security', 'o=UbuntuESM,a=xenial']
+2019-01-22 07:56:51,479 INFO Packages that will be upgraded: apt apt-transport-https apt-utils libapt-inst2.0 libapt-pkg5.0 libpoppler-glib8 libpoppler58 libtiff5 linux-generic-hwe-16.04 linux-headers-generic-hwe-16.04 linux-image-generic-hwe-16.04 poppler-utils unattended-upgrades
+2019-01-22 07:56:51,481 INFO Writing dpkg log to '/var/log/unattended-upgrades/unattended-upgrades-dpkg.log'

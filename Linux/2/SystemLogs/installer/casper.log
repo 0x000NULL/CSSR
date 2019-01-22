@@ -1,0 +1,21 @@
+touch: /dev/.initramfs/lupin-waited-for-devs: No such file or directory
+cp: can't stat '/custom-installation/initrd-override/*': No such file or directory
+cp: can't stat '/custom-installation/iso-override/*': No such file or directory
+Generating locales (this might take a while)...
+Generation complete.
+grep: /root/floppy/preseed.cfg: No such file or directory
+pwconv: failed to change the mode of /etc/passwd- to 0600
+Using CD-ROM mount point /cdrom/
+Identifying... [ab00eaa9a7758eff3a1c21824c6934f0-2]
+Scanning disc for index files...
+Found 2 package indexes, 0 source indexes, 0 translation indexes and 1 signatures
+Found label 'Ubuntu 16.04.5 LTS _Xenial Xerus_ - Release amd64 (20180731)'
+This disc is called: 
+'Ubuntu 16.04.5 LTS _Xenial Xerus_ - Release amd64 (20180731)'
+Copying package lists...gpgv: Signature made Tue Jul 31 01:11:54 2018 UTC using RSA key ID EFE21092
+gpgv: Good signature from "Ubuntu CD Image Automatic Signing Key (2012) <cdimage@ubuntu.com>"
+Reading Package Indexes... 0%Reading Package Indexes... Done
+Writing new source list
+Source list entries for this disc are:
+deb cdrom:[Ubuntu 16.04.5 LTS _Xenial Xerus_ - Release amd64 (20180731)]/ xenial main restricted
+Repeat this process for the rest of the CDs in your set.

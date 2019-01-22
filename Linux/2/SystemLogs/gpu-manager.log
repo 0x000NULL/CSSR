@@ -1,0 +1,59 @@
+log_file: /var/log/gpu-manager.log
+last_boot_file: /var/lib/ubuntu-drivers-common/last_gfx_boot
+new_boot_file: /var/lib/ubuntu-drivers-common/last_gfx_boot
+can't access /run/u-d-c-nvidia-was-loaded file
+can't access /run/u-d-c-fglrx-was-loaded file
+Looking for fglrx modules in /lib/modules/4.15.0-29-generic/updates/dkms
+Looking for nvidia modules in /lib/modules/4.15.0-29-generic/updates/dkms
+Is nvidia loaded? no
+Was nvidia unloaded? no
+Is nvidia blacklisted? no
+Is fglrx loaded? no
+Was fglrx unloaded? no
+Is fglrx blacklisted? no
+Is intel loaded? no
+Is radeon loaded? no
+Is radeon blacklisted? no
+Is amdgpu loaded? no
+Is amdgpu blacklisted? no
+Is nouveau loaded? no
+Is nouveau blacklisted? no
+Is fglrx kernel module available? no
+Is nvidia kernel module available? no
+Vendor/Device Id: 15ad:405
+BusID "PCI:0@0:15:0"
+Is boot vga? yes
+Skipping "/dev/dri/card0", driven by "vmwgfx"
+Skipping "/dev/dri/card0", driven by "vmwgfx"
+Skipping "/dev/dri/card0", driven by "vmwgfx"
+Skipping "/dev/dri/card0", driven by "vmwgfx"
+Does it require offloading? no
+last cards number = 1
+Has amd? no
+Has intel? no
+Has nvidia? no
+How many cards? 1
+Has the system changed? No
+main_arch_path x86_64-linux-gnu, other_arch_path i386-linux-gnu
+Current alternative: /usr/lib/x86_64-linux-gnu/mesa/ld.so.conf
+Current core alternative: (null)
+Current egl alternative: /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf
+Is nvidia enabled? no
+Is nvidia egl enabled? no
+Is fglrx enabled? no
+Is mesa enabled? yes
+Is mesa egl enabled? yes
+Is pxpress enabled? no
+Is prime enabled? no
+Is prime egl enabled? no
+Is nvidia available? no
+Is nvidia egl available? no
+Is fglrx available? no
+Is fglrx-core available? no
+Is mesa available? yes
+Is mesa egl available? yes
+Is pxpress available? no
+Is prime available? no
+Is prime egl available? no
+Single card detected
+No change - nothing to do

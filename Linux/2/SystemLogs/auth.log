@@ -1,0 +1,19 @@
+Jan 22 08:01:58 ubuntu Rootkit Hunter: Scanning took 2 minutes and 56 seconds
+Jan 22 08:01:58 ubuntu Rootkit Hunter: Please inspect this machine, because it may be infected.
+Jan 22 08:02:11 ubuntu passwd[126202]: pam_unix(passwd:chauthtok): password changed for root
+Jan 22 08:02:11 ubuntu passwd[126202]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Jan 22 08:02:16 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 22 08:02:16 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 08:02:16 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 08:02:16 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 22 08:02:16 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 08:02:16 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 08:02:18 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw allow ssh
+Jan 22 08:02:18 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 08:02:18 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 08:02:19 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw enable
+Jan 22 08:02:19 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 08:02:19 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 08:02:37 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/bin/tee -a /etc/fstab
+Jan 22 08:02:37 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 08:02:37 ubuntu sudo: pam_unix(sudo:session): session closed for user root

@@ -1,0 +1,30 @@
+Jan 22 08:00:19 ubuntu anacron[939]: Job `cron.daily' terminated
+Jan 22 08:00:19 ubuntu anacron[939]: Normal exit (1 job run)
+Jan 22 08:01:51 ubuntu NetworkManager[936]: <info>  [1548172911.0560] device (ens33): link disconnected (deferring action for 4 seconds)
+Jan 22 08:01:51 ubuntu kernel: [  399.256958] e1000: ens33 NIC Link is Down
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0705] device (ens33): link connected
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0719] device (ens33): DHCPv4 lease renewal requested
+Jan 22 08:01:55 ubuntu kernel: [  403.288936] e1000: ens33 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0738] dhcp4 (ens33): canceled DHCP transaction, DHCP client pid 1029
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0738] dhcp4 (ens33): state changed bound -> done
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0765] dhcp4 (ens33): activation: beginning transaction (timeout in 45 seconds)
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.0885] dhcp4 (ens33): dhclient started with pid 125168
+Jan 22 08:01:55 ubuntu dhclient[125168]: DHCPREQUEST of 192.168.213.128 on ens33 to 255.255.255.255 port 67 (xid=0x57bac0aa)
+Jan 22 08:01:55 ubuntu dhclient[125168]: DHCPACK of 192.168.213.128 from 192.168.213.254
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1240]   address 192.168.213.128
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1244]   plen 24 (255.255.255.0)
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1246]   gateway 192.168.213.2
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1251]   server identifier 192.168.213.254
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1252]   lease time 1800
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1253]   nameserver '192.168.213.2'
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1255]   domain name 'localdomain'
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1256]   wins '192.168.213.2'
+Jan 22 08:01:55 ubuntu NetworkManager[936]: <info>  [1548172915.1258] dhcp4 (ens33): state changed unknown -> bound
+Jan 22 08:01:55 ubuntu dbus[907]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Jan 22 08:01:55 ubuntu systemd[1]: Starting Network Manager Script Dispatcher Service...
+Jan 22 08:01:55 ubuntu dbus[907]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Jan 22 08:01:55 ubuntu systemd[1]: Started Network Manager Script Dispatcher Service.
+Jan 22 08:01:55 ubuntu nm-dispatcher: req:1 'dhcp4-change' [ens33]: new request (1 scripts)
+Jan 22 08:01:55 ubuntu nm-dispatcher: req:1 'dhcp4-change' [ens33]: start running ordered scripts...
+Jan 22 08:01:55 ubuntu dhclient[125168]: bound to 192.168.213.128 -- renewal in 794 seconds.
+Jan 22 08:01:56 ubuntu kernel: [  404.340811] nf_conntrack: default automatic helper assignment has been turned off for security reasons and CT-based  firewall rule not found. Use the iptables CT target to attach helpers instead.
