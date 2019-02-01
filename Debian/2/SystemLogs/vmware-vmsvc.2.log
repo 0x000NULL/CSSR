@@ -1,0 +1,27 @@
+[Jan 17 10:13:26.301] [ message] [vmsvc] Log caching is enabled with maxCacheEntries=4096.
+[Jan 17 10:13:26.302] [ message] [vmsvc] Core dump limit set to -1
+[Jan 17 10:13:26.302] [ message] [vmtoolsd] Tools Version: 10.2.0.1608 (build-7253323)
+[Jan 17 10:13:26.353] [ message] [vmtoolsd] Plugin 'hgfsServer' initialized.
+[Jan 17 10:13:26.353] [ message] [vix] QueryVGAuthConfig: vgauth usage is: 1
+[Jan 17 10:13:26.353] [ message] [vmtoolsd] Plugin 'vix' initialized.
+[Jan 17 10:13:26.353] [ message] [vmtoolsd] Plugin 'deployPkg' initialized.
+[Jan 17 10:13:26.355] [ message] [vmtoolsd] Plugin 'grabbitmqProxy' initialized.
+[Jan 17 10:13:26.355] [ message] [vmtoolsd] Plugin 'guestInfo' initialized.
+[Jan 17 10:13:26.355] [ message] [vmtoolsd] Plugin 'powerops' initialized.
+[Jan 17 10:13:26.356] [ message] [resolutionCommon] resolutionCheckForKMS: dlopen succeeded.
+[Jan 17 10:13:26.964] [ message] [resolutionCommon] resolutionCheckForKMS: System support available for resolutionKMS.
+[Jan 17 10:13:26.964] [ message] [vmtoolsd] Plugin 'resolutionKMS' initialized.
+[Jan 17 10:13:26.964] [ message] [vmtoolsd] Plugin 'timeSync' initialized.
+[Jan 17 10:13:26.964] [ message] [vmtoolsd] Plugin 'vmbackup' initialized.
+[Jan 17 10:13:27.018] [ message] [vix] VixTools_ProcessVixCommand: command 62
+[Jan 17 10:13:27.108] [ message] [powerops] Executing script: '/etc/vmware-tools/poweron-vm-default'
+[Jan 17 10:13:27.148] [ message] [powerops] Script exit code: 0, success = 1
+[Jan 17 10:44:55.367] [ message] [vmtoolsd] Unloading plugin 'vmbackup'.
+[Jan 17 10:44:55.370] [ message] [vmtoolsd] Unloading plugin 'timeSync'.
+[Jan 17 10:44:55.372] [ message] [vmtoolsd] Unloading plugin 'resolutionKMS'.
+[Jan 17 10:44:55.373] [ message] [vmtoolsd] Unloading plugin 'powerops'.
+[Jan 17 10:44:55.373] [ message] [vmtoolsd] Unloading plugin 'guestInfo'.
+[Jan 17 10:44:55.374] [ message] [vmtoolsd] Unloading plugin 'grabbitmqProxy'.
+[Jan 17 10:44:55.378] [ message] [vmtoolsd] Unloading plugin 'deployPkg'.
+[Jan 17 10:44:55.378] [ message] [vmtoolsd] Unloading plugin 'vix'.
+[Jan 17 10:44:55.378] [ message] [vmtoolsd] Unloading plugin 'hgfsServer'.

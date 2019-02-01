@@ -1,0 +1,228 @@
+Jan 17 10:13:05 ubuntu systemd-logind[813]: New seat seat0.
+Jan 17 10:13:05 ubuntu systemd-logind[813]: Watching system buttons on /dev/input/event0 (Power Button)
+Jan 17 10:13:06 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 17 10:13:06 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 17 10:13:06 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 17 10:13:06 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 17 10:13:06 ubuntu lightdm: pam_unix(lightdm-greeter:session): session opened for user lightdm by (uid=0)
+Jan 17 10:13:06 ubuntu systemd: pam_unix(systemd-user:session): session opened for user lightdm by (uid=0)
+Jan 17 10:13:06 ubuntu systemd-logind[813]: New session c1 of user lightdm.
+Jan 17 10:13:06 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 17 10:13:06 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 17 10:13:06 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 17 10:13:06 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 17 10:13:06 ubuntu lightdm: pam_succeed_if(lightdm:auth): requirement "user ingroup nopasswdlogin" not met by user "stripcheese"
+Jan 17 10:13:24 ubuntu systemd-logind[813]: Watching system buttons on /dev/input/event0 (Power Button)
+Jan 17 10:14:09 ubuntu lightdm: pam_unix(lightdm-greeter:session): session closed for user lightdm
+Jan 17 10:14:09 ubuntu lightdm: pam_unix(lightdm:session): session opened for user stripcheese by (uid=0)
+Jan 17 10:14:09 ubuntu systemd: pam_unix(systemd-user:session): session opened for user stripcheese by (uid=0)
+Jan 17 10:14:09 ubuntu systemd-logind[813]: New session c2 of user stripcheese.
+Jan 17 10:14:15 ubuntu gnome-keyring-daemon[4062]: The Secret Service was already initialized
+Jan 17 10:14:15 ubuntu gnome-keyring-daemon[4062]: The PKCS#11 component was already initialized
+Jan 17 10:14:15 ubuntu gnome-keyring-daemon[4062]: The SSH agent was already initialized
+Jan 17 10:14:16 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c2 (system bus name :1.72 [/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1], object path /org/gnome/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Jan 17 10:14:39 ubuntu sudo: stripcheese : TTY=pts/17 ; PWD=/home/stripcheese ; USER=root ; COMMAND=/bin/su
+Jan 17 10:14:39 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:14:39 ubuntu su[4820]: Successful su for root by root
+Jan 17 10:14:39 ubuntu su[4820]: + /dev/pts/17 root:root
+Jan 17 10:14:39 ubuntu su[4820]: pam_unix(su:session): session opened for user root by (uid=0)
+Jan 17 10:14:39 ubuntu su[4820]: pam_systemd(su:session): Cannot create session: Already running in a session
+Jan 17 10:15:06 ubuntu systemd-logind[813]: Removed session c1.
+Jan 17 10:15:18 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:15:18 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:15:18 ubuntu pkexec[7268]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:17:01 ubuntu CRON[7600]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jan 17 10:17:01 ubuntu CRON[7600]: pam_unix(cron:session): session closed for user root
+Jan 17 10:18:18 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:18:18 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:18:18 ubuntu pkexec[7759]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:24:17 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:24:17 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:24:17 ubuntu pkexec[8254]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:28:34 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c2 (system bus name :1.72 [/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1], object path /org/gnome/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Jan 17 10:30:17 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:30:17 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:30:17 ubuntu pkexec[45711]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:30:34 ubuntu groupadd[56631]: group added to /etc/group: name=postfix, GID=129
+Jan 17 10:30:34 ubuntu groupadd[56631]: group added to /etc/gshadow: name=postfix
+Jan 17 10:30:34 ubuntu groupadd[56631]: new group: name=postfix, GID=129
+Jan 17 10:30:34 ubuntu useradd[56637]: new user: name=postfix, UID=121, GID=129, home=/var/spool/postfix, shell=/bin/false
+Jan 17 10:30:34 ubuntu usermod[56642]: change user 'postfix' password
+Jan 17 10:30:34 ubuntu chage[56647]: changed password expiry for postfix
+Jan 17 10:30:34 ubuntu groupadd[56687]: group added to /etc/group: name=postdrop, GID=130
+Jan 17 10:30:34 ubuntu groupadd[56687]: group added to /etc/gshadow: name=postdrop
+Jan 17 10:30:34 ubuntu groupadd[56687]: new group: name=postdrop, GID=130
+Jan 17 10:30:35 ubuntu groupadd[56740]: group added to /etc/group: name=clamav, GID=131
+Jan 17 10:30:35 ubuntu groupadd[56740]: group added to /etc/gshadow: name=clamav
+Jan 17 10:30:35 ubuntu groupadd[56740]: new group: name=clamav, GID=131
+Jan 17 10:30:35 ubuntu useradd[56744]: new user: name=clamav, UID=122, GID=131, home=/var/lib/clamav, shell=/bin/false
+Jan 17 10:30:35 ubuntu chage[56749]: changed password expiry for clamav
+Jan 17 10:30:37 ubuntu useradd[56959]: new user: name=sshd, UID=123, GID=65534, home=/var/run/sshd, shell=/usr/sbin/nologin
+Jan 17 10:30:37 ubuntu usermod[56964]: change user 'sshd' password
+Jan 17 10:30:37 ubuntu chage[56969]: changed password expiry for sshd
+Jan 17 10:30:37 ubuntu sshd[57060]: Server listening on 0.0.0.0 port 22.
+Jan 17 10:30:37 ubuntu sshd[57060]: Server listening on :: port 22.
+Jan 17 10:31:11 ubuntu passwd[66609]: password for 'root' changed by 'root'
+Jan 17 10:31:13 ubuntu chage[66624]: changed password expiry for stripcheese
+Jan 17 10:31:14 ubuntu sshd[57060]: Received signal 15; terminating.
+Jan 17 10:31:14 ubuntu sshd[66641]: Server listening on 0.0.0.0 port 22.
+Jan 17 10:31:14 ubuntu sshd[66641]: Server listening on :: port 22.
+Jan 17 10:33:33 ubuntu sshd[66641]: Received SIGHUP; restarting.
+Jan 17 10:33:33 ubuntu sshd[66641]: Server listening on 0.0.0.0 port 22.
+Jan 17 10:33:33 ubuntu sshd[66641]: Server listening on :: port 22.
+Jan 17 10:33:33 ubuntu sshd[66641]: Received SIGHUP; restarting.
+Jan 17 10:33:33 ubuntu sshd[66641]: Server listening on 0.0.0.0 port 22.
+Jan 17 10:33:33 ubuntu sshd[66641]: Server listening on :: port 22.
+Jan 17 10:33:38 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:33:38 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:33:38 ubuntu pkexec[66915]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:39:31 ubuntu passwd[67318]: password for 'root' changed by 'root'
+Jan 17 10:39:32 ubuntu chage[67333]: changed password expiry for stripcheese
+Jan 17 10:39:34 ubuntu sshd[66641]: Received signal 15; terminating.
+Jan 17 10:39:34 ubuntu sshd[67351]: Server listening on 0.0.0.0 port 22.
+Jan 17 10:39:34 ubuntu sshd[67351]: Server listening on :: port 22.
+Jan 17 10:40:57 ubuntu passwd[67379]: pam_unix(passwd:chauthtok): password changed for root
+Jan 17 10:40:57 ubuntu passwd[67379]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Jan 17 10:41:03 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 17 10:41:03 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:41:03 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:41:04 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 17 10:41:04 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:41:04 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:41:06 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw allow ssh
+Jan 17 10:41:06 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:41:06 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:41:06 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw enable
+Jan 17 10:41:06 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:41:06 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:41:13 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/chkrootkit
+Jan 17 10:41:13 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:41:15 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:41:16 ubuntu Rootkit Hunter: Rootkit hunter check started (version 1.4.2)
+Jan 17 10:42:17 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 10:42:17 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 10:42:17 ubuntu pkexec[121655]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 10:44:08 ubuntu Rootkit Hunter: Scanning took 2 minutes and 52 seconds
+Jan 17 10:44:08 ubuntu Rootkit Hunter: Please inspect this machine, because it may be infected.
+Jan 17 10:44:32 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 17 10:44:32 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:44:32 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 10:44:32 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 17 10:44:32 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 10:44:32 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 17 12:52:55 ubuntu systemd-logind[912]: New seat seat0.
+Jan 17 12:52:55 ubuntu systemd-logind[912]: Watching system buttons on /dev/input/event0 (Power Button)
+Jan 17 12:52:56 ubuntu sshd[1008]: Server listening on 0.0.0.0 port 22.
+Jan 17 12:52:56 ubuntu sshd[1008]: Server listening on :: port 22.
+Jan 17 12:52:58 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 17 12:52:58 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 17 12:52:58 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 17 12:52:58 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 17 12:52:58 ubuntu lightdm: pam_unix(lightdm-greeter:session): session opened for user lightdm by (uid=0)
+Jan 17 12:52:58 ubuntu systemd-logind[912]: New session c1 of user lightdm.
+Jan 17 12:52:58 ubuntu systemd: pam_unix(systemd-user:session): session opened for user lightdm by (uid=0)
+Jan 17 12:52:59 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 17 12:52:59 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 17 12:52:59 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 17 12:52:59 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 17 12:52:59 ubuntu lightdm: pam_succeed_if(lightdm:auth): requirement "user ingroup nopasswdlogin" not met by user "stripcheese"
+Jan 17 12:53:00 ubuntu sshd[1008]: Received SIGHUP; restarting.
+Jan 17 12:53:00 ubuntu sshd[1008]: Server listening on 0.0.0.0 port 22.
+Jan 17 12:53:00 ubuntu sshd[1008]: Server listening on :: port 22.
+Jan 17 12:53:01 ubuntu sshd[1008]: Received SIGHUP; restarting.
+Jan 17 12:53:01 ubuntu sshd[1008]: Server listening on 0.0.0.0 port 22.
+Jan 17 12:53:01 ubuntu sshd[1008]: Server listening on :: port 22.
+Jan 17 12:53:14 ubuntu lightdm: pam_unix(lightdm-greeter:session): session closed for user lightdm
+Jan 17 12:53:14 ubuntu lightdm: pam_unix(lightdm:session): session opened for user stripcheese by (uid=0)
+Jan 17 12:53:14 ubuntu systemd: pam_unix(systemd-user:session): session opened for user stripcheese by (uid=0)
+Jan 17 12:53:14 ubuntu systemd-logind[912]: New session c2 of user stripcheese.
+Jan 17 12:53:14 ubuntu dbus[870]: [system] Rejected send message, 2 matched rules; type="method_call", sender=":1.49" (uid=108 pid=1423 comm="/usr/lib/x86_64-linux-gnu/indicator-bluetooth/indi") interface="org.freedesktop.DBus.Properties" member="GetAll" error name="(unset)" requested_reply="0" destination=":1.1" (uid=0 pid=876 comm="/usr/lib/bluetooth/bluetoothd ")
+Jan 17 12:53:14 ubuntu dbus[870]: [system] Rejected send message, 2 matched rules; type="method_call", sender=":1.49" (uid=108 pid=1423 comm="/usr/lib/x86_64-linux-gnu/indicator-bluetooth/indi") interface="org.freedesktop.DBus.ObjectManager" member="GetManagedObjects" error name="(unset)" requested_reply="0" destination="org.bluez" (uid=0 pid=876 comm="/usr/lib/bluetooth/bluetoothd ")
+Jan 17 12:53:28 ubuntu gnome-keyring-daemon[1461]: The Secret Service was already initialized
+Jan 17 12:53:28 ubuntu gnome-keyring-daemon[1461]: The PKCS#11 component was already initialized
+Jan 17 12:53:28 ubuntu gnome-keyring-daemon[1461]: The SSH agent was already initialized
+Jan 17 12:53:31 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c2 (system bus name :1.77 [/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1], object path /org/gnome/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Jan 17 12:54:26 ubuntu sudo: stripcheese : TTY=pts/17 ; PWD=/home/stripcheese ; USER=root ; COMMAND=/bin/su
+Jan 17 12:54:26 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 17 12:54:26 ubuntu su[2198]: Successful su for root by root
+Jan 17 12:54:26 ubuntu su[2198]: + /dev/pts/17 root:root
+Jan 17 12:54:26 ubuntu su[2198]: pam_unix(su:session): session opened for user root by (uid=0)
+Jan 17 12:54:26 ubuntu su[2198]: pam_systemd(su:session): Cannot create session: Already running in a session
+Jan 17 12:54:33 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 17 12:54:33 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 17 12:54:33 ubuntu pkexec[2226]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 17 12:54:59 ubuntu systemd-logind[912]: Removed session c1.
+Jan 17 12:56:22 ubuntu su[2198]: pam_unix(su:session): session closed for user root
+Jan 17 12:56:22 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:55:17 ubuntu systemd-logind[892]: New seat seat0.
+Jan 22 07:55:17 ubuntu systemd-logind[892]: Watching system buttons on /dev/input/event0 (Power Button)
+Jan 22 07:55:17 ubuntu sshd[1013]: Server listening on 0.0.0.0 port 22.
+Jan 22 07:55:17 ubuntu sshd[1013]: Server listening on :: port 22.
+Jan 22 07:55:18 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 22 07:55:18 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 22 07:55:18 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 22 07:55:18 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 22 07:55:18 ubuntu lightdm: pam_unix(lightdm-greeter:session): session opened for user lightdm by (uid=0)
+Jan 22 07:55:18 ubuntu systemd-logind[892]: New session c1 of user lightdm.
+Jan 22 07:55:18 ubuntu systemd: pam_unix(systemd-user:session): session opened for user lightdm by (uid=0)
+Jan 22 07:55:19 ubuntu lightdm: PAM unable to dlopen(pam_kwallet.so): /lib/security/pam_kwallet.so: cannot open shared object file: No such file or directory
+Jan 22 07:55:19 ubuntu lightdm: PAM adding faulty module: pam_kwallet.so
+Jan 22 07:55:19 ubuntu lightdm: PAM unable to dlopen(pam_kwallet5.so): /lib/security/pam_kwallet5.so: cannot open shared object file: No such file or directory
+Jan 22 07:55:19 ubuntu lightdm: PAM adding faulty module: pam_kwallet5.so
+Jan 22 07:55:19 ubuntu lightdm: pam_succeed_if(lightdm:auth): requirement "user ingroup nopasswdlogin" not met by user "stripcheese"
+Jan 22 07:55:21 ubuntu sshd[1013]: Received SIGHUP; restarting.
+Jan 22 07:55:21 ubuntu sshd[1013]: Server listening on 0.0.0.0 port 22.
+Jan 22 07:55:21 ubuntu sshd[1013]: Server listening on :: port 22.
+Jan 22 07:55:21 ubuntu sshd[1013]: Received SIGHUP; restarting.
+Jan 22 07:55:21 ubuntu sshd[1013]: Server listening on 0.0.0.0 port 22.
+Jan 22 07:55:21 ubuntu sshd[1013]: Server listening on :: port 22.
+Jan 22 07:55:24 ubuntu lightdm: pam_unix(lightdm-greeter:session): session closed for user lightdm
+Jan 22 07:55:24 ubuntu lightdm: pam_unix(lightdm:session): session opened for user stripcheese by (uid=0)
+Jan 22 07:55:24 ubuntu systemd: pam_unix(systemd-user:session): session opened for user stripcheese by (uid=0)
+Jan 22 07:55:24 ubuntu systemd-logind[892]: New session c2 of user stripcheese.
+Jan 22 07:55:32 ubuntu gnome-keyring-daemon[1453]: The Secret Service was already initialized
+Jan 22 07:55:32 ubuntu gnome-keyring-daemon[1453]: The SSH agent was already initialized
+Jan 22 07:55:32 ubuntu gnome-keyring-daemon[1453]: The PKCS#11 component was already initialized
+Jan 22 07:55:34 ubuntu polkitd(authority=local): Registered Authentication Agent for unix-session:c2 (system bus name :1.71 [/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1], object path /org/gnome/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Jan 22 07:56:16 ubuntu sudo: stripcheese : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot ; USER=root ; COMMAND=/usr/bin/git pull
+Jan 22 07:56:16 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:56:35 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:56:37 ubuntu pkexec: pam_unix(polkit-1:session): session opened for user root by (uid=1000)
+Jan 22 07:56:37 ubuntu pkexec: pam_systemd(polkit-1:session): Cannot create session: Already running in a session
+Jan 22 07:56:37 ubuntu pkexec[2487]: stripcheese: Executing command [USER=root] [TTY=unknown] [CWD=/home/stripcheese] [COMMAND=/usr/lib/update-notifier/package-system-locked]
+Jan 22 07:57:06 ubuntu sudo: stripcheese : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux ; USER=root ; COMMAND=/bin/su
+Jan 22 07:57:06 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:57:06 ubuntu su[3962]: Successful su for root by root
+Jan 22 07:57:06 ubuntu su[3962]: + /dev/pts/17 root:root
+Jan 22 07:57:06 ubuntu su[3962]: pam_unix(su:session): session opened for user root by (uid=0)
+Jan 22 07:57:07 ubuntu su[3962]: pam_systemd(su:session): Cannot create session: Already running in a session
+Jan 22 07:57:18 ubuntu systemd-logind[892]: Removed session c1.
+Jan 22 07:57:34 ubuntu passwd[4404]: password for 'root' changed by 'root'
+Jan 22 07:57:35 ubuntu chage[4419]: changed password expiry for stripcheese
+Jan 22 07:57:37 ubuntu sshd[1013]: Received signal 15; terminating.
+Jan 22 07:57:37 ubuntu sshd[4435]: Server listening on 0.0.0.0 port 22.
+Jan 22 07:57:37 ubuntu sshd[4435]: Server listening on :: port 22.
+Jan 22 07:58:37 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/bin/apt-get install ufw
+Jan 22 07:58:37 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:37 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:44 ubuntu passwd[7474]: pam_unix(passwd:chauthtok): password changed for root
+Jan 22 07:58:44 ubuntu passwd[7474]: gkr-pam: couldn't update the login keyring password: no old password was entered
+Jan 22 07:58:52 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 22 07:58:52 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:52 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:52 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw status verbose
+Jan 22 07:58:52 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:52 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:54 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw allow ssh
+Jan 22 07:58:54 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:55 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:55 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/ufw enable
+Jan 22 07:58:55 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:55 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:57 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/bin/tee -a /etc/fstab
+Jan 22 07:58:57 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:58:57 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:58:58 ubuntu sudo:     root : TTY=pts/17 ; PWD=/home/stripcheese/CyberPatriot/Linux/2 ; USER=root ; COMMAND=/usr/sbin/chkrootkit
+Jan 22 07:58:58 ubuntu sudo: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jan 22 07:59:01 ubuntu sudo: pam_unix(sudo:session): session closed for user root
+Jan 22 07:59:02 ubuntu Rootkit Hunter: Rootkit hunter check started (version 1.4.2)

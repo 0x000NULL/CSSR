@@ -1,0 +1,3089 @@
+/bin/partman: *******************************************************
+/lib/partman/init.d/30parted: *******************************************************
+parted_server: ======= Starting the server
+parted_server: main_loop: iteration 1
+parted_server: Opening infifo
+/lib/partman/init.d/30parted: IN: OPEN =dev=sda /dev/sda
+parted_server: Read command: OPEN
+parted_server: command_open()
+parted_server: Request to open =dev=sda
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: OK
+
+
+parted_server: Note =dev=sda as unchanged
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 2
+parted_server: Opening infifo
+/lib/partman/init.d/30parted: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 3
+parted_server: Opening infifo
+/lib/partman/init.d/35dump: *******************************************************
+/lib/partman/init.d/35dump: IN: DUMP =dev=sda
+parted_server: Read command: DUMP
+parted_server: command_dump()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 4
+parted_server: Opening infifo
+Device: yes
+Model: VMware, VMware Virtual S
+Path: /dev/sda
+Sector size: 512
+Sectors: 73400320
+Sectors/track: 63
+Heads: 255
+Cylinders: 4568
+Partition table: no
+/lib/partman/init.d/50biosgrub: *******************************************************
+/lib/partman/init.d/50biosgrub: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 5
+parted_server: Opening infifo
+/lib/partman/init.d/50lvm: *******************************************************
+/lib/partman/init.d/50lvm: *******************************************************
+/lib/partman/init.d/50lvm: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 6
+parted_server: Opening infifo
+/lib/partman/init.d/52crypto: *******************************************************
+/lib/partman/init.d/52crypto: *******************************************************
+/lib/partman/init.d/52crypto: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 7
+parted_server: Opening infifo
+/lib/partman/init.d/70update_partitions: *******************************************************
+/lib/partman/init.d/70update_partitions: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 8
+parted_server: Opening infifo
+/lib/partman/init.d/75auto_mountpoints: *******************************************************
+/lib/partman/init.d/80autouse_swap: *******************************************************
+/lib/partman/init.d/80autouse_swap: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 9
+parted_server: Opening infifo
+/lib/partman/display.d/10initial_auto: *******************************************************
+/bin/autopartition: *******************************************************
+/bin/autopartition: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 10
+parted_server: Opening infifo
+/bin/autopartition: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: unknown
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 11
+parted_server: Opening infifo
+/bin/autopartition: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 12
+parted_server: Opening infifo
+/bin/autopartition: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: unknown
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 13
+parted_server: Opening infifo
+/bin/autopartition: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 14
+parted_server: Opening infifo
+/bin/autopartition: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: unknown
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 15
+parted_server: Opening infifo
+/bin/autopartition: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: No partitions
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 16
+parted_server: Opening infifo
+/bin/autopartition: *******************************************************
+/bin/autopartition: IN: LABEL_TYPES =dev=sda
+parted_server: Read command: LABEL_TYPES
+parted_server: command_label_types()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: aix
+
+
+parted_server: OUT: amiga
+
+
+parted_server: OUT: bsd
+
+
+parted_server: OUT: dvh
+
+
+parted_server: OUT: gpt
+
+
+parted_server: OUT: mac
+
+
+parted_server: OUT: msdos
+
+
+parted_server: OUT: pc98
+
+
+parted_server: OUT: sun
+
+
+parted_server: OUT: loop
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+/bin/autopartition: option: aix
+/bin/autopartition: option: amiga
+/bin/autopartition: option: bsd
+/bin/autopartition: option: dvh
+/bin/autopartition: option: gpt
+/bin/autopartition: option: mac
+/bin/autopartition: option: msdos
+/bin/autopartition: option: pc98
+/bin/autopartition: option: sun
+/bin/autopartition: option: loop
+parted_server: main_loop: iteration 17
+parted_server: Opening infifo
+/bin/autopartition: IN: NEW_LABEL =dev=sda msdos
+parted_server: Read command: NEW_LABEL
+parted_server: command_new_label()
+parted_server: Note =dev=sda as changed
+parted_server: Opening outfifo
+parted_server: command_new_label: requested label with type msdos
+parted_server: command_new_label: creating
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 18
+parted_server: Opening infifo
+/bin/autopartition: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 19
+parted_server: Opening infifo
+/bin/perform_recipe: *******************************************************
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 20
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 32256-37580963839
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 32256-37580963839
+parted_server: partition_with_id(32256-37580963839)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 21
+parted_server: Opening infifo
+/lib/partman/update.d/20bootable: *******************************************************
+/lib/partman/update.d/20detected_filesystem: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: *******************************************************
+/lib/partman/update.d/21lvm_sync_flag: *******************************************************
+/lib/partman/update.d/50filesystems: *******************************************************
+/lib/partman/update.d/60basicmethods: *******************************************************
+/lib/partman/update.d/60lvm_visuals: *******************************************************
+/lib/partman/update.d/60swap: *******************************************************
+/lib/partman/update.d/61crypto_visuals: *******************************************************
+/lib/partman/visual.d/10type: *******************************************************
+/lib/partman/visual.d/10type: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 22
+parted_server: Opening infifo
+/lib/partman/visual.d/15size: *******************************************************
+/lib/partman/visual.d/35name: *******************************************************
+/lib/partman/visual.d/35name: IN: USES_NAMES =dev=sda
+parted_server: Read command: USES_NAMES
+parted_server: command_uses_names()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 23
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 32256-37580963839
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 32256-37580963839
+parted_server: partition_with_id(32256-37580963839)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 24
+parted_server: Opening infifo
+/bin/perform_recipe: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 25
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 26
+parted_server: Opening infifo
+/bin/perform_recipe: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 27
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: -1	32256-37580963839	37580931584	pri/log	free	/dev/sda-1	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 28
+parted_server: Opening infifo
+/bin/perform_recipe: IN: NEW_PARTITION =dev=sda primary ext4 32256-37580963839 beginning 36556000001
+parted_server: Read command: NEW_PARTITION
+parted_server: command_new_partition()
+parted_server: Note =dev=sda as changed
+parted_server: Opening outfifo
+parted_server: requested partition with type primary
+parted_server: requested partition with file system ext4
+parted_server: add_primary_partition(disk(73400320),63-71398500)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 29
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: -1	36556505088-37580963839	1024458752	pri/log	free	/dev/sda-1	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 30
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 36556505088-37580963839
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36556505088-37580963839
+parted_server: partition_with_id(36556505088-37580963839)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: -1	36556505088-37580963839	1024458752	pri/log	free	/dev/sda-1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 31
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 36556505088-37580963839
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36556505088-37580963839
+parted_server: partition_with_id(36556505088-37580963839)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: -1	36556505088-37580963839	1024458752	pri/log	free	/dev/sda-1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 32
+parted_server: Opening infifo
+/bin/perform_recipe: IN: NEW_PARTITION =dev=sda logical linux-swap 36556505088-37580963839 full 1024000001
+parted_server: Read command: NEW_PARTITION
+parted_server: command_new_partition()
+parted_server: Note =dev=sda as changed
+parted_server: Opening outfifo
+parted_server: requested partition with type logical
+parted_server: requested partition with file system linux-swap(v1)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 33
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 34
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 35
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 1048576-36556505087
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 36
+parted_server: Opening infifo
+/lib/partman/update.d/20bootable: *******************************************************
+/lib/partman/update.d/20bootable: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 37
+parted_server: Opening infifo
+/lib/partman/update.d/20detected_filesystem: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 38
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: *******************************************************
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 39
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 40
+parted_server: Opening infifo
+/lib/partman/update.d/50filesystems: *******************************************************
+/lib/partman/update.d/50filesystems: IN: PARTITION_INFO =dev=sda 1048576-36556505087
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 41
+parted_server: Opening infifo
+/lib/partman/update.d/60basicmethods: *******************************************************
+/lib/partman/update.d/60lvm_visuals: *******************************************************
+/lib/partman/update.d/60swap: *******************************************************
+/lib/partman/update.d/61crypto_visuals: *******************************************************
+/lib/partman/visual.d/10type: *******************************************************
+/lib/partman/visual.d/10type: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 42
+parted_server: Opening infifo
+/lib/partman/visual.d/15size: *******************************************************
+/lib/partman/visual.d/35name: *******************************************************
+/lib/partman/visual.d/35name: IN: USES_NAMES =dev=sda
+parted_server: Read command: USES_NAMES
+parted_server: command_uses_names()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 43
+parted_server: Opening infifo
+/bin/perform_recipe: IN: PARTITION_INFO =dev=sda 36557553664-37579915263
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36557553664-37579915263
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 44
+parted_server: Opening infifo
+/lib/partman/update.d/20bootable: *******************************************************
+/lib/partman/update.d/20bootable: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 45
+parted_server: Opening infifo
+/lib/partman/update.d/20detected_filesystem: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 46
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: *******************************************************
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 47
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 48
+parted_server: Opening infifo
+/lib/partman/update.d/50filesystems: *******************************************************
+/lib/partman/update.d/60basicmethods: *******************************************************
+/lib/partman/update.d/60lvm_visuals: *******************************************************
+/lib/partman/update.d/60swap: *******************************************************
+/lib/partman/update.d/60swap: IN: CHANGE_FILE_SYSTEM =dev=sda 36557553664-37579915263 linux-swap
+parted_server: Read command: CHANGE_FILE_SYSTEM
+parted_server: Opening outfifo
+parted_server: command_change_file_system(36557553664-37579915263,linux-swap)
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Already using filesystem linux-swap(v1)
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 49
+parted_server: Opening infifo
+/lib/partman/update.d/61crypto_visuals: *******************************************************
+/lib/partman/visual.d/10type: *******************************************************
+/lib/partman/visual.d/10type: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 50
+parted_server: Opening infifo
+/lib/partman/visual.d/15size: *******************************************************
+/lib/partman/visual.d/35name: *******************************************************
+/lib/partman/visual.d/35name: IN: USES_NAMES =dev=sda
+parted_server: Read command: USES_NAMES
+parted_server: command_uses_names()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 51
+parted_server: Opening infifo
+/lib/partman/display.d/80manual_partitioning: *******************************************************
+/lib/partman/choose_partition/20auto/choices: *******************************************************
+/lib/partman/choose_partition/30lvm/choices: *******************************************************
+/lib/partman/choose_partition/30lvm/choices: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+/lib/partman/choose_partition/30lvm/choices: paragraph: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+/lib/partman/choose_partition/30lvm/choices: paragraph: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+parted_server: main_loop: iteration 52
+parted_server: Opening infifo
+/lib/partman/choose_partition/30lvm/choices: IN: PARTITION_INFO =dev=sda 1048576-36556505087
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 53
+parted_server: Opening infifo
+/lib/partman/choose_partition/30lvm/choices: IN: VALID_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: VALID_FLAGS
+parted_server: command_valid_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: boot
+
+
+parted_server: OUT: hidden
+
+
+parted_server: OUT: raid
+
+
+parted_server: OUT: lvm
+
+
+parted_server: OUT: lba
+
+
+parted_server: OUT: palo
+
+
+parted_server: OUT: prep
+
+
+parted_server: OUT: diag
+
+
+parted_server: OUT: irst
+
+
+parted_server: OUT: esp
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 54
+parted_server: Opening infifo
+/lib/partman/choose_partition/30lvm/choices: IN: PARTITION_INFO =dev=sda 36557553664-37579915263
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36557553664-37579915263
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 55
+parted_server: Opening infifo
+/lib/partman/choose_partition/30lvm/choices: IN: VALID_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: VALID_FLAGS
+parted_server: command_valid_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: boot
+
+
+parted_server: OUT: hidden
+
+
+parted_server: OUT: raid
+
+
+parted_server: OUT: lvm
+
+
+parted_server: OUT: lba
+
+
+parted_server: OUT: palo
+
+
+parted_server: OUT: prep
+
+
+parted_server: OUT: diag
+
+
+parted_server: OUT: irst
+
+
+parted_server: OUT: esp
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 56
+parted_server: Opening infifo
+/lib/partman/choose_partition/35crypto/choices: *******************************************************
+/lib/partman/choose_partition/35crypto/choices: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+/lib/partman/choose_partition/35crypto/choices: paragraph: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+/lib/partman/choose_partition/35crypto/choices: paragraph: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+parted_server: main_loop: iteration 57
+parted_server: Opening infifo
+/lib/partman/choose_partition/60partition_tree/choices: *******************************************************
+/lib/partman/choose_partition/60partition_tree/choices: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+/lib/partman/choose_partition/60partition_tree/choices: paragraph: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+/lib/partman/choose_partition/60partition_tree/choices: paragraph: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+parted_server: main_loop: iteration 58
+parted_server: Opening infifo
+/lib/partman/check.d/03partition_too_small: *******************************************************
+/lib/partman/check.d/03partition_too_small: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 59
+parted_server: Opening infifo
+/lib/partman/check.d/05duplicate_labels: *******************************************************
+/lib/partman/check.d/05duplicate_labels: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 60
+parted_server: Opening infifo
+/lib/partman/check.d/05no_btrfs_boot: *******************************************************
+/lib/partman/check.d/05proper_mountpoints: *******************************************************
+/lib/partman/fstab.d/basic: *******************************************************
+/lib/partman/fstab.d/basic: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 61
+parted_server: Opening infifo
+/lib/partman/fstab.d/btrfs: *******************************************************
+/lib/partman/fstab.d/btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 62
+parted_server: Opening infifo
+/lib/partman/fstab.d/efi: *******************************************************
+/lib/partman/fstab.d/efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 63
+parted_server: Opening infifo
+/lib/partman/fstab.d/ext3: *******************************************************
+/lib/partman/fstab.d/ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 64
+parted_server: Opening infifo
+/lib/partman/fstab.d/jfs: *******************************************************
+/lib/partman/fstab.d/jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 65
+parted_server: Opening infifo
+/lib/partman/fstab.d/xfs: *******************************************************
+/lib/partman/fstab.d/xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 66
+parted_server: Opening infifo
+/lib/partman/fstab.d/basic: *******************************************************
+/lib/partman/fstab.d/basic: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 67
+parted_server: Opening infifo
+/lib/partman/fstab.d/btrfs: *******************************************************
+/lib/partman/fstab.d/btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 68
+parted_server: Opening infifo
+/lib/partman/fstab.d/efi: *******************************************************
+/lib/partman/fstab.d/efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 69
+parted_server: Opening infifo
+/lib/partman/fstab.d/ext3: *******************************************************
+/lib/partman/fstab.d/ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 70
+parted_server: Opening infifo
+/lib/partman/fstab.d/jfs: *******************************************************
+/lib/partman/fstab.d/jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 71
+parted_server: Opening infifo
+/lib/partman/fstab.d/xfs: *******************************************************
+/lib/partman/fstab.d/xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 72
+parted_server: Opening infifo
+/lib/partman/fstab.d/basic: *******************************************************
+/lib/partman/fstab.d/basic: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 73
+parted_server: Opening infifo
+/lib/partman/fstab.d/btrfs: *******************************************************
+/lib/partman/fstab.d/btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 74
+parted_server: Opening infifo
+/lib/partman/fstab.d/efi: *******************************************************
+/lib/partman/fstab.d/efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 75
+parted_server: Opening infifo
+/lib/partman/fstab.d/ext3: *******************************************************
+/lib/partman/fstab.d/ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 76
+parted_server: Opening infifo
+/lib/partman/fstab.d/jfs: *******************************************************
+/lib/partman/fstab.d/jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 77
+parted_server: Opening infifo
+/lib/partman/fstab.d/xfs: *******************************************************
+/lib/partman/fstab.d/xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 78
+parted_server: Opening infifo
+/lib/partman/check.d/07basic_method_only: *******************************************************
+/lib/partman/check.d/07basic_method_only: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 79
+parted_server: Opening infifo
+/lib/partman/check.d/07crypto_check_mountpoints: *******************************************************
+/lib/partman/check.d/07crypto_check_mountpoints: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 80
+parted_server: Opening infifo
+/lib/partman/check.d/07efi: *******************************************************
+/lib/partman/check.d/07efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 81
+parted_server: Opening infifo
+/lib/partman/check.d/08biosgrub: *******************************************************
+/lib/partman/check.d/08biosgrub: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 82
+parted_server: Opening infifo
+/lib/partman/check.d/08mountpoint_fat: *******************************************************
+/lib/partman/check.d/08mountpoint_fat: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 83
+parted_server: Opening infifo
+/lib/partman/check.d/09nomountpoint_basicfilesystems: *******************************************************
+/lib/partman/check.d/09nomountpoint_basicfilesystems: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 84
+parted_server: Opening infifo
+/lib/partman/check.d/09nomountpoint_btrfs: *******************************************************
+/lib/partman/check.d/09nomountpoint_btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 85
+parted_server: Opening infifo
+/lib/partman/check.d/09nomountpoint_ext3: *******************************************************
+/lib/partman/check.d/09nomountpoint_ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 86
+parted_server: Opening infifo
+/lib/partman/check.d/09nomountpoint_jfs: *******************************************************
+/lib/partman/check.d/09nomountpoint_jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 87
+parted_server: Opening infifo
+/lib/partman/check.d/09nomountpoint_xfs: *******************************************************
+/lib/partman/check.d/09nomountpoint_xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 88
+parted_server: Opening infifo
+/lib/partman/check.d/10alignment_ext3: *******************************************************
+/lib/partman/check.d/10alignment_ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 89
+parted_server: Opening infifo
+/lib/partman/check.d/10alignment_ext3: IN: ALIGNMENT_OFFSET =dev=sda 1048576-36556505087
+parted_server: Read command: ALIGNMENT_OFFSET
+parted_server: command_alignment_offset()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 0
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 90
+parted_server: Opening infifo
+/lib/partman/check.d/10check_basicfilesystems: *******************************************************
+/lib/partman/check.d/10check_basicfilesystems: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 91
+parted_server: Opening infifo
+/lib/partman/check.d/10check_swap: *******************************************************
+/lib/partman/check.d/10check_swap: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 92
+parted_server: Opening infifo
+/lib/partman/check.d/11unsafe_swap: *******************************************************
+/lib/partman/check.d/12system_partitions_formatted: *******************************************************
+/lib/partman/check.d/12system_partitions_formatted: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 93
+parted_server: Opening infifo
+/lib/partman/check.d/13encrypted_home_present: *******************************************************
+/lib/partman/check.d/13encrypted_home_present: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 94
+parted_server: Opening infifo
+/bin/partman: IN: IS_CHANGED =dev=sda
+parted_server: Read command: IS_CHANGED
+parted_server: command_is_changed(=dev=sda)
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 95
+parted_server: Opening infifo
+/bin/partman: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 96
+parted_server: Opening infifo
+ubiquity: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 97
+parted_server: Opening infifo
+/bin/partman-commit: *******************************************************
+/lib/partman/init.d/30parted: *******************************************************
+/lib/partman/init.d/35dump: *******************************************************
+/lib/partman/init.d/35dump: IN: DUMP =dev=sda
+parted_server: Read command: DUMP
+parted_server: command_dump()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 98
+parted_server: Opening infifo
+Device: yes
+Model: VMware, VMware Virtual S
+Path: /dev/sda
+Sector size: 512
+Sectors: 73400320
+Sectors/track: 63
+Heads: 255
+Cylinders: 4568
+Partition table: yes
+Type: msdos
+Partitions: #	id	length	type	fs	path	name
+(0,0,0)	(0,0,62)	-1	0-32255	32256	primary	label	/dev/sda-1	
+(0,1,0)	(0,32,31)	-1	32256-1048575	1016320	primary	free	/dev/sda-1	
+(0,32,32)	(4444,104,11)	1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+(4444,104,12)	(4444,136,41)	-1	36556505088-36557552639	1047552	pri/log	free	/dev/sda-1	
+(4444,136,42)	(4568,211,58)	2	36557552640-37579915263	1022362624	primary	extended	/dev/sda2	
+(4444,136,42)	(4444,136,43)	-1	36557552640-36557553663	1024	logical	label	/dev/sda-1	
+(4444,136,44)	(4568,211,58)	5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+(4568,211,59)	(4568,244,27)	-1	37579915264-37580963839	1048576	pri/log	free	/dev/sda-1	
+Dump finished.
+/lib/partman/init.d/50biosgrub: *******************************************************
+/lib/partman/init.d/50biosgrub: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 99
+parted_server: Opening infifo
+/lib/partman/init.d/50biosgrub: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 100
+parted_server: Opening infifo
+/lib/partman/init.d/50biosgrub: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 101
+parted_server: Opening infifo
+/lib/partman/init.d/50lvm: *******************************************************
+/lib/partman/init.d/50lvm: *******************************************************
+/lib/partman/init.d/50lvm: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 102
+parted_server: Opening infifo
+/lib/partman/init.d/50lvm: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 103
+parted_server: Opening infifo
+/lib/partman/init.d/50lvm: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 104
+parted_server: Opening infifo
+/lib/partman/init.d/52crypto: *******************************************************
+/lib/partman/init.d/52crypto: *******************************************************
+/lib/partman/init.d/52crypto: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 105
+parted_server: Opening infifo
+/lib/partman/init.d/70update_partitions: *******************************************************
+/lib/partman/init.d/70update_partitions: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 106
+parted_server: Opening infifo
+/lib/partman/update.d/20bootable: *******************************************************
+/lib/partman/update.d/20bootable: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 107
+parted_server: Opening infifo
+/lib/partman/update.d/20detected_filesystem: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 108
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: *******************************************************
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 109
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_FLAGS =dev=sda 1048576-36556505087
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: Partition found (1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 110
+parted_server: Opening infifo
+/lib/partman/update.d/50filesystems: *******************************************************
+/lib/partman/update.d/50filesystems: IN: PARTITION_INFO =dev=sda 1048576-36556505087
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 111
+parted_server: Opening infifo
+/lib/partman/update.d/60basicmethods: *******************************************************
+/lib/partman/update.d/60lvm_visuals: *******************************************************
+/lib/partman/update.d/60swap: *******************************************************
+/lib/partman/update.d/61crypto_visuals: *******************************************************
+/lib/partman/visual.d/10type: *******************************************************
+/lib/partman/visual.d/10type: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 112
+parted_server: Opening infifo
+/lib/partman/visual.d/15size: *******************************************************
+/lib/partman/visual.d/35name: *******************************************************
+/lib/partman/visual.d/35name: IN: USES_NAMES =dev=sda
+parted_server: Read command: USES_NAMES
+parted_server: command_uses_names()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 113
+parted_server: Opening infifo
+/lib/partman/update.d/20bootable: *******************************************************
+/lib/partman/update.d/20bootable: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 114
+parted_server: Opening infifo
+/lib/partman/update.d/20detected_filesystem: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: *******************************************************
+/lib/partman/update.d/21biosgrub_sync_flag: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 115
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: *******************************************************
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_LABEL_TYPE =dev=sda
+parted_server: Read command: GET_LABEL_TYPE
+parted_server: command_get_label_type()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: msdos
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 116
+parted_server: Opening infifo
+/lib/partman/update.d/21lvm_sync_flag: IN: GET_FLAGS =dev=sda 36557553664-37579915263
+parted_server: Read command: GET_FLAGS
+parted_server: command_get_flags()
+parted_server: Opening outfifo
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Partition found (36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 117
+parted_server: Opening infifo
+/lib/partman/update.d/50filesystems: *******************************************************
+/lib/partman/update.d/60basicmethods: *******************************************************
+/lib/partman/update.d/60lvm_visuals: *******************************************************
+/lib/partman/update.d/60swap: *******************************************************
+/lib/partman/update.d/60swap: IN: CHANGE_FILE_SYSTEM =dev=sda 36557553664-37579915263 linux-swap
+parted_server: Read command: CHANGE_FILE_SYSTEM
+parted_server: Opening outfifo
+parted_server: command_change_file_system(36557553664-37579915263,linux-swap)
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: Already using filesystem linux-swap(v1)
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 118
+parted_server: Opening infifo
+/lib/partman/update.d/61crypto_visuals: *******************************************************
+/lib/partman/visual.d/10type: *******************************************************
+/lib/partman/visual.d/10type: IN: USES_EXTENDED =dev=sda
+parted_server: Read command: USES_EXTENDED
+parted_server: command_uses_extended()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 119
+parted_server: Opening infifo
+/lib/partman/visual.d/15size: *******************************************************
+/lib/partman/visual.d/35name: *******************************************************
+/lib/partman/visual.d/35name: IN: USES_NAMES =dev=sda
+parted_server: Read command: USES_NAMES
+parted_server: command_uses_names()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 120
+parted_server: Opening infifo
+/lib/partman/init.d/80autouse_swap: *******************************************************
+/lib/partman/commit.d/01unmount_busy: *******************************************************
+/lib/partman/commit.d/01unmount_busy: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 121
+parted_server: Opening infifo
+/lib/partman/commit.d/01unmount_busy: IN: IS_BUSY =dev=sda 1048576-36556505087
+parted_server: Read command: IS_BUSY
+parted_server: command_is_busy()
+parted_server: Opening outfifo
+parted_server: command_is_busy: busy check for id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 122
+parted_server: Opening infifo
+/lib/partman/commit.d/01unmount_busy: IN: IS_BUSY =dev=sda 36557553664-37579915263
+parted_server: Read command: IS_BUSY
+parted_server: command_is_busy()
+parted_server: Opening outfifo
+parted_server: command_is_busy: busy check for id 36557553664-37579915263
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: OUT: no
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 123
+parted_server: Opening infifo
+/lib/partman/commit.d/30parted: *******************************************************
+/lib/partman/commit.d/30parted: IN: IS_CHANGED =dev=sda
+parted_server: Read command: IS_CHANGED
+parted_server: command_is_changed(=dev=sda)
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: yes
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 124
+parted_server: Opening infifo
+/lib/partman/commit.d/30parted: IN: COMMIT =dev=sda
+parted_server: Read command: COMMIT
+parted_server: command_commit()
+parted_server: Opening outfifo
+parted_server: Note =dev=sda as unchanged
+parted_server: OUT: OK
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 125
+parted_server: Opening infifo
+/lib/partman/commit.d/30parted: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 126
+parted_server: Opening infifo
+/lib/partman/commit.d/45format_swap: *******************************************************
+/lib/partman/commit.d/45format_swap: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 127
+parted_server: Opening infifo
+/lib/partman/commit.d/45format_swap: Try to format swap space in /var/lib/partman/devices/=dev=sda/36557553664-37579915263
+/lib/partman/commit.d/45format_swap: IN: PARTITION_INFO =dev=sda 36557553664-37579915263
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36557553664-37579915263
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 128
+parted_server: Opening infifo
+/lib/partman/commit.d/45format_swap: IN: PARTITION_INFO =dev=sda 36557553664-37579915263
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 36557553664-37579915263
+parted_server: partition_with_id(36557553664-37579915263)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 129
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_basicfilesystems: *******************************************************
+/lib/partman/commit.d/50format_basicfilesystems: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 130
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_basicfilesystems: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 131
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_btrfs: *******************************************************
+/lib/partman/commit.d/50format_btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 132
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 133
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_efi: *******************************************************
+/lib/partman/commit.d/50format_efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 134
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 135
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_ext3: *******************************************************
+/lib/partman/commit.d/50format_ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 136
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 137
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_ext3: Try to create file system for /var/lib/partman/devices/=dev=sda/1048576-36556505087
+/lib/partman/commit.d/50format_ext3: IN: PARTITION_INFO =dev=sda 1048576-36556505087
+parted_server: Read command: PARTITION_INFO
+parted_server: command_partition_info()
+parted_server: Opening outfifo
+parted_server: command_partition_info: info for partition with id 1048576-36556505087
+parted_server: partition_with_id(1048576-36556505087)
+parted_server: OUT: OK
+
+
+parted_server: command_partition_info: partition found
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 138
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_jfs: *******************************************************
+/lib/partman/commit.d/50format_jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 139
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 140
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_xfs: *******************************************************
+/lib/partman/commit.d/50format_xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 141
+parted_server: Opening infifo
+/lib/partman/commit.d/50format_xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 142
+parted_server: Opening infifo
+/lib/partman/finish.d/01apt_clone_save: *******************************************************
+/lib/partman/finish.d/01apt_clone_save: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 143
+parted_server: Opening infifo
+/lib/partman/finish.d/10clear_partitions: *******************************************************
+/lib/partman/finish.d/10clear_partitions: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 144
+parted_server: Opening infifo
+/lib/partman/finish.d/20mount_partitions: *******************************************************
+/lib/partman/fstab.d/basic: *******************************************************
+/lib/partman/fstab.d/basic: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 145
+parted_server: Opening infifo
+/lib/partman/fstab.d/btrfs: *******************************************************
+/lib/partman/fstab.d/btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 146
+parted_server: Opening infifo
+/lib/partman/fstab.d/efi: *******************************************************
+/lib/partman/fstab.d/efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 147
+parted_server: Opening infifo
+/lib/partman/fstab.d/ext3: *******************************************************
+/lib/partman/fstab.d/ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 148
+parted_server: Opening infifo
+/lib/partman/fstab.d/jfs: *******************************************************
+/lib/partman/fstab.d/jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 149
+parted_server: Opening infifo
+/lib/partman/fstab.d/xfs: *******************************************************
+/lib/partman/fstab.d/xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 150
+parted_server: Opening infifo
+/lib/partman/fstab.d/basic: *******************************************************
+/lib/partman/fstab.d/basic: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 151
+parted_server: Opening infifo
+/lib/partman/fstab.d/btrfs: *******************************************************
+/lib/partman/fstab.d/btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 152
+parted_server: Opening infifo
+/lib/partman/fstab.d/efi: *******************************************************
+/lib/partman/fstab.d/efi: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 153
+parted_server: Opening infifo
+/lib/partman/fstab.d/ext3: *******************************************************
+/lib/partman/fstab.d/ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 154
+parted_server: Opening infifo
+/lib/partman/fstab.d/jfs: *******************************************************
+/lib/partman/fstab.d/jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 155
+parted_server: Opening infifo
+/lib/partman/fstab.d/xfs: *******************************************************
+/lib/partman/fstab.d/xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 156
+parted_server: Opening infifo
+/lib/partman/finish.d/55crypto_config: *******************************************************
+/lib/partman/finish.d/70aptinstall_basicfilesystems: *******************************************************
+/lib/partman/finish.d/70aptinstall_basicfilesystems: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 157
+parted_server: Opening infifo
+/lib/partman/finish.d/70aptinstall_btrfs: *******************************************************
+/lib/partman/finish.d/70aptinstall_btrfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 158
+parted_server: Opening infifo
+/lib/partman/finish.d/70aptinstall_ext3: *******************************************************
+/lib/partman/finish.d/70aptinstall_ext3: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 159
+parted_server: Opening infifo
+/lib/partman/finish.d/70aptinstall_jfs: *******************************************************
+/lib/partman/finish.d/70aptinstall_jfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 160
+parted_server: Opening infifo
+/lib/partman/finish.d/70aptinstall_xfs: *******************************************************
+/lib/partman/finish.d/70aptinstall_xfs: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 161
+parted_server: Opening infifo
+/lib/partman/finish.d/70crypto_aptinstall: *******************************************************
+/lib/partman/finish.d/70crypto_aptinstall: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 162
+parted_server: Opening infifo
+/lib/partman/finish.d/75reformat_after_restart: *******************************************************
+/lib/partman/finish.d/75reformat_after_restart: IN: PARTITIONS =dev=sda
+parted_server: Read command: PARTITIONS
+parted_server: command_partitions()
+parted_server: Opening outfifo
+parted_server: OUT: OK
+
+
+parted_server: OUT: 1	1048576-36556505087	36555456512	primary	ext4	/dev/sda1	
+
+
+parted_server: OUT: 5	36557553664-37579915263	1022361600	logical	linux-swap	/dev/sda5	
+
+
+parted_server: Partitions printed
+parted_server: OUT: 
+
+
+parted_server: Closing infifo and outfifo
+parted_server: main_loop: iteration 163
+parted_server: Opening infifo
+/lib/partman/finish.d/80parted: *******************************************************
+/lib/partman/finish.d/80parted: IN: QUIT
+parted_server: Read command: QUIT
+parted_server: Quitting

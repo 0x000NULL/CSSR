@@ -1,0 +1,15 @@
++ date
++ echo Thu Jan 17 12:52:53 PST 2019 : Executing '/etc/vmware-tools/scripts/vmware/network poweron-vm'
+Thu Jan 17 12:52:53 PST 2019 : Executing '/etc/vmware-tools/scripts/vmware/network poweron-vm'
++ echo
+
++ dirname /etc/vmware-tools/scripts/vmware/network
++ . /etc/vmware-tools/scripts/vmware/../../statechange.subr
++ main poweron-vm
++ exitCode=0
++ activeList=/var/run/vmware-active-nics
++ rm -f /var/run/vmware-active-nics
++ return 0
++ date
++ echo Thu Jan 17 12:52:53 PST 2019 : Finished '/etc/vmware-tools/scripts/vmware/network poweron-vm'
+Thu Jan 17 12:52:53 PST 2019 : Finished '/etc/vmware-tools/scripts/vmware/network poweron-vm'

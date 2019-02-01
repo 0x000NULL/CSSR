@@ -1,0 +1,65 @@
+Thu Jan 17 10:31:28 2019 -> --------------------------------------
+Thu Jan 17 10:31:28 2019 -> ClamAV update process started at Thu Jan 17 10:31:28 2019
+Thu Jan 17 10:31:28 2019 -> WARNING: Your ClamAV installation is OUTDATED!
+Thu Jan 17 10:31:28 2019 -> WARNING: Local version: 0.100.2 Recommended version: 0.101.1
+Thu Jan 17 10:31:28 2019 -> DON'T PANIC! Read https://www.clamav.net/documents/upgrading-clamav
+Thu Jan 17 10:32:32 2019 -> Downloading main.cvd [100%]
+Thu Jan 17 10:32:38 2019 -> main.cvd updated (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+Thu Jan 17 10:33:02 2019 -> Downloading daily.cvd [100%]
+Thu Jan 17 10:33:08 2019 -> daily.cvd updated (version: 25306, sigs: 2212056, f-level: 63, builder: raynman)
+Thu Jan 17 10:33:08 2019 -> Downloading bytecode.cvd [100%]
+Thu Jan 17 10:33:09 2019 -> bytecode.cvd updated (version: 328, sigs: 94, f-level: 63, builder: neo)
+Thu Jan 17 10:33:12 2019 -> Database updated (6778399 signatures) from db.local.clamav.net (IP: 104.16.187.138)
+Thu Jan 17 10:33:12 2019 -> ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf
+Thu Jan 17 12:52:56 2019 -> --------------------------------------
+Thu Jan 17 12:52:56 2019 -> freshclam daemon 0.100.2 (OS: linux-gnu, ARCH: x86_64, CPU: x86_64)
+Thu Jan 17 12:52:56 2019 -> ClamAV update process started at Thu Jan 17 12:52:56 2019
+Thu Jan 17 12:52:56 2019 -> WARNING: Can't query current.cvd.clamav.net
+Thu Jan 17 12:52:56 2019 -> WARNING: Invalid DNS reply. Falling back to HTTP mode.
+Thu Jan 17 12:52:56 2019 -> Reading CVD header (main.cvd): Thu Jan 17 12:52:56 2019 -> WARNING: Can't get information about db.local.clamav.net: Temporary failure in name resolution
+Thu Jan 17 12:52:56 2019 -> WARNING: Can't read main.cvd header from db.local.clamav.net (IP: )
+Thu Jan 17 12:52:56 2019 -> Trying again in 5 secs...
+Thu Jan 17 12:53:01 2019 -> ClamAV update process started at Thu Jan 17 12:53:01 2019
+Thu Jan 17 12:53:02 2019 -> WARNING: Your ClamAV installation is OUTDATED!
+Thu Jan 17 12:53:02 2019 -> WARNING: Local version: 0.100.2 Recommended version: 0.101.1
+Thu Jan 17 12:53:02 2019 -> DON'T PANIC! Read https://www.clamav.net/documents/upgrading-clamav
+Thu Jan 17 12:53:02 2019 -> main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+Thu Jan 17 12:53:09 2019 -> Downloading daily-25307.cdiff [100%]
+Thu Jan 17 12:53:21 2019 -> daily.cld updated (version: 25307, sigs: 2212240, f-level: 63, builder: raynman)
+Thu Jan 17 12:53:21 2019 -> bytecode.cvd is up to date (version: 328, sigs: 94, f-level: 63, builder: neo)
+Thu Jan 17 12:53:43 2019 -> Database updated (6778583 signatures) from db.local.clamav.net (IP: 104.16.187.138)
+Thu Jan 17 12:53:43 2019 -> ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf
+Thu Jan 17 12:53:43 2019 -> --------------------------------------
+Thu Jan 17 12:56:28 2019 -> Update process terminated
+Tue Jan 22 07:55:17 2019 -> --------------------------------------
+Tue Jan 22 07:55:17 2019 -> freshclam daemon 0.100.2 (OS: linux-gnu, ARCH: x86_64, CPU: x86_64)
+Tue Jan 22 07:55:17 2019 -> ClamAV update process started at Tue Jan 22 07:55:17 2019
+Tue Jan 22 07:55:17 2019 -> WARNING: Can't query current.cvd.clamav.net
+Tue Jan 22 07:55:17 2019 -> WARNING: Invalid DNS reply. Falling back to HTTP mode.
+Tue Jan 22 07:55:17 2019 -> Reading CVD header (main.cvd): Tue Jan 22 07:55:17 2019 -> WARNING: Can't get information about db.local.clamav.net: Temporary failure in name resolution
+Tue Jan 22 07:55:17 2019 -> WARNING: Can't read main.cvd header from db.local.clamav.net (IP: )
+Tue Jan 22 07:55:17 2019 -> Trying again in 5 secs...
+Tue Jan 22 07:55:22 2019 -> ClamAV update process started at Tue Jan 22 07:55:22 2019
+Tue Jan 22 07:55:22 2019 -> WARNING: Your ClamAV installation is OUTDATED!
+Tue Jan 22 07:55:22 2019 -> WARNING: Local version: 0.100.2 Recommended version: 0.101.1
+Tue Jan 22 07:55:22 2019 -> DON'T PANIC! Read https://www.clamav.net/documents/upgrading-clamav
+Tue Jan 22 07:55:22 2019 -> main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
+Tue Jan 22 07:55:25 2019 -> Downloading daily-25308.cdiff [100%]
+Tue Jan 22 07:55:25 2019 -> Downloading daily-25309.cdiff [100%]
+Tue Jan 22 07:55:25 2019 -> Downloading daily-25310.cdiff [100%]
+Tue Jan 22 07:55:25 2019 -> Downloading daily-25311.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25312.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25313.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25314.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25315.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25316.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25317.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25318.cdiff [100%]
+Tue Jan 22 07:55:26 2019 -> Downloading daily-25319.cdiff [100%]
+Tue Jan 22 07:55:27 2019 -> Downloading daily-25320.cdiff [100%]
+Tue Jan 22 07:55:27 2019 -> Downloading daily-25321.cdiff [100%]
+Tue Jan 22 07:55:40 2019 -> daily.cld updated (version: 25321, sigs: 2218875, f-level: 63, builder: raynman)
+Tue Jan 22 07:55:41 2019 -> bytecode.cvd is up to date (version: 328, sigs: 94, f-level: 63, builder: neo)
+Tue Jan 22 07:55:49 2019 -> Database updated (6785218 signatures) from db.local.clamav.net (IP: 104.16.187.138)
+Tue Jan 22 07:55:49 2019 -> ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf
+Tue Jan 22 07:55:49 2019 -> --------------------------------------

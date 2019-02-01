@@ -1,0 +1,20 @@
+[Jan 22 07:55:15.640] [ message] [vmsvc] Log caching is enabled with maxCacheEntries=4096.
+[Jan 22 07:55:15.642] [ message] [vmsvc] Core dump limit set to -1
+[Jan 22 07:55:15.642] [ message] [vmtoolsd] Tools Version: 10.2.0.1608 (build-7253323)
+[Jan 22 07:55:15.820] [ message] [vmtoolsd] Plugin 'hgfsServer' initialized.
+[Jan 22 07:55:15.820] [ message] [vix] QueryVGAuthConfig: vgauth usage is: 1
+[Jan 22 07:55:15.820] [ message] [vmtoolsd] Plugin 'vix' initialized.
+[Jan 22 07:55:15.820] [ message] [vmtoolsd] Plugin 'deployPkg' initialized.
+[Jan 22 07:55:15.830] [ message] [vmtoolsd] Plugin 'grabbitmqProxy' initialized.
+[Jan 22 07:55:15.830] [ message] [vmtoolsd] Plugin 'guestInfo' initialized.
+[Jan 22 07:55:15.830] [ message] [vmtoolsd] Plugin 'powerops' initialized.
+[Jan 22 07:55:15.834] [ message] [resolutionCommon] resolutionCheckForKMS: dlopen succeeded.
+[Jan 22 07:55:15.835] [ message] [resolutionCommon] resolutionCheckForKMS: System support available for resolutionKMS.
+[Jan 22 07:55:15.835] [ message] [vmtoolsd] Plugin 'resolutionKMS' initialized.
+[Jan 22 07:55:15.835] [ message] [vmtoolsd] Plugin 'timeSync' initialized.
+[Jan 22 07:55:15.835] [ message] [vmtoolsd] Plugin 'vmbackup' initialized.
+[Jan 22 07:55:15.842] [ message] [vix] VixTools_ProcessVixCommand: command 62
+[Jan 22 07:55:16.212] [ message] [vix] VixTools_ProcessVixCommand: command 62
+[Jan 22 07:55:16.212] [ message] [vix] ToolsDaemonTcloReceiveVixCommand: command 62, additionalError = 17
+[Jan 22 07:55:16.212] [ message] [powerops] Executing script: '/etc/vmware-tools/poweron-vm-default'
+[Jan 22 07:55:16.385] [ message] [powerops] Script exit code: 0, success = 1

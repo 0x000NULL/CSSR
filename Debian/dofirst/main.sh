@@ -1,6 +1,3 @@
-#!/bin/bash
-#MIT Licence 
-#Copyright (c) Ethan Perry, Andy Lyu
 unalias -a #Get rid of aliases
 echo "unalias -a" >> ~/.bashrc
 echo "unalias -a" >> /root/.bashrc
@@ -203,11 +200,6 @@ aptInstFun(){
 	printf "\033[1;31mInstalling programs...\033[0m\n"
 	#--------- Download programs ----------------
 	apt-get install -y chkrootkit clamav rkhunter apparmor apparmor-profiles
-
-	#This will download lynis 2.4.0, which may be out of date
-	wget https://cisofy.com/files/lynis-2.5.5.tar.gz -O /lynis.tar.gz
-	tar -xzf /lynis.tar.gz --directory /usr/share/
-	cont
 }
 deleteFileFun(){
 	printf "\033[1;31mDeleting dangerous files...\033[0m\n"

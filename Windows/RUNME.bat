@@ -1,5 +1,6 @@
-@Echo off
+@echo off
 title NotaVirus Windows Script
+echo Welcome to Ethan's Script!
 pause
 clear
 Echo Running scripts
@@ -14,6 +15,8 @@ start WidnowsSecurity.ps1
 pause
 cd ..
 cd DOFIRST
+pause
+start FirstRun.bat
 pause
 start Main.bat
 pause
@@ -111,7 +114,9 @@ start disable-searchUI.bat
 pause 
 clear
 cd ..
-cd WindowsFirewall-master
+
+
+cd WindowsFirewall
 cd tools 
 
 echo Open Firewall tools? 
@@ -149,7 +154,6 @@ IF %M%==n goto end
 :audits
 start ASD1709HardeningComplianceCheck.ps1
 start ASDOffice2016HardeningComplianceCheck.ps1
-start BuildTheASDSCriptFromGetADMX.ps1
 :end
 pause 
 clear
