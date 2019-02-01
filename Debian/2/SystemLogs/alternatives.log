@@ -1,0 +1,233 @@
+update-alternatives 2018-07-31 00:30:35: run with --quiet --install /usr/bin/awk awk /usr/bin/mawk 5 --slave /usr/share/man/man1/awk.1.gz awk.1.gz /usr/share/man/man1/mawk.1.gz --slave /usr/bin/nawk nawk /usr/bin/mawk --slave /usr/share/man/man1/nawk.1.gz nawk.1.gz /usr/share/man/man1/mawk.1.gz
+update-alternatives 2018-07-31 00:30:35: link group awk updated to point to /usr/bin/mawk
+update-alternatives 2018-07-31 00:30:59: run with --quiet --install /usr/bin/awk awk /usr/bin/mawk 5 --slave /usr/share/man/man1/awk.1.gz awk.1.gz /usr/share/man/man1/mawk.1.gz --slave /usr/bin/nawk nawk /usr/bin/mawk --slave /usr/share/man/man1/nawk.1.gz nawk.1.gz /usr/share/man/man1/mawk.1.gz
+update-alternatives 2018-07-31 00:31:11: run with --install /usr/sbin/rmt rmt /usr/sbin/rmt-tar 50 --slave /usr/share/man/man8/rmt.8.gz rmt.8.gz /usr/share/man/man8/rmt-tar.8.gz
+update-alternatives 2018-07-31 00:31:11: link group rmt updated to point to /usr/sbin/rmt-tar
+update-alternatives 2018-07-31 00:31:15: run with --install /usr/share/man/man7/builtins.7.gz builtins.7.gz /usr/share/man/man7/bash-builtins.7.gz 10
+update-alternatives 2018-07-31 00:31:15: link group builtins.7.gz updated to point to /usr/share/man/man7/bash-builtins.7.gz
+update-alternatives 2018-07-31 00:31:17: run with --install /usr/bin/pager pager /bin/more 50 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/more.1.gz
+update-alternatives 2018-07-31 00:31:17: link group pager updated to point to /bin/more
+update-alternatives 2018-07-31 00:31:17: run with --install /usr/bin/pager pager /usr/bin/pg 10 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/pg.1.gz
+update-alternatives 2018-07-31 00:31:17: run with --install /usr/bin/w w /usr/bin/w.procps 50 --slave /usr/share/man/man1/w.1.gz w.1.gz /usr/share/man/man1/w.procps.1.gz
+update-alternatives 2018-07-31 00:31:17: link group w updated to point to /usr/bin/w.procps
+update-alternatives 2018-07-31 00:31:45: run with --install /bin/mt mt /bin/mt-gnu 10 --slave /usr/share/man/man1/mt.1.gz mt.1.gz /usr/share/man/man1/mt-gnu.1.gz
+update-alternatives 2018-07-31 00:31:45: link group mt updated to point to /bin/mt-gnu
+update-alternatives 2018-07-31 00:31:45: run with --quiet --install /usr/bin/pager pager /bin/less 77 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/less.1.gz
+update-alternatives 2018-07-31 00:31:45: link group pager updated to point to /bin/less
+update-alternatives 2018-07-31 00:31:45: run with --quiet --remove pager /usr/bin/less
+update-alternatives 2018-07-31 00:31:45: run with --quiet --install /usr/bin/pager pager /bin/less 77 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/less.1.gz
+update-alternatives 2018-07-31 00:31:45: run with --quiet --remove pager /usr/bin/less
+update-alternatives 2018-07-31 00:31:46: run with --install /bin/nc nc /bin/nc.openbsd 50 --slave /bin/netcat netcat /bin/nc.openbsd --slave /usr/share/man/man1/nc.1.gz nc.1.gz /usr/share/man/man1/nc_openbsd.1.gz --slave /usr/share/man/man1/netcat.1.gz netcat.1.gz /usr/share/man/man1/nc_openbsd.1.gz
+update-alternatives 2018-07-31 00:31:46: link group nc updated to point to /bin/nc.openbsd
+update-alternatives 2018-07-31 00:31:48: run with --install /usr/bin/rview rview /usr/bin/vim.tiny 10
+update-alternatives 2018-07-31 00:31:48: link group rview updated to point to /usr/bin/vim.tiny
+update-alternatives 2018-07-31 00:31:48: run with --install /usr/bin/vi vi /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/vi.1.gz vi.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/vi.1.gz vi.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/vi.1.gz vi.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/vi.1.gz vi.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/vi.1.gz vi.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/vi.1.gz vi.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:31:48: link group vi updated to point to /usr/bin/vim.tiny
+update-alternatives 2018-07-31 00:31:48: run with --install /usr/bin/view view /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/view.1.gz view.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/view.1.gz view.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/view.1.gz view.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/view.1.gz view.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/view.1.gz view.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/view.1.gz view.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:31:48: link group view updated to point to /usr/bin/vim.tiny
+update-alternatives 2018-07-31 00:31:48: run with --install /usr/bin/ex ex /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/ex.1.gz ex.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/ex.1.gz ex.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/ex.1.gz ex.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/ex.1.gz ex.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/ex.1.gz ex.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/ex.1.gz ex.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:31:48: link group ex updated to point to /usr/bin/vim.tiny
+update-alternatives 2018-07-31 00:31:48: run with --install /usr/bin/editor editor /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/editor.1.gz editor.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/editor.1.gz editor.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/editor.1.gz editor.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/editor.1.gz editor.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/editor.1.gz editor.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:31:48: link group editor updated to point to /usr/bin/vim.tiny
+update-alternatives 2018-07-31 00:31:52: run with --install /etc/newt/palette newt-palette /etc/newt/palette.ubuntu 50
+update-alternatives 2018-07-31 00:31:52: link group newt-palette updated to point to /etc/newt/palette.ubuntu
+update-alternatives 2018-07-31 00:31:52: run with --install /etc/newt/palette newt-palette /etc/newt/palette.original 20
+update-alternatives 2018-07-31 00:31:59: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb 50
+update-alternatives 2018-07-31 00:31:59: link group vtrgb updated to point to /etc/console-setup/vtrgb
+update-alternatives 2018-07-31 00:31:59: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb.vga 20
+update-alternatives 2018-07-31 00:32:21: run with --remove builtins.7.gz /usr/share/man/man7/bash-builtins.7.gz
+update-alternatives 2018-07-31 00:32:21: link group builtins.7.gz fully removed
+update-alternatives 2018-07-31 00:32:21: run with --install /usr/share/man/man7/builtins.7.gz builtins.7.gz /usr/share/man/man7/bash-builtins.7.gz 10
+update-alternatives 2018-07-31 00:32:21: link group builtins.7.gz updated to point to /usr/share/man/man7/bash-builtins.7.gz
+update-alternatives 2018-07-31 00:32:39: run with --install /usr/bin/pager pager /bin/more 50 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/more.1.gz
+update-alternatives 2018-07-31 00:32:39: run with --install /usr/bin/pager pager /usr/bin/pg 10 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/pg.1.gz
+update-alternatives 2018-07-31 00:32:39: run with --install /usr/sbin/rmt rmt /usr/sbin/rmt-tar 50 --slave /usr/share/man/man8/rmt.8.gz rmt.8.gz /usr/share/man/man8/rmt-tar.8.gz
+update-alternatives 2018-07-31 00:32:50: run with --install /usr/bin/w w /usr/bin/w.procps 50 --slave /usr/share/man/man1/w.1.gz w.1.gz /usr/share/man/man1/w.procps.1.gz
+update-alternatives 2018-07-31 00:33:01: run with --quiet --install /usr/bin/pager pager /bin/less 77 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/less.1.gz
+update-alternatives 2018-07-31 00:33:01: run with --quiet --remove pager /usr/bin/less
+update-alternatives 2018-07-31 00:33:01: run with --quiet --install /usr/bin/pager pager /bin/less 77 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/less.1.gz
+update-alternatives 2018-07-31 00:33:01: run with --quiet --remove pager /usr/bin/less
+update-alternatives 2018-07-31 00:33:02: run with --install /usr/bin/rview rview /usr/bin/vim.tiny 10
+update-alternatives 2018-07-31 00:33:02: run with --install /usr/bin/vi vi /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/vi.1.gz vi.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/vi.1.gz vi.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/vi.1.gz vi.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/vi.1.gz vi.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/vi.1.gz vi.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/vi.1.gz vi.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:33:02: run with --install /usr/bin/view view /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/view.1.gz view.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/view.1.gz view.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/view.1.gz view.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/view.1.gz view.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/view.1.gz view.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/view.1.gz view.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:33:02: run with --install /usr/bin/ex ex /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/ex.1.gz ex.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/ex.1.gz ex.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/ex.1.gz ex.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/ex.1.gz ex.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/ex.1.gz ex.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/ex.1.gz ex.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:33:02: run with --install /usr/bin/editor editor /usr/bin/vim.tiny 10 --slave /usr/share/man/fr/man1/editor.1.gz editor.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/editor.1.gz editor.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/editor.1.gz editor.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/editor.1.gz editor.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/editor.1.gz editor.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2018-07-31 00:33:03: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb 50
+update-alternatives 2018-07-31 00:33:03: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb.vga 20
+update-alternatives 2018-07-31 00:34:39: run with --quiet --install /usr/bin/pinentry pinentry /usr/bin/pinentry-curses 50 --slave /usr/share/man/man1/pinentry.1.gz pinentry.1.gz /usr/share/man/man1/pinentry-curses.1.gz
+update-alternatives 2018-07-31 00:34:39: link group pinentry updated to point to /usr/bin/pinentry-curses
+update-alternatives 2018-07-31 00:38:46: run with --install /usr/bin/write write /usr/bin/bsd-write 100 --slave /usr/share/man/man1/write.1.gz write.1.gz /usr/share/man/man1/bsd-write.1.gz
+update-alternatives 2018-07-31 00:38:46: link group write updated to point to /usr/bin/bsd-write
+update-alternatives 2018-07-31 00:38:46: run with --install /usr/bin/from from /usr/bin/bsd-from 10 --slave /usr/share/man/man1/from.1.gz from.1.gz /usr/share/man/man1/bsd-from.1.gz
+update-alternatives 2018-07-31 00:38:46: link group from updated to point to /usr/bin/bsd-from
+update-alternatives 2018-07-31 00:40:32: run with --install /usr/share/fonts/truetype/fonts-japanese-gothic.ttf fonts-japanese-gothic.ttf /usr/share/fonts/truetype/takao-gothic/TakaoPGothic.ttf 130
+update-alternatives 2018-07-31 00:40:32: link group fonts-japanese-gothic.ttf updated to point to /usr/share/fonts/truetype/takao-gothic/TakaoPGothic.ttf
+update-alternatives 2018-07-31 00:40:34: run with --force --install /etc/ld.so.conf.d/x86_64-linux-gnu_EGL.conf x86_64-linux-gnu_egl_conf /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf 500
+update-alternatives 2018-07-31 00:40:34: link group x86_64-linux-gnu_egl_conf updated to point to /usr/lib/x86_64-linux-gnu/mesa-egl/ld.so.conf
+update-alternatives 2018-07-31 00:40:38: run with --force --install /etc/ld.so.conf.d/x86_64-linux-gnu_GL.conf x86_64-linux-gnu_gl_conf /usr/lib/x86_64-linux-gnu/mesa/ld.so.conf 500 --slave /usr/lib/x86_64-linux-gnu/xorg/extra-modules x86_64-linux-gnu_xorg_extra_modules /usr/lib/x86_64-linux-gnu/xorg/x11-extra-modules
+update-alternatives 2018-07-31 00:40:38: link group x86_64-linux-gnu_gl_conf updated to point to /usr/lib/x86_64-linux-gnu/mesa/ld.so.conf
+update-alternatives 2018-07-31 00:40:41: run with --install /usr/bin/rename rename /usr/bin/prename 60 --slave /usr/share/man/man1/rename.1.gz rename.1.gz /usr/share/man/man1/prename.1.gz
+update-alternatives 2018-07-31 00:40:41: link group rename updated to point to /usr/bin/prename
+update-alternatives 2018-07-31 00:40:43: run with --quiet --install /usr/bin/rsh rsh /usr/bin/ssh 20 --slave /usr/share/man/man1/rsh.1.gz rsh.1.gz /usr/share/man/man1/ssh.1.gz
+update-alternatives 2018-07-31 00:40:43: link group rsh updated to point to /usr/bin/ssh
+update-alternatives 2018-07-31 00:40:43: run with --quiet --install /usr/bin/rlogin rlogin /usr/bin/slogin 20 --slave /usr/share/man/man1/rlogin.1.gz rlogin.1.gz /usr/share/man/man1/slogin.1.gz
+update-alternatives 2018-07-31 00:40:43: link group rlogin updated to point to /usr/bin/slogin
+update-alternatives 2018-07-31 00:40:43: run with --quiet --install /usr/bin/rcp rcp /usr/bin/scp 20 --slave /usr/share/man/man1/rcp.1.gz rcp.1.gz /usr/share/man/man1/scp.1.gz
+update-alternatives 2018-07-31 00:40:43: link group rcp updated to point to /usr/bin/scp
+update-alternatives 2018-07-31 00:40:50: run with --install /usr/lib/x86_64-linux-gnu/libtxc_dxtn.so libtxc-dxtn-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libtxc_dxtn_s2tc.so.0 10
+update-alternatives 2018-07-31 00:40:50: link group libtxc-dxtn-x86_64-linux-gnu updated to point to /usr/lib/x86_64-linux-gnu/libtxc_dxtn_s2tc.so.0
+update-alternatives 2018-07-31 00:40:51: run with --quiet --install /usr/bin/editor editor /bin/ed -100 --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/ed.1.gz
+update-alternatives 2018-07-31 00:40:51: run with --install /usr/bin/ftp ftp /usr/bin/netkit-ftp 100 --slave /usr/bin/pftp pftp /usr/bin/netkit-ftp --slave /usr/share/man/man1/ftp.1.gz ftp.1.gz /usr/share/man/man1/netkit-ftp.1.gz --slave /usr/share/man/man1/pftp.1.gz pftp.1.gz /usr/share/man/man1/netkit-ftp.1.gz --slave /usr/share/man/man5/netrc.5.gz netrc.5.gz /usr/share/man/man5/netkit-netrc.5.gz
+update-alternatives 2018-07-31 00:40:51: link group ftp updated to point to /usr/bin/netkit-ftp
+update-alternatives 2018-07-31 00:40:51: run with --install /usr/bin/infobrowser infobrowser /usr/bin/info 60 --slave /usr/share/man/man1/infobrowser.1.gz infobrowser.1.gz /usr/share/man/man1/info.1.gz
+update-alternatives 2018-07-31 00:40:51: link group infobrowser updated to point to /usr/bin/info
+update-alternatives 2018-07-31 00:40:51: run with --install /usr/bin/traceroute6 traceroute6 /usr/bin/traceroute6.iputils 100 --slave /usr/share/man/man8/traceroute6.8.gz traceroute6.8.gz /usr/share/man/man8/traceroute6.iputils.8.gz
+update-alternatives 2018-07-31 00:40:51: link group traceroute6 updated to point to /usr/bin/traceroute6.iputils
+update-alternatives 2018-07-31 00:40:52: run with --install /usr/bin/locate locate /usr/bin/mlocate 80 --slave /usr/share/man/man1/locate.1.gz locate.1.gz /usr/share/man/man1/mlocate.1.gz --slave /usr/bin/updatedb updatedb /usr/bin/updatedb.mlocate
+update-alternatives 2018-07-31 00:40:52: link group locate updated to point to /usr/bin/mlocate
+update-alternatives 2018-07-31 00:40:52: run with --install /usr/bin/editor editor /bin/nano 40 --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/nano.1.gz
+update-alternatives 2018-07-31 00:40:52: link group editor updated to point to /bin/nano
+update-alternatives 2018-07-31 00:40:52: run with --install /usr/bin/pico pico /bin/nano 10 --slave /usr/share/man/man1/pico.1.gz pico.1.gz /usr/share/man/man1/nano.1.gz
+update-alternatives 2018-07-31 00:40:52: link group pico updated to point to /bin/nano
+update-alternatives 2018-07-31 00:40:52: run with --install /usr/share/plymouth/themes/text.plymouth text.plymouth /usr/share/plymouth/themes/ubuntu-text/ubuntu-text.plymouth 50
+update-alternatives 2018-07-31 00:40:52: link group text.plymouth updated to point to /usr/share/plymouth/themes/ubuntu-text/ubuntu-text.plymouth
+update-alternatives 2018-07-31 00:40:53: run with --install /usr/bin/telnet telnet /usr/bin/telnet.netkit 100 --slave /usr/share/man/man1/telnet.1.gz telnet.1.gz /usr/share/man/man1/telnet.netkit.1.gz
+update-alternatives 2018-07-31 00:40:53: link group telnet updated to point to /usr/bin/telnet.netkit
+update-alternatives 2018-07-31 00:41:00: run with --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/xterm 20 --slave /usr/share/man/man1/x-terminal-emulator.1.gz x-terminal-emulator.1.gz /usr/share/man/man1/xterm.1.gz
+update-alternatives 2018-07-31 00:41:00: link group x-terminal-emulator updated to point to /usr/bin/xterm
+update-alternatives 2018-07-31 00:41:00: run with --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/uxterm 20 --slave /usr/share/man/man1/x-terminal-emulator.1.gz x-terminal-emulator.1.gz /usr/share/man/man1/uxterm.1.gz
+update-alternatives 2018-07-31 00:41:00: run with --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/koi8rxterm 20 --slave /usr/share/man/man1/x-terminal-emulator.1.gz x-terminal-emulator.1.gz /usr/share/man/man1/koi8rxterm.1.gz
+update-alternatives 2018-07-31 00:41:00: run with --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/lxterm 30 --slave /usr/share/man/man1/x-terminal-emulator.1.gz x-terminal-emulator.1.gz /usr/share/man/man1/lxterm.1.gz
+update-alternatives 2018-07-31 00:41:00: link group x-terminal-emulator updated to point to /usr/bin/lxterm
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/share/ghostscript/current ghostscript-current /usr/share/ghostscript/9.18 918
+update-alternatives 2018-07-31 00:41:05: link group ghostscript-current updated to point to /usr/share/ghostscript/9.18
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/compare compare /usr/bin/compare-im6 100 --slave /usr/share/man/man1/compare.1.gz compare.1.gz /usr/share/man/man1/compare-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group compare updated to point to /usr/bin/compare-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/animate animate /usr/bin/animate-im6 100 --slave /usr/share/man/man1/animate.1.gz animate.1.gz /usr/share/man/man1/animate-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group animate updated to point to /usr/bin/animate-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/convert convert /usr/bin/convert-im6 100 --slave /usr/share/man/man1/convert.1.gz convert.1.gz /usr/share/man/man1/convert-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group convert updated to point to /usr/bin/convert-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/composite composite /usr/bin/composite-im6 100 --slave /usr/share/man/man1/composite.1.gz composite.1.gz /usr/share/man/man1/composite-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group composite updated to point to /usr/bin/composite-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/conjure conjure /usr/bin/conjure-im6 100 --slave /usr/share/man/man1/conjure.1.gz conjure.1.gz /usr/share/man/man1/conjure-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group conjure updated to point to /usr/bin/conjure-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/import import /usr/bin/import-im6 100 --slave /usr/share/man/man1/import.1.gz import.1.gz /usr/share/man/man1/import-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group import updated to point to /usr/bin/import-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/identify identify /usr/bin/identify-im6 100 --slave /usr/share/man/man1/identify.1.gz identify.1.gz /usr/share/man/man1/identify-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group identify updated to point to /usr/bin/identify-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/stream stream /usr/bin/stream-im6 100 --slave /usr/share/man/man1/stream.1.gz stream.1.gz /usr/share/man/man1/stream-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group stream updated to point to /usr/bin/stream-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/display display /usr/bin/display-im6 100 --slave /usr/share/man/man1/display.1.gz display.1.gz /usr/share/man/man1/display-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group display updated to point to /usr/bin/display-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/montage montage /usr/bin/montage-im6 100 --slave /usr/share/man/man1/montage.1.gz montage.1.gz /usr/share/man/man1/montage-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group montage updated to point to /usr/bin/montage-im6
+update-alternatives 2018-07-31 00:41:05: run with --install /usr/bin/mogrify mogrify /usr/bin/mogrify-im6 100 --slave /usr/share/man/man1/mogrify.1.gz mogrify.1.gz /usr/share/man/man1/mogrify-im6.1.gz
+update-alternatives 2018-07-31 00:41:05: link group mogrify updated to point to /usr/bin/mogrify-im6
+update-alternatives 2018-07-31 00:41:06: run with --quiet --install /lib/cpp cpp /usr/bin/cpp 10
+update-alternatives 2018-07-31 00:41:06: link group cpp updated to point to /usr/bin/cpp
+update-alternatives 2018-07-31 00:41:06: run with --quiet --install /usr/bin/cc cc /usr/bin/gcc 20 --slave /usr/share/man/man1/cc.1.gz cc.1.gz /usr/share/man/man1/gcc.1.gz
+update-alternatives 2018-07-31 00:41:06: link group cc updated to point to /usr/bin/gcc
+update-alternatives 2018-07-31 00:41:06: run with --quiet --install /usr/bin/c89 c89 /usr/bin/c89-gcc 20 --slave /usr/share/man/man1/c89.1.gz c89.1.gz /usr/share/man/man1/c89-gcc.1.gz
+update-alternatives 2018-07-31 00:41:06: link group c89 updated to point to /usr/bin/c89-gcc
+update-alternatives 2018-07-31 00:41:06: run with --quiet --install /usr/bin/c99 c99 /usr/bin/c99-gcc 20 --slave /usr/share/man/man1/c99.1.gz c99.1.gz /usr/share/man/man1/c99-gcc.1.gz
+update-alternatives 2018-07-31 00:41:06: link group c99 updated to point to /usr/bin/c99-gcc
+update-alternatives 2018-07-31 00:41:06: run with --install /usr/bin/c++ c++ /usr/bin/g++ 20 --slave /usr/share/man/man1/c++.1.gz c++.1.gz /usr/share/man/man1/g++.1.gz
+update-alternatives 2018-07-31 00:41:06: link group c++ updated to point to /usr/bin/g++
+update-alternatives 2018-07-31 00:41:06: run with --install /usr/bin/lzma lzma /usr/bin/xz 20 --slave /usr/share/man/man1/lzma.1.gz lzma.1.gz /usr/share/man/man1/xz.1.gz --slave /usr/bin/unlzma unlzma /usr/bin/unxz --slave /usr/share/man/man1/unlzma.1.gz unlzma.1.gz /usr/share/man/man1/unxz.1.gz --slave /usr/bin/lzcat lzcat /usr/bin/xzcat --slave /usr/share/man/man1/lzcat.1.gz lzcat.1.gz /usr/share/man/man1/xzcat.1.gz --slave /usr/bin/lzmore lzmore /usr/bin/xzmore --slave /usr/share/man/man1/lzmore.1.gz lzmore.1.gz /usr/share/man/man1/xzmore.1.gz --slave /usr/bin/lzless lzless /usr/bin/xzless --slave /usr/share/man/man1/lzless.1.gz lzless.1.gz /usr/share/man/man1/xzless.1.gz --slave /usr/bin/lzdiff lzdiff /usr/bin/xzdiff --slave /usr/share/man/man1/lzdiff.1.gz lzdiff.1.gz /usr/share/man/man1/xzdiff.1.gz --slave /usr/bin/lzcmp lzcmp /usr/bin/xzcmp --slave /usr/share/man/man1/lzcmp.1.gz lzcmp.1.gz /usr/share/man/man1/xzcmp.1.gz --slave /usr/bin/lzgrep lzgrep /usr/bin/xzgrep --slave /usr/share/man/man1/lzgrep.1.gz lzgrep.1.gz /usr/share/man/man1/xzgrep.1.gz --slave /usr/bin/lzegrep lzegrep /usr/bin/xzegrep --slave /usr/share/man/man1/lzegrep.1.gz lzegrep.1.gz /usr/share/man/man1/xzegrep.1.gz --slave /usr/bin/lzfgrep lzfgrep /usr/bin/xzfgrep --slave /usr/share/man/man1/lzfgrep.1.gz lzfgrep.1.gz /usr/share/man/man1/xzfgrep.1.gz
+update-alternatives 2018-07-31 00:41:06: link group lzma updated to point to /usr/bin/xz
+update-alternatives 2018-07-31 00:41:15: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/DMZ-White/cursor.theme 100
+update-alternatives 2018-07-31 00:41:15: link group x-cursor-theme updated to point to /usr/share/icons/DMZ-White/cursor.theme
+update-alternatives 2018-07-31 00:41:15: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/DMZ-Black/cursor.theme 30
+update-alternatives 2018-07-31 00:41:16: run with --install /usr/bin/fakeroot fakeroot /usr/bin/fakeroot-sysv 50 --slave /usr/share/man/man1/fakeroot.1.gz fakeroot.1.gz /usr/share/man/man1/fakeroot-sysv.1.gz --slave /usr/share/man/man1/faked.1.gz faked.1.gz /usr/share/man/man1/faked-sysv.1.gz --slave /usr/share/man/es/man1/fakeroot.1.gz fakeroot.es.1.gz /usr/share/man/es/man1/fakeroot-sysv.1.gz --slave /usr/share/man/es/man1/faked.1.gz faked.es.1.gz /usr/share/man/es/man1/faked-sysv.1.gz --slave /usr/share/man/fr/man1/fakeroot.1.gz fakeroot.fr.1.gz /usr/share/man/fr/man1/fakeroot-sysv.1.gz --slave /usr/share/man/fr/man1/faked.1.gz faked.fr.1.gz /usr/share/man/fr/man1/faked-sysv.1.gz --slave /usr/share/man/sv/man1/fakeroot.1.gz fakeroot.sv.1.gz /usr/share/man/sv/man1/fakeroot-sysv.1.gz --slave /usr/share/man/sv/man1/faked.1.gz faked.sv.1.gz /usr/share/man/sv/man1/faked-sysv.1.gz
+update-alternatives 2018-07-31 00:41:16: link group fakeroot updated to point to /usr/bin/fakeroot-sysv
+update-alternatives 2018-07-31 00:41:16: run with --install /usr/bin/fakeroot fakeroot /usr/bin/fakeroot-tcp 30 --slave /usr/share/man/man1/fakeroot.1.gz fakeroot.1.gz /usr/share/man/man1/fakeroot-tcp.1.gz --slave /usr/share/man/man1/faked.1.gz faked.1.gz /usr/share/man/man1/faked-tcp.1.gz --slave /usr/share/man/es/man1/fakeroot.1.gz fakeroot.es.1.gz /usr/share/man/es/man1/fakeroot-tcp.1.gz --slave /usr/share/man/es/man1/faked.1.gz faked.es.1.gz /usr/share/man/es/man1/faked-tcp.1.gz --slave /usr/share/man/fr/man1/fakeroot.1.gz fakeroot.fr.1.gz /usr/share/man/fr/man1/fakeroot-tcp.1.gz --slave /usr/share/man/fr/man1/faked.1.gz faked.fr.1.gz /usr/share/man/fr/man1/faked-tcp.1.gz --slave /usr/share/man/sv/man1/fakeroot.1.gz fakeroot.sv.1.gz /usr/share/man/sv/man1/fakeroot-tcp.1.gz --slave /usr/share/man/sv/man1/faked.1.gz faked.sv.1.gz /usr/share/man/sv/man1/faked-tcp.1.gz
+update-alternatives 2018-07-31 00:41:32: run with --force --install /etc/ld.so.conf.d/x86_64-linux-gnu_EGL.conf x86_64-linux-gnu_egl_conf /usr/lib/x86_64-linux-gnu/libhybris-egl/ld.so.conf 400
+update-alternatives 2018-07-31 00:41:39: run with --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.plymouth 100 --slave /usr/share/plymouth/themes/default.grub default.plymouth.grub /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.grub
+update-alternatives 2018-07-31 00:41:39: link group default.plymouth updated to point to /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.plymouth
+update-alternatives 2018-07-31 00:41:39: run with --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo-scale-2.plymouth 99 --slave /usr/share/plymouth/themes/default.grub default.plymouth.grub /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.grub
+update-alternatives 2018-07-31 00:41:46: run with --install /usr/bin/rename rename /usr/bin/file-rename 70 --slave /usr/share/man/man1/rename.1.gz rename.1.gz /usr/share/man/man1/file-rename.1p.gz
+update-alternatives 2018-07-31 00:41:46: link group rename updated to point to /usr/bin/file-rename
+update-alternatives 2018-07-31 00:41:53: run with --install /usr/share/icons/default/index.theme x-cursor-theme /etc/X11/cursors/core.theme 30
+update-alternatives 2018-07-31 00:41:53: run with --install /usr/share/icons/default/index.theme x-cursor-theme /etc/X11/cursors/redglass.theme 20
+update-alternatives 2018-07-31 00:41:53: run with --install /usr/share/icons/default/index.theme x-cursor-theme /etc/X11/cursors/whiteglass.theme 20
+update-alternatives 2018-07-31 00:41:53: run with --install /usr/share/icons/default/index.theme x-cursor-theme /etc/X11/cursors/handhelds.theme 20
+update-alternatives 2018-07-31 00:41:58: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/Adwaita/cursor.theme 90
+update-alternatives 2018-07-31 00:42:05: run with --quiet --install /usr/bin/pinentry pinentry /usr/bin/pinentry-gnome3 90 --slave /usr/share/man/man1/pinentry.1.gz pinentry.1.gz /usr/share/man/man1/pinentry-gnome3.1.gz
+update-alternatives 2018-07-31 00:42:05: link group pinentry updated to point to /usr/bin/pinentry-gnome3
+update-alternatives 2018-07-31 00:42:05: run with --quiet --install /usr/bin/pinentry-x11 pinentry-x11 /usr/bin/pinentry-gnome3 90 --slave /usr/share/man/man1/pinentry-x11.1.gz pinentry-x11.1.gz /usr/share/man/man1/pinentry-gnome3.1.gz
+update-alternatives 2018-07-31 00:42:05: link group pinentry-x11 updated to point to /usr/bin/pinentry-gnome3
+update-alternatives 2018-07-31 00:42:07: run with --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/gnome-terminal.wrapper 40 --slave /usr/share/man/man1/x-terminal-emulator.1.gz x-terminal-emulator.1.gz /usr/share/man/man1/gnome-terminal.1.gz
+update-alternatives 2018-07-31 00:42:07: link group x-terminal-emulator updated to point to /usr/bin/gnome-terminal.wrapper
+update-alternatives 2018-07-31 00:42:09: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/firefox 40
+update-alternatives 2018-07-31 00:42:09: link group gnome-www-browser updated to point to /usr/bin/firefox
+update-alternatives 2018-07-31 00:42:09: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/firefox 40
+update-alternatives 2018-07-31 00:42:09: link group x-www-browser updated to point to /usr/bin/firefox
+update-alternatives 2018-07-31 00:42:09: run with --install /usr/bin/gnome-text-editor gnome-text-editor /usr/bin/gedit 50 --slave /usr/share/man/man1/gnome-text-editor.1.gz gnome-text-editor.1.gz /usr/share/man/man1/gedit.1.gz
+update-alternatives 2018-07-31 00:42:09: link group gnome-text-editor updated to point to /usr/bin/gedit
+update-alternatives 2018-07-31 00:42:12: run with --install /usr/bin/x-session-manager x-session-manager /usr/bin/gnome-session 50 --slave /usr/share/man/man1/x-session-manager.1.gz x-session-manager.1.gz /usr/share/man/man1/gnome-session.1.gz
+update-alternatives 2018-07-31 00:42:12: link group x-session-manager updated to point to /usr/bin/gnome-session
+update-alternatives 2018-07-31 00:42:19: run with --install /usr/bin/gstreamer-codec-install gstreamer-codec-install /usr/bin/gst-install 80
+update-alternatives 2018-07-31 00:42:19: link group gstreamer-codec-install updated to point to /usr/bin/gst-install
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP /etc/X11/xinit/xinput.d/fcitx 40
+update-alternatives 2018-07-31 00:44:58: link group xinput-ja_JP updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/ko_KR xinput-ko_KR /etc/X11/xinit/xinput.d/fcitx 40
+update-alternatives 2018-07-31 00:44:58: link group xinput-ko_KR updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/zh_CN xinput-zh_CN /etc/X11/xinit/xinput.d/fcitx 80
+update-alternatives 2018-07-31 00:44:58: link group xinput-zh_CN updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/zh_TW xinput-zh_TW /etc/X11/xinit/xinput.d/fcitx 50
+update-alternatives 2018-07-31 00:44:58: link group xinput-zh_TW updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/zh_HK xinput-zh_HK /etc/X11/xinit/xinput.d/fcitx 50
+update-alternatives 2018-07-31 00:44:58: link group xinput-zh_HK updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:44:58: run with --install /etc/X11/xinit/xinput.d/zh_SG xinput-zh_SG /etc/X11/xinit/xinput.d/fcitx 80
+update-alternatives 2018-07-31 00:44:58: link group xinput-zh_SG updated to point to /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2018-07-31 00:45:00: run with --install /usr/bin/x-window-manager x-window-manager /usr/bin/metacity 60 --slave /usr/share/man/man1/x-window-manager.1.gz x-window-manager.1.gz /usr/share/man/man1/metacity.1.gz
+update-alternatives 2018-07-31 00:45:00: link group x-window-manager updated to point to /usr/bin/metacity
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-ja_JP /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-ja_JP fully removed
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-ko_KR /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-ko_KR fully removed
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-zh_CN /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-zh_CN fully removed
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-zh_TW /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-zh_TW fully removed
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-zh_HK /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-zh_HK fully removed
+update-alternatives 2019-01-17 10:12:12: run with --remove xinput-zh_SG /etc/X11/xinit/xinput.d/fcitx
+update-alternatives 2019-01-17 10:12:12: link group xinput-zh_SG fully removed
+update-alternatives 2019-01-17 10:12:28: run with --remove x-window-manager /usr/bin/metacity
+update-alternatives 2019-01-17 10:12:28: link group x-window-manager fully removed
+update-alternatives 2019-01-17 10:28:22: run with --install /usr/bin/rename rename /usr/bin/prename 60 --slave /usr/share/man/man1/rename.1.gz rename.1.gz /usr/share/man/man1/prename.1.gz
+update-alternatives 2019-01-17 10:28:30: run with --install /usr/share/ghostscript/current ghostscript-current /usr/share/ghostscript/9.26 926
+update-alternatives 2019-01-17 10:28:30: link group ghostscript-current updated to point to /usr/share/ghostscript/9.26
+update-alternatives 2019-01-17 10:28:39: run with --quiet --remove rlogin /usr/bin/ssh
+update-alternatives 2019-01-17 10:28:39: run with --quiet --remove rcp /usr/bin/ssh
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/firefox 40
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/firefox 40
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/compare compare /usr/bin/compare-im6 100 --slave /usr/share/man/man1/compare.1.gz compare.1.gz /usr/share/man/man1/compare-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/animate animate /usr/bin/animate-im6 100 --slave /usr/share/man/man1/animate.1.gz animate.1.gz /usr/share/man/man1/animate-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/convert convert /usr/bin/convert-im6 100 --slave /usr/share/man/man1/convert.1.gz convert.1.gz /usr/share/man/man1/convert-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/composite composite /usr/bin/composite-im6 100 --slave /usr/share/man/man1/composite.1.gz composite.1.gz /usr/share/man/man1/composite-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/conjure conjure /usr/bin/conjure-im6 100 --slave /usr/share/man/man1/conjure.1.gz conjure.1.gz /usr/share/man/man1/conjure-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/import import /usr/bin/import-im6 100 --slave /usr/share/man/man1/import.1.gz import.1.gz /usr/share/man/man1/import-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/identify identify /usr/bin/identify-im6 100 --slave /usr/share/man/man1/identify.1.gz identify.1.gz /usr/share/man/man1/identify-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/stream stream /usr/bin/stream-im6 100 --slave /usr/share/man/man1/stream.1.gz stream.1.gz /usr/share/man/man1/stream-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/display display /usr/bin/display-im6 100 --slave /usr/share/man/man1/display.1.gz display.1.gz /usr/share/man/man1/display-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/montage montage /usr/bin/montage-im6 100 --slave /usr/share/man/man1/montage.1.gz montage.1.gz /usr/share/man/man1/montage-im6.1.gz
+update-alternatives 2019-01-17 10:28:40: run with --install /usr/bin/mogrify mogrify /usr/bin/mogrify-im6 100 --slave /usr/share/man/man1/mogrify.1.gz mogrify.1.gz /usr/share/man/man1/mogrify-im6.1.gz
+update-alternatives 2019-01-17 10:30:34: run with --install /usr/bin/mailx mailx /usr/bin/bsd-mailx 50 --slave /usr/bin/mail mail /usr/bin/bsd-mailx --slave /usr/bin/Mail Mail /usr/bin/bsd-mailx --slave /usr/share/man/man1/mailx.1.gz mailx.1.gz /usr/share/man/man1/bsd-mailx.1.gz --slave /usr/share/man/man1/mail.1.gz mail.1.gz /usr/share/man/man1/bsd-mailx.1.gz --slave /usr/share/man/man1/Mail.1.gz Mail.1.gz /usr/share/man/man1/bsd-mailx.1.gz
+update-alternatives 2019-01-17 10:30:34: link group mailx updated to point to /usr/bin/bsd-mailx
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/vim vim /usr/bin/vim.basic 30
+update-alternatives 2019-01-17 10:30:38: link group vim updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/vimdiff vimdiff /usr/bin/vim.basic 30
+update-alternatives 2019-01-17 10:30:38: link group vimdiff updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/rvim rvim /usr/bin/vim.basic 30
+update-alternatives 2019-01-17 10:30:38: link group rvim updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/rview rview /usr/bin/vim.basic 30
+update-alternatives 2019-01-17 10:30:38: link group rview updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/vi vi /usr/bin/vim.basic 30 --slave /usr/share/man/fr/man1/vi.1.gz vi.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/vi.1.gz vi.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/vi.1.gz vi.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/vi.1.gz vi.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/vi.1.gz vi.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/vi.1.gz vi.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2019-01-17 10:30:38: link group vi updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/view view /usr/bin/vim.basic 30 --slave /usr/share/man/fr/man1/view.1.gz view.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/view.1.gz view.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/view.1.gz view.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/view.1.gz view.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/view.1.gz view.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/view.1.gz view.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2019-01-17 10:30:38: link group view updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/ex ex /usr/bin/vim.basic 30 --slave /usr/share/man/fr/man1/ex.1.gz ex.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/ex.1.gz ex.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/ex.1.gz ex.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/ex.1.gz ex.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/ex.1.gz ex.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/ex.1.gz ex.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2019-01-17 10:30:38: link group ex updated to point to /usr/bin/vim.basic
+update-alternatives 2019-01-17 10:30:38: run with --install /usr/bin/editor editor /usr/bin/vim.basic 30 --slave /usr/share/man/fr/man1/editor.1.gz editor.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/editor.1.gz editor.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/editor.1.gz editor.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/editor.1.gz editor.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/ja/man1/editor.1.gz editor.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/vim.1.gz

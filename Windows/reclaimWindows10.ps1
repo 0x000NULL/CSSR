@@ -42,24 +42,28 @@ $tweaks = @(
 	"DisableWAPPush",               # "EnableWAPPush",
 
 	### Security Tweaks ###
-	# "SetUACLow",                  # "SetUACHigh",
+	# "SetUACLow",                  # 
+	"SetUACHigh",
 	# "EnableSharingMappedDrives",  # "DisableSharingMappedDrives",
 	# "DisableAdminShares",           # "EnableAdminShares",
 	"DisableSMB1",                # "EnableSMB1",
 	 "DisableSMBServer",           # "EnableSMBServer",
 	 "DisableLLMNR",               # "EnableLLMNR",
 	"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
-	# "SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
-	# "DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
+	"SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
+	"DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
 	# "EnableCtrldFolderAccess",    # "DisableCtrldFolderAccess",
-	# "DisableFirewall",            # "EnableFirewall",
-	# "DisableDefender",            # "EnableDefender",
-	# "DisableDefenderCloud",       # "EnableDefenderCloud",
+	# "DisableFirewall",            # 
+	"EnableFirewall",
+	# "DisableDefender",            # 
+	"EnableDefender",
+	# "DisableDefenderCloud",       # 
+	"EnableDefenderCloud",
 	"EnableF8BootMenu",             # "DisableF8BootMenu",
-	#"SetDEPOptOut",                 # "SetDEPOptIn",
-	# "EnableCIMemoryIntegrity",    # "DisableCIMemoryIntegrity",
+	"SetDEPOptOut",                 # "SetDEPOptIn",
+	"EnableCIMemoryIntegrity",    # "DisableCIMemoryIntegrity",
 	#"DisableScriptHost",            # "EnableScriptHost",
-	#"EnableDotNetStrongCrypto",     # "DisableDotNetStrongCrypto",
+	"EnableDotNetStrongCrypto",     # "DisableDotNetStrongCrypto",
 	# "EnableMeltdownCompatFlag"    # "DisableMeltdownCompatFlag",
 
 	### Service Tweaks ###
@@ -72,12 +76,16 @@ $tweaks = @(
 	# "EnableRemoteDesktop",          # "DisableRemoteDesktop",
 	"DisableAutoplay",              # "EnableAutoplay",
 	"DisableAutorun",               # "EnableAutorun",
-	# "EnableStorageSense",         # "DisableStorageSense",
-	# "DisableDefragmentation",     # "EnableDefragmentation",
-	# "DisableSuperfetch",          # "EnableSuperfetch",
-	# "DisableIndexing",            # "EnableIndexing",
+	"EnableStorageSense",         # "DisableStorageSense",
+	# "DisableDefragmentation",     # 
+	"EnableDefragmentation",
+	# "DisableSuperfetch",          # 
+	"EnableSuperfetch",
+	# "DisableIndexing",            # 
+	"EnableIndexing",
 	# "SetBIOSTimeUTC",             # "SetBIOSTimeLocal",
-	# "EnableHibernation",          # "DisableHibernation",
+	# "EnableHibernation",          # 
+	"DisableHibernation",
 	# "DisableSleepButton",         # "EnableSleepButton",
 	# "DisableSleepTimeout",        # "EnableSleepTimeout",
 	# "DisableFastStartup",         # "EnableFastStartup",
@@ -120,16 +128,16 @@ $tweaks = @(
 	# "HideDocumentsFromExplorer",  # "ShowDocumentsInExplorer",
 	# "HideDownloadsFromThisPC",      # "ShowDownloadsInThisPC",
 	# "HideDownloadsFromExplorer",  # "ShowDownloadsInExplorer",
-	# "HideMusicFromThisPC",          # "ShowMusicInThisPC",
-	# "HideMusicFromExplorer",      # "ShowMusicInExplorer",
-	# "HidePicturesFromThisPC",       # "ShowPicturesInThisPC",
-	# "HidePicturesFromExplorer",   # "ShowPicturesInExplorer",
-	# "HideVideosFromThisPC",         # "ShowVideosInThisPC",
-	# "HideVideosFromExplorer",     # "ShowVideosInExplorer",
+	 "HideMusicFromThisPC",          # "ShowMusicInThisPC",
+	 "HideMusicFromExplorer",      # "ShowMusicInExplorer",
+	 "HidePicturesFromThisPC",       # "ShowPicturesInThisPC",
+	 "HidePicturesFromExplorer",   # "ShowPicturesInExplorer",
+	 "HideVideosFromThisPC",         # "ShowVideosInThisPC",
+	 "HideVideosFromExplorer",     # "ShowVideosInExplorer",
 	"Hide3DObjectsFromThisPC",      # "Show3DObjectsInThisPC",
 	 "Hide3DObjectsFromExplorer",  # "Show3DObjectsInExplorer",
-	# "DisableThumbnails",          # "EnableThumbnails",
-	# "DisableThumbsDB",              # "EnableThumbsDB",
+	"DisableThumbnails",          # "EnableThumbnails",
+	 "DisableThumbsDB",              # "EnableThumbsDB",
 
 	### Application Tweaks ###
 	 "DisableOneDrive",              # "EnableOneDrive",

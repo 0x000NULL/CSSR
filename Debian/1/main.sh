@@ -227,28 +227,6 @@ function nomedia {
 	cont
 }
 
-#TODO
-function rootkits {
-	echo "Configuring rootkit finders..."
-	sed "s/RUN_DAILY.*/RUN_DAILY true/g" /etc/chkrootkit.conf
-	sed "s/CRON_DAILY_RUN.*/CRON_DAILY_RUN true/g" /etc/default/rkhunter
-	sed "s/CRON_DB_UPDATE.*/CRON_DB_UPDATE true/g" /etc/default/rkhunter
-	mv /etc/cron.weekly/rkhunter /etc/cron.weekly/rkhunter_update
-	mv /etc/cron.daily/rkhunter /etc/cron.weekly/rkhunter_run
-	mv /etc/cron.daily/chkrootkit /etc/cron.weekly/
-#	chkrootkit
-#	rkhunter
-}
-
-
-#TODO
-function scruboff {
-	echo "starting AV..."
-	freshclam
-	clamscan -i -r --remove=yes /
-	apt-get autoremove
-	cont
-}
 
 #actually running the script
 unalias -a #Get rid of aliases

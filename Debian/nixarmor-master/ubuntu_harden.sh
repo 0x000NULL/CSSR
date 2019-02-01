@@ -1,12 +1,3 @@
-#!/bin/bash
-#
-# Perform hardening operations for Ubuntu distributions
-#####################
-# Author : Emir Ozer
-# Creation Date: 8 Jan 2015
-#####################
-echo -n "I do not claim any responsibility for your use of this script."
-
 sys_upgrades() {
     apt-get --yes --force-yes update
     apt-get --yes --force-yes upgrade

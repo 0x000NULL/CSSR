@@ -1,4 +1,4 @@
-if [[ $EUID -ne 0 ]]
+f [[ $EUID -ne 0 ]]
 then
   echo "You must be root to run this script."
   exit 1
@@ -11,7 +11,6 @@ chmod +x main.sh
 cd ..
 cd 2
 chmod +x ubuntu_16.04LTS.sh
-chmod +x ubuntu_16.10.sh
 ./ubuntu_16.04LTS.sh
 cd ..
 
@@ -30,10 +29,6 @@ cd dofirst
 chmod +x main.sh
 ./main.sh
 
-
-cd ..
-cd HardeningONE-master
-sh hardeningone
 
 cd ..
 cd nixarmor-master

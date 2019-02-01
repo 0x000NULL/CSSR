@@ -1,11 +1,4 @@
-#!/bin/bash
 
-#index.sh
-
-#runs everything
-#Authored by Thomas 8/29
-#Edited by Kenneth 8/30
-#Script that will run entire directory of scripts. Use "automator.sh" to accomplish this
 
 #--------Updating Linux----
 	#Making the linux sources.list open for updates
@@ -20,6 +13,7 @@
 	sudo ./AntiVirus/automator.sh 
 	sudo ./Purge/automator.sh
 	sudo ./PW/automator.sh
+	sudo ./UFW/automator.sh
 	clear
 
 #--------Running Service Scripts-------
@@ -34,14 +28,16 @@
 ##read cotyn
 
 ##if [ "$contyn" = "ssh"]; then
-	##./Services/sshScript.sh
-	##echo "ssh secured. Modify anything else accordingly"
+/Services/sshScript.sh
+echo "ssh secured. Modify anything else accordingly"
 ##fi
 
 ##if [ "$contyn" = "samba"]; then
-	##./Services/sambaScript.sh
-	##echo "samba secured. Modify anything accordingly"
+/Services/sambaScript.sh
+echo "samba secured. Modify anything accordingly"
 #fi
+
+./Services/apache2/apache2Script.sh
 
 ##done
 

@@ -1,0 +1,16 @@
++ date
++ echo Thu Jan 17 12:56:28 PST 2019 : Executing '/etc/vmware-tools/scripts/vmware/network poweroff-vm'
+Thu Jan 17 12:56:28 PST 2019 : Executing '/etc/vmware-tools/scripts/vmware/network poweroff-vm'
++ echo
+
++ dirname /etc/vmware-tools/scripts/vmware/network
++ . /etc/vmware-tools/scripts/vmware/../../statechange.subr
++ main poweroff-vm
++ exitCode=0
++ activeList=/var/run/vmware-active-nics
++ echo No argument supplied.
+No argument supplied.
++ return 0
++ date
++ echo Thu Jan 17 12:56:28 PST 2019 : Finished '/etc/vmware-tools/scripts/vmware/network poweroff-vm'
+Thu Jan 17 12:56:28 PST 2019 : Finished '/etc/vmware-tools/scripts/vmware/network poweroff-vm'
