@@ -12,13 +12,6 @@ yellow=`tput setaf 3`
 reset=`tput setaf 7`
 mkdir OSHardeningLogs
 
-#Intro
-echo "${yellow}Welcome to OSHardening Scripts${reset}"
-echo "${yellow}Github: github.com/NitescuLucian/OSHardening${reset}"
-echo "${yellow}Issues: github.com/NitescuLucian/OSHardening/issues${reset}"
-echo "${yellow}Licence: GNU Lesser General Public License v3.0${reset}"
-echo "${yellow}Donation: paypal.me/LNitescu${reset}"
-read pause
 
 #System update date & Instalations
 echo "${yellow}Would you like to update your system and tools? (y/n)${reset}"

@@ -1,4 +1,4 @@
-f [[ $EUID -ne 0 ]]
+if [[ $EUID -ne 0 ]]
 then
   echo "You must be root to run this script."
   exit 1
@@ -29,8 +29,16 @@ cd nixarmor-master
 ./debian_harden.sh
 
 cd ..
-cd lynis-master
-./lynis
+cd 2
+echo "Are you running 16.0LTS, or 16.10? Y for LTS, N for 16.10"
+read foo
+if ["$foo" == "Y"]; then
+chmod +x ubuntu_16.04LTS.sh
+./ubuntu_16.04LTS.sh
+else
+chmod +x ubuntu_16.10.sh
+./ubuntu_16.10.sh
+
 
 cd ..
 clear

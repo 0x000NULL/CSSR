@@ -1,6 +1,7 @@
 @echo off
 title NotaVirus Windows Script
 echo Welcome to Ethan's Script!
+cd files
 pause
 clear
 Echo Running scripts
@@ -74,7 +75,7 @@ start optimize-windows-update.ps1
 pause 
 clear
 
-echo remove default updates? This script removes unwanted Apps that come with Windows. If you  do not want to remove certain Apps comment out the corresponding lines below.
+echo remove default updates? This script removes unwanted Apps that come with Windows. If you  do not want to remove certain Apps comment out the apps in the files.
 SET /P M=Type y or n then press ENTER:
 IF %M%==y goto remove-default-apps
 IF %M%==n goto skip6
