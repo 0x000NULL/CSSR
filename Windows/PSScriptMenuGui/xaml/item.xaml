@@ -1,0 +1,4 @@
+            <Button x:Name="INSERT_BUTTON_NAME" Grid.Row="INSERT_ROW" Grid.Column="0" Background="INSERT_BACKGROUND_COLOR" Foreground="INSERT_FOREGROUND_COLOR" MinHeight="50" Padding="10" Margin="0,5,0,5">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">INSERT_BUTTON_TEXT</TextBlock>
+            </Button>
+            <TextBlock TextWrapping="Wrap" Grid.Row="INSERT_ROW" Grid.Column="1" Padding="10,5,0,5" VerticalAlignment="Center">INSERT_DESCRIPTION</TextBlock>
