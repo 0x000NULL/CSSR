@@ -28,7 +28,7 @@ GEM
       mongo (~> 1.8)
       plucky (~> 0.7.0)
     mustermann (1.0.3)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     plucky (0.7.0)
       mongo (~> 1.5)
