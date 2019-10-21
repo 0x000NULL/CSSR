@@ -1,6 +1,8 @@
+
 # CSSR
 ## Computer Security Scripts and Resources
 ### Made by Ethan Aldrich
+![GitHub repo size](https://img.shields.io/github/repo-size/ethanaldrich9986/CSSR)
 #### Dont forget to read the read me!!
 
 
