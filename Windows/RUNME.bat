@@ -24,6 +24,55 @@ pause
 cd ..
 cd scripts
 
+echo SERVER2008?
+SET /P M=Type y or n then press ENTER:
+IF %M%==y goto SERVER2008GucciScript.bat
+IF %M%==n goto skip19
+:WIN7GucciScript.bat
+start WIN7GucciScript.bat
+:skip19
+pause 
+clear
+
+echo SERVER2016?
+SET /P M=Type y or n then press ENTER:
+IF %M%==y goto SERVER2016GucciScript.bat
+IF %M%==n goto skip20
+:SERVER2016GucciScript.bat
+start SERVER2016GucciScript.bat
+:skip20
+pause 
+clear
+
+echo WIN 7?
+SET /P M=Type y or n then press ENTER:
+IF %M%==y goto WIN7GucciScript.bat
+IF %M%==n goto skip21
+:WIN7GucciScript.bat
+start WIN7GucciScript.bat
+:skip21
+pause 
+clear
+
+echo WIN 8?
+SET /P M=Type y or n then press ENTER:
+IF %M%==y goto WIN8GucciScript.bat
+IF %M%==n goto skip22
+:WIN8GucciScript.bat
+start WIN8GucciScript.bat
+:skip22
+pause 
+clear
+
+echo WIN 10?
+SET /P M=Type y or n then press ENTER:
+IF %M%==y goto WIN10GucciScript.bat
+IF %M%==n goto skip23
+:WIN10GucciScript.bat
+start WIN10GucciScript.bat
+:skip23
+pause 
+clear
 
 echo block-telementry?
 SET /P M=Type y or n then press ENTER:

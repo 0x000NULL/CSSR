@@ -60,7 +60,7 @@ goto %errorlevel%
 :: Run inf files
 :1
 cls
-secedit /configure /db "C:\dankdatabase1.db" /cfg "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016Inf.inf"
+secedit /configure /db "C:\dankdatabase1.db" /cfg "Server2016CompFiles\Server2016Inf.inf"
 echo.
 
 set /p cont="Continue to bad inf? "
@@ -68,7 +68,7 @@ if %cont% == n goto begin
 echo.
 
 :: Run BAD inf
-secedit /configure /db "C:\dankdatabase2.db" /cfg "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016BadInf.inf"
+secedit /configure /db "C:\dankdatabase2.db" /cfg "Server2016CompFiles\Server2016BadInf.inf"
 echo.
 
 pause
@@ -81,8 +81,8 @@ goto begin
 :2
 cls
 :: Import IE baselines
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\IE11_Com_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\IE11_User_Sec"
+"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\IE11_Com_Sec"
+"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\IE11_User_Sec"
 echo.
 
 set /p cont="Continue to OS baselines? "
@@ -90,9 +90,9 @@ if %cont% == n goto begin
 echo.
 
 :: Import OS baselines
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\MS_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\Dom_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\DC_Sec"
+"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\MS_Sec"
+"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\Dom_Sec"
+"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\DC_Sec"
 
 echo.
 pause
@@ -146,7 +146,7 @@ goto begin
 :: Enable firewall + template
 :9
 cls
-netsh advfirewall import "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016Firewall.wfw"
+netsh advfirewall import "Server2016CompFiles\Server2016Firewall.wfw"
 netsh advfirewall set allprofiles state on
 
 pause
