@@ -1,0 +1,11 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=SEHelp.chm
+Contents file=Table of Contents.hhc
+Display compile progress=No
+Full-text search=Yes
+Language=0x409 English (United States)
+
+
+[INFOTYPES]
+

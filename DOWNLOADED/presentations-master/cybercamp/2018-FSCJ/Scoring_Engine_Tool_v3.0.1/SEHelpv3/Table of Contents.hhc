@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Scoring Engine Help Menu">
+		<param name="Local" value="MainMenu.htm">
+		<param name="URL" value="MainMenu.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="File Menu Items">
+			<param name="Local" value="FileMenuHelp\FileMenuItems.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Install/Uninstall procedures">
+			<param name="Local" value="FileMenuHelp\ScoringEngineInstall.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Technical Notes">
+			<param name="Local" value="FileMenuHelp\TechNotes.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Scoring Engine v3 Release Notes">
+			<param name="Local" value="FileMenuHelp\SEReleaseNotesv3.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Local Policy">
+			<param name="Local" value="LocalPolicyHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Audit Policy">
+				<param name="Local" value="LocalPolicyTabs\AuditPolicyHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Security Options">
+				<param name="Local" value="LocalPolicyTabs\SecurityOptionsHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="User Rights Assignment">
+				<param name="Local" value="LocalPolicyTabs\UserRightsAssignmentHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Account Policies">
+			<param name="Local" value="AccountPoliciesHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Password Policy">
+				<param name="Local" value="AccountPolicyTabs\PasswordPolicyHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Account Lockout Policy">
+				<param name="Local" value="AccountPolicyTabs\AccountLockoutPolicyHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Installed Programs">
+			<param name="Local" value="InstalledProgramsHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Installed Programs">
+				<param name="Local" value="InstalledProgramsTab\InstalledProgramsHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Local Users and Groups">
+			<param name="Local" value="LocalUsersGroupsHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Users">
+				<param name="Local" value="LocalUsersGroupsTabs\UsersHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Groups">
+				<param name="Local" value="LocalUsersGroupsTabs\GroupsHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Startup">
+			<param name="Local" value="StartupHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Startup">
+				<param name="Local" value="StartupTab\StartupHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Shares">
+			<param name="Local" value="SharesHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Shares">
+				<param name="Local" value="SharesTab\SharesHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Windows Updates">
+			<param name="Local" value="WindowsUpdatesHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Windows Updates">
+				<param name="Local" value="WindowsUpdatesTab\WindowsUpdatesHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Scheduled Tasks">
+			<param name="Local" value="ScheduledTasksHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Tree View">
+				<param name="Local" value="ScheduledTasksTabs\ScheduledTasksTreeView.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Grid View">
+				<param name="Local" value="ScheduledTasksTabs\ScheduledTasksGridView.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Firewall">
+			<param name="Local" value="FirewallHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Firewall Profiles">
+				<param name="Local" value="FirewallTabs\FirewallProfilesHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Inbound Firewall Rules">
+				<param name="Local" value="FirewallTabs\InboundFirewallRulesHelp.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Outbound Firewall Rules">
+				<param name="Local" value="FirewallTabs\OutboundFirewallRulesHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Services">
+			<param name="Local" value="ServicesHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Services">
+				<param name="Local" value="ServicesTab\ServicesHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Other">
+			<param name="Local" value="OtherHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Other">
+				<param name="Local" value="OtherTab\OtherHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Features">
+			<param name="Local" value="FeaturesHelp.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Features">
+				<param name="Local" value="FeaturesTab\FeaturesHelp.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Summary">
+			<param name="Local" value="SummaryHelp.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

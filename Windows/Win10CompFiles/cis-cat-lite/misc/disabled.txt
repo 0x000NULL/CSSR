@@ -1,0 +1,82 @@
+CIS AIX 4.3.2, 4.3.3, 5L, 5.1 Benchmark
+CIS AIX 5.3 and AIX 6.1 Benchmark
+CIS Amazon Linux Benchmark
+CIS Apache Tomcat 5.5 and 6.0 Benchmark
+CIS Apple OSX 10.5 Benchmark
+CIS Apple OSX 10.6 Benchmark
+CIS Apple OSX 10.8 Benchmark
+CIS Apple OSX 10.9 Benchmark
+CIS Apple OSX 10.10 Benchmark
+CIS Apple OSX 10.12 Benchmark
+CIS CentOS Linux 6 Benchmark
+CIS CentOS Linux 7 Benchmark
+CIS Cisco Firewall Benchmark
+CIS Cisco IOS 12 Benchmark
+CIS Cisco IOS 15 Benchmark
+CIS Debian Linux 3 Benchmark
+CIS Debian Linux 7 Benchmark
+CIS Debian Linux 8 Benchmark
+CIS HP-UX 11i v3 Update 2 Benchmark
+CIS IBM AIX 7.1 Benchmark
+CIS MIT Kerberos 1.10 Benchmark
+CIS Microsoft IIS 7 Benchmark
+CIS Microsoft IIS 8 Benchmark
+CIS Microsoft Internet Explorer 10 Benchmark
+CIS Microsoft Internet Explorer 11 Benchmark
+CIS Microsoft Office 2013 Benchmark
+CIS Microsoft Office 2016 Benchmark
+CIS Microsoft Office Access 2013 Benchmark
+CIS Microsoft Office Access 2016 Benchmark
+CIS Microsoft Office Excel 2013 Benchmark
+CIS Microsoft Office Excel 2016 Benchmark
+CIS Microsoft Office Outlook 2013 Benchmark
+CIS Microsoft Office Outlook 2016 Benchmark
+CIS Microsoft Office PowerPoint 2013 Benchmark
+CIS Microsoft Office PowerPoint 2016 Benchmark
+CIS Microsoft Office Word 2013 Benchmark
+CIS Microsoft Office Word 2016 Benchmark
+CIS Microsoft SQL Server 2008 R2 Benchmark
+CIS Microsoft SQL Server 2012 Benchmark
+CIS Microsoft SQL Server 2014 Benchmark
+CIS Microsoft Windows 7 Benchmark
+CIS Microsoft Windows 8 Benchmark
+CIS Microsoft Windows 8.1 Benchmark
+CIS Microsoft Windows Server 2003 Benchmark
+CIS Microsoft Windows Server 2008 (non-R2) Benchmark
+CIS Microsoft Windows Server 2008 R2 Benchmark
+CIS Microsoft Windows Server 2012 (non-R2) Benchmark
+CIS Microsoft Windows Server 2012 R2 Benchmark
+CIS Microsoft Windows Server 2016 RTM (Release 1607) Benchmark
+CIS Microsoft Windows XP Benchmark
+CIS Mozilla Firefox 24 ESR Benchmark
+CIS Mozilla Firefox 3 Benchmark
+CIS Mozilla Firefox 38 ESR Benchmark
+CIS Oracle Database 10g Benchmark
+CIS Oracle Database 11g Benchmark 
+CIS Oracle Database 11g R2 Benchmark
+CIS Oracle Database 12c Benchmark
+CIS Oracle Linux 6 Benchmark
+CIS Oracle Linux 7 Benchmark
+CIS Oracle MySQL Community Server 5.6 Benchmark
+CIS Oracle MySQL Community Server 5.7 Benchmark
+CIS Oracle MySQL Enterprise Edition 5.6 Benchmark
+CIS Oracle MySQL Enterprise Edition 5.7 Benchmark
+CIS Oracle Solaris 10 Benchmark
+CIS Oracle Solaris 11 Benchmark
+CIS Oracle Solaris 11.1 Benchmark
+CIS Oracle Solaris 11.2 Benchmark
+CIS Oracle Solaris 2.5.1 - 9 Benchmark
+CIS Red Hat 4 and Fedora Core 1, 2, 3, 4, 5 Benchmark
+CIS Red Hat Enterprise Linux 5 Benchmark
+CIS Red Hat Enterprise Linux 6 Benchmark
+CIS Red Hat Enterprise Linux 7 Benchmark
+CIS SUSE Linux Enterprise Server 11 Benchmark
+CIS SUSE Linux Enterprise Server 12 Benchmark
+CIS Slackware 10.2 Linux Benchmark
+CIS SuSE Linux Enterprise Server 10.0 SP1 Benchmark
+CIS SuSE Linux Enterprise Server 9.0 Benchmark
+CIS Ubuntu Linux 12.04 LTS Benchmark
+CIS Ubuntu Linux 14.04 LTS Benchmark
+CIS VMware ESX 3.5 Benchmark
+CIS VMware ESX 4 Benchmark
+CIS VMware ESXi 5.5 Benchmark

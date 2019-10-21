@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:42:00</BackupTime>
+  <ID>{44ca2981-bc93-43c5-9593-19d7d84c70e0}</ID>
+  <Comment>The Domain baseline includes settings that must be applied across the entire domain, such as password attributes policy settings.</Comment>
+  <GPODisplayName>Win8 Domain Security Compliance</GPODisplayName>
+</BackupInst>

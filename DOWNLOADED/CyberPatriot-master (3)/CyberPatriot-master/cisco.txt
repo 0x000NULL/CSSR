@@ -1,0 +1,102 @@
+
+! Securing Cisco devices by Walter Gibbons
+!
+! These commands were tested against PacketTracer's 2911 router IOS 15.1(4)
+!
+! In Cisco IOS a line that begins with a "!" is a comment and not interpreted
+! by the router/switch/firewall. Lines beginning with a "!" can be safely pasted into a router and
+! will not be interpreted and will not be saved into configuration files
+!
+! This document contains common security configurations for Cisco devices. When
+! an example is used with a particular interface e.g. "FastEthernet 0/0" ensure
+! you modify it to match your desired interface
+!
+! Replace text within angle brackets <replace me> with your desired text. Make
+! sure not to include the angle brackets when
+
+! Enable encryption of passwords stored in the config file
+service password-encryption
+
+! Enforce minimum password length
+security passwords min-length 10
+
+! Enforce timeouts on access lines, require a local user account for login while
+! not allowing shared line passwords
+line vty 0 4
+  no password
+  login local
+  exec-timeout 3 30
+  transport input ssh
+
+line console 0
+  no password
+  login local
+  exec-timeout 3 30
+
+line aux 0
+  no password
+  login local
+  exec-timeout 3 30
+
+! Set an enable mode password
+enable password <password>
+
+! Create new users with a password
+username <username> pass <password>
+
+! Set a login banner to warn unauthorized users of unauthorized use
+banner login #
+*****************************************************************************
+WARNING TO UNAUTHORIZED USERS:
+This system is for use by authorized users only. Any individual using this
+system, by such use, acknowledges and consents to the right of the company to
+monitor, access, use, and disclose any information generated, received, or
+stored on the systems...........
+*****************************************************************************
+#
+
+banner motd #
+*****************************************************************************
+WARNING TO UNAUTHORIZED USERS:
+This system is for use by authorized users only. Any individual using this
+system, by such use, acknowledges and consents to the right of the company to
+monitor, access, use, and disclose any information generated, received, or
+stored on the systems...........
+*****************************************************************************
+#
+
+! Throttle unsuccessful login attempts
+login block-for 60 attempts 3 with 30
+
+! Log login attempts
+login on-success log
+login on-failure log
+
+! To check login failures:
+show login failures
+
+! Configure SSH
+hostname <hostname>
+ip domain-name <domain.tld>
+crypto key generate rsa
+! ensure you enter a modulus of at least 1024 when prompted
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+
+! Enable IOS resilience features
+secure boot-image
+secure boot-config
+
+! Configure syslog
+logging host <ip address of syslog server>
+logging trap <level 0-7>
+logging on
+
+! Point router to NTP server for time
+ntp server <ip address of NTP server>
+
+! Generally good security practices
+no cdp run
+no lldp run
+no ip domain-lookup

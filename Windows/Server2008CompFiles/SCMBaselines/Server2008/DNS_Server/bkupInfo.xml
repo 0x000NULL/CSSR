@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:30:14</BackupTime>
+  <ID>{167c6782-7089-4fc6-8d79-02df59787d1c}</ID>
+  <Comment>The DNS Server baseline includes settings required to enable the DNS Server role.</Comment>
+  <GPODisplayName>WS2008SP2 DNS Server Security Compliance</GPODisplayName>
+</BackupInst>

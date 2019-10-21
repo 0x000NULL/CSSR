@@ -1,0 +1,53 @@
+body {
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+#payload h1 {
+    padding-right: 35%;
+    color: white;
+}
+
+#payload #heading {
+    font-size: 48px;
+    align-content: center;
+    padding-left: 35%;
+    margin-top: 100px;
+}
+
+#payload #quicklinks {
+    width: 100%;
+    left: 0;
+    height: 80px;
+    margin-bottom: 150px;
+    text-align: center;
+}
+
+#payload #quicklinks a {
+    color: transparent;
+}
+
+#payload #quicklinks button {
+    display: block;
+    background-color: #064489; /* Scheme blue*/
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 1px solid #064489;
+    /*margin: 0 auto;*/
+}
+
+#payload #quicklinks button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+}

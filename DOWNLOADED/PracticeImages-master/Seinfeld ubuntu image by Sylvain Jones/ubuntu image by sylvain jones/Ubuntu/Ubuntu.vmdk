@@ -1,0 +1,35 @@
+# Disk DescriptorFile
+version=1
+encoding="windows-1252"
+CID=eb35be1e
+parentCID=ffffffff
+isNativeSnapshot="no"
+createType="twoGbMaxExtentSparse"
+
+# Extent description
+RW 8323072 SPARSE "Ubuntu-s001.vmdk"
+RW 8323072 SPARSE "Ubuntu-s002.vmdk"
+RW 8323072 SPARSE "Ubuntu-s003.vmdk"
+RW 8323072 SPARSE "Ubuntu-s004.vmdk"
+RW 8323072 SPARSE "Ubuntu-s005.vmdk"
+RW 327680 SPARSE "Ubuntu-s006.vmdk"
+
+# The Disk Data Base 
+#DDB
+
+ddb.adapterType = "lsilogic"
+ddb.geometry.cylinders = "16383"
+ddb.geometry.heads = "16"
+ddb.geometry.sectors = "63"
+ddb.longContentID = "33429ed873c1d91117f3b577eb35be1e"
+ddb.toolsInstallType = "0"
+ddb.toolsVersion = "2147483647"
+ddb.uuid = "60 00 C2 94 2a dd 28 54-f3 52 20 cb 2d e9 7e bf"
+ddb.virtualHWVersion = "12"
+ddb.uuid.image="614bd79e-8fb0-4314-a9ef-8c6d197f957d"
+ddb.uuid.modification="39a79e3c-6281-47e1-8b92-1be4e99dfdcc"
+ddb.uuid.parent="00000000-0000-0000-0000-000000000000"
+ddb.uuid.parentmodification="00000000-0000-0000-0000-000000000000"
+ddb.geometry.biosCylinders="1024"
+ddb.geometry.biosHeads="255"
+ddb.geometry.biosSectors="63"

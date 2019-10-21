@@ -1,0 +1,30 @@
+#payload .center {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#payload .list {
+    font-size: 24px;
+    color: #00C080;
+    align-content: center;
+}
+
+#payload h1 {
+    padding-right: 35%;
+    color: white;
+    font-size: 36px;
+}
+
+#payload #heading {
+    font-size: 48px;
+    align-content: center;
+    padding-left: 35%;
+    margin-top: 100px;
+}
+
+#payload #intro {
+    padding-top: 5%;
+    padding-right: 0;
+
+}
