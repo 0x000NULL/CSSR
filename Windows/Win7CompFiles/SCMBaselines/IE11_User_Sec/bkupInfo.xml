@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-07-31T08:31:03</BackupTime>
+  <ID>{a610edc3-a0af-4b0d-b348-2a8095184f65}</ID>
+  <Comment>The IE11 user baseline includes settings to configure computers running Internet Explorer 11.</Comment>
+  <GPODisplayName>IE11 User Security Compliance</GPODisplayName>
+</BackupInst>

@@ -1,0 +1,46 @@
+Scenario
+
+You are supporting a Department of Defense(DoD) program that requires robust security. This machine must be securely configured to align with DoD, federal, and industry standards such as the Principle of Least Privilege and Least Functionality. To get started, your manager has requested you ensure the below configurations are in place. Also, your predecessor may have been up to no good. Confirm all user accounts match the list below, and ensure the system does not contain prohibited files.
+
+Access Control - Account Management:
+-<User> and Cyber Hawks should be the only active users. All others can be disabled.
+-<User> and Cyber Hawks should be the only members of the Users and Administrators Groups. All others can be removed.
+-Only members of the Administrators group should be able to access this computer from the network
+-<User>'s and Cyber Hawks password's should be reset to CyberCamp2018
+
+Access Control - Account Lockout Policy:
+-Duration: 60
+-Threshold: 3
+-Counter reset: 60
+
+Auditing:
+-The system should audit account management and privileged events.
+
+Firewalls:
+-Domain, Private, and Public firewall should be On.
+
+Identification and Authentication - Password Policy:
+-Password history: 24
+-Maximum age: 60
+-Minimum age: 1
+-Minimum length: 14
+-Complexity requirements: Enabled
+-Reversible encryption: Disabled
+
+Least Functionality - Features:
+-The Telnet server feature should be removed.
+
+Least Functionality - Services:
+-The FTP service should be Stopped and Disabled.
+
+Least Functionality - Sharing:
+-The system should not have any shared folders.
+
+Patching - Application:
+-Rather than patching, unnecessary or unused support applications, such as Flash and Firefox, should be removed.
+
+Patching - System:
+-The system should be configured to Install updates automatically
+
+Prohibited files:
+-The system should not contain any videos such as .avi or .mpeg files.

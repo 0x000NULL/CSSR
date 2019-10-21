@@ -1,0 +1,102 @@
+
+1.) Read the README
+
+2.) Windows Update (and Service Pack if applicable)
+
+3.) IF ON SERVER: Do things on server manager (enable powershell, remove features/roles)
+
+4.) Import inf files for group policy
+
+5.) Run SCM baselines
+
+6.) Import DISA Stig
+
+7.) Audit policy templates
+
+8.) Note down all the vulnerabilities and restart image
+
+9.) Re-get all the points
+
+10.) Answer forensics questions
+
+11.) Add/Delete users to conform to README
+
+12.) Activate/Disable users (disable guest and admin)
+
+13.) Add/Delete admins to conform to README
+
+14.) Change all user passwords to secure ones
+
+15.) Enable firewall (+ template)
+
+16.) Nessus scan
+
+17.) Check shared folders/files
+
+18.) Enable Windows Defender in MMC
+
+19.) Enable Smartscreen
+
+20.) Disable autoplay
+
+21.) Check for locked users, other stuff with users
+
+22.) Windows Components folder stuff
+
+23.) Do specific README Requirements
+
+24.) Install security programs (antivirus mostly)
+
+25.) Run/Scan security programs
+
+26.) Update all programs
+
+27.) Disable Services
+
+28.) Find/Remove media files
+
+29.) Uninstall programs + features
+
+30.) Find and remove malware
+
+31.) SCM internet explorer baselines
+
+32.) Set up Backup
+
+33.) Firefox security settings
+
+34.) Other application settings
+
+35.) Check hosts file for sketchy
+
+36.) Enable screen saver "logon on resume"
+
+37.) Check permissions for folders
+
+38.) Disable remote desktop (unless readme)
+
+39.) Action center
+
+40.) Enable UAC and set to highest setting
+
+41.) IF WIN10: Run CAT-Lite scanner
+
+42.) Make sure windows defender is enabled
+
+43.) Run all security programs again
+
+44.) Check for prohibited/sketchy files
+
+45.) Use processlibrary.com to check sketchy processes
+
+46.) Try vulnerabilities from the other images
+
+47.) Read past comp vulnerabilities (IMPORTANT)
+
+48.) Go through everything again to not miss stuff
+
+49.) Triple check i guess
+
+50.) Use Dr. Kowal's basic checklist
+
+51.) Despacito

@@ -1,0 +1,29 @@
+.\" Manpage for otseca.
+.\" Contact trimstray@gmail.com.
+.TH man 8 "29.05.2018" "1.0.5" "otseca man page"
+.SH NAME
+otseca \- open source security auditing tool
+.SH SYNOPSIS
+otseca <option|long-option>
+.SH DESCRIPTION
+Otseca is a open source security auditing tool to search and dump system configuration. Generates html format reports.
+.SH OPTIONS
+--help
+        show this message
+-f|--format <key>
+        set output format (key: html/raw-html)
+-t|--tasks <key>
+        set specific task to do
+        (key: system, kernel, permissions, services, network, distro, external)
+-o|--output <path>
+        set path to output directory report
+--show-errors
+        show stderr to output
+--ignore-failed
+        do not exit with nonzero on commands failed
+.SH SEE ALSO
+https://github.com/trimstray/otseca
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+trimstray (trimstray@gmail.com)

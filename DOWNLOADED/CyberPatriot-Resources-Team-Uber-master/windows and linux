@@ -1,0 +1,9 @@
+#WINDOWS COMMANDS + EXTRAS
+gpedit.msc
+secpol.msc
+Windows Baseline Security Analyzer: https://www.microsoft.com/en-us/download/details.aspx?id=19892
+batch files: https://github.com/ejmiers 
+#LINUX COMMANDS + EXTRAS
+Nessus
+service --status-all
+sudo apt-get remove --purge <program>

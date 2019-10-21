@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:40:26</BackupTime>
+  <ID>{aadbd509-4800-41d4-88fb-c0f7d5f5314d}</ID>
+  <Comment>The BitLocker baseline includes settings for configuring BitLocker Drive Encryption on computers running Windows 8.</Comment>
+  <GPODisplayName>Win8 BitLocker Security</GPODisplayName>
+</BackupInst>

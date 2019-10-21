@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:27:57</BackupTime>
+  <ID>{08644dff-299c-4278-9b68-8a65a64ef65c}</ID>
+  <Comment>The DHCP Server baseline includes settings required to enable the DHCP Server role.</Comment>
+  <GPODisplayName>WS2008SP2 DHCP Server Security Compliance</GPODisplayName>
+</BackupInst>

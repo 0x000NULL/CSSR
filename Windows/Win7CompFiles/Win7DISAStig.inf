@@ -1,0 +1,330 @@
+; Copyright (c) Microsoft Corporation.  All rights reserved.
+;
+; Security Configuration Template for Security Configuration Editor
+;
+; Template Name:        SCERegVl.INF
+; Template Version:     05.00.DR.0000
+;
+; Revision History
+; 0000  -       Original
+
+[version]
+signature="$CHICAGO$"
+DriverVer=06/21/2006,6.1.7600.16385
+
+[Register Registry Values]
+;
+; Syntax: RegPath,RegType,DisplayName,DisplayType,Options
+; where
+;         RegPath:      Includes the registry keypath and value
+;         RegType:      1 - REG_SZ, 2 - REG_EXPAND_SZ, 3 - REG_BINARY, 4 - REG_DWORD, 7 - REG_MULTI_SZ
+;         Display Name: Is a localizable string defined in the [strings] section
+;         Display type: 0 - boolean, 1 - Number, 2 - String, 3 - Choices, 4 - Multivalued, 5 - Bitmask
+;         Options:      If Displaytype is 3 (Choices) or 5 (Bitmask), then specify the range of values and corresponding display strings
+;                       in value|displaystring format separated by a comma.
+
+
+MACHINE\System\CurrentControlSet\Control\Lsa\AuditBaseObjects,4,%AuditBaseObjects%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\CrashOnAuditFail,4,%CrashOnAuditFail%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\DisableDomainCreds,4,%DisableDomainCreds%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\EveryoneIncludesAnonymous,4,%EveryoneIncludesAnonymous%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\ForceGuest,4,%ForceGuest%,3,0|%Classic%,1|%GuestBased%
+MACHINE\System\CurrentControlSet\Control\Lsa\FullPrivilegeAuditing,3,%FullPrivilegeAuditing%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\LimitBlankPasswordUse,4,%LimitBlankPasswordUse%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel,4,%LmCompatibilityLevel%,3,0|%LMCLevel0%,1|%LMCLevel1%,2|%LMCLevel2%,3|%LMCLevel3%,4|%LMCLevel4%,5|%LMCLevel5%
+MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinClientSec,4,%NTLMMinClientSec%,5,524288|%NTLMv2Session%,536870912|%NTLM128%
+MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinServerSec,4,%NTLMMinServerSec%,5,524288|%NTLMv2Session%,536870912|%NTLM128%
+MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash,4,%NoLMHash%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymous,4,%RestrictAnonymous%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymousSAM,4,%RestrictAnonymousSAM%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\SubmitControl,4,%SubmitControl%,0
+MACHINE\System\CurrentControlSet\Control\Lsa\SCENoApplyLegacyAuditPolicy,4,%SCENoApplyLegacyAuditPolicy%,0
+
+MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers,4,%AddPrintDrivers%,0
+
+MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedPaths\Machine,7,%AllowedPaths%,4
+MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths\Machine,7,%AllowedExactPaths%,4
+
+MACHINE\System\CurrentControlSet\Control\Session Manager\Kernel\ObCaseInsensitive,4,%ObCaseInsensitive%,0
+MACHINE\System\CurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown,4,%ClearPageFileAtShutdown%,0
+MACHINE\System\CurrentControlSet\Control\Session Manager\ProtectionMode,4,%ProtectionMode%,0
+MACHINE\System\CurrentControlSet\Control\Session Manager\SubSystems\optional,7,%OptionalSubSystems%,4
+
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableSecuritySignature,4,%EnableSMBSignServer%,0
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RequireSecuritySignature,4,%RequireSMBSignServer%,0
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableForcedLogOff,4,%EnableForcedLogoff%,0
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\AutoDisconnect,4,%AutoDisconnect%,1,%Unit-Minutes%
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RestrictNullSessAccess,4,%RestrictNullSessAccess%,0
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionPipes,7,%NullPipes%,4
+MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionShares,7,%NullShares%,4
+
+MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnableSecuritySignature,4,%EnableSMBSignRDR%,0
+MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\RequireSecuritySignature,4,%RequireSMBSignRDR%,0
+MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnablePlainTextPassword,4,%EnablePlainTextPassword%,0
+
+MACHINE\System\CurrentControlSet\Services\LDAP\LDAPClientIntegrity,4,%LDAPClientIntegrity%,3,0|%LDAPClient0%,1|%LDAPClient1%,2|%LDAPClient2%
+
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\DisablePasswordChange,4,%DisablePWChange%,0
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\MaximumPasswordAge,4,%MaximumPWAge%,1,%Unit-Days%
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RefusePasswordChange,4,%RefusePWChange%,0
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\SignSecureChannel,4,%SignSecureChannel%,0
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\SealSecureChannel,4,%SealSecureChannel%,0
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RequireSignOrSeal,4,%SignOrSeal%,0
+MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RequireStrongKey,4,%StrongKey%,0
+
+MACHINE\System\CurrentControlSet\Services\NTDS\Parameters\LDAPServerIntegrity,4,%LDAPServerIntegrity%,3,1|%LDAPServer1%,2|%LDAPServer2%
+
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD,4,%DisableCAD%,0
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLastUserName,4,%DontDisplayLastUserName%,0
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLockedUserId,4,%DontDisplayLockedUserId%,3,1|%LockedUserID0%,2|%LockedUserID1%,3|%LockedUserID2%
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\LegalNoticeCaption,1,%LegalNoticeCaption%,2
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\LegalNoticeText,7,%LegalNoticeText%,4
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ScForceOption,4,%ScForceOption%,0
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ShutdownWithoutLogon,4,%ShutdownWithoutLogon%,0
+MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\UndockWithoutLogon,4,%UndockWithoutLogon%,0
+
+
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole\SecurityLevel,4,%RCAdmin%,0
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole\SetCommand,4,%RCSet%,0
+
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount,1,%CachedLogonsCount%,1,%Unit-Logons%
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ForceUnlockLogon,4,%ForceUnlockLogon%,0
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\PasswordExpiryWarning,4,%PasswordExpiryWarning%,1,%Unit-Days%
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ScRemoveOption,1,%ScRemove%,3,0|%ScRemove0%,1|%ScRemove1%,2|%ScRemove2%,3|%ScRemove3%
+
+MACHINE\Software\Policies\Microsoft\Cryptography\ForceKeyProtection,4,%ForceHighProtection%,3,0|%CryptAllowNoUI%,1|%CryptAllowNoPass%,2|%CryptUsePass%
+MACHINE\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers\AuthenticodeEnabled,4,%AuthenticodeEnabled%,0
+
+MACHINE\Software\Policies\Microsoft\Windows NT\DCOM\MachineLaunchRestriction,1,%DCOMLaunchRestriction%,2
+MACHINE\Software\Policies\Microsoft\Windows NT\DCOM\MachineAccessRestriction,1,%DCOMAccessRestriction%,2
+
+; delete these values from the UI - Rdr in case NT4 w SCE
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\DisableCAD
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\DontDisplayLastUserName
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\LegalNoticeCaption
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\LegalNoticeText
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ShutdownWithoutLogon
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\CmdConsSecurityLevel
+MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\AddPrintDrivers
+MACHINE\System\CurrentControlSet\Services\MRxSMB\Parameters\EnableSecuritySignature
+MACHINE\System\CurrentControlSet\Services\MRxSMB\Parameters\RequireSecuritySignature
+MACHINE\System\CurrentControlSet\Services\MRxSMB\Parameters\EnablePlainTextPassword
+MACHINE\System\CurrentControlSet\Services\Rdr\Parameters\EnableSecuritySignature
+MACHINE\System\CurrentControlSet\Services\Rdr\Parameters\RequireSecuritySignature
+MACHINE\System\CurrentControlSet\Services\Rdr\Parameters\EnablePlainTextPassword
+MACHINE\Software\Microsoft\Windows\CurrentVersion\NetCache\EncryptEntireCache
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\EFS\AlgorithmID
+MACHINE\Software\Microsoft\Non-Driver Signing\Policy
+MACHINE\Software\Policies\Microsoft\Cryptography\ForceHighProtection
+
+
+
+;========= Start of MSS Registry Values =========
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AutoAdminLogon,1,%DisableAutoLogon%,0
+MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl\AutoReboot,4,%AutoReboot%,0
+MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters\AutoShareWks,4,%AdminShares%,0
+MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters\AutoShareServer,4,%AdminSharesServer%,0
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\DisableIPSourceRouting,4,%DisableIPSourceRouting%,3,0|%DisableIPSourceRouting0%,1|%DisableIPSourceRouting1%,2|%DisableIPSourceRouting2%
+MACHINE\SYSTEM\CurrentControlSet\Services\RasMan\Parameters\DisableSavePassword,4,%DisableSavePassword%,0
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\EnableDeadGWDetect,4,%EnableDeadGWDetect%,0
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\EnableICMPRedirect,4,%EnableICMPRedirect%,0
+MACHINE\System\CurrentControlSet\Services\Lanmanserver\Parameters\Hidden,4,%HideFromBrowseList%,0
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime,4,%KeepAliveTime%,3,150000|%KeepAliveTime0%,300000|%KeepAliveTime1%,600000|%KeepAliveTime2%,1200000|%KeepAliveTime3%,2400000|%KeepAliveTime4%,3600000|%KeepAliveTime5%,7200000|%KeepAliveTime6%
+MACHINE\System\CurrentControlSet\Services\IPSEC\NoDefaultExempt,4,%NoDefaultExempt%,3,0|%NoDefaultExempt0%,1|%NoDefaultExempt1%,2|%NoDefaultExempt2%,3|%NoDefaultExempt3% 
+MACHINE\System\CurrentControlSet\Services\Netbt\Parameters\NoNameReleaseOnDemand,4,%NoNameReleaseOnDemand%,0
+MACHINE\System\CurrentControlSet\Control\FileSystem\NtfsDisable8dot3NameCreation,4,%NtfsDisable8dot3NameCreation%,0
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\PerformRouterDiscovery,4,%PerformRouterDiscovery%,0
+MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\SafeDllSearchMode,4,%SafeDllSearchMode%,0
+MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ScreenSaverGracePeriod,1,%ScreenSaverGracePeriod%,1
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\SynAttackProtect,4,%SynAttackProtect%,3,0|%SynAttackProtect0%,1|%SynAttackProtect1%
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxConnectResponseRetransmissions,4,%TcpMaxConnectResponseRetransmissions%,3,0|%TcpMaxConnectResponseRetransmissions0%,1|%TcpMaxConnectResponseRetransmissions1%,2|%TcpMaxConnectResponseRetransmissions2%,3|%TcpMaxConnectResponseRetransmissions3%
+MACHINE\System\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmissions,4,%TcpMaxDataRetransmissions%,1
+MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security\WarningLevel,4,%WarningLevel%,3,50|%WarningLevel0%,60|%WarningLevel1%,70|%WarningLevel2%,80|%WarningLevel3%,90|%WarningLevel4%
+MACHINE\System\CurrentControlSet\Services\Tcpip6\Parameters\DisableIPSourceRouting,4,%DisableIPSourceRoutingIPv6%,3,0|%DisableIPSourceRouting0%,1|%DisableIPSourceRouting1%,2|%DisableIPSourceRouting2% 
+MACHINE\System\CurrentControlSet\Services\Tcpip6\Parameters\TcpMaxDataRetransmissions ,4,%TcpMaxDataRetransmissionsIPv6%,1
+;========= End of MSS Registry Values =========
+
+
+[Strings]
+;========= Start of MSS Strings Values =========
+DisableAutoLogon = "MSS: (AutoAdminLogon) Enable Automatic Logon (not recommended)" 
+AutoReboot = "MSS: (AutoReboot) Allow Windows to automatically restart after a system crash (recommended except for highly secure environments)"
+AdminShares = "MSS: (AutoShareWks) Enable Administrative Shares (recommended except for highly secure environments)" 
+AdminSharesServer = "MSS: (AutoShareServer) Enable Administrative Shares (recommended except for highly secure environments)" 
+DisableIPSourceRouting = "MSS: (DisableIPSourceRouting) IP source routing protection level (protects against packet spoofing)"
+DisableIPSourceRoutingIPv6 = "MSS: (DisableIPSourceRouting IPv6) IP source routing protection level (protects against packet spoofing)"
+DisableIPSourceRouting0 = "No additional protection, source routed packets are allowed"
+DisableIPSourceRouting1 = "Medium, source routed packets ignored when IP forwarding is enabled"
+DisableIPSourceRouting2 = "Highest protection, source routing is completely disabled"
+DisableSavePassword = "MSS: (DisableSavePassword) Prevent the dial-up passsword from being saved (recommended)"
+EnableDeadGWDetect = "MSS: (EnableDeadGWDetect) Allow automatic detection of dead network gateways (could lead to DoS)"
+EnableICMPRedirect = "MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes"
+HideFromBrowseList = "MSS: (Hidden) Hide Computer From the Browse List (not recommended except for highly secure environments)"
+KeepAliveTime = "MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds"
+KeepAliveTime0 ="150000 or 2.5 minutes"
+KeepAliveTime1 ="300000 or 5 minutes (recommended)" 
+KeepAliveTime2 ="600000 or 10 minutes"
+KeepAliveTime3 ="1200000 or 20 minutes"
+KeepAliveTime4 ="2400000 or 40 minutes"
+KeepAliveTime5 ="3600000 or 1 hour"
+KeepAliveTime6 ="7200000 or 2 hours (default value)"
+NoDefaultExempt = "MSS: (NoDefaultExempt) Configure IPSec exemptions for various types of network traffic." 
+NoDefaultExempt0 = "Allow all exemptions (least secure)."
+NoDefaultExempt1 = "Multicast, broadcast, & ISAKMP exempt (best for Windows XP)."
+NoDefaultExempt2 = "RSVP, Kerberos, and ISAKMP are exempt."
+NoDefaultExempt3 = "Only ISAKMP is exempt (recommended for Windows Server 2003)." 
+NoNameReleaseOnDemand = "MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers"
+NtfsDisable8dot3NameCreation = "MSS: (NtfsDisable8dot3NameCreation) Enable the computer to stop generating 8.3 style filenames (recommended)"
+PerformRouterDiscovery = "MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses (could lead to DoS)"
+SafeDllSearchMode = "MSS: (SafeDllSearchMode) Enable Safe DLL search mode (recommended)"
+ScreenSaverGracePeriod = "MSS: (ScreenSaverGracePeriod) The time in seconds before the screen saver grace period expires (0 recommended)"
+SynAttackProtect = "MSS: (SynAttackProtect) Syn attack protection level (protects against DoS)"
+SynAttackProtect0 = "No additional protection, use default settings"
+SynAttackProtect1 = "Connections time out sooner if a SYN attack is detected"
+TcpMaxConnectResponseRetransmissions = "MSS: (TcpMaxConnectResponseRetransmissions) SYN-ACK retransmissions when a connection request is not acknowledged"
+TcpMaxConnectResponseRetransmissions0 = "No retransmission, half-open connections dropped after 3 seconds"
+TcpMaxConnectResponseRetransmissions1 = "3 seconds, half-open connections dropped after 9 seconds"
+TcpMaxConnectResponseRetransmissions2 = "3 & 6 seconds, half-open connections dropped after 21 seconds"
+TcpMaxConnectResponseRetransmissions3 = "3, 6, & 9 seconds, half-open connections dropped after 45 seconds"
+TcpMaxDataRetransmissions = "MSS: (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted (3 recommended, 5 is default)"
+TcpMaxDataRetransmissionsIPv6 = "MSS: (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted (3 recommended, 5 is default)"
+WarningLevel = "MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning"
+WarningLevel0 = "50%"
+WarningLevel1 = "60%"
+WarningLevel2 = "70%"
+WarningLevel3 = "80%"
+WarningLevel4 = "90%"
+;========= End of MSS Strings Values =========
+
+;================================ Accounts ============================================================================
+;Specified in UI code - Accounts: Administrator account status
+;Specified in UI code - Accounts: Guest account status
+;Specified in UI code - Accounts: Rename administrator account
+;Specified in UI code - Accounts: Rename guest account
+LimitBlankPasswordUse = "@wsecedit.dll,-59001"
+
+
+;================================ Audit ===============================================================================
+
+AuditBaseObjects="@wsecedit.dll,-59002"
+FullPrivilegeAuditing="@wsecedit.dll,-59003"
+CrashOnAuditFail="@wsecedit.dll,-59004"
+SCENoApplyLegacyAuditPolicy="@wsecedit.dll,-59104"
+
+;================================ Devices =============================================================================
+AddPrintDrivers="@wsecedit.dll,-59005"
+UndockWithoutLogon="@wsecedit.dll,-59010"
+
+;================================ Domain controller ====================================================================
+SubmitControl="@wsecedit.dll,-59011"
+RefusePWChange="@wsecedit.dll,-59012"
+LDAPServerIntegrity = "@wsecedit.dll,-59013"
+LDAPServer1 = "@wsecedit.dll,-59014"
+LDAPServer2 = "@wsecedit.dll,-59015"
+
+;================================ Domain member ========================================================================
+DisablePWChange="@wsecedit.dll,-59016"
+MaximumPWAge="@wsecedit.dll,-59017"
+SignOrSeal="@wsecedit.dll,-59018"
+SealSecureChannel="@wsecedit.dll,-59019"
+SignSecureChannel="@wsecedit.dll,-59020"
+StrongKey="@wsecedit.dll,-59021"
+
+;================================ Interactive logon ====================================================================
+DisableCAD = "@wsecedit.dll,-59022"
+DontDisplayLastUserName = "@wsecedit.dll,-59023"
+DontDisplayLockedUserId = "@wsecedit.dll,-59024"
+LockedUserId0 = "@wsecedit.dll,-59025"
+LockedUserId1 = "@wsecedit.dll,-59026"
+LockedUserId2 = "@wsecedit.dll,-59027"
+LegalNoticeText = "@wsecedit.dll,-59028"
+LegalNoticeCaption = "@wsecedit.dll,-59029"
+CachedLogonsCount = "@wsecedit.dll,-59030"
+PasswordExpiryWarning = "@wsecedit.dll,-59031"
+ForceUnlockLogon = "@wsecedit.dll,-59032"
+ScForceOption = "@wsecedit.dll,-59033"
+ScRemove = "@wsecedit.dll,-59034"
+ScRemove0 = "@wsecedit.dll,-59035"
+ScRemove1 = "@wsecedit.dll,-59036"
+ScRemove2 = "@wsecedit.dll,-59037"
+ScRemove3 = "@wsecedit.dll,-59038"
+
+;================================ Microsoft network client =============================================================
+RequireSMBSignRdr="@wsecedit.dll,-59039"
+EnableSMBSignRdr="@wsecedit.dll,-59040"
+EnablePlainTextPassword="@wsecedit.dll,-59041"
+
+;================================ Microsoft network server =============================================================
+AutoDisconnect="@wsecedit.dll,-59042"
+RequireSMBSignServer="@wsecedit.dll,-59043"
+EnableSMBSignServer="@wsecedit.dll,-59044"
+EnableForcedLogoff="@wsecedit.dll,-59045"
+
+;================================ Network access =======================================================================
+;Specified in UI code - Network access: Allow anonymous SID/Name translation
+DisableDomainCreds = "@wsecedit.dll,-59046"
+RestrictAnonymousSAM = "@wsecedit.dll,-59047"
+RestrictAnonymous = "@wsecedit.dll,-59048"
+EveryoneIncludesAnonymous = "@wsecedit.dll,-59049"
+RestrictNullSessAccess = "@wsecedit.dll,-59050"
+NullPipes = "@wsecedit.dll,-59051"
+NullShares = "@wsecedit.dll,-59052"
+AllowedPaths = "@wsecedit.dll,-59053"
+AllowedExactPaths = "@wsecedit.dll,-59054"
+ForceGuest = "@wsecedit.dll,-59055"
+Classic = "@wsecedit.dll,-59056"
+GuestBased = "@wsecedit.dll,-59057"
+
+;================================ Network security =====================================================================
+;Specified in UI code - Network security: Enforce logon hour restrictions
+NoLMHash = "@wsecedit.dll,-59058"
+LmCompatibilityLevel = "@wsecedit.dll,-59059"
+LMCLevel0 = "@wsecedit.dll,-59060"
+LMCLevel1 = "@wsecedit.dll,-59061"
+LMCLevel2 = "@wsecedit.dll,-59062"
+LMCLevel3 = "@wsecedit.dll,-59063"
+LMCLevel4 = "@wsecedit.dll,-59064"
+LMCLevel5 = "@wsecedit.dll,-59065"
+NTLMMinClientSec = "@wsecedit.dll,-59066"
+NTLMMinServerSec = "@wsecedit.dll,-59067"
+NTLMv2Session = "@wsecedit.dll,-59070"
+NTLM128 = "@wsecedit.dll,-59071"
+LDAPClientIntegrity = "@wsecedit.dll,-59072"
+LDAPClient0 = "@wsecedit.dll,-59073"
+LDAPClient1 = "@wsecedit.dll,-59074"
+LDAPClient2 = "@wsecedit.dll,-59075"
+
+;================================ Recovery console ====================================================================
+RCAdmin="@wsecedit.dll,-59076"
+RCSet="@wsecedit.dll,-59077"
+
+;================================ Shutdown ============================================================================
+ShutdownWithoutLogon="@wsecedit.dll,-59078"
+ClearPageFileAtShutdown="@wsecedit.dll,-59079"
+
+ProtectionMode = "@wsecedit.dll,-59080"
+ObCaseInsensitive = "@wsecedit.dll,-59084"
+
+;================================ System cryptography =================================================================
+FIPS="@wsecedit.dll,-59085"
+
+ForceHighProtection="@wsecedit.dll,-59086"
+
+CryptAllowNoUI="@wsecedit.dll,-59087"
+CryptAllowNoPass="@wsecedit.dll,-59088"
+CryptUsePass="@wsecedit.dll,-59089"
+
+
+;================================ System Settings =====================================================================
+AuthenticodeEnabled = "@wsecedit.dll,-59090"
+OptionalSubSystems = "@wsecedit.dll,-59091"
+
+
+Unit-Logons="@wsecedit.dll,-59092"
+Unit-Days="@wsecedit.dll,-59093"
+Unit-Minutes="@wsecedit.dll,-59094"
+Unit-Seconds="@wsecedit.dll,-59095"
+
+;================================ DCOM Machine Restrictions ===========================================================
+DCOMLaunchRestriction="@wsecedit.dll,-59096"
+DCOMAccessRestriction="@wsecedit.dll,-59097"

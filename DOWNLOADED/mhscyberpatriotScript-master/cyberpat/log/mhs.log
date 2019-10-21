@@ -1,0 +1,23 @@
+10/11/2018 11:53:45 PM: Ending script
+10/11/2018 11:54:45 PM: Verifying an internet connection with aptitude
+10/11/2018 11:54:45 PM: Starting script
+10/11/2018 11:54:48 PM: Installing applications (chkrootkit clamav rkhunter apparmor apparmor-profiles firefox hardinfo iptables portsentry lynis ufw gufw sysv-rc-conf nessus)
+10/11/2018 11:55:13 PM: Removing Guest login, to get back guest login again remove 50-no-guest.conf
+10/11/2018 11:55:15 PM: Configuring SSH
+10/11/2018 11:55:15 PM: Enabling Universal Firewall (ufw)
+10/11/2018 11:55:17 PM: Checking for UID's of 0 (Root Access Accounts)
+10/11/2018 11:55:17 PM: No Zero UID Users
+10/11/2018 11:55:19 PM: Updating Computer
+10/11/2018 11:55:48 PM: Ending script
+10/11/2018 11:55:49 PM: Verifying an internet connection with aptitude
+10/11/2018 11:55:49 PM: Starting script
+10/11/2018 11:55:51 PM: Enabling Universal Firewall (ufw)
+10/11/2018 11:55:55 PM: Restoring Guest Login
+10/11/2018 11:55:59 PM: Removing Guest login, to get back guest login again remove 50-no-guest.conf
+10/11/2018 11:56:00 PM: Configuring SSH
+10/11/2018 11:56:02 PM: Checking for UID's of 0 (Root Access Accounts)
+10/11/2018 11:56:02 PM: No Zero UID Users
+10/11/2018 11:56:05 PM: Checking for UID's of 0 (Root Access Accounts)
+10/11/2018 11:56:05 PM: No Zero UID Users
+10/11/2018 11:56:07 PM: Installing applications (chkrootkit clamav rkhunter apparmor apparmor-profiles firefox hardinfo iptables portsentry lynis ufw gufw sysv-rc-conf nessus)
+10/11/2018 11:57:28 PM: Ending script

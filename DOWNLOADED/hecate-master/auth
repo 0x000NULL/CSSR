@@ -1,0 +1,33 @@
+#!/bin/bash
+
+: ' 
+This program removes any unauthorized users present on the system.
+If a user is not included in the user-defined file users.authorized,
+it will be removed from the system.
+'
+
+# move into working directory
+cd info
+
+read -p "Make sure to include administrators in users.authorized!" yn
+vi users.authorized
+
+: ' Saves details of any unauthorized users before deletion
+	 compares users.authorized and /etc/passwd to find DIFFERENCES
+ 	 greps for uuids 1000-1099 and saves them to users.deleted
+ 	 these are the users that will be deleted since they were not in
+	 users.authorized '
+fgrep -v -f users.authorized /etc/passwd | grep :10[0-9][0-9] > users.deleted
+
+# Auto-deletes any unauthorized users present on the system
+while read LINE
+do
+    for i in $(seq 1 ${#LINE})
+    do  
+        if [ ${LINE:$i:1} = ":" ]
+        then
+            	sudo deluser ${LINE:0:$i} 
+	    	break
+        fi
+    done
+done < users.deleted

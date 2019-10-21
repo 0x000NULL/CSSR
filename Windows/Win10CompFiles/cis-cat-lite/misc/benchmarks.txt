@@ -1,0 +1,4 @@
+/benchmarks/CIS_Apple_OSX_10.11_Benchmark_v1.1.0.xml
+/benchmarks/CIS_Google_Chrome_Benchmark_v1.2.0-xccdf.xml
+/benchmarks/CIS_Microsoft_Windows_10_Enterprise_Release_1607_Benchmark_v1.2.0-xccdf.xml
+/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml

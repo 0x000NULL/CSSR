@@ -1,0 +1,13 @@
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\bin\Debug\CyberPatriotInitiative.exe.config
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\bin\Debug\CyberPatriotInitiative.exe
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\bin\Debug\CyberPatriotInitiative.pdb
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.csprojResolveAssemblyReference.cache
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.Properties.Resources.resources
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.csproj.GenerateResource.Cache
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.exe
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.pdb
+c:\users\hal\documents\visual studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.Form1.resources
+C:\Users\HAL\Documents\Visual Studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\bin\Debug\CyberPatriotInitiative.exe.manifest
+C:\Users\HAL\Documents\Visual Studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\bin\Debug\CyberPatriotInitiative.application
+C:\Users\HAL\Documents\Visual Studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.exe.manifest
+C:\Users\HAL\Documents\Visual Studio 2015\Projects\CyberPatriotInitiative\CyberPatriotInitiative\obj\Debug\CyberPatriotInitiative.application

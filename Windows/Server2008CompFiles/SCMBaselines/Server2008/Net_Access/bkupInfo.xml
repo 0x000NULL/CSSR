@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:33:37</BackupTime>
+  <ID>{5a78de6b-7239-48d1-87d4-f1d15eaa4d1f}</ID>
+  <Comment>The Network Access Services baseline includes settings required to enable the Network Access Services server role.</Comment>
+  <GPODisplayName>WS2008SP2 Network Access Services Server Security Compliance</GPODisplayName>
+</BackupInst>

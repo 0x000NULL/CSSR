@@ -1,0 +1,10 @@
+FROM alpine:3.10
+
+MAINTAINER Rick Payne
+
+# Create a user named rick
+RUN adduser rick -D
+# USER instruction to tell the Docker process which user will be running the image
+USER rick
+
+ENTRYPOINT ["whoami"]
