@@ -1,6 +1,7 @@
-# CyberPatriot
-## Made by Ethan Aldrich
-### Dont forget to read the read me!!
+# CSSR
+## Computer Security Scripts and Resources
+### Made by Ethan Aldrich
+#### Dont forget to read the read me!!
 
 
 ## How To Use
