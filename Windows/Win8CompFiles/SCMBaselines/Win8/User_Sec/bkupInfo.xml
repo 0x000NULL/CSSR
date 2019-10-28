@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:42:27</BackupTime>
+  <ID>{87d91e3c-f148-4ad4-b3d1-161702d644e9}</ID>
+  <Comment>The User baseline includes settings such as screen saver policy settings.</Comment>
+  <GPODisplayName>Win8 User Security Compliance</GPODisplayName>
+</BackupInst>

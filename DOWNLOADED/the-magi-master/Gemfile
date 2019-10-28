@@ -1,0 +1,10 @@
+source "http://rubygems.org/"
+ruby '2.3.0'
+gem 'nokogiri'
+gem 'sinatra'
+gem 'bundler'
+gem 'pry'
+gem 'mongo_mapper'
+gem 'thin'
+gem 'bson_ext'
+gem 'activesupport'

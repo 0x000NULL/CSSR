@@ -1,0 +1,117 @@
+Hitchhiker’s Guide to Securing Cisco
+Adapted From From the Book CCENT by Todd Lammle
+Don’t Panic!
+All of which that is below can be automatically done by using Autosecure. 
+However, these are here to provide a reference in case such a reference is needed. 
+(For example, when autosecure can’t be used because it would disable a critical service, such as HTTP) 
+Although, autosecure does more.
+
+Make sure you look up interface names using “show ip int brief”! Some commands are interface specific! 
+
+~~~~~~~~~~~~~~~~~~~~
+|Block SNMP Packets|
+~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# access-list 110 deny udp any any eq snmp
+Lab_B(config)# interface s0/0
+Lab_B(config-if)# access-group 110 in
+
+~~~~~~~~~~~~~~
+|Disable Echo|
+~~~~~~~~~~~~~~
+Lab_B(config)# no service tcp-small-servers
+Lab_B(config)# no service udp-small-servers
+Lab_B(config)# no service finger
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Turn Off BootP and Auto-Config|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# no ip boot server
+Lab_B(config)# no service config
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling the HTTP Interface|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# no ip http server
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling IP Source Routing|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# no ip source-route
+
+~~~~~~~~~~~~~~~~~~~~~
+|Disabling Proxy ARP|
+~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface fa0/0
+Lab_B(config-if)# no ip proxy-arp
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling Redirect Messages|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface s0/0
+Lab_B(config-if)# no ip redirects
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling the Generation of ICMP Unreachable Messages|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface s0/0
+Lab_B(config-if)# no ip unreachables
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling Multicast Route Caching|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface s0/0
+Lab_B(config-if)# no ip mroute-cache
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling the Maintenance Operation Protocol|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface s0/0
+Lab_B(config-if)# no mop enabled
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Turning Off the X.25 PAD Service|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# no service pad
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Enabling the Nagle TCP Congestion Algorithm|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# service nagle
+
+~~~~~~~~~~~~~~~~~~~~~
+|Logging Every Event|
+~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# logging buffered 7
+Lab_B(config)# exit
+Lab_B(config)# show logging
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling Cisco Discovery Protocol|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# no cdp run
+
+##Or on a specific interface:
+
+Lab_B(config-if)# no cdp enable
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Disabling the Default Forwarded UDP Protocols|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Lab_B(config)# interface f0/0
+Lab_B(config-if)# ip helper-address [DHCP, DNS, etc Server IP]
+Lab_B(config)# no ip forward-protocol udp 69 (TFTP)
+Lab_B(config)# no ip forward-protocol udp 53 (DNS)
+Lab_B(config)# no ip forward-protocol udp 37 (Time Protocol)
+Lab_B(config)# no ip forward-protocol udp 137 (NetBIOS - Name Service)
+Lab_B(config)# no ip forward-protocol udp 138 (NetBIOS - Datagram Service)
+Lab_B(config)# no ip forward-protocol udp 68 (BootP)
+Lab_B(config)# no ip forward-protocol udp 49 (TACACS)
+Lab_B(config)# no ip forward-protocol udp 67 (DHCP)
+
+~~~~~~~~~~~~~~~~~~~~~
+|Cisco’s Auto Secure|
+~~~~~~~~~~~~~~~~~~~~~
+R1# auto secure
+
+Configure CBAC Firewall feature? [yes/no]: no
+Enable tcp intercept feature? [yes/no]: yes

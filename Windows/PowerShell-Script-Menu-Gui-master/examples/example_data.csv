@@ -1,0 +1,7 @@
+Section,Method,Command,Name,Description
+Old school,cmd,example_target.cmd,Example 1:<LineBreak />cmd,.cmd file
+Old school,cmd,taskmgr.exe,Example 2:<LineBreak />cmd,External executable
+Less old,powershell_file,example_target.ps1,Example 3:<LineBreak />powershell_file,.ps1 file called with powershell.exe
+Less old,powershell_inline,"""Inline script"";$PSVersionTable;Read-Host ""Press Enter to continue""",Example 4:<LineBreak />powershell_inline,Inline script called with powershell.exe
+The future,pwsh_file,example_target.ps1,Example 5:<LineBreak />pwsh_file,.ps1 file called with pwsh.exe
+The future,pwsh_inline,"""Inline script"";$PSVersionTable;Read-Host ""Press Enter to continue""",Example 6:<LineBreak />pwsh_inline,Inline script called with pwsh.exe

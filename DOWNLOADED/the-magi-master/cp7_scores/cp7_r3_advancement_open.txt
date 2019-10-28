@@ -1,0 +1,739 @@
+07-0185,California,Platinum,275,70,345,Advances to Regional Round
+07-1496,New Mexico,Platinum,275,60.75,335.75,Advances to Regional Round
+07-0186,California,Platinum,260,73,333,Advances to Regional Round
+07-1710,Virginia,Platinum,263,68,331,Advances to Regional Round
+07-0298,Colorado,Platinum,259,71.9,330.9,Advances to Regional Round
+07-1707,Canada,Platinum,255,72,327,Advances to Regional Round
+07-1800,Canada,Platinum,254,69.9,323.9,Advances to Regional Round
+07-0417,Oklahoma,Platinum,259,63.7,322.7,Advances to Regional Round
+07-0692,Washington,Platinum,260,60.7,320.7,Advances to Regional Round
+07-0579,Virginia,Platinum,255,64,319,Advances to Regional Round
+07-0222,Colorado,Platinum,246,71.9,317.9,Advances to Regional Round
+07-0150,Missouri,Platinum,245,72,317,Advances to Regional Round
+07-0306,Texas,Platinum,253,63.9,316.9,Advances to Regional Round
+07-0190,California,Platinum,251,65,316,Advances to Regional Round
+07-0229,Hawaii,Platinum,249,67,316,Advances to Regional Round
+07-0267,California,Platinum,245,69,314,Advances to Regional Round
+07-1242,Massachusetts,Platinum,246,65,311,Advances to Regional Round
+07-1241,Massachusetts,Platinum,241,68,309,Advances to Regional Round
+07-0606,Maryland,Platinum,244,63,307,Advances to Regional Round
+07-1842,Oklahoma,Platinum,246,59.7,305.7,Advances to Regional Round
+07-2320,Maryland,Platinum,233,70,303,Advances to Regional Round
+07-1709,Virginia,Platinum,254,48.4,302.4,Advances to Regional Round
+07-0187,California,Platinum,241,61,302,Advances to Regional Round
+07-0168,California,Platinum,242,58.7,300.7,Advances to Regional Round
+07-0572,Hawaii,Platinum,244,56.7,300.7,Advances to Regional Round
+07-1713,Virginia,Platinum,257,43.4,300.4,Advances to Regional Round
+07-0342,California,Platinum,228,70,298,Advances to Regional Round
+07-0387,Texas,Platinum,231,65,296,Advances to Regional Round
+07-0643,Maryland,Platinum,226,70,296,Advances to Regional Round
+07-0177,Alabama,Platinum,230,64.35,294.35,Advances to Regional Round
+07-0151,Missouri,Platinum,225,69,294,Advances to Regional Round
+07-0490,Missouri,Platinum,224,70,294,Advances to Regional Round
+07-1928,Florida,Platinum,234,59.7,293.7,Advances to Regional Round
+07-0426,New Jersey,Platinum,220,70,290,Advances to Regional Round
+07-0154,Indiana,Platinum,216,73,289,Advances to Regional Round
+07-0188,California,Platinum,230,59,289,Advances to Regional Round
+07-0437,Tennessee,Platinum,236,53,289,Advances to Regional Round
+07-0210,Ohio,Platinum,233,55.7,288.7,Advances to Regional Round
+07-0498,Virginia,Platinum,226,62,288,Advances to Regional Round
+07-0703,Texas,Platinum,224,63,287,Advances to Regional Round
+07-0940,Washington,Platinum,231,54.4,285.4,Advances to Regional Round
+07-0421,Michigan,Platinum,213,71.9,284.9,Advances to Regional Round
+07-0891,New Jersey,Platinum,216,68.7,284.7,Advances to Regional Round
+07-0721,Ohio,Platinum,247,37,284,Advances to Regional Round
+07-1285,Texas,Platinum,227,57,284,Advances to Regional Round
+07-1863,Colorado,Platinum,216,68,284,Advances to Regional Round
+07-0716,Texas,Platinum,220,63.7,283.7,Advances to Regional Round
+07-1688,Texas,Platinum,214,68,282,Advances to Regional Round
+07-0516,Oklahoma,Platinum,236,45.7,281.7,Advances to Regional Round
+07-1708,Virginia,Platinum,230,51.7,281.7,Advances to Regional Round
+07-0482,California,Platinum,207,72,279,Advances to Regional Round
+07-0814,Pennsylvania,Platinum,216,63,279,Advances to Regional Round
+07-1988,Maryland,Platinum,215,64,279,Advances to Regional Round
+07-0644,Maryland,Platinum,218,59,277,Does not advance
+07-1130,Tennessee,Platinum,212,64.8,276.8,Advances to Regional Round
+07-1737,Canada,Platinum,207,69,276,Advances to Regional Round
+07-0217,California,Platinum,232,43.3,275.3,Does not advance
+07-1823,Washington,Platinum,214,60.7,274.7,Advances to Regional Round
+07-1113,Alabama,Platinum,207,65.5,272.5,Advances to Regional Round
+07-1911,Oklahoma,Platinum,214,58.3,272.3,Does not advance
+07-0302,California,Platinum,230,42,272,Does not advance
+07-1734,Canada,Platinum,213,58.7,271.7,Does not advance
+07-0290,Hawaii,Platinum,208,62,270,Advances to Regional Round
+07-1735,Canada,Platinum,206,63.8,269.8,Does not advance
+07-1011,California,Platinum,220,48,268,Does not advance
+07-0156,Indiana,Platinum,206,61.7,267.7,Advances to Regional Round
+07-0164,Alabama,Platinum,210,57.4,267.4,Does not advance
+07-0294,California,Platinum,196,71,267,Does not advance
+07-0678,North Carolina,Platinum,209,57.7,266.7,Advances to Regional Round
+07-2239,Virginia,Platinum,206,60.3,266.3,Does not advance
+07-1653,Virginia,Platinum,219,46.6,265.6,Does not advance
+07-0204,Oklahoma,Platinum,216,49,265,Does not advance
+07-0712,Texas,Platinum,198,67,265,Does not advance
+07-0867,Washington,Platinum,221,43.7,264.7,Does not advance
+07-0320,Hawaii,Platinum,192,72,264,Does not advance
+07-0309,Pennsylvania,Platinum,196,67,263,Advances to Regional Round
+07-0753,New Mexico,Platinum,198,65,263,Advances to Regional Round
+07-1625,Maine,Platinum,198,65,263,Advances to Regional Round
+07-1644,Virginia,Platinum,203,58.5,261.5,Does not advance
+07-0531,Texas,Platinum,200,61.4,261.4,Does not advance
+07-0547,Florida,Platinum,204,57,261,Advances to Regional Round
+07-0170,California,Platinum,207,53.7,260.7,Does not advance
+07-1513,Ohio,Platinum,203,57.7,260.7,Advances to Regional Round
+07-0504,Washington,Platinum,200,60.2,260.2,Does not advance
+07-0951,Delaware,Platinum,201,59,260,Advances to Regional Round
+07-1725,Virginia,Platinum,195,64.7,259.7,Does not advance
+07-1379,Virginia,Platinum,203,56,259,Does not advance
+07-0489,Missouri,Platinum,192,66,258,Does not advance
+07-1611,Texas,Platinum,197,61,258,Does not advance
+07-1010,California,Platinum,218,38.4,256.4,Does not advance
+07-2069,California,Platinum,200,55.7,255.7,Does not advance
+07-0773,Washington,Platinum,187,67,254,Does not advance
+07-0238,Colorado,Platinum,202,51,253,Does not advance
+07-0540,California,Platinum,204,49,253,Does not advance
+07-0715,Texas,Platinum,187,66,253,Does not advance
+07-1916,Maryland,Platinum,194,58.3,252.3,Does not advance
+07-0601,Florida,Platinum,198,53.7,251.7,Advances to Regional Round
+07-1012,California,Platinum,188,63.7,251.7,Does not advance
+07-0851,Canada,Platinum,186,65,251,Does not advance
+07-0496,Florida,Platinum,205,45.3,250.3,Does not advance
+07-2418,California,Platinum,201,48.4,249.4,Does not advance
+07-0863,Wisconsin,Platinum,199,50.3,249.3,Advances to Regional Round
+07-1316,South Carolina,Platinum,181,65,246,Advances to Regional Round
+07-0237,Colorado,Platinum,190,55.1,245.1,Does not advance
+07-0291,Hawaii,Platinum,187,57.3,244.3,Does not advance
+07-0189,California,Platinum,184,59.7,243.7,Does not advance
+07-0535,California,Platinum,187,56.6,243.6,Does not advance
+07-1889,Washington,Platinum,190,53.4,243.4,Does not advance
+07-1077,Texas,Platinum,200,43,243,Does not advance
+07-0584,Maryland,Platinum,175,67.9,242.9,Does not advance
+07-0804,Arizona ,Platinum,193,49.7,242.7,Advances to Regional Round
+07-1275,Pennsylvania,Platinum,199,43.1,242.1,Advances to Regional Round
+07-1243,Massachusetts,Platinum,206,35.3,241.3,Advances to Regional Round
+07-0253,Massachusetts,Platinum,184,57,241,Does not advance
+07-0964,Texas,Platinum,174,66.9,240.9,Does not advance
+07-1440,Kansas,Platinum,192,48.4,240.4,Advances to Regional Round
+07-0887,Pennsylvania,Platinum,178,62,240,Does not advance
+07-0905,Missouri,Platinum,167,73,240,Does not advance
+07-0310,Pennsylvania,Platinum,188,No Score,239.7,Does not advance
+07-0995,Delaware,Platinum,198,41.4,239.4,Advances to Regional Round
+07-0157,Indiana,Platinum,180,59,239,Advances to Regional Round
+07-0936,Colorado,Platinum,185,54,239,Does not advance
+07-0585,Maryland,Platinum,175,63.7,238.7,Does not advance
+07-0921,Virtual Multi-State School,Platinum,185,53,238,Advances to Regional Round
+07-1032,North Carolina,Platinum,184,52.4,236.4,Advances to Regional Round
+07-0699,New Mexico,Platinum,174,61.7,235.7,Advances to Regional Round
+07-0318,Texas,Platinum,173,62.3,235.3,Does not advance
+07-2171,Hawaii,Platinum,180,55.1,235.1,Does not advance
+07-0390,Texas,Platinum,170,64.7,234.7,Does not advance
+07-1577,Indiana,Platinum,186,48.6,234.6,Does not advance
+07-2036,Illinois,Platinum,173,61.2,234.2,Advances to Regional Round
+07-0180,Washington,Platinum,173,61,234,Does not advance
+07-0323,Virginia,Platinum,168,65.7,233.7,Does not advance
+07-0289,Arizona ,Platinum,188,45.1,233.1,Advances to Regional Round
+07-0816,Virginia,Platinum,202,29.7,231.7,Does not advance
+07-1518,Texas,Platinum,163,68.7,231.7,Does not advance
+07-2351,Maryland,Platinum,169,62,231,Does not advance
+07-1716,Virginia,Platinum,180,50.7,230.7,Does not advance
+07-1701,Virginia,Platinum,157,73,230,Does not advance
+07-2030,Colorado,Platinum,166,64,230,Does not advance
+07-2193,Virginia,Platinum,176,54,230,Does not advance
+07-0713,Texas,Platinum,174,55.9,229.9,Does not advance
+07-0236,Colorado,Platinum,191,38.1,229.1,Does not advance
+07-1009,California,Platinum,172,57,229,Does not advance
+07-2431,New Jersey,Platinum,163,65,228,Advances to Regional Round
+07-0815,Virginia,Platinum,186,41.1,227.1,Does not advance
+07-1488,Virginia,Platinum,176,51.1,227.1,Does not advance
+07-0231,Oklahoma,Platinum,179,45.6,224.6,Does not advance
+07-1014,Texas,Platinum,168,56,224,Does not advance
+07-1847,Oklahoma,Platinum,203,20.9,223.9,Does not advance
+07-1622,Virginia,Platinum,180,43,223,Does not advance
+07-1783,Texas,Platinum,181,41.8,222.8,Does not advance
+07-0334,California,Platinum,171,51,222,Does not advance
+07-1126,Virginia,Platinum,172,49.7,221.7,Does not advance
+07-0191,California,Platinum,182,39.1,221.1,Does not advance
+07-0372,Maryland,Platinum,169,52,221,Does not advance
+07-1036,Texas,Platinum,176,45,221,Does not advance
+07-1623,Virginia,Platinum,186,32,218,Does not advance
+07-1495,Oklahoma,Platinum,162,55.3,217.3,Does not advance
+07-0293,Colorado,Platinum,187,29.7,216.7,Does not advance
+07-0456,Arizona ,Platinum,162,53.6,215.6,Advances to Regional Round
+07-1202,Massachusetts,Platinum,154,61,215,Does not advance
+07-0350,Indiana,Platinum,185,29.7,214.7,Does not advance
+07-0295,Canada,Platinum,157,55.2,212.2,Does not advance
+07-0700,New Mexico,Platinum,148,64.2,212.2,Does not advance
+07-0358,Virginia,Platinum,153,58.7,211.7,Does not advance
+07-0311,South Carolina,Platinum,187,24.2,211.2,Advances to Regional Round
+07-0800,Texas,Platinum,141,70,211,Does not advance
+07-0849,Pennsylvania,Platinum,167,43.8,210.8,Does not advance
+07-0778,New Jersey,Platinum,150,60.7,210.7,Does not advance
+07-0608,Texas,Platinum,164,46.15,210.15,Does not advance
+07-0327,Colorado,Platinum,175,35,210,Does not advance
+07-1526,Missouri,Platinum,143,66.7,209.7,Does not advance
+07-1736,Canada,Platinum,150,58.7,208.7,Does not advance
+07-0750,New Mexico,Platinum,166,42,208,Does not advance
+07-0488,California,Platinum,187,20.5,207.5,Does not advance
+07-0506,California,Platinum,153,54.5,207.5,Does not advance
+07-1179,Florida,Platinum,182,25.3,207.3,Does not advance
+07-1914,Florida,Platinum,179,27.45,206.45,Does not advance
+07-1127,Virginia,Platinum,149,57,206,Does not advance
+07-1427,Tennessee,Platinum,153,52.4,205.4,Advances to Regional Round
+07-0452,Texas,Platinum,164,40.4,204.4,Does not advance
+07-0784,Colorado,Platinum,149,55.4,204.4,Does not advance
+07-1765,New Jersey,Platinum,142,62,204,Does not advance
+07-0312,South Carolina,Platinum,178,25.1,203.1,Advances to Regional Round
+07-1262,Colorado,Platinum,160,43,203,Does not advance
+07-1424,California,Platinum,203,No Score,203,Does not advance
+07-1826,California,Platinum,163,39.8,202.8,Does not advance
+07-1715,Virginia,Platinum,149,53.7,202.7,Does not advance
+07-1452,California,Platinum,149,53,202,Does not advance
+07-0698,New Mexico,Platinum,166,33.3,199.3,Does not advance
+07-0360,Washington,Platinum,141,58.1,199.1,Does not advance
+07-1873,Washington,Platinum,149,49.3,198.3,Does not advance
+07-0639,Colorado,Platinum,158,40.1,198.1,Does not advance
+07-0765,Oklahoma,Platinum,159,38.9,197.9,Does not advance
+07-1719,Virginia,Platinum,148,49.3,197.3,Does not advance
+07-1689,North Carolina,Platinum,197,No Score,197,Advances to Regional Round
+07-0152,Colorado,Platinum,148,48.1,196.1,Does not advance
+07-1191,Texas,Platinum,130,66,196,Does not advance
+07-1934,Ohio,Platinum,132,61.7,193.7,Does not advance
+07-0484,California,Platinum,144,48.1,192.1,Does not advance
+07-1497,New Mexico,Platinum,176,15.4,191.4,Does not advance
+07-1547,Washington,Platinum,134,55,189,Does not advance
+07-1813,Virginia,Platinum,149,39,188,Does not advance
+07-1269,Texas,Platinum,158,29.8,187.8,Does not advance
+07-0818,Virginia,Platinum,122,65.7,187.7,Does not advance
+07-1352,Washington,Platinum,167,17.6,184.6,Does not advance
+07-1962,California,Platinum,144,39.4,183.4,Does not advance
+07-1254,California,Platinum,150,33.1,183.1,Does not advance
+07-0954,South Carolina,Platinum,146,35.7,181.7,Does not advance
+07-0728,California,Platinum,133,48.4,181.4,Does not advance
+07-0340,California,Platinum,163,17.95,180.95,Does not advance
+07-1412,Virginia,Platinum,137,42.4,179.4,Does not advance
+07-2429,California,Platinum,167,12.1,179.1,Does not advance
+07-2001,Maryland,Platinum,151,27.3,178.3,Does not advance
+07-0362,California,Platinum,155,22.9,177.9,Does not advance
+07-2238,Virginia,Platinum,147,29.7,176.7,Does not advance
+07-1828,California,Platinum,122,54.1,176.1,Does not advance
+07-2111,California,Platinum,140,35.9,175.9,Does not advance
+07-0303,Canada,Platinum,139,36.8,175.8,Does not advance
+07-0202,Oregon,Platinum,112,63.4,175.4,Advances to Regional Round
+07-1444,Vermont,Platinum,131,44.4,175.4,Advances to Regional Round
+07-2235,Virginia,Platinum,115,60,175,Does not advance
+07-0356,Wisconsin,Platinum,130,43.3,173.3,Advances to Regional Round
+07-1706,South Carolina,Platinum,144,28.6,172.6,Does not advance
+07-1289,Washington,Platinum,137,34.4,171.4,Does not advance
+07-0752,New Mexico,Platinum,143,27.4,170.4,Does not advance
+07-0901,Indiana,Platinum,137,31.7,168.7,Does not advance
+07-0902,Indiana,Platinum,132,35.3,167.3,Does not advance
+07-0388,Texas,Platinum,133,32.4,165.4,Does not advance
+07-1827,California,Platinum,132,33,165,Does not advance
+07-0868,Washington,Platinum,123,40,163,Does not advance
+07-0941,Ohio,Platinum,131,26.4,157.4,Does not advance
+07-0195,California,Platinum,125,31.7,156.7,Does not advance
+07-0802,Oklahoma,Platinum,110,40.5,150.5,Does not advance
+07-0207,Pennsylvania,Platinum,126,23.1,149.1,Does not advance
+07-0192,California,Platinum,115,29.7,144.7,Does not advance
+07-1637,Kansas,Platinum,114,29.7,143.7,Advances to Regional Round
+07-1829,California,Platinum,108,29.8,137.8,Does not advance
+07-2234,Virginia,Platinum,115,15.4,130.4,Does not advance
+07-1449,California,Platinum,73,54.4,127.4,Does not advance
+07-0193,California,Platinum,106,18.15,124.15,Does not advance
+07-2209,California,Platinum,103,12.1,115.1,Does not advance
+07-0965,Alabama,Gold,215,29.7,244.7,Advances to Regional Round
+07-0640,Virginia,Gold,216,26.4,242.4,Advances to Regional Round
+07-0809,Nebraska,Gold,205,33,238,Advances to Regional Round
+07-1738,Canada,Gold,216,20.9,236.9,Advances to Regional Round
+07-1778,Washington,Gold,208,26.4,234.4,Advances to Regional Round
+07-1114,Alabama,Gold,207,26.4,233.4,Advances to Regional Round
+07-2109,California,Gold,199,33,232,Advances to Regional Round
+07-1957,California,Gold,203,26.4,229.4,Advances to Regional Round
+07-0838,California,Gold,199,29.7,228.7,Advances to Regional Round
+07-2161,California,Gold,194,31.9,225.9,Advances to Regional Round
+07-0711,Texas,Gold,199,26.4,225.4,Advances to Regional Round
+07-1711,Virginia,Gold,192,33,225,Advances to Regional Round
+07-1864,Colorado,Gold,194,29.7,223.7,Advances to Regional Round
+07-2427,Colorado,Gold,194,29.7,223.7,Advances to Regional Round
+07-0864,Pennsylvania,Gold,193,29.7,222.7,Advances to Regional Round
+07-0423,Colorado,Gold,189,33,222,Advances to Regional Round
+07-2321,Maryland,Gold,195,26.4,221.4,Advances to Regional Round
+07-2039,California,Gold,221,No Score,221,Advances to Regional Round
+07-1809,Pennsylvania,Gold,187,33,220,Advances to Regional Round
+07-1040,Texas,Gold,195,24.2,219.2,Advances to Regional Round
+07-1394,Tennessee,Gold,186,33,219,Advances to Regional Round
+07-0824,Hawaii,Gold,192,26.4,218.4,Advances to Regional Round
+07-2214,Connecticut,Gold,186,31.9,217.9,Advances to Regional Round
+07-1124,Ohio,Gold,188,29.7,217.7,Advances to Regional Round
+07-2279,Texas,Gold,188,28.6,216.6,Advances to Regional Round
+07-1354,Texas,Gold,190,26.4,216.4,Advances to Regional Round
+07-0741,Louisiana,Gold,182,33,215,Advances to Regional Round
+07-1037,North Carolina,Gold,183,31.9,214.9,Advances to Regional Round
+07-1461,California,Gold,191,23.1,214.1,Advances to Regional Round
+07-2278,Tennessee,Gold,181,33,214,Advances to Regional Round
+07-0397,Texas,Gold,184,29.7,213.7,Advances to Regional Round
+07-1038,Texas,Gold,190,23.1,213.1,Advances to Regional Round
+07-2002,Maryland,Gold,183,29.7,212.7,Advances to Regional Round
+07-1787,Oregon,Gold,189,23.1,212.1,Advances to Regional Round
+07-1883,Massachusetts,Gold,182,29.7,211.7,Advances to Regional Round
+07-1050,Oregon,Gold,189,22,211,Advances to Regional Round
+07-1260,Colorado,Gold,178,33,211,Advances to Regional Round
+07-1700,California,Gold,211,No Score,211,Advances to Regional Round
+07-2443,Virginia,Gold,184,26.4,210.4,Advances to Regional Round
+07-0756,Virginia,Gold,177,33,210,Advances to Regional Round
+07-2334,Texas,Gold,186,23.1,209.1,Advances to Regional Round
+07-0810,Nebraska,Gold,176,33,209,Advances to Regional Round
+07-1698,California,Gold,209,No Score,209,Advances to Regional Round
+07-2194,Virginia,Gold,189,19.8,208.8,Advances to Regional Round
+07-0966,Texas,Gold,175,33,208,Does not advance
+07-1305,Texas,Gold,191,16.5,207.5,Does not advance
+07-2197,California,Gold,174,33,207,Does not advance
+07-2265,"Washington, D.C.",Gold,178,28.6,206.6,Advances to Regional Round
+07-1304,Texas,Gold,173,33,206,Does not advance
+07-1286,South Carolina,Gold,176,29.7,205.7,Advances to Regional Round
+07-0960,Texas,Gold,175,29.7,204.7,Does not advance
+07-0211,Ohio,Gold,174,29.7,203.7,Advances to Regional Round
+07-0947,Alabama,Gold,177,26.4,203.4,Advances to Regional Round
+07-1786,California,Gold,172,31.35,203.35,Does not advance
+07-1884,Massachusetts,Gold,178,25.3,203.3,Advances to Regional Round
+07-1917,Maryland,Gold,173,29.7,202.7,Advances to Regional Round
+07-0633,California,Gold,181,21.45,202.45,Does not advance
+07-0967,Virginia,Gold,169,33,202,Does not advance
+07-1777,Washington,Gold,171,29.7,200.7,Advances to Regional Round
+07-0425,Maryland,Gold,174,26.4,200.4,Does not advance
+07-1327,Texas,Gold,174,26.4,200.4,Does not advance
+07-1699,Virginia,Gold,177,23.1,200.1,Does not advance
+07-0438,Maryland,Gold,169,30.8,199.8,Does not advance
+07-1985,Washington,Gold,187,12.65,199.65,Advances to Regional Round
+07-1723,Virginia,Gold,173,26.4,199.4,Does not advance
+07-1586,Texas,Gold,166,33,199,Does not advance
+07-1609,California,Gold,170,28.6,198.6,Does not advance
+07-1299,Arizona ,Gold,168,29.7,197.7,Advances to Regional Round
+07-1760,Texas,Gold,169,28.6,197.6,Does not advance
+07-1353,Texas,Gold,171,26.4,197.4,Does not advance
+07-1835,Virginia,Gold,171,26.4,197.4,Does not advance
+07-0709,Texas,Gold,164,33,197,Does not advance
+07-0859,North Carolina,Gold,167,29.7,196.7,Advances to Regional Round
+07-2400,Arkansas,Gold,172,24.2,196.2,Advances to Regional Round
+07-2446,Rhode Island,Gold,182,13.75,195.75,Advances to Regional Round
+07-1422,Texas,Gold,169,26.4,195.4,Does not advance
+07-1970,California,Gold,169,26.4,195.4,Does not advance
+07-1223,Canada,Gold,162,33,195,Advances to Regional Round
+07-0221,South Carolina,Gold,165,29.7,194.7,Advances to Regional Round
+07-0549,Florida,Gold,176,18.7,194.7,Advances to Regional Round
+07-1251,Virginia,Gold,165,29.7,194.7,Does not advance
+07-1705,Texas,Gold,173,21.45,194.45,Does not advance
+07-1065,AE,Gold,168,26.4,194.4,Advances to Regional Round
+07-2034,Pennsylvania,Gold,164,29.7,193.7,Advances to Regional Round
+07-2014,Virginia,Gold,161,31.9,192.9,Does not advance
+07-1647,Virginia,Gold,163,29.7,192.7,Does not advance
+07-1919,Virginia,Gold,175,17.6,192.6,Does not advance
+07-2052,California,Gold,174,18.15,192.15,Does not advance
+07-2072,Virginia,Gold,159,33,192,Does not advance
+07-0984,Indiana,Gold,162,29.7,191.7,Advances to Regional Round
+07-1671,Texas,Gold,161,29.7,190.7,Does not advance
+07-1598,South Carolina,Gold,164,26.4,190.4,Advances to Regional Round
+07-1978,Virginia,Gold,162,28.05,190.05,Does not advance
+07-1203,Alabama,Gold,160,29.7,189.7,Does not advance
+07-1442,Texas,Gold,160,29.7,189.7,Does not advance
+07-0749,California,Gold,159,29.7,188.7,Does not advance
+07-1748,California,Gold,159,29.7,188.7,Does not advance
+07-1402,Virginia,Gold,162,26.4,188.4,Does not advance
+07-0477,Louisiana,Gold,165,23.1,188.1,Advances to Regional Round
+07-0262,Colorado,Gold,155,33,188,Does not advance
+07-2358,Virginia,Gold,163,24.2,187.2,Does not advance
+07-1046,Hawaii,Gold,157,29.7,186.7,Advances to Regional Round
+07-1257,California,Gold,157,29.7,186.7,Does not advance
+07-0536,California,Gold,170,16.5,186.5,Does not advance
+07-0252,Colorado,Gold,153,33,186,Does not advance
+07-1516,Texas,Gold,154,31.9,185.9,Does not advance
+07-1545,Colorado,Gold,163,22,185,Does not advance
+07-1295,Texas,Gold,160,24.75,184.75,Does not advance
+07-2133,Pennsylvania,Gold,159,25.3,184.3,Does not advance
+07-1023,New Jersey,Gold,151,33,184,Advances to Regional Round
+07-2277,Tennessee,Gold,165,18.7,183.7,Advances to Regional Round
+07-1633,Texas,Gold,157,26.4,183.4,Does not advance
+07-1360,Texas,Gold,160,23.1,183.1,Does not advance
+07-1149,Ohio,Gold,148,33,181,Advances to Regional Round
+07-1291,Texas,Gold,161,19.8,180.8,Does not advance
+07-1174,Tennessee,Gold,152,28.6,180.6,Does not advance
+07-1384,Indiana,Gold,152,28.6,180.6,Advances to Regional Round
+07-0451,Ohio,Gold,155,25.3,180.3,Does not advance
+07-0710,Texas,Gold,156,24.2,180.2,Does not advance
+07-1436,California,Gold,147,33,180,Does not advance
+07-0875,Tennessee,Gold,155,24.75,179.75,Does not advance
+07-0179,Alabama,Gold,150,29.7,179.7,Does not advance
+07-0968,Virginia,Gold,150,29.7,179.7,Does not advance
+07-1546,Colorado,Gold,150,29.7,179.7,Does not advance
+07-0265,Canada,Gold,174,5.5,179.5,Advances to Regional Round
+07-0952,Hawaii,Gold,153,25.3,178.3,Advances to Regional Round
+07-2088,"Washington, D.C.",Gold,155,23.1,178.1,Advances to Regional Round
+07-1630,Maine,Gold,148,29.7,177.7,Advances to Regional Round
+07-1628,Maine,Gold,152,25.3,177.3,Advances to Regional Round
+07-0399,Texas,Gold,153,24.2,177.2,Does not advance
+07-1542,Maryland,Gold,154,23.1,177.1,Does not advance
+07-0974,Alabama,Gold,144,33,177,Does not advance
+07-1722,Texas,Gold,147,29.7,176.7,Does not advance
+07-1969,California,Gold,147,29.7,176.7,Does not advance
+07-1131,Vermont,Gold,160,16.5,176.5,Advances to Regional Round
+07-1075,Utah,Gold,150,26.4,176.4,Advances to Regional Round
+07-0962,California,Gold,157,19.25,176.25,Does not advance
+07-0909,Texas,Gold,153,23.1,176.1,Does not advance
+07-1770,Massachusetts,Gold,156,19.8,175.8,Advances to Regional Round
+07-1212,New Jersey,Gold,146,29.7,175.7,Advances to Regional Round
+07-1336,California,Gold,145,29.7,174.7,Does not advance
+07-1830,Ohio,Gold,145,29.7,174.7,Does not advance
+07-2102,California,Gold,148,26.4,174.4,Does not advance
+07-0441,California,Gold,149,25.3,174.3,Does not advance
+07-0216,California,Gold,151,23.1,174.1,Does not advance
+07-0785,Colorado,Gold,163,11,174,Does not advance
+07-1627,Maine,Gold,142,31.9,173.9,Advances to Regional Round
+07-1659,Colorado,Gold,153,20.9,173.9,Does not advance
+07-0788,California,Gold,144,29.7,173.7,Does not advance
+07-2243,Illinois,Gold,157,16.5,173.5,Advances to Regional Round
+07-1887,Washington,Gold,147,26.4,173.4,Does not advance
+07-1665,Texas,Gold,143,29.7,172.7,Does not advance
+07-1674,California,Gold,146,26.4,172.4,Does not advance
+07-1350,Texas,Gold,148,24.2,172.2,Does not advance
+07-1015,Texas,Gold,150,22,172,Does not advance
+07-2407,Massachusetts,Gold,152,19.8,171.8,Does not advance
+07-1619,Florida,Gold,148,23.1,171.1,Advances to Regional Round
+07-0548,Florida,Gold,146,24.75,170.75,Advances to Regional Round
+07-2326,Washington,Gold,144,26.4,170.4,Does not advance
+07-2327,Washington,Gold,147,23.1,170.1,Does not advance
+07-0581,Maryland,Gold,141,28.6,169.6,Does not advance
+07-0332,Hawaii,Gold,146,23.1,169.1,Does not advance
+07-1882,Massachusetts,Gold,146,23.1,169.1,Does not advance
+07-0882,Oklahoma,Gold,152,16.5,168.5,Advances to Regional Round
+07-0874,Tennessee,Gold,153,15.4,168.4,Does not advance
+07-0946,Alabama,Gold,142,26.4,168.4,Does not advance
+07-0747,Alabama,Gold,143,25.3,168.3,Does not advance
+07-1801,Connecticut,Gold,145,23.1,168.1,Advances to Regional Round
+07-1290,Texas,Gold,138,29.7,167.7,Does not advance
+07-1227,Florida,Gold,152,15.4,167.4,Does not advance
+07-1788,Canada,Gold,167,No Score,167,Does not advance
+07-1298,Louisiana,Gold,147,19.8,166.8,Advances to Regional Round
+07-0714,Texas,Gold,143,23.1,166.1,Does not advance
+07-2200,Maryland,Gold,136,29.7,165.7,Does not advance
+07-0232,Oklahoma,Gold,151,14.3,165.3,Advances to Regional Round
+07-2333,Connecticut,Gold,142,23.1,165.1,Advances to Regional Round
+07-0587,Maryland,Gold,146,18.7,164.7,Does not advance
+07-0870,Tennessee,Gold,141,23.1,164.1,Does not advance
+07-0268,Pennsylvania,Gold,142,22,164,Does not advance
+07-0717,Indiana,Gold,131,33,164,Advances to Regional Round
+07-2302,California,Gold,147,16.5,163.5,Does not advance
+07-1664,Texas,Gold,141,22,163,Does not advance
+07-1182,Florida,Gold,144,18.7,162.7,Does not advance
+07-0969,Virginia,Gold,134,28.6,162.6,Does not advance
+07-1886,California,Gold,147,15.4,162.4,Does not advance
+07-2202,Maryland,Gold,136,26.4,162.4,Does not advance
+07-0266,South Carolina,Gold,144,18.15,162.15,Does not advance
+07-2454,Virginia,Gold,129,33,162,Does not advance
+07-1893,Wisconsin,Gold,142,19.8,161.8,Advances to Regional Round
+07-0515,Maryland,Gold,143,18.7,161.7,Does not advance
+07-0985,Alabama,Gold,132,29.7,161.7,Does not advance
+07-1517,Virginia,Gold,132,29.7,161.7,Does not advance
+07-1642,Virginia,Gold,133,28.6,161.6,Does not advance
+07-1329,North Carolina,Gold,132,28.6,160.6,Advances to Regional Round
+07-1774,Virginia,Gold,134,26.4,160.4,Does not advance
+07-1079,California,Gold,142,18.15,160.15,Does not advance
+07-1035,North Carolina,Gold,138,22,160,Does not advance
+07-1165,Oklahoma,Gold,138,22,160,Advances to Regional Round
+07-2341,Texas,Gold,138,22,160,Does not advance
+07-1330,North Carolina,Gold,145,13.75,158.75,Does not advance
+07-1576,Indiana,Gold,142,16.5,158.5,Does not advance
+07-1082,Ohio,Gold,132,26.4,158.4,Does not advance
+07-1477,California,Gold,128,29.7,157.7,Does not advance
+07-0471,South Carolina,Gold,131,26.4,157.4,Does not advance
+07-0278,Colorado,Gold,124,33,157,Does not advance
+07-0827,Oklahoma,Gold,157,No Score,157,Does not advance
+07-2190,Montana,Gold,136,20.9,156.9,Advances to Regional Round
+07-1819,Maryland,Gold,130,26.4,156.4,Does not advance
+07-0343,California,Gold,142,13.75,155.75,Does not advance
+07-1773,Virginia,Gold,131,24.75,155.75,Does not advance
+07-0308,Pennsylvania,Gold,127,28.6,155.6,Does not advance
+07-0196,California,Gold,129,26.4,155.4,Does not advance
+07-0760,Louisiana,Gold,132,23.1,155.1,Does not advance
+07-1331,New York,Gold,122,33,155,Advances to Regional Round
+07-1396,Tennessee,Gold,122,33,155,Does not advance
+07-1964,Colorado,Gold,133,22,155,Does not advance
+07-1232,Texas,Gold,134,20.9,154.9,Does not advance
+07-1775,Virginia,Gold,125,29.7,154.7,Does not advance
+07-2303,California,Gold,140,14.3,154.3,Does not advance
+07-0476,Virginia,Gold,131,23.1,154.1,Does not advance
+07-1692,Virginia,Gold,131,23.1,154.1,Does not advance
+07-0762,Virginia,Gold,132,22,154,Does not advance
+07-1004,Arkansas,Gold,135,18.7,153.7,Advances to Regional Round
+07-1717,Virginia,Gold,124,29.7,153.7,Does not advance
+07-1569,Arizona ,Gold,127,26.4,153.4,Advances to Regional Round
+07-1030,Kansas,Gold,131,22,153,Advances to Regional Round
+07-2349,Virginia,Gold,127,25.3,152.3,Does not advance
+07-0836,Texas,Gold,119,33,152,Does not advance
+07-0507,California,Gold,125,26.4,151.4,Does not advance
+07-0918,Texas,Gold,144,6.6,150.6,Does not advance
+07-1098,Utah,Gold,124,26.4,150.4,Advances to Regional Round
+07-2268,Colorado,Gold,129,20.9,149.9,Does not advance
+07-1228,Florida,Gold,143,6.6,149.6,Does not advance
+07-1166,Rhode Island,Gold,134,15.4,149.4,Advances to Regional Round
+07-1971,California,Gold,129,19.8,148.8,Does not advance
+07-0158,Colorado,Gold,130,18.7,148.7,Does not advance
+07-1903,Maryland,Gold,115,33,148,Does not advance
+07-0389,Texas,Gold,121,26.4,147.4,Does not advance
+07-0957,California,Gold,124,23.1,147.1,Does not advance
+07-1395,Tennessee,Gold,114,33,147,Does not advance
+07-1213,New Jersey,Gold,115,31.9,146.9,Advances to Regional Round
+07-1906,Rhode Island,Gold,130,16.5,146.5,Advances to Regional Round
+07-1643,Indiana,Gold,113,33,146,Does not advance
+07-1672,Texas,Gold,116,29.7,145.7,Does not advance
+07-0767,California,Gold,124,20.9,144.9,Does not advance
+07-1338,California,Gold,130,14.85,144.85,Does not advance
+07-0583,Maryland,Gold,114,30.8,144.8,Does not advance
+07-1591,Rhode Island,Gold,118,26.4,144.4,Does not advance
+07-1071,Utah,Gold,121,23.1,144.1,Advances to Regional Round
+07-0371,California,Gold,131,12.65,143.65,Does not advance
+07-0854,Canada,Gold,129,14.3,143.3,Does not advance
+07-0527,Washington,Gold,116,26.4,142.4,Does not advance
+07-1790,Maryland,Gold,119,23.1,142.1,Does not advance
+07-2012,Texas,Gold,109,33,142,Does not advance
+07-1342,Texas,Gold,127,14.3,141.3,Does not advance
+07-0722,Arizona ,Gold,123,17.6,140.6,Advances to Regional Round
+07-2015,Virginia,Gold,114,26.4,140.4,Does not advance
+07-1720,Virginia,Gold,117,23.1,140.1,Does not advance
+07-1556,South Carolina,Gold,108,31.9,139.9,Does not advance
+07-1123,Florida,Gold,117,22,139,Does not advance
+07-0331,Colorado,Gold,138,No Score,138,Does not advance
+07-1192,California,Gold,138,No Score,138,Does not advance
+07-1128,Texas,Gold,119,18.7,137.7,Does not advance
+07-2188,Virginia,Gold,122,14.85,136.85,Does not advance
+07-1858,Texas,Gold,121,15.4,136.4,Does not advance
+07-2047,Virginia,Gold,110,26.4,136.4,Does not advance
+07-0828,Oklahoma,Gold,136,No Score,136,Does not advance
+07-2281,South Carolina,Gold,116,18.7,134.7,Does not advance
+07-1767,Canada,Gold,108,26.4,134.4,Does not advance
+07-0916,Alabama,Gold,106,27.5,133.5,Does not advance
+07-1064,Florida,Gold,128,5.5,133.5,Does not advance
+07-0324,Maryland,Gold,107,26.4,133.4,Does not advance
+07-0275,Texas,Gold,110,23.1,133.1,Does not advance
+07-1154,Texas,Gold,133,No Score,133,Does not advance
+07-1320,Virginia,Gold,104,26.4,130.4,Does not advance
+07-0398,Texas,Gold,109,19.8,128.8,Does not advance
+07-0520,Maryland,Gold,108,20.35,128.35,Does not advance
+07-2192,Virginia,Gold,128,No Score,128,Does not advance
+07-1180,California,Gold,121,6.6,127.6,Does not advance
+07-1078,California,Gold,104,23.1,127.1,Does not advance
+07-1629,Maine,Gold,103,22,125,Does not advance
+07-2049,Maryland,Gold,98,26.4,124.4,Does not advance
+07-1714,Virginia,Gold,94,29.7,123.7,Does not advance
+07-0770,California,Gold,111,12.1,123.1,Does not advance
+07-1994,California,Gold,123,No Score,123,Does not advance
+07-1214,New Jersey,Gold,93,29.7,122.7,Does not advance
+07-1153,Texas,Gold,96,26.4,122.4,Does not advance
+07-1200,South Carolina,Gold,102,19.8,121.8,Does not advance
+07-2213,California,Gold,100,20.9,120.9,Does not advance
+07-2058,Texas,Gold,103,17.05,120.05,Does not advance
+07-1857,Texas,Gold,109,8.8,117.8,Does not advance
+07-1641,Virginia,Gold,88,29.7,117.7,Does not advance
+07-2129,Canada,Gold,82,33,115,Does not advance
+07-1049,Colorado,Gold,91,23.1,114.1,Does not advance
+07-0386,Kansas,Gold,83,29.7,112.7,Advances to Regional Round
+07-1429,California,Gold,86,26.4,112.4,Does not advance
+07-0793,California,Gold,85,26.4,111.4,Does not advance
+07-1756,Michigan,Gold,92,17.6,109.6,Advances to Regional Round
+07-1818,Colorado,Gold,106,3.3,109.3,Does not advance
+07-1147,Oklahoma,Gold,105,No Score,105,Does not advance
+07-1386,Indiana,Gold,85,17.6,102.6,Does not advance
+07-2164,Texas,Gold,101,No Score,101,Does not advance
+07-0950,California,Gold,72,28.6,100.6,Does not advance
+07-1039,Texas,Gold,75,18.7,93.7,Does not advance
+07-1296,Canada,Gold,90,No Score,90,Does not advance
+07-1347,California,Gold,71,13.2,84.2,Does not advance
+07-0817,Virginia,Gold,54,No Score,54,Does not advance
+07-2208,California,Gold,41,12.1,53.1,Does not advance
+07-1146,Oklahoma,Gold,53,No Score,53,Does not advance
+07-1812,Virginia,Gold,26,23.65,49.65,Does not advance
+07-1968,California,Gold,16,No Score,16,Does not advance
+07-1119,Pennsylvania,Silver,216,26.4,242.4,Advances to Regional Round
+07-1270,Pennsylvania,Silver,206,22,228,Advances to Regional Round
+07-1063,Alabama,Silver,192,33,225,Advances to Regional Round
+07-0684,California,Silver,188,26.4,214.4,Advances to Regional Round
+07-1536,Louisiana,Silver,191,23.1,214.1,Advances to Regional Round
+07-1435,Vermont,Silver,184,29.7,213.7,Advances to Regional Round
+07-1807,Virginia,Silver,175,33,208,Advances to Regional Round
+07-1076,Tennessee,Silver,175,26.4,201.4,Advances to Regional Round
+07-0632,California,Silver,171,26.4,197.4,Advances to Regional Round
+07-1804,Virginia,Silver,161,33,194,Advances to Regional Round
+07-2044,Virginia,Silver,161,33,194,Advances to Regional Round
+07-1271,New York,Silver,174,19.8,193.8,Advances to Regional Round
+07-2444,Virginia,Silver,161,28.6,189.6,Advances to Regional Round
+07-1224,Nebraska,Silver,174,15.4,189.4,Advances to Regional Round
+07-1110,California,Silver,176,13.2,189.2,Advances to Regional Round
+07-2091,South Carolina,Silver,156,31.9,187.9,Advances to Regional Round
+07-1721,Virginia,Silver,158,29.7,187.7,Advances to Regional Round
+07-0544,Texas,Silver,159,28.6,187.6,Advances to Regional Round
+07-2048,Virginia,Silver,152,33,185,Advances to Regional Round
+07-1249,Texas,Silver,157,26.4,183.4,Advances to Regional Round
+07-1027,Maryland,Silver,153,29.7,182.7,Advances to Regional Round
+07-1510,Maine,Silver,155,26.4,181.4,Advances to Regional Round
+07-0869,Tennessee,Silver,181,No Score,181,Advances to Regional Round
+07-1834,Virginia,Silver,152,26.4,178.4,Advances to Regional Round
+07-0373,Canada,Silver,145,33,178,Advances to Regional Round
+07-1454,Florida,Silver,150,26.4,176.4,Advances to Regional Round
+07-1712,Virginia,Silver,150,26.4,176.4,Advances to Regional Round
+07-1651,Virginia,Silver,143,33,176,Advances to Regional Round
+07-1187,Florida,Silver,175,No Score,175,Advances to Regional Round
+07-1073,New York,Silver,156,18.15,174.15,Advances to Regional Round
+07-1549,Pennsylvania,Silver,148,25.3,173.3,Advances to Regional Round
+07-1476,California,Silver,145,26.4,171.4,Advances to Regional Round
+07-0691,Indiana,Silver,148,23.1,171.1,Advances to Regional Round
+07-2437,North Carolina,Silver,144,25.3,169.3,Advances to Regional Round
+07-1910,Oklahoma,Silver,147,22,169,Advances to Regional Round
+07-1118,Indiana,Silver,138,29.7,167.7,Advances to Regional Round
+07-1437,Minnesota,Silver,156,9.9,165.9,Advances to Regional Round
+07-1571,Virginia,Silver,146,19.8,165.8,Advances to Regional Round
+07-2186,North Carolina,Silver,138,26.4,164.4,Advances to Regional Round
+07-1718,Virginia,Silver,140,23.1,163.1,Advances to Regional Round
+07-1328,Texas,Silver,131,26.4,157.4,Advances to Regional Round
+07-0652,Arkansas,Silver,149,8.25,157.25,Advances to Regional Round
+07-1418,Ohio,Silver,137,19.8,156.8,Advances to Regional Round
+07-0650,Arkansas,Silver,136,19.8,155.8,Advances to Regional Round
+07-2246,Illinois,Silver,138,17.6,155.6,Advances to Regional Round
+07-1100,Utah,Silver,128,27.5,155.5,Advances to Regional Round
+07-1979,Virginia,Silver,134,19.25,153.25,Advances to Regional Round
+07-0852,Canada,Silver,135,18.15,153.15,Advances to Regional Round
+07-2067,Texas,Silver,123,29.7,152.7,Advances to Regional Round
+07-2086,South Carolina,Silver,134,18.7,152.7,Advances to Regional Round
+07-2356,California,Silver,128,24.2,152.2,Advances to Regional Round
+07-1650,Virginia,Silver,132,19.8,151.8,Does not advance
+07-1387,Indiana,Silver,129,22,151,Advances to Regional Round
+07-2313,Virginia,Silver,131,19.8,150.8,Does not advance
+07-1759,Texas,Silver,122,28.6,150.6,Does not advance
+07-1151,California,Silver,135,15.4,150.4,Does not advance
+07-0702,Texas,Silver,132,16.5,148.5,Does not advance
+07-0526,Washington,Silver,118,29.7,147.7,Advances to Regional Round
+07-2145,Virginia,Silver,115,31.9,146.9,Does not advance
+07-1959,California,Silver,116,30.8,146.8,Does not advance
+07-1468,California,Silver,122,24.2,146.2,Does not advance
+07-1017,California,Silver,123,23.1,146.1,Does not advance
+07-0300,Ohio,Silver,146,No Score,146,Advances to Regional Round
+07-0681,Maryland,Silver,113,33,146,Advances to Regional Round
+07-1975,Colorado,Silver,116,29.7,145.7,Advances to Regional Round
+07-2098,Washington,Silver,116,29.7,145.7,Advances to Regional Round
+07-1806,Virginia,Silver,112,33,145,Does not advance
+07-1417,Ohio,Silver,125,18.7,143.7,Advances to Regional Round
+07-2436,North Carolina,Silver,127,16.5,143.5,Advances to Regional Round
+07-0582,Maryland,Silver,117,26.4,143.4,Advances to Regional Round
+07-0446,Texas,Silver,131,12.1,143.1,Does not advance
+07-1276,Pennsylvania,Silver,141,No Score,141,Does not advance
+07-0521,Rhode Island,Silver,114,26.4,140.4,Advances to Regional Round
+07-1258,California,Silver,117,23.1,140.1,Does not advance
+07-0651,Arkansas,Silver,120,19.8,139.8,Advances to Regional Round
+07-2157,California,Silver,110,29.7,139.7,Does not advance
+07-1406,Utah,Silver,137,No Score,137,Advances to Regional Round
+07-1034,Kansas,Silver,117,19.8,136.8,Advances to Regional Round
+07-1814,Virginia,Silver,112,23.1,135.1,Does not advance
+07-1974,Nebraska,Silver,135,No Score,135,Advances to Regional Round
+07-1019,California,Silver,134,No Score,134,Does not advance
+07-1590,Oregon,Silver,134,No Score,134,Advances to Regional Round
+07-1142,New Mexico,Silver,122,9.9,131.9,Advances to Regional Round
+07-1757,Michigan,Silver,102,27.5,129.5,Advances to Regional Round
+07-1764,New Jersey,Silver,99,29.7,128.7,Advances to Regional Round
+07-2393,New York,Silver,106,22,128,Advances to Regional Round
+07-0768,Pennsylvania,Silver,100,26.4,126.4,Does not advance
+07-1058,Kansas,Silver,110,15.4,125.4,Advances to Regional Round
+07-2046,Virginia,Silver,102,23.1,125.1,Does not advance
+07-1473,California,Silver,103,21.45,124.45,Does not advance
+07-0795,California,Silver,100,23.1,123.1,Does not advance
+07-0970,Ohio,Silver,114,8.8,122.8,Does not advance
+07-1859,California,Silver,107,15.4,122.4,Does not advance
+07-1332,California,Silver,99,23.1,122.1,Does not advance
+07-1610,California,Silver,101,19.8,120.8,Does not advance
+07-2003,Maryland,Silver,101,19.8,120.8,Does not advance
+07-1548,Washington,Silver,97,23.1,120.1,Advances to Regional Round
+07-0792,California,Silver,90,29.7,119.7,Does not advance
+07-2201,Vermont,Silver,96,23.1,119.1,Advances to Regional Round
+07-1467,California,Silver,111,7.7,118.7,Does not advance
+07-0459,Florida,Silver,97,20.9,117.9,Advances to Regional Round
+07-2242,Delaware,Silver,97,18.7,115.7,Advances to Regional Round
+07-2206,Virginia,Silver,91,23.1,114.1,Does not advance
+07-1907,Pennsylvania,Silver,114,No Score,114,Does not advance
+07-0444,Maryland,Silver,112,No Score,112,Does not advance
+07-0925,Tennessee,Silver,103,8.8,111.8,Advances to Regional Round
+07-1915,California,Silver,91,19.8,110.8,Does not advance
+07-2250,Hawaii,Silver,87,23.1,110.1,Advances to Regional Round
+07-1851,Texas,Silver,110,No Score,110,Does not advance
+07-1239,Delaware,Silver,109,No Score,109,Advances to Regional Round
+07-1297,Canada,Silver,108,No Score,108,Advances to Regional Round
+07-1302,California,Silver,79,24.75,103.75,Does not advance
+07-1581,Texas,Silver,81,22,103,Does not advance
+07-0945,California,Silver,83,19.8,102.8,Does not advance
+07-0376,Virginia,Silver,78,23.1,101.1,Does not advance
+07-0972,Texas,Silver,69,28.6,97.6,Does not advance
+07-2071,Louisiana,Silver,84,13.2,97.2,Advances to Regional Round
+07-0855,Canada,Silver,97,No Score,97,Does not advance
+07-1976,Nebraska,Silver,94,No Score,94,Advances to Regional Round
+07-1368,Texas,Silver,86,6.6,92.6,Does not advance
+07-0755,Texas,Silver,67,25.3,92.3,Does not advance
+07-1853,Texas,Silver,92,No Score,92,Does not advance
+07-0837,California,Silver,68,23.1,91.1,Does not advance
+07-0928,Rhode Island,Silver,89,No Score,89,Advances to Regional Round
+07-1848,New York,Silver,74,12.1,86.1,Does not advance
+07-1855,Texas,Silver,86,No Score,86,Does not advance
+07-0671,Texas,Silver,66,19.8,85.8,Does not advance
+07-1022,California,Silver,63,22.55,85.55,Does not advance
+07-0791,California,Silver,58,26.4,84.4,Does not advance
+07-0396,Tennessee,Silver,72,12.1,84.1,Does not advance
+07-1605,Maryland,Silver,83,No Score,83,Does not advance
+07-2010,Nebraska,Silver,83,No Score,83,Does not advance
+07-0734,California,Silver,59,23.1,82.1,Does not advance
+07-2148,New York,Silver,82,No Score,82,Does not advance
+07-1541,California,Silver,55,26.4,81.4,Does not advance
+07-2412,Texas,Silver,81,No Score,81,Does not advance
+07-1849,New York,Silver,56,23.1,79.1,Does not advance
+07-2050,Maryland,Silver,49,28.6,77.6,Does not advance
+07-1122,Pennsylvania,Silver,51,26.4,77.4,Does not advance
+07-1896,Virginia,Silver,75,No Score,75,Does not advance
+07-0754,Iowa,Silver,59,15.95,74.95,Advances to Regional Round
+07-2163,Maryland,Silver,74,No Score,74,Does not advance
+07-0992,Maryland,Silver,72,1.1,73.1,Does not advance
+07-0430,Tennessee,Silver,72,No Score,72,Does not advance
+07-0682,Maryland,Silver,58,11,69,Does not advance
+07-2004,Rhode Island,Silver,67,No Score,67,Advances to Regional Round
+07-0857,Tennessee,Silver,66,No Score,66,Does not advance
+07-0573,Maryland,Silver,64,No Score,64,Does not advance
+07-1955,Rhode Island,Silver,39,24.75,63.75,Does not advance
+07-0200,Texas,Silver,57,6.6,63.6,Does not advance
+07-1607,Maryland,Silver,43,19.8,62.8,Does not advance
+07-1949,California,Silver,47,15.4,62.4,Does not advance
+07-2318,Maryland,Silver,62,No Score,62,Does not advance
+07-2337,New York,Silver,62,No Score,62,Does not advance
+07-1895,Virginia,Silver,58,3.85,61.85,Does not advance
+07-0462,Virginia,Silver,49,9.9,58.9,Does not advance
+07-1686,Virginia,Silver,40,17.6,57.6,Does not advance
+07-1697,Virginia,Silver,32,24.2,56.2,Does not advance
+07-1587,Maryland,Silver,39,9.9,48.9,Does not advance
+07-1687,Virginia,Silver,47,No Score,47,Does not advance
+07-2273,New York,Silver,33,13.2,46.2,Does not advance
+07-1908,Virginia,Silver,46,No Score,46,Does not advance
+07-1954,California,Silver,24,22,46,Does not advance
+07-1218,California,Silver,44,No Score,44,Does not advance
+07-1588,Maryland,Silver,44,No Score,44,Does not advance
+07-1888,California,Silver,41,No Score,41,Does not advance
+07-2274,New York,Silver,40,No Score,40,Does not advance
+07-1522,California,Silver,39,No Score,39,Does not advance
+07-0856,Tennessee,Silver,37,No Score,37,Does not advance
+07-2347,AE,Silver,23,12.65,35.65,Advances to Regional Round
+07-0997,California,Silver,35,No Score,35,Does not advance
+07-1945,California,Silver,20,7.7,27.7,Does not advance
+07-2328,New York,Silver,26,No Score,26,Does not advance
+07-1267,Virginia,Silver,11,14.3,25.3,Does not advance
+07-1856,Texas,Silver,22,No Score,22,Does not advance
+07-2338,Arizona ,Silver,No Score,22,22,Advances to Regional Round
+07-0769,Pennsylvania,Silver,No Score,13.75,13.75,Does not advance
+07-0206,AE,Silver,No Score,13.2,13.2,Advances to Regional Round
+07-2275,New York,Silver,No Score,11,11,Does not advance
+07-0988,California,Silver,10,No Score,10,Does not advance
+07-0223,California,Silver,8,No Score,8,Does not advance
+07-1068,California,Silver,5,No Score,5,Does not advance
+07-1524,California,Silver,5,No Score,5,Does not advance
+07-1731,Virginia,Silver,4,No Score,4,Does not advance
+07-0161,Alabama,Platinum,277,72,349,Advances to Regional Round

@@ -1,0 +1,10 @@
+<BackupInst xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest">
+  <GPOGuid><![CDATA[{96BB1CBE-E589-4397-B3B8-738257D66897}]]></GPOGuid>
+  <GPODomain><![CDATA[contoso.com]]></GPODomain>
+  <GPODomainGuid><![CDATA[{970dc492-9663-4ce1-ba13-2ce7e1ef72d7}]]></GPODomainGuid>
+  <GPODomainController><![CDATA[SASC-WS08-DC01.sasc.contoso.com]]></GPODomainController>
+  <BackupTime>2017-01-27T15:32:48</BackupTime>
+  <ID>{8129eefe-a9c9-419c-8b68-93ce4f0edc0a}</ID>
+  <Comment>The Member Server baseline includes settings that are suitable for all servers running Windows Server 2008 SP2 regardless of role. This forms the baseline on which you can layer role-specific settings. This baseline is suitable for midsize and large organizations with typical security needs that want to balance security and functionality.</Comment>
+  <GPODisplayName>WS2008SP2 Member Server Security Compliance</GPODisplayName>
+</BackupInst>

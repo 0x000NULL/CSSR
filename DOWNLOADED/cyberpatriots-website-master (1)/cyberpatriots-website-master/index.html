@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="CSS/login.css">
+        <title>Login</title>
+
+
+    </head>
+
+    <body oncontextmenu="return false">
+
+        <!-- No navbar or payload div, not yet authorized!-->
+
+        <div class="header">
+            <div>Tmsa<span>CyberPatriots</span></div>
+        </div>
+        <br>
+        <form name="login">
+            <div class="login">
+                <input type="text" placeholder="Username" name="userid"><br>
+                <input type="password" placeholder="Password" name="pswrd"><br>
+                <input type="button" onclick="check(this.form)" value="Login"/>
+            </div>
+
+        </form>
+
+        <script>
+            function check(form) {
+                if (form.userid.value == "tmsa" && form.pswrd.value == "cyberpatriots") {
+                    window.location.replace("home.html");
+                }
+                else {
+                    alert("Wrong login, please try again.");
+                }
+            }
+        </script>
+    </body>
+</html>

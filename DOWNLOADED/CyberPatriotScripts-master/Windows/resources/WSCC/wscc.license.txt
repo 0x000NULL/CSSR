@@ -1,0 +1,20 @@
+WSCC - Windows System Control Center
+Copyright (C) 2007-2016 KirySoft S.R.L. All Rights Reserved.
+
+WSCC Freeware License Agreement
+
+Please read the following terms and conditions before using this software. Use of WSCC (SOFTWARE) indicates you accept the terms of this license agreement and warranty. This licence describes the conditions under which you may use the SOFTWARE. If you are unable or unwilling to accept these conditions in full, then, notwithstanding the conditions in the remainder of this licence, you may not use the program at all.
+
+1. COPYRIGHT.
+All copyrights to SOFTWARE are exclusively owned by the author - KirySoft (OWNER). Your license confers no title or ownership of the SOFTWARE and should not be construed as a sale of any right in the SOFTWARE. You may not reverse engineer, de-compile or disassemble the SOFTWARE. KirySoft shall retain title and all ownership rights to the SOFTWARE. You are not permitted to distribute the software for profit.
+
+2. GRANT OF LICENSE.
+The Software is being licensed to you free of charge for private and commercial use. It may be freely used, copied and distributed as long as it is not sold, and all original files are included, including this license.
+
+3. DISCLAIMER OF WARRANTY.
+THE SOFTWARE IS PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KIRYSOFT FURTHER DISCLAIMS ALL WARRANTIES, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. THE ENTIRE RISK ARISING OUT OF THE USE OR PERFORMANCE OF THE PRODUCT AND DOCUMENTATION REMAINS WITH RECIPIENT. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL KIRYSOFT BE LIABLE FOR ANY CONSEQUENTIAL, INCIDENTAL, DIRECT, INDIRECT, SPECIAL, PUNITIVE, OR OTHER DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR OTHER PECUNIARY LOSS) ARISING OUT OF THIS AGREEMENT OR THE USE OF OR INABILITY TO USE THE PRODUCT, EVEN IF KIRYSOFT HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+4. DISTRIBUTION.
+You may make and distribute unlimited copies of the SOFTWARE, as long as each copy that you make and distribute contains this agreement and the same copyright and other proprietary notices pertaining to this SOFTWARE. If you download the SOFTWARE from the Internet or similar on-line source, you must include the KirySoft copyright notice for the SOFTWARE with any on-line distribution and on any media you distribute that includes the SOFTWARE.
+
+Thank you for using our product.

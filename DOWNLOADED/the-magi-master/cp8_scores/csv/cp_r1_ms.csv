@@ -1,0 +1,10 @@
+team_id,location,time,official_round_1_score,scraped_round_1_score,warned_multi_instances,warned_time,score_delta
+08-1489,AL,6:26,73,67,false,true,-6
+08-1853,OH,49:57,143,94,false,true,-49
+08-1347,TX,5:06,67,77,false,false,10
+08-3177,CA,4:28,78,100,false,false,22
+08-2102,IA,5:52,45,94,false,false,49
+08-0714,MO,5:37,47,57,false,false,10
+08-1187,FL,5:59,88,63,false,false,-25
+08-2985,FL,5:11,63,88,false,false,25
+08-0852,CA,5:48,85,65,true,false,-20

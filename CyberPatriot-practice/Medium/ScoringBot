@@ -1,0 +1,300 @@
+
+#!/bin/bash
+
+#Sets up variables that can be changed eaisly
+numProblems=31
+savedFile=/root/RyanSetupNOLOOK/completed.txt
+output=/home/argus/Desktop/Answers
+goodsound=/root/RyanSetupNOLOOK/Point_Gain.mp3
+badsound=/root/RyanSetupNOLOOK/Point_Loss.mp3
+echo "" >> $savedFile
+echo "" > $output
+
+#True = solved, false = not solved
+#True = 0, false = 1
+#this declares them all empty arrays
+oldSaves=()
+newSaves=()
+outputString=()
+outputPoints=()
+commands=()
+compareCommandTo=()	#contains what command should/shouldn't be (must specify)
+total=0
+grandtotal=78
+
+while (true)
+do
+	#loops through and gets all of the old solved items, and sets up the arrays
+	for ((i=1;i<=$numProblems;i++)); do
+		oldSaves[$i]=1;
+		newSaves[$i]=1;
+	#	echo ${oldSaves[$i]}
+	done;
+
+	stuff=()
+	while IFS='' read -r line || [[ -n "$line" ]]
+	do
+		oldSaves[$line]=0;
+		#echo ${oldSaves[$line]};
+	done < "$savedFile"
+
+
+	#for i in $stuff; do
+	#	for ((a=1;a<=$numProblems;a++)); do
+	#		if [ $i == $a ]; then
+	#			oldSaves[$a]=true;
+	#		fi
+	#	done;
+	#done;
+
+
+
+
+	#Entering Specific to each Image zone
+
+
+
+
+
+	#Sets up all of the specific information for each problem (like, the output info, the points, the one-line command that can be used to see if output is true)
+	for ((i=1;i<=$numProblems;i++)); do
+		case $i in
+			1)outputString[$i]="Forensics Question 1			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "Dog" -e "dog" /home/argus/Desktop/Forensics_Question_1.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			2)outputString[$i]="Forensics Question 2			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "chmod" -e "execute" -e "write" -e "read" -e "world" -e "owner" -e "group" -e "4" -e "1" -e "2" /home/argus/Desktop/Forensics_Question_1.txt );
+			  compareCommandTo[$i]=" -eq 10 ";
+			;;
+			3)outputString[$i]="Forensics Question 3				-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( grep -ic -e "updatedb" /home/argus/Desktop/Forensics_Question_2.txt );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			4)outputString[$i]="Removed program Crack		-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "Crack" -e "crack" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			5)outputString[$i]="Removed program Hydra			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "Hydra" -e "hydra" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			6)outputString[$i]="Removed program telnetd			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "telnet" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			7)outputString[$i]="Removed program apache2			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "apache2");
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			8)outputString[$i]="SSH root login disabled	-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "PermitRootLogin yes" -e "PermitRootLogin without-password" /etc/ssh/sshd_config );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			9)outputString[$i]="SSH don't permit empty password	-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "PermitEmptyPasswords yes" /etc/ssh/sshd_config );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			10)outputString[$i]="Change insecure root password					-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic "root:$6$Jcl73j5d$hg6TOXCBcIC*" /etc/shadow );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			11)outputString[$i]="ufw enabled					-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ufw status | grep -c ' active' );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			12)outputString[$i]="Removed bad init file			-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( ls -la /etc/init.d | grep -ic "n0th1ng2C" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			13)outputString[$i]="Set correct password length and complexity			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic -e "minlen=" -e "dcredit=" -e "ucredit=" -e "lcredit=" -e "ocredit=" /etc/pam.d/common-password );
+			  compareCommandTo[$i]=" -eq 5 ";
+			;;
+			14)outputString[$i]="Performed updates and restarted computer			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( apt-get upgrade --simulate | grep -ic "0 upgraded" );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			15)utputString[$i]="Deleted Hidden Directory			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( ls -la /home | grep -ic ".HackerDirectory" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			16)outputString[$i]="Remove insecure default sudo configuration			-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( grep -ic "!authenticate" /etc/sudoers );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			17)outputString[$i]="Remove insecure sudo configuration			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /etc/sudoers.d | grep -ic "hello" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			18)outputString[$i]="Remove insecure README sudo configuration			-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( grep -ic "ALL ALL = NOPASSWD: ALL" /etc/sudoers.d/README );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			19)outputString[$i]="Remove hidden root user r00t			-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( grep -ic "r00t" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			20)outputString[$i]="Check for updates daily			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic "APT::Periodic::Update-Package-Lists \"1\";" /etc/apt/apt.conf.d/10periodic );
+			compareCommandTo[$i]=" -ne 0 ";
+			;;
+			21)outputString[$i]="Give user Cronos a password				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "nopasswdlogin:x:119:cronos,promethius" -e "nopasswdlogin:x:119:promethius" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			22)outputString[$i]="Give user Promethius a password				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic "nopasswdlogin:x:119:cronos" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			23)outputString[$i]="Removed bad user Antivirus			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "Antivirus" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			24)outputString[$i]="Removed guest account			-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "allow-guest=false" /etc/lightdm/lighedm.conf );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			25)outputString[$i]="Cronos is not an Administrator				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( grep -ic -e "sudo:x:27:argus,cronos" /etc/group );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			26)outputString[$i]="Removed insecure nicolascage sudo gid config			-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "nicolascage:x:1005:27" /etc/passwd );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			27)outputString[$i]="Remove Netcat Backdoor 'nc'				-";
+			  outputPoints[$i]=3;
+			  commands[$i]=$( ls -la /var/spool/cron/crontabs | grep -ic "root" ) || $( netstat -ntlup | grep -ic "nc" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			28)outputString[$i]="Remove Illegal Media File WOOF				-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( ls -la /home | grep -ic "WOOF" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			29)outputString[$i]="Add user account Gary				-";
+			  outputPoints[$i]=5;
+			  commands[$i]=$( grep -ic -e "gary" -e "Gary" /etc/passwd );
+			  compareCommandTo[$i]=" -ne 0 ";
+			;;
+			30)outputString[$i]="Remove Netcat Backdoor 'netcat'				-";
+			  outputPoints[$i]=4;
+			  commands[$i]=$( ls -la /var/spool/cron/crontabs | grep -ic "cron" ) || $( netstat -ntlup | grep -ic "netcat" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+			31)outputString[$i]="Removed program rsh		-";
+			  outputPoints[$i]=2;
+			  commands[$i]=$( dpkg-query --list | grep -c -e "rsh" );
+			  compareCommandTo[$i]=" -eq 0 ";
+			;;
+		esac
+	done;
+
+
+
+
+
+
+
+	#Exiting Specific to each Image zone
+
+
+
+
+
+
+
+	#loops through the output of each command and what the output should be if completed, and will set new as solved or not accordingly
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${commands[$i]} ${compareCommandTo[$i]};
+		if [ ${commands[$i]} ${compareCommandTo[$i]} ]; then
+			newSaves[$i]=0;
+		fi
+	done
+
+
+	#Now compare each item, and if was in old and not in new, play bad sound. If is in new but not in old, play good sound. If same in both, play nothing.
+	#All true statments are put into the Answers file
+
+	echo "" > $output
+
+	for ((i=1;i<=$numProblems;i++)); do
+		echo ${oldSaves[$i]};
+		echo ${newSaves[$i]};
+		if [ ${oldSaves[$i]} -eq ${newSaves[$i]} ];
+		then
+			echo "I'm in!";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				echo ${outputString[$i]} ${outputPoints[$i]} >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+				#echo ${outputPoints[$i]};
+				#echo ${total};
+			fi
+		else
+			echo "is apparently not same";
+			if [ ${newSaves[$i]} -eq 0 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $goodsound > /dev/null 2>&1;
+				echo ${outputString[$i]} ${outputPoints[$i]}  >> $output;
+				total=$(( $total + ${outputPoints[$i]} ));
+			fi
+			if [ ${newSaves[$i]} -eq 1 ];
+			then
+				#echo "mpg123 $goodsound > /dev/null 2>&1";
+				mpg123 $badsound > /dev/null 2>&1;
+			fi
+		fi
+	done;
+
+	#Save all of the now solved vuln into the saved file file.
+
+	echo "" > $savedFile
+
+	for ((i=1;i<=$numProblems;i++)); do
+		if [ ${newSaves[$i]} -eq 0 ]; then
+			echo $i >> $savedFile;
+		fi
+	done;
+	echo "" >> $output
+	echo 'Total: '$total >> $output
+	
+	if [ $grandtotal -eq $total ]; then 
+		echo "Congradulations! You have successfully finished the Easy Image! Scoring Bot shutting off." >> $output
+		exit 0;
+	fi
+
+	total=0
+done
+
+
+
+

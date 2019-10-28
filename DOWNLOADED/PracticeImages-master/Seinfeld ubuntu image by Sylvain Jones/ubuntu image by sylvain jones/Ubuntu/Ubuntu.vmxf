@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Foundry>
+<VM>
+<VMId type="string">52 ef 0e c5 05 24 19 b3-e5 aa 89 e9 88 56 7e 59</VMId>
+<ClientMetaData>
+<clientMetaDataAttributes/>
+<HistoryEventList/></ClientMetaData>
+<vmxPathName type="string">Ubuntu.vmx</vmxPathName></VM><tools-install-info><installError>0</installError><updateCounter>1</updateCounter></tools-install-info></Foundry>
