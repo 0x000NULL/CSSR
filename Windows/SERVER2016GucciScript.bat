@@ -48,11 +48,6 @@ choco feature enable -n allowGlobalConfirmation
 choco install git
 pause
 
-cd %userprofile%\Desktop
-git init
-git remote add origin https://github.com/Marduk28/CyberPatriot_Windows_Scripts.git
-git fetch origin master
-git checkout origin/master Server2016CompFiles OurGloriousChecklist2018_Windows.txt
 
 :: Ask if menu or automode
 :autochoice
@@ -74,7 +69,7 @@ if %autochoice% == a (
 )
 if %autochoice% == m (
 	set automode=false
-	start /d "%userprofile%\Desktop\Win7CompFiles" DankMMC.msc
+	start Win7CompFiles\DankMMC.msc
 	goto menu
 )
 else (
@@ -183,7 +178,7 @@ if %inf% == n (
 
 :enabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016EnabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "Server2016CompFiles\Server2016EnabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Enabled INF Done!
@@ -199,7 +194,7 @@ goto 4
 
 :disabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016DisabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "Server2016CompFiles\Server2016DisabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Disabled Inf Done!
@@ -217,9 +212,9 @@ goto 4
 :5
 cls
 
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\MS_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\Dom_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\Server2016\DC_Sec"
+"Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\MS_Sec"
+"Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\Dom_Sec"
+"Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\Server2016\DC_Sec"
 cls
 echo SCM Baselines Done!
 echo.
@@ -278,7 +273,7 @@ echo.
 
 net user
 
-start /d "%userprofile%\Desktop\Server2016CompFiles" users.txt
+start Server2016CompFiles\users.txt
 
 pause
 
@@ -326,7 +321,7 @@ if %automode% == true (
 	cls
 	net user BroShirt /active:no
 	net user BroPants /active:no
-	for /f "skip=4 eol=;" %%a in (%userprofile%\Desktop\Server2016CompFiles\users.txt) do net user %%a /active:yes
+	for /f "skip=4 eol=;" %%a in (Server2016CompFiles\users.txt) do net user %%a /active:yes
 	goto 10
 )
 
@@ -411,7 +406,7 @@ goto deladmins
 :11
 if %automode% == true (
 	cls
-	for /f "skip=2 eol=;" %%a in (%userprofile%\Desktop\Server2016CompFiles\users.txt) do net user %%a abc123ABC123@@
+	for /f "skip=2 eol=;" %%a in (Server2016CompFiles\users.txt) do net user %%a abc123ABC123@@
 	goto 12
 )
 
@@ -434,7 +429,7 @@ goto 11
 :: Enable firewall + template
 :12
 cls
-netsh advfirewall import "%USERPROFILE%\Desktop\Server2016CompFiles\Server2016Firewall.wfw"
+netsh advfirewall import "Server2016CompFiles\Server2016Firewall.wfw"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 netsh advfirewall set allprofiles state on
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
@@ -880,8 +875,8 @@ goto menu
 :: SCM IE Baselines
 :21
 cls
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\IE11_Com_Sec"
-"%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2016CompFiles\SCMBaselines\IE11_User_Sec"
+"Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\IE11_Com_Sec"
+"Server2016CompFiles\SCMBaselines\LGPO.exe" /g "Server2016CompFiles\SCMBaselines\IE11_User_Sec"
 
 if %automode% == true goto 22
 
@@ -928,7 +923,7 @@ cls
 takeown /f "%systemroot%\system32\drivers\etc"
 
 del "%systemroot%\system32\drivers\etc\hosts"
-copy "%userprofile%\Desktop\Server2016CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
+copy "Server2016CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
 
 if %automode% == true goto 25
 
@@ -1031,7 +1026,7 @@ echo.
 pause
 
 cls
-echo Past comp vulns (Make Peter or someone read them)
+echo Past comp vulns
 echo.
 pause
 
@@ -1043,7 +1038,7 @@ pause
 cls
 echo Official checklist
 echo.
-start /d "%userprofile%\Desktop\Win7CompFiles" OfficialWin7Checklist.pdf
+start Win7CompFiles\OfficialWin7Checklist.pdf
 pause
 
 if %automode% == true goto end
@@ -1063,7 +1058,7 @@ goto menu
 
 :: Open DankMMC
 :29
-start /d "%userprofile%\Desktop\Server2016CompFiles" DankMMC.msc
+start Server2016CompFiles\DankMMC.msc
 goto menu
 
 :: Change visual effects for performance
@@ -1073,10 +1068,10 @@ goto menu
 
 :: Open official checklist
 :31
-start /d "%userprofile%\Desktop\Server2016CompFiles" OfficialServer2016Checklist.docx
+start Server2016CompFiles\OfficialServer2016Checklist.docx
 goto menu
 
 :: Open master checklist
 :32
-start /d "%userprofile%\Desktop" OurGloriousChecklist2018_Windows.txt
+start OurGloriousChecklist2018_Windows.txt
 goto menu

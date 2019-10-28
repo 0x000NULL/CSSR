@@ -47,12 +47,6 @@ choco feature enable -n allowGlobalConfirmation
 choco install git
 pause
 
-cd %userprofile%\Desktop
-git init
-git remote add origin https://github.com/Marduk28/CyberPatriot_Windows_Scripts.git
-git fetch origin master
-git checkout origin/master Win7CompFiles OurGloriousChecklist2018_Windows.txt
-
 :: Ask if menu or automode
 :autochoice
 cls
@@ -73,7 +67,7 @@ if %autochoice% == a (
 )
 if %autochoice% == m (
 	set automode=false
-	start /d "%userprofile%\Desktop\Win7CompFiles" DankMMC.msc
+	start Win7CompFiles\DankMMC.msc
 	goto menu
 )
 else (
@@ -135,8 +129,8 @@ if %automode% == true (
 
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 4 /f
 
-	if %processor_architecture% == x86 start /d "%userprofile%\Desktop" Win7ServicePack32bit.exe
-	if %processor_architecture% == AMD64 start /d "%userprofile%\Desktop" Win7ServicePack64bit.exe
+	if %processor_architecture% == x86 start /d "\Desktop" Win7ServicePack32bit.exe
+	if %processor_architecture% == AMD64 start /d "\Desktop" Win7ServicePack64bit.exe
 
 	goto 3
 )
@@ -147,8 +141,8 @@ echo.
 
 start wuapp.exe
 
-if %processor_architecture% == x86 start /d "%userprofile%\Desktop\Win7CompFiles" Win7ServicePack32bit.exe
-if %processor_architecture% == AMD64 start /d "%userprofile%\Desktop\Win7CompFiles" Win7ServicePack64bit.exe
+if %processor_architecture% == x86 start Win7CompFilesWin7ServicePack32bit.exe
+if %processor_architecture% == AMD64 start Win7CompFiles\Win7ServicePack64bit.exe
 
 pause
 
@@ -171,7 +165,7 @@ if %inf% == n (
 
 :enabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "%USERPROFILE%\Desktop\Win7CompFiles\Win7EnabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "Win7CompFiles\Win7EnabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Enabled INF Done!
@@ -187,7 +181,7 @@ goto 3
 
 :disabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "%USERPROFILE%\Desktop\Win7CompFiles\Win7DisabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "Win7CompFiles\Win7DisabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Disabled Inf Done!
@@ -205,10 +199,10 @@ goto 3
 :4
 cls
 
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\Win7\Computer_Sec"
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\Win7\Domain_Sec"
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\Win7\User_Sec"
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\Win7\BitLocker_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\Win7\Computer_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\Win7\Domain_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\Win7\User_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\Win7\BitLocker_Sec"
 cls
 echo SCM Baselines Done!
 echo.
@@ -225,7 +219,7 @@ goto menu
 :5
 cls
 
-secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "%USERPROFILE%\Desktop\Win7CompFiles\Win7DISAStig.inf"
+secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "Win7CompFiles\Win7DISAStig.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo DISA Stig Done!
@@ -285,7 +279,7 @@ echo.
 
 net user
 
-start /d "%userprofile%\Desktop\Win7CompFiles" users.txt
+start Win7CompFiles\users.txt
 
 pause
 
@@ -333,7 +327,7 @@ if %automode% == true (
 	cls
 	net user BroShirt /active:no
 	net user BroPants /active:no
-	for /f "skip=4 eol=;" %%a in (%userprofile%\Desktop\Win7CompFiles\users.txt) do net user %%a /active:yes
+	for /f "skip=4 eol=;" %%a in (Win7CompFiles\users.txt) do net user %%a /active:yes
 	goto 10
 )
 
@@ -418,7 +412,7 @@ goto deladmins
 :11
 if %automode% == true (
 	cls
-	for /f "skip=2 eol=;" %%a in (%userprofile%\Desktop\Win7CompFiles\users.txt) do net user %%a abc123ABC123@@
+	for /f "skip=2 eol=;" %%a in (Win7CompFiles\users.txt) do net user %%a abc123ABC123@@
 	goto 12
 )
 
@@ -441,7 +435,7 @@ goto 11
 :: Enable firewall + template
 :12
 cls
-netsh advfirewall import "%USERPROFILE%\Desktop\Win7CompFiles\Win7Firewall.wfw"
+netsh advfirewall import "Win7CompFiles\Win7Firewall.wfw"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 netsh advfirewall set allprofiles state on
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
@@ -534,10 +528,10 @@ cls
 choco install firefox ie11 malwarebytes mbsa microsoftsecurityessentials nmap --ignorechecksum --force
 pause
 
-start /d "%programfiles%\Malwarebytes\Anti-Malware" mbam.exe
-start /d "%programfiles%\Microsoft Baseline Security Analyzer 2" mbsa.exe
-start /d "%programfiles%\Microsoft Security Client" msseces.exe
-start /d "%programfiles%\Nmap" zenmap.exe
+start %programfiles%\Malwarebytes\Anti-Malware\mbam.exe
+start "%programfiles%\Microsoft Baseline Security Analyzer 2\mbsa.exe"
+start %programfiles%\Microsoft Security Client\msseces.exe
+start %programfiles%\Nmap\zenmap.exe
 
 if %automode% == true goto 17
 
@@ -864,8 +858,8 @@ goto menu
 :: SCM IE Baselines
 :21
 cls
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\IE11_Com_Sec"
-"%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Win7CompFiles\SCMBaselines\IE11_User_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\IE11_Com_Sec"
+"Win7CompFiles\SCMBaselines\LGPO.exe" /g "Win7CompFiles\SCMBaselines\IE11_User_Sec"
 
 if %automode% == true goto 22
 
@@ -912,7 +906,7 @@ cls
 takeown /f "%systemroot%\system32\drivers\etc"
 
 del "%systemroot%\system32\drivers\etc\hosts"
-copy "%userprofile%\Desktop\Win7CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
+copy "Win7CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
 
 if %automode% == true goto 25
 
@@ -1015,7 +1009,7 @@ echo.
 pause
 
 cls
-echo Past comp vulns (Make Peter or someone read them)
+echo Past comp vulns
 echo.
 pause
 
@@ -1027,7 +1021,7 @@ pause
 cls
 echo Official checklist
 echo.
-start /d "%userprofile%\Desktop\Win7CompFiles" OfficialWin7Checklist.pdf
+start Win7CompFiles\OfficialWin7Checklist.pdf
 pause
 
 if %automode% == true goto end
@@ -1047,7 +1041,7 @@ goto menu
 
 :: Open DankMMC
 :29
-start /d "%userprofile%\Desktop\Win7CompFiles" DankMMC.msc
+start Win7CompFiles\DankMMC.msc
 goto menu
 
 :: Change visual effects for performance
@@ -1057,10 +1051,10 @@ goto menu
 
 :: Open official checklist
 :31
-start /d "%userprofile%\Desktop\Win7CompFiles" OfficialWin7Checklist.pdf
+start Win7CompFiles\OfficialWin7Checklist.pdf
 goto menu
 
 :: Open master checklist
 :32
-start /d "%userprofile%\Desktop" OurGloriousChecklist2018_Windows.txt
+start OurGloriousChecklist2018_Windows.txt
 goto menu

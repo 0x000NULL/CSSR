@@ -48,12 +48,6 @@ choco feature enable -n allowGlobalConfirmation
 choco install git
 pause
 
-cd %userprofile%\Desktop
-git init
-git remote add origin https://github.com/Marduk28/CyberPatriot_Windows_Scripts.git
-git fetch origin master
-git checkout origin/master Server2008CompFiles OurGloriousChecklist2018_Windows.txt
-
 :: Ask if menu or automode
 :autochoice
 cls
@@ -74,7 +68,7 @@ if %autochoice% == a (
 )
 if %autochoice% == m (
 	set automode=false
-	start /d "%userprofile%\Desktop\Win7CompFiles" DankMMC.msc
+	start Win7CompFiles\DankMMC.msc
 	goto menu
 )
 else (
@@ -137,7 +131,7 @@ if %automode% == true (
 
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 4 /f
 
-	start /d "%userprofile%\Desktop" Server2008ServicePack32bit.exe
+	start Server2008ServicePack32bit.exe
 
 	goto 3
 )
@@ -148,7 +142,7 @@ echo.
 
 start wuapp.exe
 
-start /d "%userprofile%\Desktop\Server2008CompFiles" Server2008ServicePack32bit.exe
+start Server2008CompFiles\Server2008ServicePack32bit.exe
 
 pause
 
@@ -190,7 +184,7 @@ if %inf% == n (
 
 :enabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "%USERPROFILE%\Desktop\Server2008CompFiles\Server2008EnabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "Server2008CompFiles\Server2008EnabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Enabled INF Done!
@@ -206,7 +200,7 @@ goto 4
 
 :disabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "%USERPROFILE%\Desktop\Server2008CompFiles\Server2008DisabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "Server2008CompFiles\Server2008DisabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Disabled Inf Done!
@@ -224,19 +218,19 @@ goto 4
 :5
 cls
 
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\AD_Cert"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\DHCP_Server"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\DNS_Server"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Dom_Cont"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Dom_Sec"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\File_Server"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Hyper_V_Sec"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Mbr_Serv"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Net_Access"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Print_Serv"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Term_Serv"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\AD_Cert"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\DHCP_Server"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\DNS_Server"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Dom_Cont"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Dom_Sec"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\File_Server"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Hyper_V_Sec"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Mbr_Serv"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Net_Access"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Print_Serv"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Term_Serv"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
 cls
 echo SCM Baselines Done!
 echo.
@@ -253,7 +247,7 @@ goto menu
 :6
 cls
 
-secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "%USERPROFILE%\Desktop\Server2008CompFiles\Server2008DISAStig.inf"
+secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "Server2008CompFiles\Server2008DISAStig.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo DISA Stig Done!
@@ -313,7 +307,7 @@ echo.
 
 net user
 
-start /d "%userprofile%\Desktop\Server2008CompFiles" users.txt
+start Server2008CompFiles\users.txt
 
 pause
 
@@ -361,7 +355,7 @@ if %automode% == true (
 	cls
 	net user BroShirt /active:no
 	net user BroPants /active:no
-	for /f "skip=4 eol=;" %%a in (%userprofile%\Desktop\Server2008CompFiles\users.txt) do net user %%a /active:yes
+	for /f "skip=4 eol=;" %%a in (Server2008CompFiles\users.txt) do net user %%a /active:yes
 	goto 11
 )
 
@@ -446,7 +440,7 @@ goto deladmins
 :12
 if %automode% == true (
 	cls
-	for /f "skip=2 eol=;" %%a in (%userprofile%\Desktop\Server2008CompFiles\users.txt) do net user %%a abc123ABC123@@
+	for /f "skip=2 eol=;" %%a in (Server2008CompFiles\users.txt) do net user %%a abc123ABC123@@
 	goto 13
 )
 
@@ -469,7 +463,7 @@ goto 12
 :: Enable firewall + template
 :13
 cls
-netsh advfirewall import "%USERPROFILE%\Desktop\Server2008CompFiles\Server2008Firewall.wfw"
+netsh advfirewall import "Server2008CompFiles\Server2008Firewall.wfw"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 netsh advfirewall set allprofiles state on
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
@@ -562,10 +556,10 @@ cls
 choco install firefox ie9 malwarebytes mbsa microsoftsecurityessentials nmap --ignorechecksum --force
 pause
 
-start /d "%programfiles%\Malwarebytes\Anti-Malware" mbam.exe
-start /d "%programfiles%\Microsoft Baseline Security Analyzer 2" mbsa.exe
-start /d "%programfiles%\Microsoft Security Client" msseces.exe
-start /d "%programfiles%\Nmap" zenmap.exe
+start %programfiles%\Malwarebytes\Anti-Malware\mbam.exe
+start "%programfiles%\Microsoft Baseline Security Analyzer 2\mbsa.exe"
+start %programfiles%\Microsoft Security Client\msseces.exe
+start %programfiles%\Nmap\zenmap.exe
 
 if %automode% == true goto 18
 
@@ -892,8 +886,8 @@ goto menu
 :: SCM IE Baselines
 :22
 cls
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\IE9_Com_Sec"
-"%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\LGPO.exe" /g "%USERPROFILE%\Desktop\Server2008CompFiles\SCMBaselines\IE9_User_Sec"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\IE9_Com_Sec"
+"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\IE9_User_Sec"
 
 if %automode% == true goto 23
 
@@ -940,7 +934,7 @@ cls
 takeown /f "%systemroot%\system32\drivers\etc"
 
 del "%systemroot%\system32\drivers\etc\hosts"
-copy "%userprofile%\Desktop\Server2008CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
+copy "Server2008CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
 
 if %automode% == true goto 26
 
@@ -1042,7 +1036,7 @@ echo.
 pause
 
 cls
-echo Past comp vulns (Make Peter or someone read them)
+echo Past comp vulns 
 echo.
 pause
 
@@ -1054,7 +1048,7 @@ pause
 cls
 echo Official checklist
 echo.
-start /d "%userprofile%\Desktop\Win7CompFiles" OfficialWin7Checklist.pdf
+start Win7CompFiles\OfficialWin7Checklist.pdf
 pause
 
 if %automode% == true goto end
@@ -1074,7 +1068,7 @@ goto menu
 
 :: Open DankMMC
 :30
-start /d "%userprofile%\Desktop\Server2008CompFiles" DankMMC.msc
+start Server2008CompFiles\DankMMC.msc
 goto menu
 
 :: Change visual effects for performance
@@ -1084,10 +1078,10 @@ goto menu
 
 :: Open official checklist
 :32
-start /d "%userprofile%\Desktop\Server2008CompFiles" OfficialServer2008Checklist.docx
+start Server2008CompFiles\OfficialServer2008Checklist.docx
 goto menu
 
 :: Open master checklist
 :33
-start /d "%userprofile%\Desktop" OurGloriousChecklist2018_Windows.txt
+start OurGloriousChecklist2018_Windows.txt
 goto menu
