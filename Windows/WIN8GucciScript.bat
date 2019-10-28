@@ -49,12 +49,6 @@ choco feature enable -n allowGlobalConfirmation
 choco install git
 pause
 
-cd 
-git init
-git remote add origin https://github.com/Marduk28/CyberPatriot_Windows_Scripts.git
-git fetch origin master
-git checkout origin/master Win8CompFiles OurGloriousChecklist2018_Windows.txt
-
 :: Ask if menu or automode
 :autochoice
 cls
