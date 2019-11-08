@@ -19,7 +19,7 @@
 2. Extract the .zip and open the folder then open 'Windows'
 3. Open powershell as an administrator and run `PowerShell.exe -ExecutionPolicy UnRestricted powershell` to get an unrestricted powershell session.
 4. Run `./RUNME.bat`
-5. Run the file ReclaimWindows10.ps1 in the same session iwth the command `start reclainWindows10.ps1` BUT know that it could break/make your image. Use carefully and read the script before hand!
+5. Run the file ReclaimWindows10.ps1 in the same session with the command `start reclainWindows10.ps1` BUT know that it could break/make your image. Use carefully and read the script before hand!
 6. Run the file `win10.ps1` in the folder `Wind10Server16-19` AFTER reading the included readme and know it that this script can break your image.
 7. Browse the lists folder and work on compleating the image. Dont forget to read the read me!!
 	
