@@ -52,7 +52,7 @@ include
 category
 logout
 comment
-report
+https://forum.eslgaming.com/group/6999-deck-heroes-hack-apk-ios-no-survey-gems-jewels-and-coins
 tag
 member
 add
