@@ -9,10 +9,60 @@ permissions:
   contents: read
 
 jobs:
-  tree:
-    name: Tree hygiene
+  lint:
+    name: Lint and tree hygiene
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
-      - name: Show repository layout
-        run: git ls-files | cut -d/ -f1 | sort | uniq -c
+      - name: shellcheck (audit and tests)
+        run: shellcheck audit/linux/cssr-audit.sh tests/linux-readonly.sh
+      - name: Legacy shell scripts parse
+        run: git ls-files -z 'legacy/*.sh' | xargs -0 -n1 bash -n
+      - name: Legacy batch files have a label for every goto
+        run: python3 tests/check_bat_labels.py
+      - name: No bundled binaries, documents, large files or known secrets
+        run: python3 tests/check_tree.py
+
+  linux-audit:
+    name: Linux audit (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run the audit read-only (exit 0 or 1 is fine; runners aren't hardened)
+        run: sudo tests/linux-readonly.sh
+      - name: Docs check table is current
+        run: audit/linux/cssr-audit.sh --list-checks --markdown | python3 tests/check_docs_tables.py linux
+
+  windows-audit:
+    name: Windows audit (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025]
+    steps:
+      - uses: actions/checkout@v7
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) {
+            Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+          }
+          $r = Invoke-ScriptAnalyzer -Path audit/windows/CSSR-Audit.ps1 -Settings audit/windows/PSScriptAnalyzerSettings.psd1
+          $r | Format-Table -AutoSize Line, RuleName, Message -Wrap
+          if ($r) { exit 1 }
+      - name: Run the audit read-only under Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          $PSVersionTable.PSVersion.ToString()
+          powershell -NoProfile -ExecutionPolicy Bypass -File tests\windows-readonly.ps1
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Docs check table is current
+        shell: powershell
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File audit\windows\CSSR-Audit.ps1 -ListChecks -Markdown | python tests\check_docs_tables.py windows
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }

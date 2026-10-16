@@ -39,9 +39,9 @@ These changes make the scripts safer and keep the remaining paths working:
 - **Removed a backdoor.** The Gucci scripts replaced `sethc.exe` with `cmd.exe` (the "sticky
   keys" trick), which gives anyone at the login screen a SYSTEM shell. That block is gone. The
   new audit script flags it if you find it on an image.
-- **No shared passwords.** The Gucci scripts set every user to `abc123ABC123@@`, and the
-  Wellesley `Main.bat` set every user to `CyberPatriot1`. Both now ask for a password once
-  per run.
+- **No shared passwords.** The Gucci scripts and the Wellesley `Main.bat` each set every user
+  to the same hard-coded password, published right in the script. Both now ask for a
+  password once per run.
 - **Paths fixed.** The Gucci scripts now find their `*CompFiles` folder even when started from
   another folder or after they `cd` to the drive root. `RUNME.bat` jumped to labels that didn't
   exist and called `clear`, which isn't a cmd command. Both are fixed.
