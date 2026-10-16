@@ -1,4 +1,0 @@
-demo/ojspext/events/globals.jsa
-globals.jsa
-globals.jsa
-.jsa

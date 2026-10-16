@@ -1,3 +1,0 @@
-#!/bin/bash
-mkdir -p /opt/docker 2>/dev/null
-git clone https://github.com/dockersecuritytools/batten.git /opt/docker/batten

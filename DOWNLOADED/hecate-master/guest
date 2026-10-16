@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Disables guest account
-sudo sh -c 'printf "[Seat:*]\nallow-guest=false\n" >/etc/lightdm/lightdm.conf.d/50-no-guest.conf'

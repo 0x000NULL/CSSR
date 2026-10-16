@@ -1,6 +1,0 @@
-Civil Air Patrol = cap
-Air Force JROTC = afjrotc
-Marine Corps JROTC = mcjrotc
-Army JROTC = ajrotc
-Navy JROTC = njrotc
-Naval Sea Cadet Corps = nscc

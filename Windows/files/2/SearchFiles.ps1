@@ -1,1 +1,0 @@
-﻿Get-ChildItem -Path C:\ -Include *.jpg,*.png,*.jpeg,*.avi,*.mp4,*.mp3,*.wav -Exclude *.dll,*.doc,*.docx,  -File -Recurse -ErrorAction SilentlyContinue
