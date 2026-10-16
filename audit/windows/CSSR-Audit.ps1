@@ -189,6 +189,12 @@ function Get-InstalledSoftware {
     }
 }
 
+function Format-Value {
+    param([object]$Value)
+    if ($null -eq $Value) { return 'unset' }
+    return "$Value"
+}
+
 function Join-Short {
     param([object[]]$Items, [int]$Max = 15)
     $list = @($Items)
@@ -327,9 +333,9 @@ Register-Check 'WIN-SEC-02' 'Security options' 'UAC is on and prompts administra
     $consent = Get-RegValue $key ConsentPromptBehaviorAdmin
     $secure = Get-RegValue $key PromptOnSecureDesktop
     $problems = @()
-    if ($lua -ne 1) { $problems += "EnableLUA=$lua" }
-    if ($consent -notin 1, 2) { $problems += "ConsentPromptBehaviorAdmin=$consent" }
-    if ($secure -ne 1) { $problems += "PromptOnSecureDesktop=$secure" }
+    if ($lua -ne 1) { $problems += "EnableLUA=$(Format-Value $lua)" }
+    if ($consent -notin 1, 2) { $problems += "ConsentPromptBehaviorAdmin=$(Format-Value $consent)" }
+    if ($secure -ne 1) { $problems += "PromptOnSecureDesktop=$(Format-Value $secure)" }
     if ($problems.Count) { Fail "UAC is weakened: $($problems -join ', ')" "reg add $($key -replace 'HKLM:', 'HKLM') /v EnableLUA /t REG_DWORD /d 1 /f  (likewise ConsentPromptBehaviorAdmin=2, PromptOnSecureDesktop=1; reboot)" }
     else { Pass 'UAC is on and prompts on the secure desktop.' }
 }
@@ -347,8 +353,8 @@ Register-Check 'WIN-SEC-04' 'Security options' 'No LM hashes are stored and only
     $nolm = Get-RegValue $key NoLMHash
     $level = Get-RegValue $key LmCompatibilityLevel
     $problems = @()
-    if ($nolm -ne 1) { $problems += "NoLMHash=$nolm" }
-    if ($null -eq $level -or $level -lt 5) { $problems += "LmCompatibilityLevel=$level" }
+    if ($nolm -ne 1) { $problems += "NoLMHash=$(Format-Value $nolm)" }
+    if ($null -eq $level -or $level -lt 5) { $problems += "LmCompatibilityLevel=$(Format-Value $level)" }
     if ($problems.Count) { Warn "Older authentication is allowed: $($problems -join ', ')" 'reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v LmCompatibilityLevel /t REG_DWORD /d 5 /f  (and NoLMHash=1)' }
     else { Pass 'LM hashes are off and only NTLMv2 is used.' }
 }
@@ -363,7 +369,7 @@ Register-Check 'WIN-SEC-05' 'Security options' "Logon screen hides the last user
 Register-Check 'WIN-SEC-06' 'Security options' 'AutoRun is disabled for all drives' $false {
     $v = Get-RegValue 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer' NoDriveTypeAutoRun
     if ($v -eq 255) { Pass 'AutoRun is disabled for all drive types.' }
-    else { Warn "NoDriveTypeAutoRun is $(if ($null -eq $v) { 'unset' } else { $v })." 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v NoDriveTypeAutoRun /t REG_DWORD /d 255 /f' }
+    else { Warn "NoDriveTypeAutoRun is $(Format-Value $v)." 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v NoDriveTypeAutoRun /t REG_DWORD /d 255 /f' }
 }
 
 # --- Network ---
@@ -456,9 +462,10 @@ Register-Check 'WIN-SW-01' 'Software' 'No hacking tools, P2P or remote-access pr
 }
 Register-Check 'WIN-FIL-01' 'Files' 'No media files in user folders' $false {
     $root = Join-Path $env:SystemDrive 'Users'
-    $patterns = $MediaExtensions | ForEach-Object { "*.$_" }
-    $files = @(Get-ChildItem -LiteralPath $root -Recurse -File -Force -Include $patterns -ErrorAction SilentlyContinue |
-            Where-Object { $_.FullName -notmatch '\\AppData\\Local\\(Microsoft|Packages)\\' } | ForEach-Object FullName)
+    # -Include is ignored together with -LiteralPath in Windows PowerShell 5.1, so filter here.
+    $files = @(Get-ChildItem -LiteralPath $root -Recurse -File -Force -ErrorAction SilentlyContinue |
+            Where-Object { ($MediaExtensions -contains $_.Extension.TrimStart('.').ToLowerInvariant()) -and
+                ($_.FullName -notmatch '\\AppData\\Local\\(Microsoft|Packages)\\') } | ForEach-Object FullName)
     if ($files.Count) { Warn "$($files.Count) media files under ${root}: $(Join-Short $files 10)" "Answer forensics questions first, then delete what the README doesn't allow: Remove-Item -LiteralPath 'PATH'" }
     else { Pass "No media files under $root." }
 }

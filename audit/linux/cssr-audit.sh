@@ -8,7 +8,7 @@
 # Targets Ubuntu 22.04/24.04; Debian 12 and Linux Mint work on a best-effort basis.
 # Part of CSSR (https://github.com/0x000NULL/CSSR), MIT License.
 
-# shellcheck disable=SC2329,SC1091  # checks are called via the CHECKS registry; os-release is sourced at runtime
+# shellcheck disable=SC2317,SC2329,SC1091  # checks are called via the CHECKS registry; os-release is sourced at runtime
 set -u
 
 CSSR_AUDIT_VERSION="2026.1"
