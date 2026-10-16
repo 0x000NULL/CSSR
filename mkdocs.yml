@@ -1,0 +1,65 @@
+site_name: CSSR
+site_description: Computer Security Scripts and Resources - CyberPatriot guides, check-only audit scripts and links.
+site_url: https://0x000null.github.io/CSSR/
+repo_url: https://github.com/0x000NULL/CSSR
+repo_name: 0x000NULL/CSSR
+edit_uri: edit/master/docs/
+copyright: Guides &copy; 2018&ndash;2026 Ethan Aldrich, CC BY 4.0 &middot; Scripts MIT
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - How a round works: getting-started/competition-overview.md
+      - Virtual machines: getting-started/virtual-machines.md
+      - Reading the README: getting-started/reading-the-readme.md
+  - Guides:
+      - Security basics: guides/security-basics.md
+      - Users and passwords: guides/users-and-passwords.md
+      - Services and software: guides/services-and-software.md
+      - Windows hardening checklist: guides/windows-hardening.md
+      - Linux hardening checklist: guides/linux-hardening.md
+      - Forensics questions: guides/forensics-questions.md
+      - Networking and Cisco: guides/networking-and-cisco.md
+  - Practice: practice.md
+  - Audit scripts: audit-scripts.md
+  - Resources: resources.md
+  - Legacy toolkit: legacy.md
+  - Credits: credits.md
