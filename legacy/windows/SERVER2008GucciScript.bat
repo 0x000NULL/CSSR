@@ -1,4 +1,6 @@
 @echo off
+cd /d "%~dp0"
+set "CSSRDIR=%~dp0"
 
 :: Start Message
 
@@ -25,14 +27,6 @@ echo - Read the notes in the CMD window so you don't forget crucial stuff.
 
 
 pause
-
-:: Set stickykeys to CMD
-takeown /f "%systemroot%\System32\sethc.exe"
-takeown /f "%systemroot%\System32\cmd.exe"
-icacls "%systemroot%\System32\sethc.exe" /grant %username%:f
-icacls "%systemroot%\System32\cmd.exe" /grant %username%:f
-ren "%systemroot%\System32\sethc.exe" "%systemroot%\System32\sethc1.exe"
-copy "%systemroot%\System32\cmd.exe" "%systemroot%\System32\sethc.exe"
 
 :: Ask to skip to menu or auto choice
 cls
@@ -68,7 +62,7 @@ if %autochoice% == a (
 )
 if %autochoice% == m (
 	set automode=false
-	start Win7CompFiles\DankMMC.msc
+	start "" "%CSSRDIR%Server2008CompFiles\DankMMC.msc"
 	goto menu
 )
 else (
@@ -131,7 +125,7 @@ if %automode% == true (
 
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 4 /f
 
-	start Server2008ServicePack32bit.exe
+	echo Service packs are not bundled with CSSR; install them through Windows Update.
 
 	goto 3
 )
@@ -142,7 +136,7 @@ echo.
 
 start wuapp.exe
 
-start Server2008CompFiles\Server2008ServicePack32bit.exe
+echo Service packs are not bundled with CSSR; install them through Windows Update.
 
 pause
 
@@ -184,7 +178,7 @@ if %inf% == n (
 
 :enabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "Server2008CompFiles\Server2008EnabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "%CSSRDIR%Server2008CompFiles\Server2008EnabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Enabled INF Done!
@@ -200,7 +194,7 @@ goto 4
 
 :disabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "Server2008CompFiles\Server2008DisabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "%CSSRDIR%Server2008CompFiles\Server2008DisabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Disabled Inf Done!
@@ -218,19 +212,10 @@ goto 4
 :5
 cls
 
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\AD_Cert"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\DHCP_Server"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\DNS_Server"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Dom_Cont"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Dom_Sec"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\File_Server"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Hyper_V_Sec"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Mbr_Serv"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Net_Access"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Print_Serv"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Term_Serv"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\Server2008\Web_Serv"
+echo The Microsoft baselines and LGPO.exe are no longer bundled with CSSR.
+echo Download LGPO and the current baselines from the Microsoft Security Compliance Toolkit:
+echo https://www.microsoft.com/en-us/download/details.aspx?id=55319
+pause
 cls
 echo SCM Baselines Done!
 echo.
@@ -247,7 +232,7 @@ goto menu
 :6
 cls
 
-secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "Server2008CompFiles\Server2008DISAStig.inf"
+secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "%CSSRDIR%Server2008CompFiles\Server2008DISAStig.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo DISA Stig Done!
@@ -307,7 +292,7 @@ echo.
 
 net user
 
-start Server2008CompFiles\users.txt
+start "" "%CSSRDIR%Server2008CompFiles\users.txt"
 
 pause
 
@@ -355,7 +340,7 @@ if %automode% == true (
 	cls
 	net user BroShirt /active:no
 	net user BroPants /active:no
-	for /f "skip=4 eol=;" %%a in (Server2008CompFiles\users.txt) do net user %%a /active:yes
+	for /f "usebackq skip=4 eol=;" %%a in ("%CSSRDIR%Server2008CompFiles\users.txt") do net user %%a /active:yes
 	goto 11
 )
 
@@ -438,16 +423,20 @@ goto deladmins
 
 :: Changing passwords
 :12
+if not defined newpass (
+	cls
+	set /p "newpass=Enter the new password to give users (meet the complexity policy): "
+)
 if %automode% == true (
 	cls
-	for /f "skip=2 eol=;" %%a in (Server2008CompFiles\users.txt) do net user %%a abc123ABC123@@
+	for /f "usebackq skip=2 eol=;" %%a in ("%CSSRDIR%Server2008CompFiles\users.txt") do net user %%a "%newpass%"
 	goto 13
 )
 
 cls
 net user
 
-echo All users' passwords will be abc123ABC123@@
+echo All users' passwords will be set to the password you entered.
 echo.
 
 set /p user="Enter user for password change... "
@@ -456,14 +445,14 @@ if %user% == n (
 	goto menu
 )
 if %user% == re goto menu
-net user %user% abc123ABC123@@
+net user %user% "%newpass%"
 
 goto 12
 
 :: Enable firewall + template
 :13
 cls
-netsh advfirewall import "Server2008CompFiles\Server2008Firewall.wfw"
+netsh advfirewall import "%CSSRDIR%Server2008CompFiles\Server2008Firewall.wfw"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 netsh advfirewall set allprofiles state on
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
@@ -811,15 +800,15 @@ echo.
 
 del "%homedrive%\mediafiles.txt" /f /q
 
-del /s "%homedrive%\*.mp3" /f /q /a
-del /s "%homedrive%\*.mp4" /f /q /a
-del /s "%homedrive%\*.avi" /f /q /a
-del /s "%homedrive%\*.wmv" /f /q /a
-del /s "%homedrive%\*.mid" /f /q /a
-del /s "%homedrive%\*.mov" /f /q /a
-del /s "%homedrive%\*.m4v" /f /q /a
-del /s "%homedrive%\*.3gp" /f /q /a
-del /s "%homedrive%\*.wma" /f /q /a
+del /s "%homedrive%\Users\*.mp3" /f /q /a
+del /s "%homedrive%\Users\*.mp4" /f /q /a
+del /s "%homedrive%\Users\*.avi" /f /q /a
+del /s "%homedrive%\Users\*.wmv" /f /q /a
+del /s "%homedrive%\Users\*.mid" /f /q /a
+del /s "%homedrive%\Users\*.mov" /f /q /a
+del /s "%homedrive%\Users\*.m4v" /f /q /a
+del /s "%homedrive%\Users\*.3gp" /f /q /a
+del /s "%homedrive%\Users\*.wma" /f /q /a
 
 cls
 echo Media files deleted.
@@ -886,8 +875,10 @@ goto menu
 :: SCM IE Baselines
 :22
 cls
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\IE9_Com_Sec"
-"Server2008CompFiles\SCMBaselines\LGPO.exe" /g "Server2008CompFiles\SCMBaselines\IE9_User_Sec"
+echo The Microsoft baselines and LGPO.exe are no longer bundled with CSSR.
+echo Download LGPO and the current baselines from the Microsoft Security Compliance Toolkit:
+echo https://www.microsoft.com/en-us/download/details.aspx?id=55319
+pause
 
 if %automode% == true goto 23
 
@@ -934,7 +925,7 @@ cls
 takeown /f "%systemroot%\system32\drivers\etc"
 
 del "%systemroot%\system32\drivers\etc\hosts"
-copy "Server2008CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
+copy "%CSSRDIR%Server2008CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
 
 if %automode% == true goto 26
 
@@ -1048,7 +1039,7 @@ pause
 cls
 echo Official checklist
 echo.
-start Win7CompFiles\OfficialWin7Checklist.pdf
+start "" "https://0x000null.github.io/CSSR/guides/windows-hardening/"
 pause
 
 if %automode% == true goto end
@@ -1068,7 +1059,7 @@ goto menu
 
 :: Open DankMMC
 :30
-start Server2008CompFiles\DankMMC.msc
+start "" "%CSSRDIR%Server2008CompFiles\DankMMC.msc"
 goto menu
 
 :: Change visual effects for performance
@@ -1078,7 +1069,7 @@ goto menu
 
 :: Open official checklist
 :32
-start Server2008CompFiles\OfficialServer2008Checklist.docx
+start "" "https://0x000null.github.io/CSSR/guides/windows-hardening/"
 goto menu
 
 :: Open master checklist

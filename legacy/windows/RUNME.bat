@@ -1,137 +1,76 @@
 @echo off
 title NotaVirus Windows Script
+rem CSSR legacy Windows runner (2018-2019). Not maintained: read legacy\README.md first,
+rem and use audit\windows\CSSR-Audit.ps1 on current images instead.
+rem Run from an elevated (Administrator) command prompt.
+cd /d "%~dp0"
 echo Welcome to Ethan's Script!
-cd files
 pause
-clear
-Echo Running scripts
-cd 2
-start CyberPatriotPowerShellScript.ps1
-cd ..
-pause
-cd 3
-start WindowsStigs.bat
-pause 
-start WidnowsSecurity.ps1
-pause
-cd ..
-cd DOFIRST
-pause
-start FirstRun.bat
-pause
-start Main.bat
-pause
-cd ..
-cd scripts
+cls
 
-echo SERVER2008?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto SERVER2008GucciScript.bat
-IF %M%==n goto skip19
-:WIN7GucciScript.bat
-start WIN7GucciScript.bat
-:skip19
-pause 
-clear
+echo Running the DOFIRST scripts (Wellesley CyberPatriotScripts)...
+pause
+start "" "%~dp0files\DOFIRST\FirstRun.bat"
+pause
+start "" "%~dp0files\DOFIRST\Main.bat"
+pause
+cls
 
-echo SERVER2016?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto SERVER2016GucciScript.bat
-IF %M%==n goto skip20
-:SERVER2016GucciScript.bat
-start SERVER2016GucciScript.bat
-:skip20
-pause 
-clear
+echo SERVER 2008?
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" start "" "%~dp0SERVER2008GucciScript.bat"
+pause
+cls
+
+echo SERVER 2016?
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" start "" "%~dp0SERVER2016GucciScript.bat"
+pause
+cls
 
 echo WIN 7?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto WIN7GucciScript.bat
-IF %M%==n goto skip21
-:WIN7GucciScript.bat
-start WIN7GucciScript.bat
-:skip21
-pause 
-clear
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" start "" "%~dp0WIN7GucciScript.bat"
+pause
+cls
 
 echo WIN 8?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto WIN8GucciScript.bat
-IF %M%==n goto skip22
-:WIN8GucciScript.bat
-start WIN8GucciScript.bat
-:skip22
-pause 
-clear
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" start "" "%~dp0WIN8GucciScript.bat"
+pause
+cls
 
 echo WIN 10?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto WIN10GucciScript.bat
-IF %M%==n goto skip23
-:WIN10GucciScript.bat
-start WIN10GucciScript.bat
-:skip23
-pause 
-clear
-
-echo block-telementry?
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto block-telementry
-IF %M%==n goto skip1
-:block-telementry
-start files/scripts/block-telementry.ps1
-:skip1
-pause 
-clear
-
-echo disable services? This will diable many services. Please editthe file.
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto disable-services
-IF %M%==n goto skip2
-:disable-services
-notepad files/scripts/disable-services.ps1
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" start "" "%~dp0WIN10GucciScript.bat"
 pause
-start files/scripts/disable-services.ps1
-:skip2
-pause 
-clear
+cls
 
-
-cd WindowsFirewall
-cd tools 
-
-echo Open Firewall tools? 
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto FirewallToolsWithGui
-IF %M%==n goto skip10
-:FirewallToolsWithGui
-start FirewallToolsWithGui.ps1
-:skip10
-pause 
-clear
-
-echo run misc script? 
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto all
-IF %M%==n goto skip11
-:all
-start all.bat
-:skip11
-pause 
-clear
-
-echo opening gui!
-start hardentools.exe
+echo Block telemetry?
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0files\scripts\block-telemetry.ps1"
 pause
-clear
+cls
 
-echo run audits?  These will allow you to check for compleatness. each will open in a new window.
-SET /P M=Type y or n then press ENTER:
-IF %M%==y goto audits
-IF %M%==n goto end
-:audits
-start ASD1709HardeningComplianceCheck.ps1
-start ASDOffice2016HardeningComplianceCheck.ps1
-:end
-pause 
-clear
+echo Disable services? This will disable many services. Edit the file first: it opens in Notepad.
+set "M="
+set /p M=Type y or n then press ENTER:
+if /i "%M%"=="y" (
+	notepad "%~dp0files\scripts\disable-services.ps1"
+	pause
+	powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0files\scripts\disable-services.ps1"
+)
+pause
+cls
+
+echo hardentools is no longer bundled. If you want it, download it from
+echo https://github.com/securitywithoutborders/hardentools/releases
+echo.
+echo FINISHED. Check users, the README and the forensics questions!
+pause

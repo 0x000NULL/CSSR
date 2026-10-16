@@ -1,4 +1,6 @@
 @echo off
+cd /d "%~dp0"
+set "CSSRDIR=%~dp0"
 
 :: Start Message
 
@@ -26,14 +28,6 @@ echo - Read the notes in the CMD window so you don't forget crucial stuff.
 echo.
 
 pause
-
-:: Set stickykeys to CMD
-takeown /f "%systemroot%\System32\sethc.exe"
-takeown /f "%systemroot%\System32\cmd.exe"
-icacls "%systemroot%\System32\sethc.exe" /grant %username%:f
-icacls "%systemroot%\System32\cmd.exe" /grant %username%:f
-ren "%systemroot%\System32\sethc.exe" "%systemroot%\System32\sethc1.exe"
-copy "%systemroot%\System32\cmd.exe" "%systemroot%\System32\sethc.exe"
 
 :: Ask to skip to menu or auto choice
 cls
@@ -159,7 +153,7 @@ if %inf% == n (
 
 :enabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "Win8CompFiles\Win8EnabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase1.db" /cfg "%CSSRDIR%Win8CompFiles\Win8EnabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Enabled INF Done!
@@ -175,7 +169,7 @@ goto 3
 
 :disabledinf
 cls
-secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "Win8CompFiles\Win8DisabledInf.inf"
+secedit /configure /db "%systemroot%\dankdatabase2.db" /cfg "%CSSRDIR%Win8CompFiles\Win8DisabledInf.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo Disabled Inf Done!
@@ -193,10 +187,10 @@ goto 3
 :4
 cls
 
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\Win8\Computer_Sec"
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\Win8\Domain_Sec"
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\Win8\User_Sec"
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\Win8\BitLocker_Sec"
+echo The Microsoft baselines and LGPO.exe are no longer bundled with CSSR.
+echo Download LGPO and the current baselines from the Microsoft Security Compliance Toolkit:
+echo https://www.microsoft.com/en-us/download/details.aspx?id=55319
+pause
 cls
 echo SCM Baselines Done!
 echo.
@@ -213,7 +207,7 @@ goto menu
 :5
 cls
 
-secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "Win8CompFiles\Win8DISAStig.inf"
+secedit /configure /db "%systemroot%\dankdatabase3.db" /cfg "%CSSRDIR%Win8CompFiles\Win8DISAStig.inf"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 cls
 echo DISA Stig Done!
@@ -321,7 +315,7 @@ if %automode% == true (
 	cls
 	net user BroShirt /active:no
 	net user BroPants /active:no
-	for /f "skip=4 eol=;" %%a in (Win8CompFiles\users.txt) do net user %%a /active:yes
+	for /f "usebackq skip=4 eol=;" %%a in ("%CSSRDIR%Win8CompFiles\users.txt") do net user %%a /active:yes
 	goto 10
 )
 
@@ -404,16 +398,20 @@ goto deladmins
 
 :: Changing passwords
 :11
+if not defined newpass (
+	cls
+	set /p "newpass=Enter the new password to give users (meet the complexity policy): "
+)
 if %automode% == true (
 	cls
-	for /f "skip=2 eol=;" %%a in (Win8CompFiles\users.txt) do net user %%a abc123ABC123@@
+	for /f "usebackq skip=2 eol=;" %%a in ("%CSSRDIR%Win8CompFiles\users.txt") do net user %%a "%newpass%"
 	goto 12
 )
 
 cls
 net user
 
-echo All users' passwords will be abc123ABC123@@
+echo All users' passwords will be set to the password you entered.
 echo.
 
 set /p user="Enter user for password change... "
@@ -422,14 +420,14 @@ if %user% == n (
 	goto menu
 )
 if %user% == re goto menu
-net user %user% abc123ABC123@@
+net user %user% "%newpass%"
 
 goto 11
 
 :: Enable firewall + template
 :12
 cls
-netsh advfirewall import "\Win8CompFiles\Win8Firewall.wfw"
+netsh advfirewall import "%CSSRDIR%Win8CompFiles\Win8Firewall.wfw"
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
 netsh advfirewall set allprofiles state on
 if %errorlevel% == 1 echo. && echo Uh oh. Error happened.
@@ -777,15 +775,15 @@ echo.
 
 del "%homedrive%\mediafiles.txt" /f /q
 
-del /s "%homedrive%\*.mp3" /f /q /a
-del /s "%homedrive%\*.mp4" /f /q /a
-del /s "%homedrive%\*.avi" /f /q /a
-del /s "%homedrive%\*.wmv" /f /q /a
-del /s "%homedrive%\*.mid" /f /q /a
-del /s "%homedrive%\*.mov" /f /q /a
-del /s "%homedrive%\*.m4v" /f /q /a
-del /s "%homedrive%\*.3gp" /f /q /a
-del /s "%homedrive%\*.wma" /f /q /a
+del /s "%homedrive%\Users\*.mp3" /f /q /a
+del /s "%homedrive%\Users\*.mp4" /f /q /a
+del /s "%homedrive%\Users\*.avi" /f /q /a
+del /s "%homedrive%\Users\*.wmv" /f /q /a
+del /s "%homedrive%\Users\*.mid" /f /q /a
+del /s "%homedrive%\Users\*.mov" /f /q /a
+del /s "%homedrive%\Users\*.m4v" /f /q /a
+del /s "%homedrive%\Users\*.3gp" /f /q /a
+del /s "%homedrive%\Users\*.wma" /f /q /a
 
 cls
 echo Media files deleted.
@@ -852,8 +850,10 @@ goto menu
 :: SCM IE Baselines
 :21
 cls
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\IE11_Com_Sec"
-"Win8CompFiles\SCMBaselines\LGPO.exe" /g "Win8CompFiles\SCMBaselines\IE11_User_Sec"
+echo The Microsoft baselines and LGPO.exe are no longer bundled with CSSR.
+echo Download LGPO and the current baselines from the Microsoft Security Compliance Toolkit:
+echo https://www.microsoft.com/en-us/download/details.aspx?id=55319
+pause
 
 if %automode% == true goto 22
 
@@ -900,7 +900,7 @@ cls
 takeown /f "%systemroot%\system32\drivers\etc"
 
 del "%systemroot%\system32\drivers\etc\hosts"
-copy "Win8CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
+copy "%CSSRDIR%Win8CompFiles\hosts" "%systemroot%\system32\drivers\etc\hosts"
 
 if %automode% == true goto 25
 

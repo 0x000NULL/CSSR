@@ -306,10 +306,11 @@ echo Renamed Administrator to "Dude" and Guest to "LameDude"
 goto:EOF
 
 :passwords
-echo Making passwords expire, and setting password to: CyberPatriot1 IMPORTANT
+if not defined newpass set /p "newpass=Enter the new password to give every user in resources\users.txt: "
+echo Making passwords expire, and setting every listed user's password to the one you entered. IMPORTANT
 echo Please change the main account password after script
 for /f "tokens=*" %%a in ('type %path%resources\users.txt') do (
-	net user "%%a" "CyberPatriot1"
+	net user "%%a" "%newpass%"
 	C:\Windows\System32\wbem\wmic UserAccount where Name="%%a" set PasswordExpires=True
 )
 echo Made passwords expire, and set passwords

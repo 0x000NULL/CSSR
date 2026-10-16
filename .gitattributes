@@ -1,0 +1,3 @@
+# Windows cmd.exe can mis-parse labels and goto in batch files with LF-only line endings.
+*.bat text eol=crlf
+*.cmd text eol=crlf
