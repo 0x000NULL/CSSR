@@ -517,7 +517,7 @@ chk_lockout() {
     deny=$(pam_arg common-auth pam_tally2.so deny)
   else
     fail "No account lockout: pam_faillock is not in /etc/pam.d/common-auth." \
-      "Add 'auth required pam_faillock.so preauth' and 'auth [default=die] pam_faillock.so authfail' around pam_unix, 'account required pam_faillock.so' to common-account, and set deny = ${LOCKOUT_DENY_MAX}, unlock_time = 900 in /etc/security/faillock.conf"
+      "Enable pam_faillock with pam-auth-update (steps: https://0x000null.github.io/CSSR/guides/linux-hardening/#password-policy), then set deny = ${LOCKOUT_DENY_MAX} and unlock_time = 900 in /etc/security/faillock.conf"
     return
   fi
   if is_int "$deny" && [ "$deny" -ge 1 ] && [ "$deny" -le "$LOCKOUT_DENY_MAX" ]; then

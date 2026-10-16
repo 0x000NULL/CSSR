@@ -66,3 +66,14 @@ jobs:
         run: |
           powershell -NoProfile -ExecutionPolicy Bypass -File audit\windows\CSSR-Audit.ps1 -ListChecks -Markdown | python tests\check_docs_tables.py windows
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
+
+  docs:
+    name: Docs build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-docs.txt
+      - run: mkdocs build --strict

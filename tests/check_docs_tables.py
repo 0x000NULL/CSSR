@@ -21,7 +21,9 @@ def main() -> int:
         print(__doc__, file=sys.stderr)
         return 2
     name = args[0].upper()
-    generated = "\n".join(line.rstrip() for line in sys.stdin.read().strip().splitlines())
+    # Windows PowerShell 5.1 prefixes piped output with a UTF-8 byte-order mark.
+    raw = sys.stdin.buffer.read().decode("utf-8-sig", errors="replace").lstrip("\ufeff")
+    generated = "\n".join(line.rstrip() for line in raw.strip().splitlines())
     text = DOC.read_text(encoding="utf-8").replace("\r\n", "\n")
     pattern = re.compile(
         rf"(<!-- BEGIN {name} CHECKS -->\n)(.*?)(<!-- END {name} CHECKS -->)", re.S
