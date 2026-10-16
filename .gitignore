@@ -1,5 +1,22 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+# MkDocs build output
+/site/
 
-/.vs
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Audit script reports
+audit-report*.json
+audit-report*.txt
+
+# Logs written by the legacy scripts when run from a checkout
+*.log
+legacy/linux/oshardening/OSHardeningLogs/
+legacy/linux/oshardening/SystemLogs/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+*~
+.vs/
