@@ -1,0 +1,2 @@
+# Authorized administrators from the README. One name per line.
+alice

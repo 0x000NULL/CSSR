@@ -1,0 +1,5 @@
+# Authorized users, copied from the image README. One name per line.
+# List every user the README names, administrators included.
+alice
+bob
+carol
